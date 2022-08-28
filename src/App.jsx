@@ -17,16 +17,16 @@ function App() {
       >
         Соберите бургер
       </p>
-      <div style={{ marginLeft: "360px", display: "flex" }}>
+      <div style={{ display: "flex", columnGap: "40px", justifyContent: "center" }}>
         <BurgerIngredients {...data} />
         <div>
           <BurgerConstructor {...data} />
-          <div style={{ display: "flex" }}>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <p className="text text_type_digits-default">610</p>
+          <div style={{ display: "flex", justifyContent: "flex-end"  }} className="mt-5">
+            <div style={{ display: "flex", alignItems: "center", marginRight: "40px"}}>
+              <p className="text text_type_digits-default mr-2" >610</p>
               <CurrencyIcon type="primary" />
             </div>
-            <Button type="primary" size="medium" className="ml-10">
+            <Button type="primary" size="medium">
               Оформить заказ
             </Button>
           </div>

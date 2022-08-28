@@ -9,7 +9,8 @@ export const AppHeader = () => {
     <>
     <div
         style={{
-          display: "flex",
+          display: "flex", 
+          padding: "18px 0",
           justifyContent: "center",
           backgroundColor: "#1C1C21",
         }}
