@@ -8,7 +8,9 @@ function App() {
   return (
     <>
       <AppHeader />
-      <BurgerIngredients />
+      <div>
+        <BurgerIngredients />
+      </div>
     </>
   );
 }
