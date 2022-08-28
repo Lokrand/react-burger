@@ -12,8 +12,8 @@ export const AppHeader = () => {
           display: "flex",
           justifyContent: "center",
           backgroundColor: "#1C1C21",
-          margin: "40px 40px 0",
         }}
+        className="m-10"
       >
         <div
           style={{ display: "flex", alignItems: "center", marginLeft: "20px" }}
