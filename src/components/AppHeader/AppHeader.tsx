@@ -13,7 +13,7 @@ export const AppHeader = () => {
           justifyContent: "center",
           backgroundColor: "#1C1C21",
         }}
-        className="m-10"
+        className="m-10 "
       >
         <div
           style={{ display: "flex", alignItems: "center", marginLeft: "20px" }}
