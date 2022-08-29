@@ -33,7 +33,7 @@ export const BurgerConstructor = (props) => {
           className="scrollBar"
         >
           <div style={{ display: "flex", alignItems: "center" }}>
-            <DragIcon type="primary" />
+            <DragIcon type="primary" style={{width: "200px"}}/>
             <ConstructorElement
               text={props[1].name}
               price={props[1].price}

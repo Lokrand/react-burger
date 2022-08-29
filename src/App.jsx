@@ -42,7 +42,7 @@ function App() {
                   marginRight: "40px",
                 }}
               >
-                <p className="text text_type_digits-default mr-2">610</p>
+                <p className="text text_type_digits-medium mr-2">610</p>
                 <CurrencyIcon type="primary" />
               </div>
               <Button type="primary" size="medium">

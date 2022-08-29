@@ -21,11 +21,11 @@ export const AppHeader = () => {
           className="mr-10"
         >
           <BurgerIcon type="secondary" />
-          <p className="ml-2">Конструктор</p>
+          <p className="text text_type_main-default ml-2">Конструктор</p>
         </div>
         <div style={{ display: "flex", alignItems: "center" }} className="ml-2">
           <ListIcon type="secondary" />
-          <p style={{ marginLeft: "8px", marginRight: "132px" }}>
+          <p className="text text_type_main-default" style={{ marginLeft: "8px", marginRight: "132px" }}>
             Лента заказов
           </p>
         </div>
@@ -34,7 +34,7 @@ export const AppHeader = () => {
           style={{ display: "flex", alignItems: "center", marginLeft: "312px" }}
         >
           <ProfileIcon type="secondary" />
-          <p style={{ marginLeft: "11px" }}>Личный кабинет</p>
+          <p className="text text_type_main-default" style={{ marginLeft: "11px" }}>Личный кабинет</p>
         </div>
       </div>
       </>
