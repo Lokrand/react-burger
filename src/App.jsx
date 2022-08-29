@@ -10,28 +10,50 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 function App() {
   return (
     <>
-      <AppHeader />
-      <p
-        className="text text_type_main-large mb-5"
-        style={{ marginLeft: "370px" }}
-      >
-        Соберите бургер
-      </p>
-      <div style={{ display: "flex", columnGap: "40px", justifyContent: "center" }}>
-        <BurgerIngredients {...data} />
-        <div>
-          <BurgerConstructor {...data} />
-          <div style={{ display: "flex", justifyContent: "flex-end"  }} className="mt-10">
-            <div style={{ display: "flex", alignItems: "center", marginRight: "40px"}}>
-              <p className="text text_type_digits-default mr-2" >610</p>
-              <CurrencyIcon type="primary" />
+    <body>
+      <header>
+        <AppHeader />
+      </header>
+      <main>
+        <p
+          className="text text_type_main-large mb-5"
+          style={{ marginLeft: "370px" }}
+        >
+          Соберите бургер
+        </p>
+        <div
+          style={{
+            display: "flex",
+            columnGap: "40px",
+            justifyContent: "center",
+          }}
+        >
+          <BurgerIngredients {...data} />
+          <div>
+            <BurgerConstructor {...data} />
+            <div
+              style={{ display: "flex", justifyContent: "flex-end" }}
+              className="mt-10"
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginRight: "40px",
+                }}
+              >
+                <p className="text text_type_digits-default mr-2">610</p>
+                <CurrencyIcon type="primary" />
+              </div>
+              <Button type="primary" size="medium">
+                Оформить заказ
+              </Button>
             </div>
-            <Button type="primary" size="medium">
-              Оформить заказ
-            </Button>
           </div>
         </div>
-      </div>
+      </main>
+      
+    </body>
     </>
   );
 }

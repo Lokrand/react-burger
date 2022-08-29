@@ -2,7 +2,14 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 export const BurgerIngredient = (props) => {
   return (
     <>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          rowGap: "4px",
+        }}
+      >
         <img src={props.image} alt={props.name} />
         <div
           style={{
@@ -11,14 +18,13 @@ export const BurgerIngredient = (props) => {
             justifyContent: "center",
             columnGap: "9px",
           }}
-          className="mb-2"
         >
           <p className="text text_type_digits-default">{props.price}</p>
           <CurrencyIcon type="primary" />
         </div>
         <p
           className="text text_type_main-small"
-          style={{ display: "flex", justifyContent: "center" }}
+          style={{ display: "flex", width: "272px", justifyContent: "center", textAlign: "center"}}
         >
           {props.name}
         </p>

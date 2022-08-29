@@ -1,5 +1,6 @@
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import "./BurgerConstructor.css";
 export const BurgerConstructor = (props) => {
   return (
     <>
@@ -8,17 +9,20 @@ export const BurgerConstructor = (props) => {
           display: "flex",
           flexDirection: "column",
           gap: "16px",
-          height: "696px",
+          height: "670px",
           width: "auto",
         }}
       >
-        <ConstructorElement
-          type="top"
-          isLocked={true}
-          text={props[0].name}
-          price={200}
-          thumbnail={props[0].image}
-        />
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <div style={{ width: "24px" }} />
+          <ConstructorElement
+            type="top"
+            isLocked={true}
+            text={props[0].name}
+            price={200}
+            thumbnail={props[0].image}
+          />
+        </div>
         <div
           style={{
             display: "flex",
@@ -26,6 +30,7 @@ export const BurgerConstructor = (props) => {
             gap: "16px",
             overflow: "auto",
           }}
+          className="scrollBar"
         >
           <div style={{ display: "flex", alignItems: "center" }}>
             <DragIcon type="primary" />
@@ -99,15 +104,57 @@ export const BurgerConstructor = (props) => {
               thumbnail={props[9].image}
             />
           </div>
-          
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <DragIcon type="primary" />
+            <ConstructorElement
+              text={props[10].name}
+              price={props[10].price}
+              thumbnail={props[10].image}
+            />
+          </div>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <DragIcon type="primary" />
+            <ConstructorElement
+              text={props[11].name}
+              price={props[11].price}
+              thumbnail={props[11].image}
+            />
+          </div>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <DragIcon type="primary" />
+            <ConstructorElement
+              text={props[12].name}
+              price={props[12].price}
+              thumbnail={props[12].image}
+            />
+          </div>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <DragIcon type="primary" />
+            <ConstructorElement
+              text={props[13].name}
+              price={props[13].price}
+              thumbnail={props[13].image}
+            />
+          </div>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <DragIcon type="primary" />
+            <ConstructorElement
+              text={props[14].name}
+              price={props[14].price}
+              thumbnail={props[14].image}
+            />
+          </div>
         </div>
-        <ConstructorElement
-          type="bottom"
-          isLocked={true}
-          text={props[0].name}
-          price={200}
-          thumbnail={props[0].image}
-        />
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <div style={{ width: "24px" }} />
+          <ConstructorElement
+            type="bottom"
+            isLocked={true}
+            text={props[0].name}
+            price={200}
+            thumbnail={props[0].image}
+          />
+        </div>
       </div>
     </>
   );
