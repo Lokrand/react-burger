@@ -13,7 +13,7 @@ function App() {
       <AppHeader />
       <p
         className="text text_type_main-large mb-5"
-        style={{ marginLeft: "360px" }}
+        style={{ marginLeft: "370px" }}
       >
         Соберите бургер
       </p>
@@ -21,7 +21,7 @@ function App() {
         <BurgerIngredients {...data} />
         <div>
           <BurgerConstructor {...data} />
-          <div style={{ display: "flex", justifyContent: "flex-end"  }} className="mt-5">
+          <div style={{ display: "flex", justifyContent: "flex-end"  }} className="mt-10">
             <div style={{ display: "flex", alignItems: "center", marginRight: "40px"}}>
               <p className="text text_type_digits-default mr-2" >610</p>
               <CurrencyIcon type="primary" />

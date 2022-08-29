@@ -18,11 +18,12 @@ export const AppHeader = () => {
       >
         <div
           style={{ display: "flex", alignItems: "center", marginLeft: "20px" }}
+          className="mr-10"
         >
           <BurgerIcon type="secondary" />
-          <p style={{ marginLeft: "8px", marginRight: "49px" }}>Конструктор</p>
+          <p className="ml-2">Конструктор</p>
         </div>
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ display: "flex", alignItems: "center" }} className="ml-2">
           <ListIcon type="secondary" />
           <p style={{ marginLeft: "8px", marginRight: "132px" }}>
             Лента заказов
