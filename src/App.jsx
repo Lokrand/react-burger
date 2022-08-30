@@ -1,5 +1,4 @@
 import React from "react";
-import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import { AppHeader } from "./components/AppHeader/AppHeader";
 import "./App.css";
 import { BurgerIngredients } from "./components/BurgerIngredients/BurgerIngredients";
@@ -42,7 +41,9 @@ function App() {
                   }}
                 >
                   <p className="text text_type_digits-medium mr-2">610</p>
-                  <span style={{transform: "scale(1.35)", marginTop: "5px"}}><CurrencyIcon type="primary"/></span>
+                  <span style={{ transform: "scale(1.35)", marginTop: "5px" }}>
+                    <CurrencyIcon type="primary" />
+                  </span>
                 </div>
                 <Button type="primary" size="large">
                   Оформить заказ

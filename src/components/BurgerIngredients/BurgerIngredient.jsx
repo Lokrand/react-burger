@@ -6,7 +6,6 @@ export const BurgerIngredient = (props) => {
         style={{
           display: "flex",
           flexDirection: "column",
-          // justifyContent: "center",
           rowGap: "9px",
         }}
       >

@@ -1,7 +1,7 @@
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import "./BurgerConstructor.css";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 export const BurgerConstructor = (props) => {
   return (
     <>
@@ -34,13 +34,21 @@ export const BurgerConstructor = (props) => {
           }}
           className="scrollBar"
         >
-          <div style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "16px",
-            marginRight: "8px"
-          }}>
-            <div style={{ display: "flex", columnGap: "10px",  alignItems: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "16px",
+              marginRight: "8px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                columnGap: "10px",
+                alignItems: "center",
+              }}
+            >
               <DragIcon type="primary" />
               <ConstructorElement
                 text={props[1].name}
@@ -48,7 +56,13 @@ export const BurgerConstructor = (props) => {
                 thumbnail={props[1].image}
               />
             </div>
-            <div style={{ display: "flex", columnGap: "10px", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "10px",
+                alignItems: "center",
+              }}
+            >
               <DragIcon type="primary" />
               <ConstructorElement
                 text={props[2].name}
@@ -56,7 +70,13 @@ export const BurgerConstructor = (props) => {
                 thumbnail={props[2].image}
               />
             </div>
-            <div style={{ display: "flex", columnGap: "10px", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "10px",
+                alignItems: "center",
+              }}
+            >
               <DragIcon type="primary" />
               <ConstructorElement
                 text={props[3].name}
@@ -64,7 +84,13 @@ export const BurgerConstructor = (props) => {
                 thumbnail={props[3].image}
               />
             </div>
-            <div style={{ display: "flex", columnGap: "10px", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "10px",
+                alignItems: "center",
+              }}
+            >
               <DragIcon type="primary" />
               <ConstructorElement
                 text={props[4].name}
@@ -72,7 +98,13 @@ export const BurgerConstructor = (props) => {
                 thumbnail={props[4].image}
               />
             </div>
-            <div style={{ display: "flex", columnGap: "10px", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "10px",
+                alignItems: "center",
+              }}
+            >
               <DragIcon type="primary" />
               <ConstructorElement
                 text={props[5].name}
@@ -80,7 +112,13 @@ export const BurgerConstructor = (props) => {
                 thumbnail={props[5].image}
               />
             </div>
-            <div style={{ display: "flex", columnGap: "10px", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "10px",
+                alignItems: "center",
+              }}
+            >
               <DragIcon type="primary" />
               <ConstructorElement
                 text={props[6].name}
@@ -88,7 +126,13 @@ export const BurgerConstructor = (props) => {
                 thumbnail={props[6].image}
               />
             </div>
-            <div style={{ display: "flex", columnGap: "10px", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "10px",
+                alignItems: "center",
+              }}
+            >
               <DragIcon type="primary" />
               <ConstructorElement
                 text={props[7].name}
@@ -96,7 +140,13 @@ export const BurgerConstructor = (props) => {
                 thumbnail={props[7].image}
               />
             </div>
-            <div style={{ display: "flex", columnGap: "10px", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "10px",
+                alignItems: "center",
+              }}
+            >
               <DragIcon type="primary" />
               <ConstructorElement
                 text={props[8].name}
@@ -104,7 +154,13 @@ export const BurgerConstructor = (props) => {
                 thumbnail={props[8].image}
               />
             </div>
-            <div style={{ display: "flex", columnGap: "10px", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "10px",
+                alignItems: "center",
+              }}
+            >
               <DragIcon type="primary" />
               <ConstructorElement
                 text={props[9].name}
@@ -112,7 +168,13 @@ export const BurgerConstructor = (props) => {
                 thumbnail={props[9].image}
               />
             </div>
-            <div style={{ display: "flex", columnGap: "10px", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "10px",
+                alignItems: "center",
+              }}
+            >
               <DragIcon type="primary" />
               <ConstructorElement
                 text={props[10].name}
@@ -120,7 +182,13 @@ export const BurgerConstructor = (props) => {
                 thumbnail={props[10].image}
               />
             </div>
-            <div style={{ display: "flex", columnGap: "10px", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "10px",
+                alignItems: "center",
+              }}
+            >
               <DragIcon type="primary" />
               <ConstructorElement
                 text={props[11].name}
@@ -128,7 +196,13 @@ export const BurgerConstructor = (props) => {
                 thumbnail={props[11].image}
               />
             </div>
-            <div style={{ display: "flex", columnGap: "10px", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "10px",
+                alignItems: "center",
+              }}
+            >
               <DragIcon type="primary" />
               <ConstructorElement
                 text={props[12].name}
@@ -136,7 +210,13 @@ export const BurgerConstructor = (props) => {
                 thumbnail={props[12].image}
               />
             </div>
-            <div style={{ display: "flex", columnGap: "10px", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "10px",
+                alignItems: "center",
+              }}
+            >
               <DragIcon type="primary" />
               <ConstructorElement
                 text={props[13].name}
@@ -144,7 +224,13 @@ export const BurgerConstructor = (props) => {
                 thumbnail={props[13].image}
               />
             </div>
-            <div style={{ display: "flex", columnGap: "10px", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                columnGap: "10px",
+                alignItems: "center",
+              }}
+            >
               <DragIcon type="primary" />
               <ConstructorElement
                 text={props[14].name}
@@ -170,7 +256,7 @@ export const BurgerConstructor = (props) => {
 };
 
 BurgerConstructor.propTypes = {
-   name: PropTypes.string,
-   price: PropTypes.number,
-   image: PropTypes.string,
+  name: PropTypes.string,
+  price: PropTypes.number,
+  image: PropTypes.string,
 };

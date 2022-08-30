@@ -2,7 +2,7 @@ import React from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIngredient } from "./BurgerIngredient";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 export const BurgerIngredients = (props) => {
   const [current, setCurrent] = React.useState("one");
   return (
@@ -19,7 +19,10 @@ export const BurgerIngredients = (props) => {
             Начинки
           </Tab>
         </div>
-        <div style={{ maxHeight: "716px", overflow: "auto" }} className="scrollBar">
+        <div
+          style={{ maxHeight: "716px", overflow: "auto" }}
+          className="scrollBar"
+        >
           <p className="text text_type_main-medium mb-6">Булки</p>
           <div
             style={{
@@ -84,7 +87,7 @@ export const BurgerIngredients = (props) => {
 };
 
 BurgerIngredients.propTypes = {
-   name: PropTypes.string,
-   price: PropTypes.number,
-   image: PropTypes.string,
+  name: PropTypes.string,
+  price: PropTypes.number,
+  image: PropTypes.string,
 };
