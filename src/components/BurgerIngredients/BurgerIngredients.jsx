@@ -2,12 +2,12 @@ import React from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIngredient } from "./BurgerIngredient";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-// import "./BurgerIngredients.css"
+import PropTypes from 'prop-types';
 export const BurgerIngredients = (props) => {
   const [current, setCurrent] = React.useState("one");
   return (
     <>
-      <div style={{ height: "872px" }}>
+      <div>
         <div style={{ display: "flex" }} className="mb-10">
           <Tab value="one" active={current === "one"} onClick={setCurrent}>
             Булки
@@ -19,15 +19,13 @@ export const BurgerIngredients = (props) => {
             Начинки
           </Tab>
         </div>
-        <div style={{ maxHeight: "716px", overflow: "auto" }}  className="scrollBar">
+        <div style={{ maxHeight: "716px", overflow: "auto" }} className="scrollBar">
           <p className="text text_type_main-medium mb-6">Булки</p>
           <div
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              columnGap: "24px",
               rowGap: "32px",
-              padding: "0 32px",
             }}
           >
             <div style={{ position: "relative" }}>
@@ -48,9 +46,7 @@ export const BurgerIngredients = (props) => {
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              columnGap: "24px",
               rowGap: "32px",
-              padding: "0 32px",
             }}
           >
             <BurgerIngredient {...props[3]} />
@@ -68,9 +64,7 @@ export const BurgerIngredients = (props) => {
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              columnGap: "24px",
               rowGap: "32px",
-              padding: "0 32px",
             }}
           >
             <BurgerIngredient {...props[2]} />
@@ -89,4 +83,8 @@ export const BurgerIngredients = (props) => {
   );
 };
 
-BurgerIngredients.propTypes = {};
+BurgerIngredients.propTypes = {
+   name: PropTypes.string,
+   price: PropTypes.number,
+   image: PropTypes.string,
+};

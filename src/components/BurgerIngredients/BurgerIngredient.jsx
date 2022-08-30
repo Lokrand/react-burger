@@ -6,11 +6,11 @@ export const BurgerIngredient = (props) => {
         style={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
-          rowGap: "4px",
+          // justifyContent: "center",
+          rowGap: "9px",
         }}
       >
-        <img src={props.image} alt={props.name} />
+        <img src={props.image} alt={props.name} style={{ width: "fit-content", margin: "0 auto" }} />
         <div
           style={{
             display: "flex",
@@ -23,7 +23,7 @@ export const BurgerIngredient = (props) => {
           <CurrencyIcon type="primary" />
         </div>
         <p
-          className="text text_type_main-small"
+          className="text text_type_main-default"
           style={{ display: "flex", width: "272px", justifyContent: "center", textAlign: "center"}}
         >
           {props.name}

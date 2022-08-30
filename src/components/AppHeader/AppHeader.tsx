@@ -14,7 +14,6 @@ export const AppHeader = () => {
           justifyContent: "center",
           backgroundColor: "#1C1C21",
         }}
-        className="mt-10 ml-10 mr-10"
       >
         <div
           style={{ display: "flex", alignItems: "center", marginLeft: "20px" }}
@@ -27,19 +26,19 @@ export const AppHeader = () => {
           <ListIcon type="secondary" />
           <p
             className="text text_type_main-default text_color_inactive ml-2"
-            style={{ marginRight: "132px" }}
+            style={{ marginRight: "130px" }}
           >
             Лента заказов
           </p>
         </div>
         <Logo />
         <div
-          style={{ display: "flex", alignItems: "center", marginLeft: "312px" }}
+          style={{ display: "flex", alignItems: "center", marginLeft: "310px" }}
         >
           <ProfileIcon type="secondary" />
           <p
             className="text text_type_main-default text_color_inactive"
-            style={{ marginLeft: "11px" }}
+            style={{ marginLeft: "8px" }}
           >
             Личный кабинет
           </p>

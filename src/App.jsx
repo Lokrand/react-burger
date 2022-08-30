@@ -7,6 +7,7 @@ import { BurgerConstructor } from "./components/BurgerConstructor/BurgerConstruc
 import { data } from "./utils/data";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
+
 function App() {
   return (
     <>
@@ -18,12 +19,12 @@ function App() {
           <div
             style={{
               display: "flex",
-              columnGap: "40px",
+              columnGap: "44px",
               justifyContent: "center",
             }}
             className="mt-10"
           >
-            <div>
+            <div className="pl-4">
               <p className="text text_type_main-large mb-5">Соберите бургер</p>
               <BurgerIngredients {...data} />
             </div>
@@ -41,9 +42,9 @@ function App() {
                   }}
                 >
                   <p className="text text_type_digits-medium mr-2">610</p>
-                  <CurrencyIcon type="primary" />
+                  <span style={{transform: "scale(1.35)", marginTop: "5px"}}><CurrencyIcon type="primary"/></span>
                 </div>
-                <Button type="primary" size="medium">
+                <Button type="primary" size="large">
                   Оформить заказ
                 </Button>
               </div>

@@ -1,6 +1,7 @@
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import "./BurgerConstructor.css";
+import PropTypes from 'prop-types';
 export const BurgerConstructor = (props) => {
   return (
     <>
@@ -19,7 +20,7 @@ export const BurgerConstructor = (props) => {
           <ConstructorElement
             type="top"
             isLocked={true}
-            text={props[0].name}
+            text="Краторная булка N-200i (верх)"
             price={200}
             thumbnail={props[0].image}
           />
@@ -158,7 +159,7 @@ export const BurgerConstructor = (props) => {
           <ConstructorElement
             type="bottom"
             isLocked={true}
-            text={props[0].name}
+            text="Краторная булка N-200i (низ)"
             price={200}
             thumbnail={props[0].image}
           />
@@ -166,4 +167,10 @@ export const BurgerConstructor = (props) => {
       </div>
     </>
   );
+};
+
+BurgerConstructor.propTypes = {
+   name: PropTypes.string,
+   price: PropTypes.number,
+   image: PropTypes.string,
 };
