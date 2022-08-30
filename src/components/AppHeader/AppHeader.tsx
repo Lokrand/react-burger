@@ -7,25 +7,28 @@ import {
 export const AppHeader = () => {
   return (
     <>
-    <div
+      <div
         style={{
-          display: "flex", 
+          display: "flex",
           padding: "18px 0",
           justifyContent: "center",
           backgroundColor: "#1C1C21",
         }}
-        className="m-10 "
+        className="mt-10 ml-10 mr-10"
       >
         <div
           style={{ display: "flex", alignItems: "center", marginLeft: "20px" }}
           className="mr-10"
         >
-          <BurgerIcon type="secondary" />
+          <BurgerIcon type="primary" />
           <p className="text text_type_main-default ml-2">Конструктор</p>
         </div>
         <div style={{ display: "flex", alignItems: "center" }} className="ml-2">
           <ListIcon type="secondary" />
-          <p className="text text_type_main-default" style={{ marginLeft: "8px", marginRight: "132px" }}>
+          <p
+            className="text text_type_main-default text_color_inactive ml-2"
+            style={{ marginRight: "132px" }}
+          >
             Лента заказов
           </p>
         </div>
@@ -34,9 +37,14 @@ export const AppHeader = () => {
           style={{ display: "flex", alignItems: "center", marginLeft: "312px" }}
         >
           <ProfileIcon type="secondary" />
-          <p className="text text_type_main-default" style={{ marginLeft: "11px" }}>Личный кабинет</p>
+          <p
+            className="text text_type_main-default text_color_inactive"
+            style={{ marginLeft: "11px" }}
+          >
+            Личный кабинет
+          </p>
         </div>
       </div>
-      </>
-  )
-}
+    </>
+  );
+};

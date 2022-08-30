@@ -2,13 +2,13 @@ import React from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIngredient } from "./BurgerIngredient";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import "./BurgerIngredients.css"
+// import "./BurgerIngredients.css"
 export const BurgerIngredients = (props) => {
   const [current, setCurrent] = React.useState("one");
   return (
     <>
       <div style={{ height: "872px" }}>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex" }} className="mb-10">
           <Tab value="one" active={current === "one"} onClick={setCurrent}>
             Булки
           </Tab>
@@ -20,7 +20,7 @@ export const BurgerIngredients = (props) => {
           </Tab>
         </div>
         <div style={{ maxHeight: "716px", overflow: "auto" }}  className="scrollBar">
-          <p className="text text_type_main-medium mt-10 mb-6">Булки</p>
+          <p className="text text_type_main-medium mb-6">Булки</p>
           <div
             style={{
               display: "grid",
