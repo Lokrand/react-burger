@@ -15,7 +15,7 @@ function App() {
         <div className={styles.sections}>
           <div className="pl-4">
             <p className="text text_type_main-large mb-5">Соберите бургер</p>
-            <BurgerIngredients {...data} />
+            <BurgerIngredients data={data} />
           </div>
           <div className="mt-15">
             <BurgerConstructor data={data} />

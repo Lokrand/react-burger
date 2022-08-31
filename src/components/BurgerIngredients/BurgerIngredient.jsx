@@ -1,5 +1,7 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerIngredients.module.css";
+import PropTypes from "prop-types";
+
 export const BurgerIngredient = (props) => {
   return (
     <div className={styles.item}>
@@ -13,4 +15,11 @@ export const BurgerIngredient = (props) => {
       </div>
     </div>
   );
+};
+
+BurgerIngredient.propTypes = {
+  _id: PropTypes.string,
+  name: PropTypes.string,
+  price: PropTypes.number,
+  image: PropTypes.string,
 };

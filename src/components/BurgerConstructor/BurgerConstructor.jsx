@@ -3,17 +3,6 @@ import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerConstructor.module.css";
 import PropTypes from "prop-types";
 export const BurgerConstructor = (props) => {
-  // const listItems = props.map((el) => {
-  //   <div className={styles.item}>
-  //     <DragIcon type="primary" />
-  //     <ConstructorElement
-  //       key={el._id}
-  //       text={el.name}
-  //       price={el.price}
-  //       thumbnail={el.image}
-  //     />
-  //   </div>;
-  // });
   return (
     <div className={styles.section}>
       <div className={styles.bread}>
@@ -40,7 +29,6 @@ export const BurgerConstructor = (props) => {
               </div>
             );
           })}
-          
         </div>
       </div>
       <div className={styles.bread}>
@@ -58,8 +46,8 @@ export const BurgerConstructor = (props) => {
 };
 
 BurgerConstructor.propTypes = {
+  _id: PropTypes.string,
   name: PropTypes.string,
   price: PropTypes.number,
   image: PropTypes.string,
-  
 };

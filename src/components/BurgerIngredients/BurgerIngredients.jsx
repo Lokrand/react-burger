@@ -23,36 +23,32 @@ export const BurgerIngredients = (props) => {
         <p className="text text_type_main-medium mb-6">Булки</p>
         <div className={styles.items}>
           <div className={styles.block}>
-            <BurgerIngredient {...props[0]} />
+            <BurgerIngredient {...props.data[0]} />
             <div className={styles.counter}>
               <Counter count={1} size="default" />
             </div>
           </div>
-          <BurgerIngredient {...props[1]} />
+          <BurgerIngredient {...props.data[1]} />
         </div>
         <p className="text text_type_main-medium mb-6 mt-15">Соусы</p>
         <div className={styles.items}>
-          <BurgerIngredient {...props[3]} />
-          <BurgerIngredient {...props[5]} />
+          <BurgerIngredient {...props.data[2]} />
+          <BurgerIngredient {...props.data[3]} />
           <div className={styles.block}>
-            <BurgerIngredient {...props[6]} />
+            <BurgerIngredient {...props.data[4]} />
             <div className={styles.counter}>
               <Counter count={1} size="default" />
             </div>
           </div>
-          <BurgerIngredient {...props[9]} />
+          <BurgerIngredient {...props.data[5]} />
         </div>
         <p className="text text_type_main-medium mb-6 mt-15">Начинки</p>
         <div className={styles.items}>
-          <BurgerIngredient {...props[2]} />
-          <BurgerIngredient {...props[4]} />
-          <BurgerIngredient {...props[7]} />
-          <BurgerIngredient {...props[8]} />
-          <BurgerIngredient {...props[10]} />
-          <BurgerIngredient {...props[11]} />
-          <BurgerIngredient {...props[12]} />
-          <BurgerIngredient {...props[13]} />
-          <BurgerIngredient {...props[14]} />
+          {props.data.slice(6).map((element) => {
+            return (
+              <BurgerIngredient {...element} key={element._id}/>
+            );
+          })}
         </div>
       </div>
     </div>
