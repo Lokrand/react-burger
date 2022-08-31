@@ -45,9 +45,7 @@ export const BurgerIngredients = (props) => {
         <p className="text text_type_main-medium mb-6 mt-15">Начинки</p>
         <div className={styles.items}>
           {props.data.slice(6).map((element) => {
-            return (
-              <BurgerIngredient {...element} key={element._id}/>
-            );
+            return <BurgerIngredient {...element} key={element._id} />;
           })}
         </div>
       </div>
@@ -56,8 +54,5 @@ export const BurgerIngredients = (props) => {
 };
 
 BurgerIngredients.propTypes = {
-  _id: PropTypes.string,
-  name: PropTypes.string,
-  price: PropTypes.number,
-  image: PropTypes.string,
+  data: PropTypes.array.isRequired,
 };

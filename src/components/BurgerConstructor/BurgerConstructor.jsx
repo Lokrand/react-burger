@@ -47,7 +47,7 @@ export const BurgerConstructor = (props) => {
 
 BurgerConstructor.propTypes = {
   _id: PropTypes.string,
-  name: PropTypes.string,
-  price: PropTypes.number,
-  image: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
 };
