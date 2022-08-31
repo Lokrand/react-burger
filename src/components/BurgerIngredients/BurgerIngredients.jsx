@@ -53,6 +53,12 @@ export const BurgerIngredients = (props) => {
   );
 };
 
+const dataPropTypes = {
+  _id: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+};
 BurgerIngredients.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape(dataPropTypes)).isRequired,
 };

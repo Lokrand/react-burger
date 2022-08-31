@@ -44,10 +44,12 @@ export const BurgerConstructor = (props) => {
     </div>
   );
 };
-
-BurgerConstructor.propTypes = {
+const dataPropTypes = {
   _id: PropTypes.string,
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
+};
+BurgerConstructor.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape(dataPropTypes)).isRequired,
 };
