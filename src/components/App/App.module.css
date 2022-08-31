@@ -1,0 +1,23 @@
+.sections {
+  display: flex;
+  column-gap: 44px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.block {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 40px;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  margin-right: 40px;
+}
+
+.icon {
+  transform: scale(1.35);
+  margin-top: 5px;
+}

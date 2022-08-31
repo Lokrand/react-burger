@@ -1,0 +1,49 @@
+.scrollBar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: auto;
+}
+
+.scrollBar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollBar::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+
+.scrollBar::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 670px;
+  width: auto;
+  padding-left: 16px;
+}
+
+.bread {
+  display: flex;
+  align-items: center;
+}
+
+.secret {
+  width: 34px;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-right: 8px;
+}
+
+.item {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+}
