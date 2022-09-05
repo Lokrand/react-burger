@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AppHeader } from "../AppHeader/AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
@@ -6,8 +6,12 @@ import { data } from "../../utils/data";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./App.module.css";
+import { Modal } from "../Modal/Modal";
+import { OrderDetails } from "../OrderDetails/OrderDetails";
 
 function App() {
+  const [modalActive, setModalActive] = useState(false);
+
   return (
     <>
       <AppHeader />
@@ -26,13 +30,14 @@ function App() {
                   <CurrencyIcon type="primary" />
                 </span>
               </div>
-              <Button type="primary" size="large">
+              <Button type="primary" size="large" onClick={() => setModalActive(true)}>
                 Оформить заказ
               </Button>
             </div>
           </div>
         </div>
       </main>
+      <Modal active={modalActive} setActive={setModalActive} />
     </>
   );
 }
