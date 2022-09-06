@@ -2,7 +2,7 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerConstructor.module.css";
 import PropTypes from "prop-types";
-export const BurgerConstructor = (props) => {
+export const BurgerConstructor = ({ data }) => {
   return (
     <div className={styles.section}>
       <div className={styles.bread}>
@@ -12,23 +12,23 @@ export const BurgerConstructor = (props) => {
           isLocked={true}
           text="Краторная булка N-200i (верх)"
           price={200}
-          thumbnail={props.data[0].image}
+          thumbnail={data.image}
         />
       </div>
       <div className={styles.scrollBar}>
         <div className={styles.items}>
-          {props.data.slice(1).map((element) => {
-            return (
-              <div key={element._id} className={styles.item}>
+          {data
+            .filter((item) => item.type === "main" || "sauce")
+            .map((el) => (
+              <div key={el._id} className={styles.item}>
                 <DragIcon type="primary" />
                 <ConstructorElement
-                  text={element.name}
-                  price={element.price}
-                  thumbnail={element.image}
+                  text={el.name}
+                  price={el.price}
+                  thumbnail={el.image}
                 />
               </div>
-            );
-          })}
+            ))}
         </div>
       </div>
       <div className={styles.bread}>
@@ -38,7 +38,7 @@ export const BurgerConstructor = (props) => {
           isLocked={true}
           text="Краторная булка N-200i (низ)"
           price={200}
-          thumbnail={props.data[0].image}
+          thumbnail={data.image}
         />
       </div>
     </div>

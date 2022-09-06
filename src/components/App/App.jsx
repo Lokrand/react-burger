@@ -53,7 +53,7 @@ function App() {
             {appState.loading ? (
               <p>Loading</p>
             ) : (
-              <BurgerConstructor data={data} />
+              <BurgerConstructor data={appState.components} />
             )}
             <div className={styles.block}>
               <div className={styles.total}>

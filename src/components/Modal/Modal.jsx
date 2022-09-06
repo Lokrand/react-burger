@@ -3,23 +3,26 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import icon from "../../images/done.png";
 import { useCallback, useEffect } from "react";
 
-export const Modal = ({ active, setActive, children }) => { 
+export const Modal = ({ active, setActive, children }) => {
+  const closePopup = useCallback(
+    (event) => {
+      if (event.key === "Escape") {
+        setActive(false);
+      }
+    },
+    [setActive]
+  );
 
-  const closePopup = useCallback((event) => {
-    if (event.key === "Escape") {
-      setActive(false)
-    }
-  }, [setActive])
-  
   useEffect(() => {
-    document.addEventListener("keydown", closePopup)
-    return () => document.removeEventListener("keydown", closePopup)
-  }, [closePopup])
+    document.addEventListener("keydown", closePopup);
+    return () => document.removeEventListener("keydown", closePopup);
+  }, [closePopup]);
 
   return (
     <div
       className={active ? `${styles.modal} ${styles.active}` : styles.modal}
-      onClick={() => setActive(false)} onKeyDown={closePopup}
+      onClick={() => setActive(false)}
+      onKeyDown={closePopup}
     >
       <div
         className={
