@@ -19,14 +19,14 @@
 }
 
 .content {
-  width: 720px;
-  height: 400px;
+  width: 640px;
   padding: 40px;
   opacity: 1;
   border-radius: 40px;
   background-color: #1C1C21;
   transform: scale(0.5);
   transition: .4s all;
+  text-align: center;
 }
 
 .content.active {
@@ -35,11 +35,13 @@
 
 .closeIcon {
   display: flex;
-  margin-top: 20px;
+  position: absolute;
+  top: 60px;
+  right: 40px;
   justify-content: flex-end;
   cursor: pointer;
 }
 
 .header {
-  display: flex;
+  
 }
