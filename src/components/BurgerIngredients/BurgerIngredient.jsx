@@ -3,6 +3,7 @@ import styles from "./BurgerIngredients.module.css";
 import PropTypes from "prop-types";
 
 export const BurgerIngredient = (props) => {
+
   return (
     <div className={styles.item}>
       <img src={props.image} alt={props.name} className={styles.image} />

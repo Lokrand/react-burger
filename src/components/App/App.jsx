@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AppHeader } from "../AppHeader/AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
@@ -8,9 +8,25 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./App.module.css";
 import { Modal } from "../Modal/Modal";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
+import axios from "axios";
 
 function App() {
   const [modalActive, setModalActive] = useState(false);
+  const [appState, setAppState] = useState({
+    loading: false,
+    components: null,
+  });
+  useEffect(() => {
+    setAppState({ loading: true });
+    const apiUrl = "https://norma.nomoreparties.space/api/ingredients";
+    axios.get(apiUrl).then((resp) => {
+      const allComponents = resp.data;
+      setAppState({
+        loading: false,
+        components: allComponents,
+      });
+    });
+  }, [setAppState]);
 
   return (
     <>
@@ -30,14 +46,18 @@ function App() {
                   <CurrencyIcon type="primary" />
                 </span>
               </div>
-              <Button type="primary" size="large" onClick={() => setModalActive(true)}>
+              <Button
+                type="primary"
+                size="large"
+                onClick={() => setModalActive(true)}
+              >
                 Оформить заказ
               </Button>
             </div>
           </div>
         </div>
       </main>
-      <Modal active={modalActive} setActive={setModalActive} />
+      <OrderDetails active={modalActive} setActive={setModalActive} />
     </>
   );
 }
