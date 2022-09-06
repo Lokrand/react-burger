@@ -1,14 +1,20 @@
 import styles from "./Modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import icon from "../../images/done.png";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
-export const Modal = ({ active, setActive, children }) => {
+export const Modal = ({ active, setActive, children }) => { 
+
   const closePopup = useCallback((event) => {
     if (event.key === "Escape") {
       setActive(false)
     }
-  }, [])
+  }, [setActive])
+  
+  useEffect(() => {
+    document.addEventListener("keydown", closePopup)
+    return () => document.removeEventListener("keydown", closePopup)
+  }, [closePopup])
 
   return (
     <div

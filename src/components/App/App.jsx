@@ -9,24 +9,28 @@ import styles from "./App.module.css";
 import { Modal } from "../Modal/Modal";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
 import axios from "axios";
+import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 
 function App() {
   const [modalActive, setModalActive] = useState(false);
+  const [componentModalActive, setComponentModalActive] = useState(false);
+
   const [appState, setAppState] = useState({
     loading: false,
-    components: null,
+    components: [],
   });
+
   useEffect(() => {
     setAppState({ loading: true });
     const apiUrl = "https://norma.nomoreparties.space/api/ingredients";
     axios.get(apiUrl).then((resp) => {
-      const allComponents = resp.data;
+      const allComponents = resp.data.data;
       setAppState({
         loading: false,
         components: allComponents,
       });
     });
-  }, [setAppState]);
+  }, []);
 
   return (
     <>
@@ -35,10 +39,22 @@ function App() {
         <div className={styles.sections}>
           <div className="pl-4">
             <p className="text text_type_main-large mb-5">Соберите бургер</p>
-            <BurgerIngredients data={data} />
+            {appState.loading ? (
+              <p>Loading</p>
+            ) : (
+              <BurgerIngredients
+                data={appState.components}
+                modalActive={componentModalActive}
+                setModalActive={setComponentModalActive}
+              />
+            )}
           </div>
           <div className="mt-15">
-            <BurgerConstructor data={data} />
+            {appState.loading ? (
+              <p>Loading</p>
+            ) : (
+              <BurgerConstructor data={data} />
+            )}
             <div className={styles.block}>
               <div className={styles.total}>
                 <p className="text text_type_digits-medium mr-2">610</p>

@@ -1,6 +1,7 @@
 import { Modal } from "../Modal/Modal";
 import icon from "../../images/done.png";
 
+
 export const OrderDetails = ({ active, setActive }) => {
   return (
     <Modal active={active} setActive={setActive}>
