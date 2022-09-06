@@ -14,3 +14,7 @@
   height: 240px;
   width: 480px;
 }
+
+.title {
+  text-align: start;
+}
