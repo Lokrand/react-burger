@@ -1,4 +1,5 @@
 import { Modal } from "../Modal/Modal";
+import styles from "./IngredientDetails.module.css";
 
 export const IngredientDetails = ({ active, setActive }) => {
   return (
