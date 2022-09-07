@@ -88,7 +88,7 @@ export const BurgerIngredients = ({ data, modalActive, setModalActive }) => {
 };
 
 const dataPropTypes = {
-  _id: PropTypes.string.isRequired,
+  _id: PropTypes.string,
 };
 
 BurgerIngredients.propTypes = {
