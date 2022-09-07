@@ -2,14 +2,11 @@ import React, { useEffect, useState } from "react";
 import { AppHeader } from "../AppHeader/AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
-import { data } from "../../utils/data";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./App.module.css";
-import { Modal } from "../Modal/Modal";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
 import axios from "axios";
-import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 
 function App() {
   const [modalActive, setModalActive] = useState(false);
@@ -29,7 +26,8 @@ function App() {
         loading: false,
         components: allComponents,
       });
-    });
+    })
+    .catch((err) => console.log(`Error: ${err}`))
   }, []);
 
   return (

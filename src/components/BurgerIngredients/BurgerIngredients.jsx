@@ -88,11 +88,9 @@ export const BurgerIngredients = ({ data, modalActive, setModalActive }) => {
 };
 
 const dataPropTypes = {
-  _id: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
+  _id: PropTypes.string.isRequired,
 };
+
 BurgerIngredients.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape(dataPropTypes)).isRequired,
 };
