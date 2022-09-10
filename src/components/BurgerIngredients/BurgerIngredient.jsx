@@ -1,6 +1,7 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerIngredients.module.css";
 import PropTypes from "prop-types";
+import { ingredientType } from "../utils/types";
 
 export const BurgerIngredient = ({data, onClick}) => {
 
@@ -19,10 +20,6 @@ export const BurgerIngredient = ({data, onClick}) => {
 };
 
 BurgerIngredient.propTypes = {
-  data: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-  }), 
+  data: PropTypes.shape(ingredientType).isRequired, 
   onClick: PropTypes.func.isRequired,
 };

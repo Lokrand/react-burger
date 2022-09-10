@@ -1,40 +1,42 @@
 import styles from "./Modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import icon from "../../images/done.png";
 import { useCallback, useEffect } from "react";
+import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 
 export const Modal = ({ active, setActive, children }) => {
-  const closePopup = useCallback(
-    (event) => {
-      if (event.key === "Escape") {
-        setActive(false);
-      }
-    },
-    [setActive]
-  );
+  const closePopup = useCallback(() => {
+    setActive(false);
+  }, [setActive]);
+
+  const isOpen = active;
 
   useEffect(() => {
-    document.addEventListener("keydown", closePopup);
-    return () => document.removeEventListener("keydown", closePopup);
-  }, [closePopup]);
+    function closeByEscape(evt) {
+      if (evt.key === "Escape") {
+        closePopup();
+      }
+    }
+    if (isOpen) {
+      document.addEventListener("keydown", closeByEscape);
+      return () => {
+        document.removeEventListener("keydown", closeByEscape);
+      };
+    }
+  }, [isOpen, closePopup]);
 
   return (
-    <div
-      className={active ? `${styles.modal} ${styles.active}` : styles.modal}
-      onClick={() => setActive(false)}
-      onKeyDown={closePopup}
-    >
+    <ModalOverlay active={active} onClick={closePopup}>
       <div
         className={
           active ? `${styles.content} ${styles.active}` : styles.content
         }
         onClick={(e) => e.stopPropagation()}
       >
-        <div className={styles.closeIcon} onClick={() => setActive(false)}>
+        <div className={styles.closeIcon} onClick={closePopup}>
           <CloseIcon type="primary" />
         </div>
         {children}
       </div>
-    </div>
+    </ModalOverlay>
   );
 };

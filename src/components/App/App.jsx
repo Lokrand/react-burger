@@ -9,7 +9,6 @@ import { OrderDetails } from "../OrderDetails/OrderDetails";
 import axios from "axios";
 
 function App() {
-  const [modalActive, setModalActive] = useState(false);
   const [componentModalActive, setComponentModalActive] = useState(false);
 
   const [appState, setAppState] = useState({
@@ -20,14 +19,16 @@ function App() {
   useEffect(() => {
     setAppState({ loading: true });
     const apiUrl = "https://norma.nomoreparties.space/api/ingredients";
-    axios.get(apiUrl).then((resp) => {
-      const allComponents = resp.data.data;
-      setAppState({
-        loading: false,
-        components: allComponents,
-      });
-    })
-    .catch((err) => console.log(`Error: ${err}`))
+    axios
+      .get(apiUrl)
+      .then((resp) => {
+        const allComponents = resp.data.data;
+        setAppState({
+          loading: false,
+          components: allComponents,
+        });
+      })
+      .catch((err) => console.log(`Error: ${err}`));
   }, []);
 
   return (
@@ -53,25 +54,9 @@ function App() {
             ) : (
               <BurgerConstructor data={appState.components} />
             )}
-            <div className={styles.block}>
-              <div className={styles.total}>
-                <p className="text text_type_digits-medium mr-2">610</p>
-                <span className={styles.icon}>
-                  <CurrencyIcon type="primary" />
-                </span>
-              </div>
-              <Button
-                type="primary"
-                size="large"
-                onClick={() => setModalActive(true)}
-              >
-                Оформить заказ
-              </Button>
-            </div>
           </div>
         </div>
       </main>
-      <OrderDetails active={modalActive} setActive={setModalActive} />
     </>
   );
 }

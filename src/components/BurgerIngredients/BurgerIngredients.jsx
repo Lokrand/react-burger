@@ -5,6 +5,7 @@ import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import styles from "./BurgerIngredients.module.css";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
+import { ingredientType } from "../utils/types";
 
 export const BurgerIngredients = ({ data, modalActive, setModalActive }) => {
   const [modalIngredient, setModalIngredient] = useState(null);
@@ -87,10 +88,6 @@ export const BurgerIngredients = ({ data, modalActive, setModalActive }) => {
   );
 };
 
-const dataPropTypes = {
-  _id: PropTypes.string,
-};
-
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape(dataPropTypes)).isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape(ingredientType)).isRequired,
 };

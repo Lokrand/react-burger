@@ -1,6 +1,7 @@
 import { Modal } from "../Modal/Modal";
 import styles from "./IngredientDetails.module.css";
 import PropTypes from "prop-types";
+import { ingredientType } from "../utils/types";
 
 export const IngredientDetails = ({ data, active, setActive }) => {
   return (
@@ -49,12 +50,5 @@ export const IngredientDetails = ({ data, active, setActive }) => {
 };
 
 IngredientDetails.propTypes = {
-  data: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    calories: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-  })
+  data: PropTypes.shape(ingredientType),
 };
