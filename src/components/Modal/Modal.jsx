@@ -3,7 +3,6 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useCallback, useEffect } from "react";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import PropTypes from "prop-types";
-import { ingredientType } from "../utils/types";
 import ReactDom from "react-dom";
 
 export const Modal = ({ active, setActive, children }) => {
@@ -47,6 +46,6 @@ export const Modal = ({ active, setActive, children }) => {
 
 Modal.propTypes = {
   active: PropTypes.bool.isRequired,
-  children: PropTypes.element.isRequired,
-  setActive: PropTypes.func.isRequired, 
+  setActive: PropTypes.func.isRequired,
+  children: PropTypes.array.isRequired, 
 };
