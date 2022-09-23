@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerConstructor.module.css";
@@ -7,14 +7,19 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
 import { ingredientType } from "../utils/types";
+import { BurgersContext } from "../BurgersContext/BurgersContext";
 
-export const BurgerConstructor = ({ data }) => {
+export const BurgerConstructor = () => {
+  console.log(useContext(BurgersContext));
+  const items = useContext(BurgersContext).components;
   const [modalActive, setModalActive] = useState(false);
-  if (data.length === 0) {
+  if (items.length === 0) {
     return null;
   }
-  const bun = data.find((el) => el.type === "bun");
-
+  const bun = items.find((el) => el.type === "bun");
+  const bunTop = bun.name + ' (верх)';
+  const bunBot = bun.name + ' (низ)';
+  const bunPrice = bun.price * 2;
   return (
     <>
       <div className={styles.section}>
@@ -23,14 +28,14 @@ export const BurgerConstructor = ({ data }) => {
           <ConstructorElement
             type="top"
             isLocked={true}
-            text="Краторная булка N-200i (верх)"
-            price={200}
+            text={bunTop}
+            price={bun.price}
             thumbnail={bun.image}
           />
         </div>
         <div className={styles.scrollBar}>
           <div className={styles.items}>
-            {data
+            {items
               .filter((item) => item.type !== "bun")
               .map((el) => (
                 <div key={el._id} className={styles.item}>
@@ -49,7 +54,7 @@ export const BurgerConstructor = ({ data }) => {
           <ConstructorElement
             type="bottom"
             isLocked={true}
-            text="Краторная булка N-200i (низ)"
+            text={bunBot}
             price={200}
             thumbnail={bun.image}
           />

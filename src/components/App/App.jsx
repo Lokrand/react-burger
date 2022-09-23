@@ -4,6 +4,7 @@ import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
 import styles from "./App.module.css";
 import axios from "axios";
+import { BurgersContext } from "../BurgersContext/BurgersContext";
 
 function App() {
   const [componentModalActive, setComponentModalActive] = useState(false);
@@ -29,7 +30,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <BurgersContext.Provider value={appState}>
       <AppHeader />
       <main>
         <div className={styles.sections}>
@@ -39,7 +40,6 @@ function App() {
               <p>Loading</p>
             ) : (
               <BurgerIngredients
-                data={appState.components}
                 modalActive={componentModalActive}
                 setModalActive={setComponentModalActive}
               />
@@ -49,13 +49,14 @@ function App() {
             {appState.loading ? (
               <p>Loading</p>
             ) : (
-              <BurgerConstructor data={appState.components} />
+              <BurgerConstructor />
             )}
           </div>
         </div>
       </main>
-    </>
+    </BurgersContext.Provider>
   );
 }
 
 export default App;
+
