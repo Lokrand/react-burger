@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIngredient } from "./BurgerIngredient";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import styles from "./BurgerIngredients.module.css";
-export const BurgerIngredients = (props) => {
-  const [current, setCurrent] = React.useState("one");
+import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
+import { ingredientType } from "../utils/types";
+
+export const BurgerIngredients = ({ data, modalActive, setModalActive }) => {
+  const [modalIngredient, setModalIngredient] = useState(null);
+
+  const [current, setCurrent] = useState("one");
   return (
     <div>
       <div className={styles.menu}>
@@ -22,43 +27,67 @@ export const BurgerIngredients = (props) => {
       <div className={styles.main}>
         <p className="text text_type_main-medium mb-6">Булки</p>
         <div className={styles.items}>
-          <div className={styles.block}>
-            <BurgerIngredient {...props.data[0]} />
+          {data
+            .filter((item) => item.type === "bun")
+            .map((el) => (
+              <BurgerIngredient
+                data={el}
+                key={el._id}
+                onClick={() => {
+                  setModalActive(true);
+                  setModalIngredient(el);
+                }}
+              />
+            ))}
+          {/* <div className={styles.block}>
+            <BurgerIngredient data={data[0]} active={modalActive} setActive={setModalActive} />
             <div className={styles.counter}>
-              <Counter count={1} size="default" />
+            <Counter count={1} size="default" />
             </div>
-          </div>
-          <BurgerIngredient {...props.data[1]} />
+          </div> */}
         </div>
         <p className="text text_type_main-medium mb-6 mt-15">Соусы</p>
         <div className={styles.items}>
-          <BurgerIngredient {...props.data[2]} />
-          <BurgerIngredient {...props.data[3]} />
-          <div className={styles.block}>
-            <BurgerIngredient {...props.data[4]} />
-            <div className={styles.counter}>
-              <Counter count={1} size="default" />
-            </div>
-          </div>
-          <BurgerIngredient {...props.data[5]} />
+          {data
+            .filter((item) => item.type === "sauce")
+            .map((el) => (
+              <BurgerIngredient
+                data={el}
+                key={el._id}
+                onClick={() => {
+                  setModalActive(true);
+                  setModalIngredient(el);
+                }}
+              />
+            ))}
         </div>
         <p className="text text_type_main-medium mb-6 mt-15">Начинки</p>
         <div className={styles.items}>
-          {props.data.slice(6).map((element) => {
-            return <BurgerIngredient {...element} key={element._id} />;
-          })}
+          {data
+            .filter((item) => item.type === "main")
+            .map((el) => (
+              <BurgerIngredient
+                data={el}
+                key={el._id}
+                onClick={() => {
+                  setModalActive(true);
+                  setModalIngredient(el);
+                }}
+              />
+            ))}
         </div>
       </div>
+      {modalIngredient && (
+        <IngredientDetails
+          data={modalIngredient}
+          active={modalActive}
+          setActive={setModalActive}
+        />
+      )}
     </div>
   );
 };
 
-const dataPropTypes = {
-  _id: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-};
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape(dataPropTypes)).isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape(ingredientType)).isRequired,
 };

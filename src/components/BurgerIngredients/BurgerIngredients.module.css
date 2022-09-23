@@ -30,6 +30,12 @@
   display: flex;
   flex-direction: column;
   row-gap: 9px;
+  cursor: pointer;
+  transition: .2s linear;
+}
+
+.item:hover {
+  opacity: .6;
 }
 
 .block {
