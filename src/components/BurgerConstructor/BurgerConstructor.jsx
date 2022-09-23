@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useReducer } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerConstructor.module.css";
@@ -8,18 +8,50 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { OrderDetails } from "../OrderDetails/OrderDetails";
 import { ingredientType } from "../utils/types";
 import { BurgersContext } from "../BurgersContext/BurgersContext";
+import axios from "axios";
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "totalPrice":
+      return getPrice(action.items);
+    default:
+      throw new Error(`Wrong type of action: ${action.type}`);
+  }
+}
+
+function getPrice(items) {
+  let totalPrice = 0;
+  items.forEach((el) => {
+    if (el.type !== "bun") {
+      totalPrice += el.price;
+    } else {
+      totalPrice += el.price * 2;
+    }
+  });
+  return totalPrice;
+}
 
 export const BurgerConstructor = () => {
-  console.log(useContext(BurgersContext));
+  // console.log(useContext(BurgersContext));
   const items = useContext(BurgersContext).components;
+
   const [modalActive, setModalActive] = useState(false);
+
+  const bun = items.find((el) => el.type === "bun");
+  const bunTop = bun?.name + " (верх)";
+  const bunBot = bun?.name + " (низ)";
+
+  useEffect(() => {
+    // console.log('totalPriceUpdated')
+    dispatch({ type: "totalPrice", items });
+  }, [items]);
+
+  const [state, dispatch] = useReducer(reducer, 0 );//items, getPrice
+
   if (items.length === 0) {
     return null;
   }
-  const bun = items.find((el) => el.type === "bun");
-  const bunTop = bun.name + ' (верх)';
-  const bunBot = bun.name + ' (низ)';
-  const bunPrice = bun.price * 2;
+
   return (
     <>
       <div className={styles.section}>
@@ -62,7 +94,7 @@ export const BurgerConstructor = () => {
       </div>
       <div className={styles.block}>
         <div className={styles.total}>
-          <p className="text text_type_digits-medium mr-2">610</p>
+          <p className="text text_type_digits-medium mr-2">{state}</p>
           <span className={styles.icon}>
             <CurrencyIcon type="primary" />
           </span>
@@ -70,7 +102,9 @@ export const BurgerConstructor = () => {
         <Button
           type="primary"
           size="large"
-          onClick={() => setModalActive(true)}
+          onClick={() => {
+            setModalActive(true);
+          }}
         >
           Оформить заказ
         </Button>
@@ -80,6 +114,6 @@ export const BurgerConstructor = () => {
   );
 };
 
-BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape(ingredientType)).isRequired,
-};
+// BurgerConstructor.propTypes = {
+//   data: PropTypes.arrayOf(PropTypes.shape(ingredientType)).isRequired,
+// };
