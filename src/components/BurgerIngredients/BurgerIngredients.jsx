@@ -89,6 +89,6 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
   );
 };
 
-// BurgerIngredients.propTypes = {
-//   items: PropTypes.arrayOf(PropTypes.shape(ingredientType)).isRequired,
-// };
+BurgerIngredients.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape(ingredientType)),
+};

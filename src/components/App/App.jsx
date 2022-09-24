@@ -30,10 +30,9 @@ function App() {
   }, []);
   
 
-
+// Тест для проверки расчёта стоимости заказа
   // useEffect(() => {  
   //   const interval = setInterval(() => {
-  //     console.log('1212e', appState.components)
   //     setAppState({
   //       loading: false,
   //       components: appState.components.slice(0, (appState.components.length-1)),

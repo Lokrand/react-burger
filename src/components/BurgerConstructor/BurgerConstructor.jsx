@@ -39,6 +39,7 @@ export const BurgerConstructor = () => {
   const bun = items.find((el) => el.type === "bun");
   const bunTop = bun?.name + " (верх)";
   const bunBot = bun?.name + " (низ)";
+  
   // Создаю массив, в который в дальнейшем буду записывать элементы бургера, перенесенные с помощью DnD
   // Сейчас здесь все ингредиенты, которые приходят с Api, кроме булок
   const ingredient = items.filter((item) => item.type !== "bun");
@@ -139,6 +140,6 @@ export const BurgerConstructor = () => {
   );
 };
 
-// BurgerConstructor.propTypes = {
-//   data: PropTypes.arrayOf(PropTypes.shape(ingredientType)).isRequired,
-// };
+BurgerConstructor.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape(ingredientType)),
+};
