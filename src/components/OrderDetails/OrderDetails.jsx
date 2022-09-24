@@ -1,10 +1,11 @@
 import { Modal } from "../Modal/Modal";
 import icon from "../../images/done.png";
 
-export const OrderDetails = ({ active, setActive }) => {
+export const OrderDetails = ({ active, setActive, orderNumber }) => {
+  // console.log('MyOrder', orderNumber)
   return (
     <Modal active={active} setActive={setActive}>
-      <p className="text text_type_digits-large mt-25 mb-8">034536</p>
+      <p className="text text_type_digits-large mt-25 mb-8">{orderNumber}</p>
       <p className="text text_type_main-medium mb-15">идентификатор заказа</p>
       <img src={icon} alt="" />
       <p className="text text_type_main-default mt-15 mb-2">

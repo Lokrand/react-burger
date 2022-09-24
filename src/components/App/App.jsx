@@ -28,18 +28,7 @@ function App() {
       })
       .catch((err) => console.log(`Error: ${err}`));
   }, []);
-  // get the order number
-  useEffect(() => {
-    const apiUrl = "https://norma.nomoreparties.space/api/orders";
-    console.log(appState.components)
-    let ingredients = ["60d3b41abdacab0026a733c6","60d3b41abdacab0026a733c7"];
-    axios
-    .post(apiUrl,{ingredients: ingredients})
-    .then((resp) => {
-        // console.log(resp.data.order.number)
-        })
-      .catch((err) => console.log(`Error: ${err}`))
-  }, []);
+  
 
 
   // useEffect(() => {  
