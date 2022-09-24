@@ -32,7 +32,6 @@ function getPrice(items) {
 }
 
 export const BurgerConstructor = () => {
-  // console.log(useContext(BurgersContext));
   const items = useContext(BurgersContext).components;
 
   const [modalActive, setModalActive] = useState(false);
@@ -42,36 +41,35 @@ export const BurgerConstructor = () => {
   const bunBot = bun?.name + " (низ)";
   // Создаю массив, в который в дальнейшем буду записывать элементы бургера, перенесенные с помощью DnD
   // Сейчас здесь все ингредиенты, которые приходят с Api, кроме булок
-  const ingredient =  items.filter((item) => item.type !== "bun")
-  const orderFor = []
-  ingredient.forEach((el) => {
-    orderFor.push(el._id)
-  })
-  // console.log(orderFor)
+  const ingredient = items.filter((item) => item.type !== "bun");
+  const [orderFor, setOrderFor] = useState([]);
 
   useEffect(() => {
     // console.log('totalPriceUpdated')
     dispatch({ type: "totalPrice", items });
   }, [items]);
-  const [order, setOrder] = useState(0)
-  const getOrderNumber = async () => {
-    // get the order number
-    useEffect(() => {
-      if (orderFor !== null && orderFor.length > 0) {
-        const apiUrl = "https://norma.nomoreparties.space/api/orders";
-        axios
-        .post(apiUrl,{'ingredients': orderFor})
-        .then((resp) => {
-          setOrder(resp.data.order.number)
-          // order = resp.data.order.number
-            })
-          .catch((err) => console.log(`Error: ${err}`))
-      }
-    }, [orderFor]);
-    return await order;
-  }
+  const [order, setOrder] = useState(0);
 
-  const [state, dispatch] = useReducer(reducer, 0 );//items, getPrice
+  // get the order number
+  useEffect(() => {
+    ingredient.forEach((el) => {
+      setOrderFor([...orderFor, el._id]);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (orderFor !== null && orderFor.length > 0) {
+      const apiUrl = "https://norma.nomoreparties.space/api/orders";
+      axios
+        .post(apiUrl, { ingredients: orderFor })
+        .then((resp) => {
+          setOrder(resp.data.order.number);
+        })
+        .catch((err) => console.log(`Error: ${err}`));
+    }
+  }, [orderFor]);
+
+  const [state, dispatch] = useReducer(reducer, 0);
 
   if (items.length === 0) {
     return null;
@@ -92,17 +90,16 @@ export const BurgerConstructor = () => {
         </div>
         <div className={styles.scrollBar}>
           <div className={styles.items}>
-            {ingredient
-              .map((el) => (
-                <div key={el._id} className={styles.item}>
-                  <DragIcon type="primary" />
-                  <ConstructorElement
-                    text={el.name}
-                    price={el.price}
-                    thumbnail={el.image}
-                  />
-                </div>
-              ))}
+            {ingredient.map((el) => (
+              <div key={el._id} className={styles.item}>
+                <DragIcon type="primary" />
+                <ConstructorElement
+                  text={el.name}
+                  price={el.price}
+                  thumbnail={el.image}
+                />
+              </div>
+            ))}
           </div>
         </div>
         <div className={styles.bread}>
@@ -111,7 +108,7 @@ export const BurgerConstructor = () => {
             type="bottom"
             isLocked={true}
             text={bunBot}
-            price={200}
+            price={bun.price}
             thumbnail={bun.image}
           />
         </div>
@@ -127,14 +124,17 @@ export const BurgerConstructor = () => {
           type="primary"
           size="large"
           onClick={() => {
-            getOrderNumber();
             setModalActive(true);
           }}
         >
           Оформить заказ
         </Button>
       </div>
-      <OrderDetails active={modalActive} setActive={setModalActive}  />{/* orderNumber={order} */}
+      <OrderDetails
+        active={modalActive}
+        setActive={setModalActive}
+        orderNumber={order}
+      />
     </>
   );
 };

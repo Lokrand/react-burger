@@ -38,7 +38,7 @@ function App() {
   //       loading: false,
   //       components: appState.components.slice(0, (appState.components.length-1)),
   //     });
-  //   }, 500)
+  //   }, 1000)
   //   return () => {clearInterval(interval)}
   // }, [appState.components])
 
