@@ -2,63 +2,33 @@ import React, { useContext, useEffect, useState, useReducer } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerConstructor.module.css";
-import PropTypes, { number } from "prop-types";
+import PropTypes from "prop-types";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
 import { ingredientType } from "../utils/types";
-import { BurgersContext } from "../BurgersContext/BurgersContext";
+import { BurgersContext } from "../../services/BurgersContext/BurgersContext";
 import axios from "axios";
-
-function reducer(state, action) {
-  switch (action.type) {
-    case "totalPrice":
-      return getPrice(action.items);
-    default:
-      throw new Error(`Wrong type of action: ${action.type}`);
-  }
-}
-
-function getPrice(items) {
-  let totalPrice = 0;
-  items.forEach((el) => {
-    if (el.type !== "bun") {
-      totalPrice += el.price;
-    } else {
-      totalPrice += el.price * 2;
-    }
-  });
-  return totalPrice;
-}
+import { reducer } from "./BurgerConstructor.utils";
 
 export const BurgerConstructor = () => {
-  const items = useContext(BurgersContext).components;
+  const items = useContext(BurgersContext);
 
   const [modalActive, setModalActive] = useState(false);
 
   const bun = items.find((el) => el.type === "bun");
   const bunTop = bun?.name + " (верх)";
   const bunBot = bun?.name + " (низ)";
-  
-  // Создаю массив, в который в дальнейшем буду записывать элементы бургера, перенесенные с помощью DnD
-  // Сейчас здесь все ингредиенты, которые приходят с Api, кроме булок
+
   const ingredient = items.filter((item) => item.type !== "bun");
-  const [orderFor, setOrderFor] = useState([]);
 
   useEffect(() => {
-    // console.log('totalPriceUpdated')
     dispatch({ type: "totalPrice", items });
   }, [items]);
   const [order, setOrder] = useState(0);
 
-  // get the order number
-  useEffect(() => {
-    ingredient.forEach((el) => {
-      setOrderFor([...orderFor, el._id]);
-    });
-  }, []);
-
-  useEffect(() => {
+  const handleOrderClick = () => {
+    const orderFor = ingredient.map((el) => el._id);
     if (orderFor !== null && orderFor.length > 0) {
       const apiUrl = "https://norma.nomoreparties.space/api/orders";
       axios
@@ -68,7 +38,7 @@ export const BurgerConstructor = () => {
         })
         .catch((err) => console.log(`Error: ${err}`));
     }
-  }, [orderFor]);
+  };
 
   const [state, dispatch] = useReducer(reducer, 0);
 
@@ -126,6 +96,7 @@ export const BurgerConstructor = () => {
           size="large"
           onClick={() => {
             setModalActive(true);
+            handleOrderClick();
           }}
         >
           Оформить заказ

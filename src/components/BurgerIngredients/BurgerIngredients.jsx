@@ -6,11 +6,11 @@ import PropTypes from "prop-types";
 import styles from "./BurgerIngredients.module.css";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 import { ingredientType } from "../utils/types";
-import { BurgersContext } from "../BurgersContext/BurgersContext";
+import { BurgersContext } from "../../services/BurgersContext/BurgersContext";
 
 export const BurgerIngredients = ({ modalActive, setModalActive }) => {
   const [modalIngredient, setModalIngredient] = useState(null);
-  const items = useContext(BurgersContext).components;
+  const items = useContext(BurgersContext);
   const [current, setCurrent] = useState("one");
   return (
     <div>
