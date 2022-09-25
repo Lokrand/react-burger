@@ -8,8 +8,8 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { OrderDetails } from "../OrderDetails/OrderDetails";
 import { ingredientType } from "../utils/types";
 import { BurgersContext } from "../../services/BurgersContext/BurgersContext";
-import axios from "axios";
 import { reducer } from "./BurgerConstructor.utils";
+import { getOrderNumber } from "../utils/api.js";
 
 export const BurgerConstructor = () => {
   const items = useContext(BurgersContext);
@@ -28,16 +28,9 @@ export const BurgerConstructor = () => {
   const [order, setOrder] = useState(0);
 
   const handleOrderClick = () => {
-    const orderFor = ingredient.map((el) => el._id);
-    if (orderFor !== null && orderFor.length > 0) {
-      const apiUrl = "https://norma.nomoreparties.space/api/orders";
-      axios
-        .post(apiUrl, { ingredients: orderFor })
-        .then((resp) => {
-          setOrder(resp.data.order.number);
-        })
-        .catch((err) => console.log(`Error: ${err}`));
-    }
+    getOrderNumber(ingredient).then((res) => {
+      setOrder(res.order.number);
+    });
   };
 
   const [state, dispatch] = useReducer(reducer, 0);

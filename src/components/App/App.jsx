@@ -3,7 +3,6 @@ import { AppHeader } from "../AppHeader/AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
 import styles from "./App.module.css";
-import axios from "axios";
 import { BurgersContext } from "../../services/BurgersContext/BurgersContext";
 import { getIngredients } from "../utils/api.js";
 
