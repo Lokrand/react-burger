@@ -5,12 +5,7 @@ const ing = {
 
 export const getIngredients = async () => {
   ing.loading = true;
-  const res = await fetch("https://norma.nomoreparties.space/api/ingredients", {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  });
+  const res = await fetch("https://norma.nomoreparties.space/api/ingredients");
   const data = await res.json();
   ing.appState = data.data;
   ing.loading = true;
