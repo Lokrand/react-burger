@@ -5,21 +5,28 @@ import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
 import styles from "./App.module.css";
 import { BurgersContext } from "../../services/BurgersContext/BurgersContext";
 import { getIngredients } from "../../utils/api.js";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
-  const [componentModalActive, setComponentModalActive] = useState(false);
-  const [appState, setAppState] = useState([]);
-  const [loading, setloading] = useState(false);
+  const dispatch = useDispatch();
+  const items = useSelector(state => state.components)
 
+  const [componentModalActive, setComponentModalActive] = useState(false);
+  const [components, setcomponents] = useState([]);
+  const [loading, setloading] = useState(false);
   useEffect(() => {
-    getIngredients().then((res) => {
-      setAppState(res.data);
-      setloading(false);
-    });
-  }, []);
+    setcomponents(items);
+    setloading(false);
+  }, [])
+  // useEffect(() => {
+  //   getIngredients().then((res) => {
+  //     setcomponents(res.data);
+  //     setloading(false);
+  //   });
+  // }, []);
 
   return (
-    <BurgersContext.Provider value={appState}>
+    <BurgersContext.Provider value={components}>
       <AppHeader />
       <main>
         <div className={styles.sections}>

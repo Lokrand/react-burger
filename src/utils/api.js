@@ -1,5 +1,5 @@
-const ing = {
-  appState: [],
+export const ing = {
+  components: [],
   loading: false,
 };
 
@@ -7,7 +7,7 @@ export const getIngredients = async () => {
   ing.loading = true;
   const res = await fetch("https://norma.nomoreparties.space/api/ingredients");
   const data = await res.json();
-  ing.appState = data.data;
+  ing.components = data.data;
   ing.loading = true;
   return data;
 };

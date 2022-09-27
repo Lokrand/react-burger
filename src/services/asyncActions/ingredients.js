@@ -1,5 +1,5 @@
 const ing = {
-  appState: [],
+  components: [],
   loading: false,
 };
 
@@ -8,10 +8,13 @@ export const fetchIngredients = () => {
     ing.loading = true;
     const res = fetch("https://norma.nomoreparties.space/api/ingredients")
     .then((res) => res.json())
-    .then((json) => dispatch(addManyIngredients(json)))
-    const data = res.json();
-    ing.appState = data.data;
-    ing.loading = true;
-    return data;
+    .then((json) => {
+      console.log('JASOOOOOOOOOOON', json)
+      dispatch(addManyIngredients(json.data))
+      ing.loading = true;
+    })
+    // const data = res.json();
+    // ing.components = data.data;
+    // return data;
   };
 };
