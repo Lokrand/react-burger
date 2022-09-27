@@ -9,4 +9,7 @@ export const ingredientType = {
   proteins: PropTypes.number.isRequired,
   fat: PropTypes.number.isRequired,
   carbohydrates: PropTypes.number.isRequired,
+  active: PropTypes.bool,
+  setActive: PropTypes.func,
+  orderNumber: PropTypes.number,
 };

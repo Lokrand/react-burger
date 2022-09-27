@@ -1,7 +1,7 @@
 import { Modal } from "../Modal/Modal";
 import styles from "./IngredientDetails.module.css";
 import PropTypes from "prop-types";
-import { ingredientType } from "../utils/types";
+import { ingredientType } from "../../utils/types";
 
 export const IngredientDetails = ({ data, active, setActive }) => {
   return (

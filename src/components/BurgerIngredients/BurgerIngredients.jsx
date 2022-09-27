@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIngredient } from "./BurgerIngredient";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import styles from "./BurgerIngredients.module.css";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
-import { ingredientType } from "../utils/types";
+import { ingredientType } from "../../utils/types";
+import { BurgersContext } from "../../services/BurgersContext/BurgersContext";
 
-export const BurgerIngredients = ({ data, modalActive, setModalActive }) => {
+export const BurgerIngredients = ({ modalActive, setModalActive }) => {
   const [modalIngredient, setModalIngredient] = useState(null);
-
+  const items = useContext(BurgersContext);
   const [current, setCurrent] = useState("one");
   return (
     <div>
@@ -27,7 +28,7 @@ export const BurgerIngredients = ({ data, modalActive, setModalActive }) => {
       <div className={styles.main}>
         <p className="text text_type_main-medium mb-6">Булки</p>
         <div className={styles.items}>
-          {data
+          {items
             .filter((item) => item.type === "bun")
             .map((el) => (
               <BurgerIngredient
@@ -48,7 +49,7 @@ export const BurgerIngredients = ({ data, modalActive, setModalActive }) => {
         </div>
         <p className="text text_type_main-medium mb-6 mt-15">Соусы</p>
         <div className={styles.items}>
-          {data
+          {items
             .filter((item) => item.type === "sauce")
             .map((el) => (
               <BurgerIngredient
@@ -63,7 +64,7 @@ export const BurgerIngredients = ({ data, modalActive, setModalActive }) => {
         </div>
         <p className="text text_type_main-medium mb-6 mt-15">Начинки</p>
         <div className={styles.items}>
-          {data
+          {items
             .filter((item) => item.type === "main")
             .map((el) => (
               <BurgerIngredient
@@ -89,5 +90,5 @@ export const BurgerIngredients = ({ data, modalActive, setModalActive }) => {
 };
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape(ingredientType)).isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape(ingredientType)),
 };
