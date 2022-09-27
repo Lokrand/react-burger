@@ -1,7 +1,7 @@
 import { Modal } from "../Modal/Modal";
 import icon from "../../images/done.png";
 import PropTypes from "prop-types";
-import { ingredientType } from "../utils/types";
+import { ingredientType } from "../../utils/types";
 
 export const OrderDetails = ({ active, setActive, orderNumber }) => {
   return (

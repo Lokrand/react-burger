@@ -4,7 +4,7 @@ import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
 import styles from "./App.module.css";
 import { BurgersContext } from "../../services/BurgersContext/BurgersContext";
-import { getIngredients } from "../utils/api.js";
+import { getIngredients } from "../../utils/api.js";
 
 function App() {
   const [componentModalActive, setComponentModalActive] = useState(false);

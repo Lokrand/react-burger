@@ -5,7 +5,7 @@ import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import styles from "./BurgerIngredients.module.css";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
-import { ingredientType } from "../utils/types";
+import { ingredientType } from "../../utils/types";
 import { BurgersContext } from "../../services/BurgersContext/BurgersContext";
 
 export const BurgerIngredients = ({ modalActive, setModalActive }) => {

@@ -6,10 +6,10 @@ import PropTypes from "prop-types";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
-import { ingredientType } from "../utils/types";
+import { ingredientType } from "../../utils/types";
 import { BurgersContext } from "../../services/BurgersContext/BurgersContext";
 import { reducer } from "./BurgerConstructor.utils";
-import { getOrderNumber } from "../utils/api.js";
+import { getOrderNumber } from "../../utils/api.js";
 
 export const BurgerConstructor = () => {
   const items = useContext(BurgersContext);
