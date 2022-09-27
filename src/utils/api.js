@@ -3,14 +3,14 @@ export const ing = {
   loading: false,
 };
 
-export const getIngredients = async () => {
-  ing.loading = true;
-  const res = await fetch("https://norma.nomoreparties.space/api/ingredients");
-  const data = await res.json();
-  ing.components = data.data;
-  ing.loading = true;
-  return data;
-};
+// export const getIngredients = async () => {
+//   ing.loading = true;
+//   const res = await fetch("https://norma.nomoreparties.space/api/ingredients");
+//   const data = await res.json();
+//   ing.components = data.data;
+//   ing.loading = true;
+//   return data;
+// };
 
 export const getOrderNumber = async (ingredient) => {
   const orderFor = ingredient.map((el) => el._id);

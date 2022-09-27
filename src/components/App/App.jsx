@@ -6,17 +6,22 @@ import styles from "./App.module.css";
 import { BurgersContext } from "../../services/BurgersContext/BurgersContext";
 import { getIngredients } from "../../utils/api.js";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchIngredients } from '../../services/asyncActions/ingredients.js'
 
 function App() {
+  
   const dispatch = useDispatch();
-  const items = useSelector(state => state.components)
-
+  const items = useSelector(state => state.app.components);
+  const loading = useSelector(state => state.app.loading);
+  console.log('ЮЗ СЕЛЕКТОР', items);
+  
   const [componentModalActive, setComponentModalActive] = useState(false);
-  const [components, setcomponents] = useState([]);
-  const [loading, setloading] = useState(false);
+
+  // const [loading, setloading] = useState(false);
+  
   useEffect(() => {
-    setcomponents(items);
-    setloading(false);
+    dispatch(fetchIngredients());
+    // setloading(false);
   }, [])
   // useEffect(() => {
   //   getIngredients().then((res) => {
@@ -26,7 +31,7 @@ function App() {
   // }, []);
 
   return (
-    <BurgersContext.Provider value={components}>
+    <BurgersContext.Provider value={items}>
       <AppHeader />
       <main>
         <div className={styles.sections}>

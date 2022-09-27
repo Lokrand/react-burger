@@ -1,20 +1,17 @@
-const ing = {
-  components: [],
-  loading: false,
-};
+import { addManyIngredients, addManyIngredientsLoading } from '../reducers/BugrerReducer.js'
 
 export const fetchIngredients = () => {
   return function (dispatch) {
-    ing.loading = true;
-    const res = fetch("https://norma.nomoreparties.space/api/ingredients")
+    // loading - loading
+    dispatch(addManyIngredientsLoading(true))
+
+    fetch("https://norma.nomoreparties.space/api/ingredients")
     .then((res) => res.json())
     .then((json) => {
-      console.log('JASOOOOOOOOOOON', json)
+      //loading - success
       dispatch(addManyIngredients(json.data))
-      ing.loading = true;
+
     })
-    // const data = res.json();
-    // ing.components = data.data;
-    // return data;
   };
 };
+
