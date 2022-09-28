@@ -7,13 +7,15 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
 import { ingredientType } from "../../utils/types";
-import { BurgersContext } from "../../services/BurgersContext/BurgersContext";
+// import { BurgersContext } from "../../services/BurgersContext/BurgersContext";
 import { reducer } from "./BurgerConstructor.utils";
 import { getOrderNumber } from "../../utils/api.js";
+import { useSelector } from "react-redux";
 
 export const BurgerConstructor = () => {
-  const items = useContext(BurgersContext);
-
+  // const items = useContext(BurgersContext);
+  const items = useSelector((state) => state.app.components);
+  
   const [modalActive, setModalActive] = useState(false);
 
   const bun = items.find((el) => el.type === "bun");

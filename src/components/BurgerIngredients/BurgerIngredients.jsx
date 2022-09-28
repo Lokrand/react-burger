@@ -6,27 +6,62 @@ import PropTypes from "prop-types";
 import styles from "./BurgerIngredients.module.css";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 import { ingredientType } from "../../utils/types";
-import { BurgersContext } from "../../services/BurgersContext/BurgersContext";
+import { useSelector } from "react-redux";
+import { Link } from "react-scroll";
+import { useDrag } from "react-dnd";
 
 export const BurgerIngredients = ({ modalActive, setModalActive }) => {
   const [modalIngredient, setModalIngredient] = useState(null);
-  const items = useContext(BurgersContext);
+  const items = useSelector((state) => state.app.components);
+
   const [current, setCurrent] = useState("one");
+
+  
+  
+
+  //   const [, dragRef] = useDrag({
+  //     type: "animal",
+  //     item: {id}
+  // });
+
   return (
     <div>
       <div className={styles.menu}>
-        <Tab value="one" active={current === "one"} onClick={setCurrent}>
+        <Tab
+          value="one"
+          active={current === "one"}
+          onClick={() => {
+            document.getElementById("buns").scrollIntoView();
+            setCurrent("one");
+          }}
+        >
           Булки
         </Tab>
-        <Tab value="two" active={current === "two"} onClick={setCurrent}>
+        <Tab
+          value="two"
+          active={current === "two"}
+          onClick={() => {
+            document.getElementById("souce").scrollIntoView();
+            setCurrent("two");
+          }}
+        >
           Соусы
         </Tab>
-        <Tab value="three" active={current === "three"} onClick={setCurrent}>
+        <Tab
+          value="three"
+          active={current === "three"}
+          onClick={() => {
+            document.getElementById("stuff").scrollIntoView();
+            setCurrent("three");
+          }}
+        >
           Начинки
         </Tab>
       </div>
       <div className={styles.main}>
-        <p className="text text_type_main-medium mb-6">Булки</p>
+        <p className="text text_type_main-medium mb-6" id="buns">
+          Булки
+        </p>
         <div className={styles.items}>
           {items
             .filter((item) => item.type === "bun")
@@ -47,7 +82,9 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
             </div>
           </div> */}
         </div>
-        <p className="text text_type_main-medium mb-6 mt-15">Соусы</p>
+        <p className="text text_type_main-medium mb-6 mt-15" id="souce">
+          Соусы
+        </p>
         <div className={styles.items}>
           {items
             .filter((item) => item.type === "sauce")
@@ -62,7 +99,9 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
               />
             ))}
         </div>
-        <p className="text text_type_main-medium mb-6 mt-15">Начинки</p>
+        <p className="text text_type_main-medium mb-6 mt-15" id="stuff">
+          Начинки
+        </p>
         <div className={styles.items}>
           {items
             .filter((item) => item.type === "main")

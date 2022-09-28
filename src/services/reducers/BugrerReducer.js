@@ -16,6 +16,7 @@ export const addManyIngredients = (payload) => ({
   type: GET_INGREDIENTS,
   payload,
 });
+
 export const addManyIngredientsLoading = (payload) => ({
   type: GET_INGREDIENTS_LOADING,
   payload,

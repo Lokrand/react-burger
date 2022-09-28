@@ -1,5 +1,4 @@
-import { composeWithDevTools } from 'redux-devtools-extension'
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import { combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { reducer } from "./BugrerReducer";
 import { configureStore } from '@reduxjs/toolkit';
