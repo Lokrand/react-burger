@@ -21,5 +21,3 @@ export const addManyIngredientsLoading = (payload) => ({
   type: GET_INGREDIENTS_LOADING,
   payload,
 });
-
-

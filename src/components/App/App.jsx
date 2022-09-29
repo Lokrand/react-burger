@@ -10,7 +10,6 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.app.components);
   const loading = useSelector((state) => state.app.loading);
   const [componentModalActive, setComponentModalActive] = useState(false);
 
