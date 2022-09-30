@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState, useReducer } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import { ConstructorIngredients } from "./ConstructorIngredients";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerConstructor.module.css";
 import PropTypes from "prop-types";
@@ -9,24 +10,65 @@ import { OrderDetails } from "../OrderDetails/OrderDetails";
 import { ingredientType } from "../../utils/types";
 // import { BurgersContext } from "../../services/BurgersContext/BurgersContext";
 import { reducer } from "./BurgerConstructor.utils";
+import { counterReducer } from "../../services/reducers/BugrerReducer";
 import { getOrderNumber } from "../../utils/api.js";
 import { useSelector } from "react-redux";
+import { useDrop } from "react-dnd";
+import { ADD_BURGER_INGREDIENTS, GET_COUNTER } from "../../services/actions/ingredients";
 
+
+ 
 export const BurgerConstructor = () => {
   // const items = useContext(BurgersContext);
+  // const count = useSelector((state) => state.counterReducer.count);
+  const [count, countDispatch] = useReducer(counterReducer, 0);
+  console.log(count)
   const items = useSelector((state) => state.app.components);
+  // const items = [];
+  
+  const [state, dispatch] = useReducer(reducer, 0);
+
+  const [board, setBoard] = useState([]);
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: "bun",
+    drop: (item) => addIngredientToBoard(item.id),
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+    }),
+  }));
+  
+  const addIngredientToBoard = (id) => {
+    const innredientsList = items.filter((item) => id === item._id)
+    setBoard((board) => [...board, innredientsList[0]]);
+  };
+  
+  const removeIngredient = (id) => {
+    console.log('heyheyhey')
+    const innredientsList = board.filter((item) => id !== item._id)
+    setBoard(innredientsList);
+  }
   
   const [modalActive, setModalActive] = useState(false);
 
-  const bun = items.find((el) => el.type === "bun");
+  const bun = board.find((el) => el.type === "bun");
   const bunTop = bun?.name + " (верх)";
   const bunBot = bun?.name + " (низ)";
 
-  const ingredient = items.filter((item) => item.type !== "bun");
+  const ingredient = board.filter((item) => item.type !== "bun");
 
   useEffect(() => {
-    dispatch({ type: "totalPrice", items });
-  }, [items]);
+    const myCount = board.filter((el) => el._id === board[board.length-1]._id).length
+    // if (board[board.length-1]._id === 
+    countDispatch({type: GET_COUNTER, count: myCount })
+    console.log(count.count)
+  }, [board])
+
+
+  useEffect(() => {
+    if (board.length > 0) {
+      dispatch({ type: "totalPrice", board });
+    }
+  }, [board]);
   const [order, setOrder] = useState(0);
 
   const handleOrderClick = () => {
@@ -35,31 +77,30 @@ export const BurgerConstructor = () => {
     });
   };
 
-  const [state, dispatch] = useReducer(reducer, 0);
-
-  if (items.length === 0) {
-    return null;
-  }
-
   return (
     <>
-      <div className={styles.section}>
+      <div className={styles.section} ref={drop}>
         <div className={styles.bread}>
           <div className={styles.secret} />
-          <ConstructorElement
+          {
+            bun && <ConstructorElement
             type="top"
             isLocked={true}
             text={bunTop}
             price={bun.price}
             thumbnail={bun.image}
           />
+          }
+          
         </div>
         <div className={styles.scrollBar}>
           <div className={styles.items}>
             {ingredient.map((el) => (
               <div key={el._id} className={styles.item}>
                 <DragIcon type="primary" />
-                <ConstructorElement
+                <ConstructorIngredients
+                  id={el._id}
+                  remove={removeIngredient}
                   text={el.name}
                   price={el.price}
                   thumbnail={el.image}
@@ -70,13 +111,15 @@ export const BurgerConstructor = () => {
         </div>
         <div className={styles.bread}>
           <div className={styles.secret} />
-          <ConstructorElement
+          {bun && <ConstructorElement
             type="bottom"
             isLocked={true}
             text={bunBot}
             price={bun.price}
             thumbnail={bun.image}
           />
+          }
+          
         </div>
       </div>
       <div className={styles.block}>

@@ -1,12 +1,31 @@
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import React, { useContext, useEffect, useState, useReducer } from "react";
+import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerIngredients.module.css";
 import PropTypes from "prop-types";
 import { ingredientType } from "../../utils/types";
+import { useDrag } from "react-dnd";
+import { useSelector } from "react-redux";
 
-export const BurgerIngredient = ({data, onClick}) => {
-
+export const BurgerIngredient = ({ data, onClick }) => {
+  const id = data._id;
+  const [counter, setCounter] = useState(0)
+  let count = useSelector((state) => state.counterReducer.count.count);
+  useEffect(() => {
+    setCounter(count)
+  }, [id])
+  const [{ isDrag }, dragRef] = useDrag({
+    type: "bun",
+    item: { id },
+    collect: (monitor) => ({
+      isDrag: monitor.isDragging(),
+    }),
+  });
   return (
-    <div className={styles.item} onClick={onClick}>
+    <div
+      className={isDrag ? styles.isDragging : styles.item}
+      onClick={onClick}
+      ref={dragRef}
+    >
       <img src={data.image} alt={data.name} className={styles.image} />
       <div className={styles.price}>
         <p className="text text_type_digits-default">{data.price}</p>
@@ -15,11 +34,14 @@ export const BurgerIngredient = ({data, onClick}) => {
       <div className={styles.title}>
         <p className="text text_type_main-default">{data.name}</p>
       </div>
+      <div className={styles.counter}>
+        <Counter count={counter} size="default" />
+      </div>
     </div>
   );
 };
 
 BurgerIngredient.propTypes = {
-  data: PropTypes.shape(ingredientType).isRequired, 
+  data: PropTypes.shape(ingredientType).isRequired,
   onClick: PropTypes.func.isRequired,
 };

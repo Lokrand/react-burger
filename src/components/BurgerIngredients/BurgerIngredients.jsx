@@ -16,19 +16,23 @@ import { useSelector } from "react-redux";
 import { Link } from "react-scroll";
 import { useDrag } from "react-dnd";
 import { throttle } from "../../utils/throttle";
+import { DndProvider, useDrop } from "react-dnd";
 
 export const BurgerIngredients = ({ modalActive, setModalActive }) => {
+  
   const [modalIngredient, setModalIngredient] = useState(null);
   const items = useSelector((state) => state.app.components);
-
+  // const items=[]
   const [current, setCurrent] = useState("one");
 
   const bunRef = useRef(null);
   const souceRef = useRef(null);
   // const throttle = (() => {update()}, 1000)
+
   function scrollBar() {
     const bunsBlockHeight = bunRef.current.offsetHeight;
     const souceBlockHeight = souceRef.current.offsetHeight;
+    
     let scrollPosition = document.querySelector("#main").scrollTop;
     if (scrollPosition > 0 && scrollPosition < bunsBlockHeight / 2) {
       setCurrent("one");
@@ -40,9 +44,9 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
     } else if (scrollPosition > bunsBlockHeight + souceBlockHeight / 2) {
       setCurrent("three");
     }
-  };
-
-  // scrollBar = throttle(scrollBar, 20)
+  }
+  scrollBar = throttle(scrollBar, 100)
+  // console.log('heu')
 
   return (
     <div>
@@ -96,12 +100,6 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
                   }}
                 />
               ))}
-            {/* <div className={styles.block}>
-            <BurgerIngredient data={data[0]} active={modalActive} setActive={setModalActive} />
-            <div className={styles.counter}>
-            <Counter count={1} size="default" />
-            </div>
-          </div> */}
           </div>
         </div>
         <div ref={souceRef}>

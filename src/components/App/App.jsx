@@ -5,23 +5,28 @@ import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
 import styles from "./App.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchIngredients } from "../../services/asyncActions/ingredients.js";
-import { DndProvider } from "react-dnd";
+import { DndProvider, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.app.loading);
   const [componentModalActive, setComponentModalActive] = useState(false);
-
+  const items = useSelector((state) => state.app.components);
   useEffect(() => {
     dispatch(fetchIngredients());
   }, []);
-
+  const [counter, setCounter] = useState(0);
+  const getCounter = (id, items) => {
+    const innredientsList = items.filter((item) => id === item._id)
+    setCounter(innredientsList.length)
+    return counter;
+  }
   return (
     <>
       <AppHeader />
-      <DndProvider backend={HTML5Backend}>
-        <main>
+      <main>
+        <DndProvider backend={HTML5Backend}>
           <div className={styles.sections}>
             <div className="pl-4">
               <p className="text text_type_main-large mb-5">Соберите бургер</p>
@@ -35,11 +40,11 @@ function App() {
               )}
             </div>
             <div className="mt-15">
-              {loading ? <p>Loading</p> : <BurgerConstructor />}
+              {loading ? <p>Loading</p> : <BurgerConstructor getCounter={getCounter} />}
             </div>
           </div>
-        </main>
-      </DndProvider>
+        </DndProvider>
+      </main>
     </>
   );
 }
