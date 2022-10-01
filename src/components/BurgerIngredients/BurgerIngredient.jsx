@@ -1,4 +1,3 @@
-import React, { useContext, useEffect, useState, useReducer } from "react";
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerIngredients.module.css";
 import PropTypes from "prop-types";
@@ -8,11 +7,9 @@ import { useSelector } from "react-redux";
 
 export const BurgerIngredient = ({ data, onClick }) => {
   const id = data._id;
-  const [counter, setCounter] = useState(0)
-  let count = useSelector((state) => state.counterReducer.count.count);
-  useEffect(() => {
-    setCounter(count)
-  }, [id])
+  const selectedItems = useSelector((state) => state.app.selectedItems);
+  const counter = selectedItems.filter((el) => el._id === id).length;
+
   const [{ isDrag }, dragRef] = useDrag({
     type: "bun",
     item: { id },
@@ -20,6 +17,7 @@ export const BurgerIngredient = ({ data, onClick }) => {
       isDrag: monitor.isDragging(),
     }),
   });
+
   return (
     <div
       className={isDrag ? styles.isDragging : styles.item}
@@ -34,9 +32,10 @@ export const BurgerIngredient = ({ data, onClick }) => {
       <div className={styles.title}>
         <p className="text text_type_main-default">{data.name}</p>
       </div>
-      <div className={styles.counter}>
+      {counter !== 0 ? <div className={styles.counter}>
         <Counter count={counter} size="default" />
-      </div>
+      </div> : <div></div>}
+      
     </div>
   );
 };

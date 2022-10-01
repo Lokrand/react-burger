@@ -1,8 +1,3 @@
-export const ing = {
-  components: [],
-  loading: false,
-};
-
 export const getOrderNumber = async (ingredient) => {
   const orderFor = ingredient.map((el) => el._id);
   if (orderFor !== null && orderFor.length > 0) {

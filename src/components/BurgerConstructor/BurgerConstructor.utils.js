@@ -1,12 +1,3 @@
-export function reducer(state, action) {
-  switch (action.type) {
-    case "totalPrice":
-      return getPrice(action.board);
-    default:
-      throw new Error(`Wrong type of action: ${action.type}`);
-  }
-}
-
 export function getPrice(items) {
   let totalPrice = 0;
   if (items.length > 0) {

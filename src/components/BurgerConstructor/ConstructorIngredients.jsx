@@ -5,6 +5,8 @@ import {
 import styles from "./BurgerConstructor.module.css";
 
 export const ConstructorIngredients = (props) => {
+  let time = new Date().getTime().toString()
+  console.log(time)
   return (
     <div className={styles.constructor_element}>
       <img

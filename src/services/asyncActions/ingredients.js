@@ -1,13 +1,15 @@
-import { addManyIngredients, addManyIngredientsLoading } from '../reducers/BugrerReducer.js'
+import {
+  addManyIngredients,
+  addManyIngredientsLoading,
+} from "../reducers/BugrerReducer.js";
 
 export const fetchIngredients = () => {
   return function (dispatch) {
-    dispatch(addManyIngredientsLoading(true))
+    dispatch(addManyIngredientsLoading(true));
     fetch("https://norma.nomoreparties.space/api/ingredients")
-    .then((res) => res.json())
-    .then((json) => {
-      dispatch(addManyIngredients(json.data))
-    })
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(addManyIngredients(json.data));
+      });
   };
 };
-
