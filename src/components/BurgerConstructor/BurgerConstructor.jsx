@@ -11,11 +11,12 @@ import { ingredientType } from "../../utils/types";
 import { getPrice } from "./BurgerConstructor.utils";
 import { getOrderNumber } from "../../services/asyncActions/orderNumber";
 import { useDispatch, useSelector } from "react-redux";
-import { useDrop } from "react-dnd";
+import { useDrag, useDrop } from "react-dnd";
 import {
   ADD_CONSTRUCTOR_ELEMENT,
   REMOVE_CONSTRUCTOR_ELEMENT,
 } from "../../services/actions/ingredients";
+import { Reorder } from "framer-motion";
 
 export const BurgerConstructor = () => {
   const items = useSelector((state) => state.app.components);
@@ -27,7 +28,10 @@ export const BurgerConstructor = () => {
   const bun = selectedItems.find((el) => el.type === "bun");
   const bunTop = bun?.name + " (верх)";
   const bunBot = bun?.name + " (низ)";
+  let orderNumber = 0;
   const ingredient = selectedItems.filter((item) => item.type !== "bun");
+  const [todos, setTodos] = useState(ingredient) /////////////////////////
+  // console.log('selectedItems', selectedItems)
   const totalPrice = getPrice(selectedItems);
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "bun",
@@ -45,6 +49,7 @@ export const BurgerConstructor = () => {
     });
   };
 
+  
   const removeIngredient = (key) => {
     reduxDispatch({
       type: REMOVE_CONSTRUCTOR_ELEMENT,
@@ -60,6 +65,34 @@ export const BurgerConstructor = () => {
     return `${Math.floor(Math.random() * 1000) + Date.now()}`;
   };
 
+  const sortIngredients = (a, b) => {
+    if (a.order > b.order) {
+      return 1;
+    } else {
+      return -1;
+    }
+  }
+
+  const [{ isOvere }, dropRef] = useDrop(() => ({
+    accept: "bun",
+    drop: (item) => {
+      console.log('item', item)
+      selectedItems.map((el) => {
+        if(el.key === item.key) {
+          return {...el, key: item.key}
+        }
+      })
+      // addIngredientToBoard(item.id)}
+    },
+    collect: (monitor) => ({
+      isOvere: monitor.isOver(),
+    }),
+  }));
+
+  const setItem = (item) => {
+    ingredient.push(item)
+    return ingredient
+  }
   return (
     <>
       <div className={styles.section} ref={drop}>
@@ -75,12 +108,13 @@ export const BurgerConstructor = () => {
             />
           )}
         </div>
-        <div className={styles.scrollBar}>
+        <div className={styles.scrollBar} ref={dropRef}>
+          <Reorder.Group as="ol" axys ="y" values={todos} onReorder={setItem} >
           <div className={styles.items}>
-            {ingredient.map((el) => (
-              <div key={el.key} className={styles.item}>
-                <DragIcon type="primary" />
+            {ingredient.sort(sortIngredients).map((el) => (
+              <div key={el.key}>
                 <ConstructorIngredients
+                  el={el}
                   id={el.key}
                   remove={removeIngredient}
                   text={el.name}
@@ -90,6 +124,7 @@ export const BurgerConstructor = () => {
               </div>
             ))}
           </div>
+          </Reorder.Group>
         </div>
         <div className={styles.bread}>
           <div className={styles.secret} />

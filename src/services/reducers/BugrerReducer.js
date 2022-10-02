@@ -16,7 +16,11 @@ export const initialState = {
   orderFor: [],
   orderNumber: 0,
 };
-
+let orderNumber = 0;
+const getOrder = () => {
+  orderNumber++;
+  return orderNumber;
+}
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS:
@@ -43,6 +47,9 @@ export const reducer = (state = initialState, action) => {
             };
           }
         }
+      }
+      if (ingredient.type !== 'bun') {
+        ingredient.order = getOrder();
       }
       return {
         ...state,
