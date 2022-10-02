@@ -1,34 +1,33 @@
 import React, {
-  createRef,
-  useContext,
-  useEffect,
   useRef,
   useState,
 } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIngredient } from "./BurgerIngredient";
-import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import styles from "./BurgerIngredients.module.css";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 import { ingredientType } from "../../utils/types";
-import { useSelector } from "react-redux";
-import { Link } from "react-scroll";
-import { useDrag } from "react-dnd";
+import { useDispatch, useSelector } from "react-redux";
 import { throttle } from "../../utils/throttle";
-import { DndProvider, useDrop } from "react-dnd";
+import { GET_DETAILS } from "../../services/actions/ingredients";
 
 export const BurgerIngredients = ({ modalActive, setModalActive }) => {
-  
+  // TODO нужно ли мне это? 
   const [modalIngredient, setModalIngredient] = useState(null);
   const items = useSelector((state) => state.app.components);
-  // const items=[]
   const [current, setCurrent] = useState("one");
-
   const bunRef = useRef(null);
   const souceRef = useRef(null);
-  // const throttle = (() => {update()}, 1000)
+  const detailsDispatch = useDispatch();
 
+  const getIngredientDetails = (el) => {
+    setModalIngredient(true)
+    detailsDispatch({
+      type: GET_DETAILS,
+      payload: el,
+    })
+  }
   function scrollBar() {
     const bunsBlockHeight = bunRef.current.offsetHeight;
     const souceBlockHeight = souceRef.current.offsetHeight;
@@ -45,8 +44,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
       setCurrent("three");
     }
   }
-  scrollBar = throttle(scrollBar, 100)
-  // console.log('heu')
+  // scrollBar = throttle(scrollBar, 100)
 
   return (
     <div>
@@ -96,7 +94,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
                   key={el._id}
                   onClick={() => {
                     setModalActive(true);
-                    setModalIngredient(el);
+                    getIngredientDetails(el);
                   }}
                 />
               ))}
@@ -115,7 +113,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
                   key={el._id}
                   onClick={() => {
                     setModalActive(true);
-                    setModalIngredient(el);
+                    getIngredientDetails(el);
                   }}
                 />
               ))}
@@ -133,7 +131,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
                 key={el._id}
                 onClick={() => {
                   setModalActive(true);
-                  setModalIngredient(el);
+                  getIngredientDetails(el);
                 }}
               />
             ))}
@@ -141,7 +139,6 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
       </div>
       {modalIngredient && (
         <IngredientDetails
-          data={modalIngredient}
           active={modalActive}
           setActive={setModalActive}
         />

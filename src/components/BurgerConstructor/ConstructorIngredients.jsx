@@ -5,8 +5,6 @@ import {
 import styles from "./BurgerConstructor.module.css";
 
 export const ConstructorIngredients = (props) => {
-  let time = new Date().getTime().toString()
-  console.log(time)
   return (
     <div className={styles.constructor_element}>
       <img
@@ -20,7 +18,7 @@ export const ConstructorIngredients = (props) => {
           <p className="text text_type_digits-default">{props.price}</p>
           <div className={styles.icons}>
             <CurrencyIcon type="primary" />
-            <div className={styles.delete_icon} onClick={() => props.remove(props.id)}>
+            <div className={styles.delete_icon} onClick={() => {props.remove(props.id)}}>
               <DeleteIcon type="primary" />
             </div>
           </div>

@@ -12,7 +12,6 @@ function App() {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.app.loading);
   const [componentModalActive, setComponentModalActive] = useState(false);
-  const items = useSelector((state) => state.app.components);
   useEffect(() => {
     dispatch(fetchIngredients());
   }, []);

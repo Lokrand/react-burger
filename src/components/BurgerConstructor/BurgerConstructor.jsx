@@ -8,9 +8,8 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
 import { ingredientType } from "../../utils/types";
-// import { BurgersContext } from "../../services/BurgersContext/BurgersContext";
 import { getPrice } from "./BurgerConstructor.utils";
-import { getOrderNumber } from "../../utils/api.js";
+import { getOrderNumber } from "../../services/asyncActions/orderNumber";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import {
@@ -22,6 +21,14 @@ export const BurgerConstructor = () => {
   const items = useSelector((state) => state.app.components);
   const selectedItems = useSelector((state) => state.app.selectedItems);
   const reduxDispatch = useDispatch();
+  const orderFor = useSelector((state) => state.app.orderFor);
+  const order = useSelector((state) => state.app.orderNumber);
+  const [modalActive, setModalActive] = useState(false);
+  const bun = selectedItems.find((el) => el.type === "bun");
+  const bunTop = bun?.name + " (верх)";
+  const bunBot = bun?.name + " (низ)";
+  const ingredient = selectedItems.filter((item) => item.type !== "bun");
+  const totalPrice = getPrice(selectedItems);
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "bun",
     drop: (item) => addIngredientToBoard(item.id),
@@ -31,71 +38,28 @@ export const BurgerConstructor = () => {
   }));
 
   const addIngredientToBoard = (id) => {
-    let buns;
-    console.log('selectedItems', selectedItems)
-    if (selectedItems.length > 0) {
-      buns = selectedItems.filter((el) => el.type === "bun");
-    }
-    let nextElement = items[items.findIndex(x => x._id === id)]
     const innredientsList = items.filter((item) => id === item._id);
-    if (nextElement.type === 'bun' && buns) {
-      console.log('Ты вообще сюда попадаешь?*')
-
-      if (nextElement.name === buns[0].name) {
-        console.log('такая же булка')
-        reduxDispatch({ type: ADD_CONSTRUCTOR_ELEMENT, payload: [] });
-      } else {
-        console.log('это вот новая булка')
-        removeIngredient(buns[0]._id)
-        reduxDispatch({
-          type: ADD_CONSTRUCTOR_ELEMENT,
-          payload: innredientsList[0],
-        });
-      }
-    } else {
-      console.log('я добавил элемент тебе, Димончик')
-      const innredientsList = items.filter((item) => id === item._id);
-      reduxDispatch({
-        type: ADD_CONSTRUCTOR_ELEMENT,
-        payload: innredientsList[0],
-      });
-    }
+    reduxDispatch({
+      type: ADD_CONSTRUCTOR_ELEMENT,
+      payload: { ...innredientsList[0], key: generateKeys() },
+    });
   };
 
-  const removeIngredient = (id) => {
-    const innredientsList = selectedItems.filter((item) => id !== item._id);
+  const removeIngredient = (key) => {
     reduxDispatch({
       type: REMOVE_CONSTRUCTOR_ELEMENT,
-      payload: innredientsList,
+      payload: key,
     });
   };
 
-  const [modalActive, setModalActive] = useState(false);
-
-  const bun = selectedItems.find((el) => el.type === "bun");
-  const bunTop = bun?.name + " (верх)";
-  const bunBot = bun?.name + " (низ)";
-  const ingredient = selectedItems.filter((item) => item.type !== "bun");
-
-  const totalPrice = getPrice(selectedItems);
-  const [order, setOrder] = useState(0);
   const handleOrderClick = () => {
-    getOrderNumber(ingredient).then((res) => {
-      setOrder(res.order.number);
-    });
+    reduxDispatch(getOrderNumber(orderFor));
   };
 
-  useEffect(() => {
-    let isBun = selectedItems.findIndex((el) => el.type === "bun");
-    if (isBun !== -1) {
-      selectedItems.slice(isBun + 1, isBun - 1);
-    }
-  }, [selectedItems]);
-
-  const generateKeys = (something) => {
-    // Math.floor(Math.random() * 1000) + Date.now()
-    return `${something}_${new Date().getTime()}`;
+  const generateKeys = () => {
+    return `${Math.floor(Math.random() * 1000) + Date.now()}`;
   };
+
   return (
     <>
       <div className={styles.section} ref={drop}>
@@ -114,10 +78,10 @@ export const BurgerConstructor = () => {
         <div className={styles.scrollBar}>
           <div className={styles.items}>
             {ingredient.map((el) => (
-              <div key={el._id} className={styles.item}>
+              <div key={el.key} className={styles.item}>
                 <DragIcon type="primary" />
                 <ConstructorIngredients
-                  id={el._id}
+                  id={el.key}
                   remove={removeIngredient}
                   text={el.name}
                   price={el.price}

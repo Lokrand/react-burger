@@ -8,8 +8,8 @@ import { useSelector } from "react-redux";
 export const BurgerIngredient = ({ data, onClick }) => {
   const id = data._id;
   const selectedItems = useSelector((state) => state.app.selectedItems);
-  const counter = selectedItems.filter((el) => el._id === id).length;
-
+  let counter;
+  counter = selectedItems.filter((el) => el._id === id).length;
   const [{ isDrag }, dragRef] = useDrag({
     type: "bun",
     item: { id },
