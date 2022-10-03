@@ -74,10 +74,19 @@ export const BurgerConstructor = () => {
   }));
 
   const setItem = (item) => {
-    reduxDispatch({
-      type: UPDATE_SELECTED_ITEMS_ORDER,
-      payload: item,
-    });
+    const bun = selectedItems.find((el) => el.type === "bun");
+    if (bun) {
+      item.push(bun);
+      reduxDispatch({
+        type: UPDATE_SELECTED_ITEMS_ORDER,
+        payload: item,
+      });
+    } else {
+      reduxDispatch({
+        type: UPDATE_SELECTED_ITEMS_ORDER,
+        payload: item,
+      });
+    }
   };
   return (
     <>
