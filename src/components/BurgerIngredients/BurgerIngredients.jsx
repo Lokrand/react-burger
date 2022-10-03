@@ -6,11 +6,12 @@ import styles from "./BurgerIngredients.module.css";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 import { ingredientType } from "../../utils/types";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_DETAILS } from "../../services/actions/ingredients";
+import { GET_DETAILS } from "../../services/actions/actions";
+import { typeBun } from "../../utils/constans";
 
 export const BurgerIngredients = ({ modalActive, setModalActive }) => {
   const [modalIngredient, setModalIngredient] = useState(null);
-  const items = useSelector((state) => state.app.components);
+  const items = useSelector((state) => state.getIngredientsReducer.components);
   const [current, setCurrent] = useState("one");
   const bunRef = useRef(null);
   const souceRef = useRef(null);
@@ -81,7 +82,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
           </p>
           <div className={styles.items}>
             {items
-              .filter((item) => item.type === "bun")
+              .filter((item) => item.type === typeBun)
               .map((el) => (
                 <BurgerIngredient
                   data={el}

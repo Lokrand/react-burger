@@ -1,43 +1,27 @@
+import { typeBun } from "../../utils/constans.js";
 import {
-  GET_INGREDIENTS,
-  GET_INGREDIENTS_LOADING,
-  GET_COUNTER,
   ADD_CONSTRUCTOR_ELEMENT,
   REMOVE_CONSTRUCTOR_ELEMENT,
-  GET_DETAILS,
-  GET_ORDER_NUMBER,
   UPDATE_SELECTED_ITEMS_ORDER,
-} from "../actions/ingredients.js";
+} from "../actions/actions.js";
 
-export const initialState = {
-  components: [],
-  loading: false,
+const initialState = {
   selectedItems: [],
-  details: [],
   orderFor: [],
-  orderNumber: 0,
 };
-let orderNumber = 0;
-const getOrder = () => {
-  orderNumber++;
-  return orderNumber;
-};
+
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_INGREDIENTS:
-      return { ...state, components: action.payload, loading: false };
-    case GET_INGREDIENTS_LOADING:
-      return { ...state, loading: action.payload };
     case ADD_CONSTRUCTOR_ELEMENT:
       const ingredient = action.payload;
-      if (ingredient.type === "bun") {
+      if (ingredient.type === typeBun) {
         for (let i = 0; i < state.selectedItems.length; i++) {
           let el = state.selectedItems[i];
-          if (el.type === "bun" && ingredient._id === el._id) {
+          if (el.type === typeBun && ingredient._id === el._id) {
             return state;
-          } else if (el.type === "bun" && ingredient._id !== el._id) {
+          } else if (el.type === typeBun && ingredient._id !== el._id) {
             const withoutBunArr = state.selectedItems.filter((el) => {
-              return el.type !== "bun";
+              return el.type !== typeBun;
             });
             withoutBunArr.push(ingredient);
             const orderWothoutBun = withoutBunArr.map((el) => el._id);
@@ -48,9 +32,6 @@ export const reducer = (state = initialState, action) => {
             };
           }
         }
-      }
-      if (ingredient.type !== "bun") {
-        ingredient.order = getOrder();
       }
       return {
         ...state,
@@ -67,41 +48,9 @@ export const reducer = (state = initialState, action) => {
         selectedItems: removedIngs,
         orderFor: orderForAfterRemove,
       };
-    case GET_DETAILS:
-      return { ...state, details: action.payload };
-    case GET_ORDER_NUMBER:
-      return { ...state, orderNumber: action.payload };
     case UPDATE_SELECTED_ITEMS_ORDER:
       return { ...state, selectedItems: action.payload };
     default:
       return state;
   }
 };
-
-const counterState = {
-  count: 0,
-};
-
-export const counterReducer = (state = counterState, action) => {
-  switch (action.type) {
-    case GET_COUNTER:
-      return { ...state, count: action.count };
-    default:
-      return state;
-  }
-};
-
-export const addManyIngredients = (payload) => ({
-  type: GET_INGREDIENTS,
-  payload,
-});
-
-export const addManyIngredientsLoading = (payload) => ({
-  type: GET_INGREDIENTS_LOADING,
-  payload,
-});
-
-export const getOrderReducer = (payload) => ({
-  type: GET_ORDER_NUMBER,
-  payload,
-});

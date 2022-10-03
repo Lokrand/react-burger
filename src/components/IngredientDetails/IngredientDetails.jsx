@@ -5,7 +5,7 @@ import { ingredientType } from "../../utils/types";
 import { useSelector } from "react-redux";
 
 export const IngredientDetails = ({ active, setActive }) => {
-  const data = useSelector((state) => state.app.details);
+  const data = useSelector((state) => state.getDetails.details);
 
   return (
     <Modal active={active} setActive={setActive}>

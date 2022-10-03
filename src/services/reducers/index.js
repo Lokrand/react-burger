@@ -1,9 +1,12 @@
 import { combineReducers } from "redux";
 import thunk from "redux-thunk";
-import { reducer, counterReducer } from "./BugrerReducer";
+import { reducer } from "./BugrerReducer";
+import { getIngredientsReducer } from "./getIngredients";
+import { getDetails } from "./getDetails";
+import { getOrderNumber } from "./getOrderNumber";
 import { configureStore } from "@reduxjs/toolkit";
 
-export const rootReducer = combineReducers({ app: reducer, counterReducer });
+const rootReducer = combineReducers({ app: reducer, getIngredientsReducer, getDetails, getOrderNumber });
 
 export const store = configureStore({
   reducer: rootReducer,

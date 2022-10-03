@@ -15,25 +15,25 @@ import {
   ADD_CONSTRUCTOR_ELEMENT,
   REMOVE_CONSTRUCTOR_ELEMENT,
   UPDATE_SELECTED_ITEMS_ORDER,
-} from "../../services/actions/ingredients";
+} from "../../services/actions/actions";
 import { Reorder } from "framer-motion";
 import { generateKeys } from "../../utils/generateKeys";
+import { typeBun } from "../../utils/constans";
 
 export const BurgerConstructor = () => {
-  const items = useSelector((state) => state.app.components);
+  const items = useSelector((state) => state.getIngredientsReducer.components);
   const selectedItems = useSelector((state) => state.app.selectedItems);
   const reduxDispatch = useDispatch();
   const orderFor = useSelector((state) => state.app.orderFor);
-  const order = useSelector((state) => state.app.orderNumber);
+  const order = useSelector((state) => state.getOrderNumber.orderNumber);
   const [modalActive, setModalActive] = useState(false);
-  const bun = selectedItems.find((el) => el.type === "bun");
+  const bun = selectedItems.find((el) => el.type === typeBun);
   const bunTop = bun?.name + " (верх)";
   const bunBot = bun?.name + " (низ)";
-  const ingredient = selectedItems.filter((item) => item.type !== "bun");
-
+  const ingredient = selectedItems.filter((item) => item.type !== typeBun);
   const totalPrice = getPrice(selectedItems);
   const [, drop] = useDrop(() => ({
-    accept: "bun",
+    accept: typeBun,
     drop: (item) => addIngredientToBoard(item.id),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
@@ -60,7 +60,7 @@ export const BurgerConstructor = () => {
   };
 
   const [, dropRef] = useDrop(() => ({
-    accept: "bun",
+    accept: typeBun,
     drop: (item) => {
       selectedItems.map((el) => {
         if (el.key === item.key) {
@@ -74,7 +74,7 @@ export const BurgerConstructor = () => {
   }));
 
   const setItem = (item) => {
-    const bun = selectedItems.find((el) => el.type === "bun");
+    const bun = selectedItems.find((el) => el.type === typeBun);
     if (bun) {
       item.push(bun);
       reduxDispatch({

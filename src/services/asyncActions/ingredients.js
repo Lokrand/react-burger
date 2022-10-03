@@ -1,7 +1,7 @@
 import {
   addManyIngredients,
   addManyIngredientsLoading,
-} from "../reducers/BugrerReducer.js";
+} from "../reducers/getIngredients";
 
 export const fetchIngredients = () => {
   return function (dispatch) {

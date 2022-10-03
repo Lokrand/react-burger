@@ -7,14 +7,14 @@ import PropTypes from "prop-types";
 import { ingredientType } from "../../utils/types";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
+import { typeBun } from "../../utils/constans";
 
 export const BurgerIngredient = ({ data, onClick }) => {
   const id = data._id;
   const selectedItems = useSelector((state) => state.app.selectedItems);
-  let counter;
-  counter = selectedItems.filter((el) => el._id === id).length;
+  const counter = selectedItems.filter((el) => el._id === id).length;
   const [{ isDrag }, dragRef] = useDrag({
-    type: "bun",
+    type: typeBun,
     item: { id },
     collect: (monitor) => ({
       isDrag: monitor.isDragging(),
@@ -39,9 +39,7 @@ export const BurgerIngredient = ({ data, onClick }) => {
         <div className={styles.counter}>
           <Counter count={counter} size="default" />
         </div>
-      ) : (
-        <div></div>
-      )}
+      ) : null}
     </div>
   );
 };
