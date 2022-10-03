@@ -10,8 +10,6 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-// const store = createStore(rootReducer);
-
 root.render(
   <Provider store={store}>
     <React.StrictMode>
