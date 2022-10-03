@@ -48,7 +48,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
           value="one"
           active={current === "one"}
           onClick={() => {
-            document.getElementById("buns").scrollIntoView();
+            document.getElementById("buns").scrollIntoView({ behavior: 'smooth', block: 'start' });
             setCurrent("one");
           }}
         >
@@ -58,7 +58,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
           value="two"
           active={current === "two"}
           onClick={() => {
-            document.getElementById("souce").scrollIntoView();
+            document.getElementById("souce").scrollIntoView({ behavior: 'smooth', block: 'start' });
             setCurrent("two");
           }}
         >
@@ -68,7 +68,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
           value="three"
           active={current === "three"}
           onClick={() => {
-            document.getElementById("stuff").scrollIntoView();
+            document.getElementById("stuff").scrollIntoView({ behavior: 'smooth', block: 'start' });
             setCurrent("three");
           }}
         >

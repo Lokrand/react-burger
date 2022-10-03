@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import { AppHeader } from "../AppHeader/AppHeader";
 import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
@@ -25,7 +26,7 @@ function App() {
             <div className="pl-4">
               <p className="text text_type_main-large mb-5">Соберите бургер</p>
               {loading ? (
-                <p>Loading</p>
+                <p className="text text_type_main-medium">Loading...</p>
               ) : (
                 <BurgerIngredients
                   modalActive={componentModalActive}
@@ -34,7 +35,11 @@ function App() {
               )}
             </div>
             <div className="mt-15">
-              {loading ? <p>Loading</p> : <BurgerConstructor />}
+              {loading ? (
+                <p className="text text_type_main-medium">Loading...</p>
+              ) : (
+                <BurgerConstructor />
+              )}
             </div>
           </div>
         </DndProvider>

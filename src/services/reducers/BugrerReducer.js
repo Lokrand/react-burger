@@ -7,7 +7,6 @@ import {
 
 const initialState = {
   selectedItems: [],
-  orderFor: [],
 };
 
 export const reducer = (state = initialState, action) => {
@@ -24,11 +23,9 @@ export const reducer = (state = initialState, action) => {
               return el.type !== typeBun;
             });
             withoutBunArr.push(ingredient);
-            const orderWothoutBun = withoutBunArr.map((el) => el._id);
             return {
               ...state,
               selectedItems: withoutBunArr,
-              orderFor: orderWothoutBun,
             };
           }
         }
@@ -36,17 +33,14 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         selectedItems: [...state.selectedItems, action.payload],
-        orderFor: [...state.orderFor, action.payload._id],
       };
     case REMOVE_CONSTRUCTOR_ELEMENT:
       const removedIngs = state.selectedItems.filter(
         (el) => el.key !== action.payload
       );
-      const orderForAfterRemove = removedIngs.map((el) => el._id);
       return {
         ...state,
         selectedItems: removedIngs,
-        orderFor: orderForAfterRemove,
       };
     case UPDATE_SELECTED_ITEMS_ORDER:
       return { ...state, selectedItems: action.payload };

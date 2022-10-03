@@ -1,8 +1,13 @@
-import { getOrderSuccess } from "../reducers/getOrderNumber";
+import {
+  getOrderRequest,
+  getOrderSuccess,
+  getOrderError,
+} from "../reducers/getOrderNumber";
 
 export const getOrderNumber = (orderFor) => {
   if (orderFor?.length > 0) {
     return function (dispatch) {
+      dispatch(getOrderRequest());
       fetch("https://norma.nomoreparties.space/api/orders", {
         method: "POST",
         headers: {
@@ -15,7 +20,11 @@ export const getOrderNumber = (orderFor) => {
         .then((json) => {
           dispatch(getOrderSuccess(json.order.number));
         })
-        .catch((err) => console.error('Error', err))
+        .catch((err) => {
+          console.error("Error", err)
+          dispatch(getOrderError(err));
+
+        });
     };
   }
 };

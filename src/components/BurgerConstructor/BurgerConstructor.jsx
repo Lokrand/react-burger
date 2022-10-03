@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable */
+import React, { useMemo, useState } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorIngredients } from "./ConstructorIngredients";
 import styles from "./BurgerConstructor.module.css";
@@ -18,20 +19,20 @@ import {
 } from "../../services/actions/actions";
 import { Reorder } from "framer-motion";
 import { generateKeys } from "../../utils/generateKeys";
-import { typeBun } from "../../utils/constans";
+import { currectOrder, typeBun } from "../../utils/constans";
 
 export const BurgerConstructor = () => {
   const items = useSelector((state) => state.getIngredientsReducer.components);
   const selectedItems = useSelector((state) => state.app.selectedItems);
   const reduxDispatch = useDispatch();
-  const orderFor = useSelector((state) => state.app.orderFor);
   const order = useSelector((state) => state.getOrderNumber.orderNumber);
   const [modalActive, setModalActive] = useState(false);
-  const bun = selectedItems.find((el) => el.type === typeBun);
+  const bun = useMemo(() => selectedItems.find((el) => el.type === typeBun), [selectedItems]);
   const bunTop = bun?.name + " (верх)";
   const bunBot = bun?.name + " (низ)";
   const ingredient = selectedItems.filter((item) => item.type !== typeBun);
   const totalPrice = getPrice(selectedItems);
+  let doIHaveABun = false;
   const [, drop] = useDrop(() => ({
     accept: typeBun,
     drop: (item) => addIngredientToBoard(item.id),
@@ -54,9 +55,28 @@ export const BurgerConstructor = () => {
       payload: key,
     });
   };
+  selectedItems.forEach((el) => {
+    if (el.type === typeBun) {
+      doIHaveABun = true;
+    }
+  });
+  if (doIHaveABun) {
+    selectedItems.forEach((el) => {
+      if (el.type !== typeBun) {
+        currectOrder.push(el);
+      }
+    });
+    selectedItems.forEach((el) => {
+      if (el.type === typeBun) {
+        currectOrder.push(el);
+        currectOrder.unshift(el);
+      }
+    });
+  }
+  const getCurrentOrder = currectOrder.map((el) => el._id);
 
   const handleOrderClick = () => {
-    reduxDispatch(getOrderNumber(orderFor));
+    reduxDispatch(getOrderNumber(getCurrentOrder));
   };
 
   const [, dropRef] = useDrop(() => ({
@@ -145,16 +165,22 @@ export const BurgerConstructor = () => {
             <CurrencyIcon type="primary" />
           </span>
         </div>
-        <Button
-          type="primary"
-          size="large"
-          onClick={() => {
-            setModalActive(true);
-            handleOrderClick();
-          }}
-        >
-          Оформить заказ
-        </Button>
+        {doIHaveABun ? (
+          <Button
+            type="primary"
+            size="large"
+            onClick={() => {
+              setModalActive(true);
+              handleOrderClick();
+            }}
+          >
+            Оформить заказ
+          </Button>
+        ) : (
+          <Button type="primary" size="large" disabled>
+            Оформить заказ
+          </Button>
+        )}
       </div>
       <OrderDetails
         active={modalActive}
