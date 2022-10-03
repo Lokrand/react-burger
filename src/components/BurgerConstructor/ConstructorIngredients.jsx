@@ -1,33 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   CurrencyIcon,
   DeleteIcon,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDrag, useDrop } from "react-dnd";
 import styles from "./BurgerConstructor.module.css";
-import { mergeRefs } from "react-merge-refs";
-import { useSelector } from "react-redux";
 import { Reorder } from "framer-motion";
 
 export const ConstructorIngredients = (props) => {
-  // const [card, setCard] = useState(null)
-  // const id = props.id;
-  // const selectedItems = useSelector((state) => state.app.selectedItems);
-  // const [{ isDrag }, dragRef] = useDrag({
-  //   type: "bun",
-  //   item: { id },
-  //   collect: (monitor) => ({
-  //     isDrag: monitor.isDragging(),
-  //   }),
-  // });
-
   return (
     <Reorder.Item
       value={props.el}
+      id={props.el}
       whileDrag={{
-        scale: 1.03,
-        transition: "scale .2s linear",
+        filter: "invert(1)",
       }}
     >
       <div className={styles.item}>

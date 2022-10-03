@@ -1,7 +1,4 @@
-import React, {
-  useRef,
-  useState,
-} from "react";
+import React, { useRef, useState } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIngredient } from "./BurgerIngredient";
 import PropTypes from "prop-types";
@@ -9,11 +6,9 @@ import styles from "./BurgerIngredients.module.css";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 import { ingredientType } from "../../utils/types";
 import { useDispatch, useSelector } from "react-redux";
-import { throttle } from "../../utils/throttle";
 import { GET_DETAILS } from "../../services/actions/ingredients";
 
 export const BurgerIngredients = ({ modalActive, setModalActive }) => {
-  // TODO нужно ли мне это? 
   const [modalIngredient, setModalIngredient] = useState(null);
   const items = useSelector((state) => state.app.components);
   const [current, setCurrent] = useState("one");
@@ -22,16 +17,16 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
   const detailsDispatch = useDispatch();
 
   const getIngredientDetails = (el) => {
-    setModalIngredient(true)
+    setModalIngredient(true);
     detailsDispatch({
       type: GET_DETAILS,
       payload: el,
-    })
-  }
+    });
+  };
   function scrollBar() {
     const bunsBlockHeight = bunRef.current.offsetHeight;
     const souceBlockHeight = souceRef.current.offsetHeight;
-    
+
     let scrollPosition = document.querySelector("#main").scrollTop;
     if (scrollPosition > 0 && scrollPosition < bunsBlockHeight / 2) {
       setCurrent("one");
@@ -44,7 +39,6 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
       setCurrent("three");
     }
   }
-  // scrollBar = throttle(scrollBar, 100)
 
   return (
     <div>
@@ -138,10 +132,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
         </div>
       </div>
       {modalIngredient && (
-        <IngredientDetails
-          active={modalActive}
-          setActive={setModalActive}
-        />
+        <IngredientDetails active={modalActive} setActive={setModalActive} />
       )}
     </div>
   );

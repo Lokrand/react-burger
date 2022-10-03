@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorIngredients } from "./ConstructorIngredients";
-import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerConstructor.module.css";
 import PropTypes from "prop-types";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -11,12 +10,14 @@ import { ingredientType } from "../../utils/types";
 import { getPrice } from "./BurgerConstructor.utils";
 import { getOrderNumber } from "../../services/asyncActions/orderNumber";
 import { useDispatch, useSelector } from "react-redux";
-import { useDrag, useDrop } from "react-dnd";
+import { useDrop } from "react-dnd";
 import {
   ADD_CONSTRUCTOR_ELEMENT,
   REMOVE_CONSTRUCTOR_ELEMENT,
+  UPDATE_SELECTED_ITEMS_ORDER,
 } from "../../services/actions/ingredients";
 import { Reorder } from "framer-motion";
+import { generateKeys } from "../../utils/generateKeys";
 
 export const BurgerConstructor = () => {
   const items = useSelector((state) => state.app.components);
@@ -28,12 +29,10 @@ export const BurgerConstructor = () => {
   const bun = selectedItems.find((el) => el.type === "bun");
   const bunTop = bun?.name + " (верх)";
   const bunBot = bun?.name + " (низ)";
-  let orderNumber = 0;
   const ingredient = selectedItems.filter((item) => item.type !== "bun");
-  const [todos, setTodos] = useState(ingredient) /////////////////////////
-  // console.log('selectedItems', selectedItems)
+
   const totalPrice = getPrice(selectedItems);
-  const [{ isOver }, drop] = useDrop(() => ({
+  const [, drop] = useDrop(() => ({
     accept: "bun",
     drop: (item) => addIngredientToBoard(item.id),
     collect: (monitor) => ({
@@ -49,7 +48,6 @@ export const BurgerConstructor = () => {
     });
   };
 
-  
   const removeIngredient = (key) => {
     reduxDispatch({
       type: REMOVE_CONSTRUCTOR_ELEMENT,
@@ -61,28 +59,14 @@ export const BurgerConstructor = () => {
     reduxDispatch(getOrderNumber(orderFor));
   };
 
-  const generateKeys = () => {
-    return `${Math.floor(Math.random() * 1000) + Date.now()}`;
-  };
-
-  const sortIngredients = (a, b) => {
-    if (a.order > b.order) {
-      return 1;
-    } else {
-      return -1;
-    }
-  }
-
-  const [{ isOvere }, dropRef] = useDrop(() => ({
+  const [, dropRef] = useDrop(() => ({
     accept: "bun",
     drop: (item) => {
-      console.log('item', item)
       selectedItems.map((el) => {
-        if(el.key === item.key) {
-          return {...el, key: item.key}
+        if (el.key === item.key) {
+          return { ...el, key: item.key };
         }
-      })
-      // addIngredientToBoard(item.id)}
+      });
     },
     collect: (monitor) => ({
       isOvere: monitor.isOver(),
@@ -90,9 +74,11 @@ export const BurgerConstructor = () => {
   }));
 
   const setItem = (item) => {
-    ingredient.push(item)
-    return ingredient
-  }
+    reduxDispatch({
+      type: UPDATE_SELECTED_ITEMS_ORDER,
+      payload: item,
+    });
+  };
   return (
     <>
       <div className={styles.section} ref={drop}>
@@ -109,11 +95,16 @@ export const BurgerConstructor = () => {
           )}
         </div>
         <div className={styles.scrollBar} ref={dropRef}>
-          <Reorder.Group as="ol" axys ="y" values={todos} onReorder={setItem} >
-          <div className={styles.items}>
-            {ingredient.sort(sortIngredients).map((el) => (
-              <div key={el.key}>
+          <Reorder.Group
+            as="ol"
+            axys="y"
+            values={ingredient}
+            onReorder={setItem}
+          >
+            <div className={styles.items}>
+              {ingredient.map((el) => (
                 <ConstructorIngredients
+                  key={el.key}
                   el={el}
                   id={el.key}
                   remove={removeIngredient}
@@ -121,9 +112,8 @@ export const BurgerConstructor = () => {
                   price={el.price}
                   thumbnail={el.image}
                 />
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
           </Reorder.Group>
         </div>
         <div className={styles.bread}>

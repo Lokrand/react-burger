@@ -47,5 +47,5 @@ export const Modal = ({ active, setActive, children }) => {
 Modal.propTypes = {
   active: PropTypes.bool.isRequired,
   setActive: PropTypes.func.isRequired,
-  children: PropTypes.array.isRequired, 
+  children: PropTypes.array.isRequired,
 };

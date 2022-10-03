@@ -6,6 +6,7 @@ import {
   REMOVE_CONSTRUCTOR_ELEMENT,
   GET_DETAILS,
   GET_ORDER_NUMBER,
+  UPDATE_SELECTED_ITEMS_ORDER,
 } from "../actions/ingredients.js";
 
 export const initialState = {
@@ -20,7 +21,7 @@ let orderNumber = 0;
 const getOrder = () => {
   orderNumber++;
   return orderNumber;
-}
+};
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS:
@@ -48,7 +49,7 @@ export const reducer = (state = initialState, action) => {
           }
         }
       }
-      if (ingredient.type !== 'bun') {
+      if (ingredient.type !== "bun") {
         ingredient.order = getOrder();
       }
       return {
@@ -70,6 +71,8 @@ export const reducer = (state = initialState, action) => {
       return { ...state, details: action.payload };
     case GET_ORDER_NUMBER:
       return { ...state, orderNumber: action.payload };
+    case UPDATE_SELECTED_ITEMS_ORDER:
+      return { ...state, selectedItems: action.payload };
     default:
       return state;
   }
@@ -87,6 +90,7 @@ export const counterReducer = (state = counterState, action) => {
       return state;
   }
 };
+
 export const addManyIngredients = (payload) => ({
   type: GET_INGREDIENTS,
   payload,

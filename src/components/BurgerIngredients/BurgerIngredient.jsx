@@ -1,4 +1,7 @@
-import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  Counter,
+  CurrencyIcon,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerIngredients.module.css";
 import PropTypes from "prop-types";
 import { ingredientType } from "../../utils/types";
@@ -32,10 +35,13 @@ export const BurgerIngredient = ({ data, onClick }) => {
       <div className={styles.title}>
         <p className="text text_type_main-default">{data.name}</p>
       </div>
-      {counter !== 0 ? <div className={styles.counter}>
-        <Counter count={counter} size="default" />
-      </div> : <div></div>}
-      
+      {counter !== 0 ? (
+        <div className={styles.counter}>
+          <Counter count={counter} size="default" />
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 };

@@ -17,10 +17,10 @@ function App() {
   }, []);
   const [counter, setCounter] = useState(0);
   const getCounter = (id, items) => {
-    const innredientsList = items.filter((item) => id === item._id)
-    setCounter(innredientsList.length)
+    const innredientsList = items.filter((item) => id === item._id);
+    setCounter(innredientsList.length);
     return counter;
-  }
+  };
   return (
     <>
       <AppHeader />
@@ -39,7 +39,11 @@ function App() {
               )}
             </div>
             <div className="mt-15">
-              {loading ? <p>Loading</p> : <BurgerConstructor getCounter={getCounter} />}
+              {loading ? (
+                <p>Loading</p>
+              ) : (
+                <BurgerConstructor getCounter={getCounter} />
+              )}
             </div>
           </div>
         </DndProvider>
