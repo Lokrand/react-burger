@@ -19,7 +19,7 @@ import {
 } from "../../services/actions/actions";
 import { Reorder } from "framer-motion";
 import { generateKeys } from "../../utils/generateKeys";
-import { currectOrder, typeBun } from "../../utils/constans";
+import {  typeBun } from "../../utils/constans";
 
 export const BurgerConstructor = () => {
   const items = useSelector((state) => state.getIngredientsReducer.components);
@@ -33,6 +33,7 @@ export const BurgerConstructor = () => {
   const ingredient = selectedItems.filter((item) => item.type !== typeBun);
   const totalPrice = getPrice(selectedItems);
   let doIHaveABun = false;
+  const currectOrder = [];
   const [, drop] = useDrop(() => ({
     accept: typeBun,
     drop: (item) => addIngredientToBoard(item.id),
