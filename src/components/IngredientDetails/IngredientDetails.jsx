@@ -2,8 +2,11 @@ import { Modal } from "../Modal/Modal";
 import styles from "./IngredientDetails.module.css";
 import PropTypes from "prop-types";
 import { ingredientType } from "../../utils/types";
+import { useSelector } from "react-redux";
 
-export const IngredientDetails = ({ data, active, setActive }) => {
+export const IngredientDetails = ({ active, setActive }) => {
+  const data = useSelector((state) => state.getDetails.details);
+
   return (
     <Modal active={active} setActive={setActive}>
       <div className={styles.title}>

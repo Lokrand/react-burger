@@ -28,18 +28,25 @@
 
 .item {
   display: flex;
+  position: relative;
   flex-direction: column;
   row-gap: 9px;
   cursor: pointer;
-  transition: .2s linear;
+  transition: 0.2s linear;
+}
+
+.isDragging {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  row-gap: 9px;
+  cursor: pointer;
+  transition: 0.2s linear;
+  border: 5px solid red;
 }
 
 .item:hover {
-  opacity: .6;
-}
-
-.block {
-  position: relative;
+  opacity: 0.6;
 }
 
 .counter {

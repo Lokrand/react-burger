@@ -1,6 +1,6 @@
 import styles from "./ModalOverlay.module.css";
 
-export const ModalOverlay = ({active, children, onClick}) => {
+export const ModalOverlay = ({ active, children, onClick }) => {
   return (
     <div
       className={active ? `${styles.modal} ${styles.active}` : styles.modal}
@@ -8,5 +8,5 @@ export const ModalOverlay = ({active, children, onClick}) => {
     >
       {children}
     </div>
-  )
-}
+  );
+};

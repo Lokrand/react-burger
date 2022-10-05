@@ -1,7 +1,13 @@
+ol {
+  margin: 0;
+  padding: 0;
+  width: 586px;
+}
+
 .scrollBar {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   overflow: auto;
 }
 
@@ -22,7 +28,7 @@
   flex-direction: column;
   gap: 16px;
   height: 670px;
-  width: auto;
+  min-width: 570px;
   padding-left: 16px;
 }
 
@@ -63,4 +69,51 @@
 .icon {
   transform: scale(1.35);
   margin-top: 5px;
+}
+
+.constructor_element {
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  width: 488px;
+  min-height: 48px;
+  background-color: #2f2f37;
+  border-radius: 40px;
+  align-items: center;
+}
+
+.constructor_image {
+  height: 40px;
+  width: 80px;
+  margin-right: 20px;
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+  column-gap: 24px;
+  margin-left: 9px;
+}
+
+.delete_icon {
+  opacity: 1;
+  transition: opacity 0.2s linear;
+}
+
+.delete_icon:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  width: 388px;
+  justify-content: space-between;
 }
