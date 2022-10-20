@@ -22,14 +22,11 @@ function App() {
   useEffect(() => {
     dispatch(fetchIngredients());
   }, []);
-
-  const login = false;
-
   return (
     <>
-      <AppHeader />
-      <main>
-        <Router>
+      <Router>
+        <AppHeader />
+        <main>
           <Switch>
             <Route exact path="/">
               <DndProvider backend={HTML5Backend}>
@@ -63,8 +60,8 @@ function App() {
             <Route path="/reset-password" children={<ResetPassword />} />
             <Route path="/profile" children={<Profile />} />
           </Switch>
-        </Router>
-      </main>
+        </main>
+      </Router>
     </>
   );
 }

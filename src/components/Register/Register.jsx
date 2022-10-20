@@ -8,7 +8,7 @@ import {
 import styles from "./Register.module.css";
 import { ModalRegister } from "../ModalRegister/ModalRegister";
 import ReactDom from "react-dom";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 export const Register = () => {
   const [value, setValue] = React.useState("password");
@@ -58,11 +58,11 @@ export const Register = () => {
         <p className="text text_type_main-default text_color_inactive">
           Уже зарегистрированы?
         </p>
-        <Link to="/login" onClick={toLogin}>
+        <NavLink to="/login" onClick={toLogin}>
           <p className={`${styles.log_in} text text_type_main-default`}>
             Войти
           </p>
-        </Link>
+        </NavLink>
       </div>
     </ModalRegister>,
     document.getElementById("modals")

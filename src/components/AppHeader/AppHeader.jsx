@@ -1,3 +1,4 @@
+import React, { useState, useCallback } from "react";
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import {
   BurgerIcon,
@@ -5,7 +6,21 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./AppHeader.module.css";
+import { NavLink, useHistory } from "react-router-dom";
+
 export const AppHeader = () => {
+  const [hover, setHover] = useState(true);
+  const showHover = () => {
+    setHover(false);
+  };
+  const hideHover = () => {
+    setHover(true);
+  };
+  const history = useHistory();
+  const toProfile = useCallback(() => {
+    history.replace({ pathname: "/profile" });
+    window.location.reload();
+  }, [history]);
   return (
     <header>
       <div className={styles.header}>
@@ -20,11 +35,27 @@ export const AppHeader = () => {
           </p>
         </div>
         <Logo />
-        <div className={styles.account}>
-          <ProfileIcon type="secondary" />
-          <p className="text text_type_main-default text_color_inactive ml-2">
-            Личный кабинет
-          </p>
+        <div
+          className={styles.account}
+          onMouseEnter={showHover}
+          onMouseLeave={hideHover}
+          onClick={toProfile}
+        >
+          {hover ? (
+            <>
+              <ProfileIcon type="secondary" />
+              <p className="text text_type_main-default text_color_inactive ml-2">
+                Личный кабинет
+              </p>
+            </>
+          ) : (
+            <NavLink to="/profile" onClick={toProfile} className={styles.link}>
+              <ProfileIcon type="primary" />
+              <p className="text text_type_main-default text_color_active ml-2">
+                Личный кабинет
+              </p>
+            </NavLink>
+          )}
         </div>
       </div>
     </header>

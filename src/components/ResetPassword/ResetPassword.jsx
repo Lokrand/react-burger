@@ -7,7 +7,7 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 export const ResetPassword = () => {
   const [value, setValue] = React.useState("bob@example.com");
@@ -51,11 +51,11 @@ export const ResetPassword = () => {
         <p className="text text_type_main-default text_color_inactive">
           Вспомнили пароль?
         </p>
-        <Link to="/login" onClick={toLogin}>
+        <NavLink to="/login" onClick={toLogin}>
           <p className={`${styles.log_in} text text_type_main-default`}>
             Войти
           </p>
-        </Link>
+        </NavLink>
       </div>
     </ModalRegister>,
     document.getElementById("modals")
