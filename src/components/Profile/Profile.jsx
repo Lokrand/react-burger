@@ -14,7 +14,7 @@ export const Profile = () => {
           В этом разделе вы можете изменить&nbsp;свои персональные данные
         </p>
       </div>
-      <div className={styles.inputs}>
+      <form className={styles.form}>
         <Input
           type={"text"}
           placeholder={"Имя"}
@@ -22,7 +22,6 @@ export const Profile = () => {
           name={"name"}
           error={false}
           errorText={"Ошибка"}
-          size={"default"}
         />
         <Input
           type={"text"}
@@ -31,7 +30,6 @@ export const Profile = () => {
           name={"name"}
           error={false}
           errorText={"Ошибка"}
-          size={"default"}
         />
         <Input
           type={"text"}
@@ -40,9 +38,8 @@ export const Profile = () => {
           name={"name"}
           error={false}
           errorText={"Ошибка"}
-          size={"default"}
         />
-      </div>
+      </form>
     </div>
   );
 };

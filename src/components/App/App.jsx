@@ -10,7 +10,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Login } from "../Login/Login";
 import { Register } from "../Register/Register";
-import { ForgetPassword } from "../ForgetPassword/ForgetPassword";
+import { ForgotPassword } from "../ForgotPassword/ForgotPassword";
 import { ResetPassword } from "../ResetPassword/ResetPassword";
 import { Profile } from "../Profile/Profile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -31,22 +31,7 @@ function App() {
       <main>
         <Router>
           <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route>
-            <Route path="/forgot-password">
-              <ForgetPassword />
-            </Route>
-            <Route path="/reset-password">
-              <ResetPassword />
-            </Route>
-            <Route path="/profile">
-              <Profile />
-            </Route>
-            <Route path="/">
+            <Route exact path="/">
               <DndProvider backend={HTML5Backend}>
                 <div className={styles.sections}>
                   <div className="pl-4">
@@ -72,6 +57,11 @@ function App() {
                 </div>
               </DndProvider>
             </Route>
+            <Route path="/login" children={<Login />} />
+            <Route path="/register" children={<Register />} />
+            <Route path="/forgot-password" children={<ForgotPassword />} />
+            <Route path="/reset-password" children={<ResetPassword />} />
+            <Route path="/profile" children={<Profile />} />
           </Switch>
         </Router>
       </main>

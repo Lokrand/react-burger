@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   Button,
   EmailInput,
@@ -8,6 +8,7 @@ import {
 import styles from "./Register.module.css";
 import { ModalRegister } from "../ModalRegister/ModalRegister";
 import ReactDom from "react-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 
 export const Register = () => {
   const [value, setValue] = React.useState("password");
@@ -24,10 +25,17 @@ export const Register = () => {
   const onChangeEMail = (e) => {
     setEmail(e.target.value);
   };
+
+  const history = useHistory();
+  const toLogin = useCallback(() => {
+    history.replace({ pathname: "/login" });
+    window.location.reload();
+  }, [history]);
+
   return ReactDom.createPortal(
     <ModalRegister>
       <p className="text text_type_main-medium mb-6">Регистрация</p>
-      <div className={styles.inputs}>
+      <form className={styles.form}>
         <Input
           type={"text"}
           placeholder={"placeholder"}
@@ -39,11 +47,10 @@ export const Register = () => {
           ref={inputRef}
           onIconClick={onIconClick}
           errorText={"Ошибка"}
-          size={"default"}
         />
         <EmailInput onChange={onChangeEMail} value={email} name={"email"} />
         <PasswordInput onChange={onChange} value={value} name={"password"} />
-      </div>
+      </form>
       <Button type="primary" size="large">
         Зарегистрироваться
       </Button>
@@ -51,7 +58,11 @@ export const Register = () => {
         <p className="text text_type_main-default text_color_inactive">
           Уже зарегистрированы?
         </p>
-        <p className={`${styles.log_in} text text_type_main-default`}>Войти</p>
+        <Link to="/login" onClick={toLogin}>
+          <p className={`${styles.log_in} text text_type_main-default`}>
+            Войти
+          </p>
+        </Link>
       </div>
     </ModalRegister>,
     document.getElementById("modals")

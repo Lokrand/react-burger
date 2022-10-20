@@ -1,8 +1,5 @@
-.inputs {
-  display: flex;
-  flex-direction: column;
-  row-gap: 24px;
-  margin-bottom: 24px;
+.form {
+  composes: form from "../../pages/forms.css";
 }
 
 .already_exist {

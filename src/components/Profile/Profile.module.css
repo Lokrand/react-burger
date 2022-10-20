@@ -1,3 +1,7 @@
+.form {
+  composes: form from "../../pages/forms.css";
+}
+
 .section {
   display: flex;
   column-gap: 60px;
@@ -8,11 +12,4 @@
   width: 320px;
   min-height: 192px;
   margin: 0 0 0 380px;
-}
-
-.inputs {
-  width: 480px;
-  display: flex;
-  flex-direction: column;
-  row-gap: 24px;
 }
