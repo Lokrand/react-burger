@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import {
   Button,
   EmailInput,
@@ -8,7 +8,7 @@ import {
 import styles from "./Register.module.css";
 import { ModalRegister } from "../ModalRegister/ModalRegister";
 import ReactDom from "react-dom";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const Register = () => {
   const [value, setValue] = React.useState("password");
@@ -25,12 +25,6 @@ export const Register = () => {
   const onChangeEMail = (e) => {
     setEmail(e.target.value);
   };
-
-  const history = useHistory();
-  const toLogin = useCallback(() => {
-    history.replace({ pathname: "/login" });
-    window.location.reload();
-  }, [history]);
 
   return ReactDom.createPortal(
     <ModalRegister>
@@ -58,7 +52,7 @@ export const Register = () => {
         <p className="text text_type_main-default text_color_inactive">
           Уже зарегистрированы?
         </p>
-        <NavLink to="/login" onClick={toLogin}>
+        <NavLink to="/login">
           <p className={`${styles.log_in} text text_type_main-default`}>
             Войти
           </p>

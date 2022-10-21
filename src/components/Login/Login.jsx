@@ -1,5 +1,4 @@
-import React, { useCallback, useState } from "react";
-
+import React, { useState } from "react";
 import {
   Button,
   EmailInput,
@@ -8,10 +7,9 @@ import {
 import styles from "./Login.module.css";
 import ReactDom from "react-dom";
 import { ModalRegister } from "../ModalRegister/ModalRegister";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
-
   const [value, setValue] = useState("password");
   const onChange = (e) => {
     setValue(e.target.value);
@@ -20,16 +18,6 @@ export const Login = () => {
   const onChanges = (e) => {
     setValues(e.target.value);
   };
-  
-  const history = useHistory();
-  const toRegister = useCallback(() => {
-    history.replace({ pathname: "/register" });
-    window.location.reload();
-  }, [history]);
-  const toForgotPassword = useCallback(() => {
-    history.replace({ pathname: "/forgot-password" });
-    window.location.reload();
-  }, [history]);
 
   return ReactDom.createPortal(
     <ModalRegister>
@@ -45,7 +33,7 @@ export const Login = () => {
         <p className="text text_type_main-default text_color_inactive">
           Вы - новый пользователь?
         </p>
-        <Link to={{pathname: '/register'}} onClick={toRegister}>  
+        <Link to={{ pathname: "/register" }}>
           <p className={`${styles.register} text text_type_main-default`}>
             Зарегистрироваться
           </p>
@@ -55,10 +43,10 @@ export const Login = () => {
         <p className="text text_type_main-default text_color_inactive">
           Забыли пароль?
         </p>
-        <Link to='/forgot-password' onClick={toForgotPassword}>
-        <p className={`${styles.register} text text_type_main-default`}>
-          Восстановить пароль
-        </p>
+        <Link to="/forgot-password">
+          <p className={`${styles.register} text text_type_main-default`}>
+            Восстановить пароль
+          </p>
         </Link>
       </div>
     </ModalRegister>,

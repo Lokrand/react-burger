@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useCallback, useEffect } from "react";
 import { ModalRegister } from "../ModalRegister/ModalRegister";
 import styles from "./ForgotPassword.module.css";
@@ -32,24 +33,20 @@ export const ForgotPassword = () => {
     window.location.reload();
   }, [history]);
 
-  const login = useCallback(() => {
-    history.replace({ pathname: "/login" });
-    window.location.reload();
-  }, [history]);
   return ReactDom.createPortal(
     <ModalRegister>
       <p className="text text_type_main-medium mb-6">Восстановление пароля</p>
       <form className={styles.form}>
         <EmailInput onChange={onChange} value={value} name={"email"} />
       </form>
-      <Button type="primary" size="large" onClick={sendEmail} disabled>
+      <Button type="primary" size="large" onClick={sendEmail}>
         Восстановить
       </Button>
       <div className={styles.already_exist}>
         <p className="text text_type_main-default text_color_inactive">
           Вспомнили пароль?
         </p>
-        <NavLink to="/login" onClick={login}>
+        <NavLink to="/login">
           <p className={`${styles.log_in} text text_type_main-default`}>
             Войти
           </p>

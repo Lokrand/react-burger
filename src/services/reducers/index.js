@@ -6,6 +6,10 @@ import { getDetails } from "./getDetails";
 import { getOrderNumber } from "./getOrderNumber";
 import { configureStore } from "@reduxjs/toolkit";
 import { getPassword } from "./getPassword";
+import { registerPerson } from "./registerPerson";
+import { resetPassword } from "./resetPassword";
+import { login } from "./login";
+import { logout } from "./logout";
 
 const rootReducer = combineReducers({
   app: reducer,
@@ -13,6 +17,10 @@ const rootReducer = combineReducers({
   getDetails,
   getOrderNumber,
   getPassword,
+  registerPerson,
+  resetPassword,
+  login,
+  logout,
 });
 
 export const store = configureStore({

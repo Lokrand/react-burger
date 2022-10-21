@@ -4,7 +4,7 @@ import { useCallback, useEffect } from "react";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import PropTypes from "prop-types";
 import ReactDom from "react-dom";
-
+import React from "react";
 export const Modal = ({ active, setActive, children }) => {
   const closePopup = useCallback(() => {
     setActive(false);

@@ -12,56 +12,65 @@ import { Login } from "../Login/Login";
 import { Register } from "../Register/Register";
 import { ForgotPassword } from "../ForgotPassword/ForgotPassword";
 import { ResetPassword } from "../ResetPassword/ResetPassword";
-import { Profile } from "../Profile/Profile";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Switch, Route, useLocation } from "react-router-dom";
+import { registerPerson } from "../../services/asyncActions/registerPerson";
+import { person } from "../../utils/constans";
+import { ProfileRegister } from "../ProfileRegister/ProfileRegister";
+import { ProfileOrders } from "../ProfileOrders/ProfileOrders";
 
 function App() {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.getIngredientsReducer.loading);
+  // const user = useSelector((state) => state.registerPerson.user);
+  // console.log('new user', user)
   const [componentModalActive, setComponentModalActive] = useState(false);
   useEffect(() => {
     dispatch(fetchIngredients());
+    dispatch(registerPerson(person));
   }, []);
+  let location = useLocation();
+  useEffect(() => {
+    console.log("location", location);
+  }, [location.pathname]);
   return (
     <>
-      <Router>
+      <Switch>
         <AppHeader />
         <main>
-          <Switch>
-            <Route exact path="/">
-              <DndProvider backend={HTML5Backend}>
-                <div className={styles.sections}>
-                  <div className="pl-4">
-                    <p className="text text_type_main-large mb-5">
-                      Соберите бургер
-                    </p>
-                    {loading ? (
-                      <p className="text text_type_main-medium">Loading...</p>
-                    ) : (
-                      <BurgerIngredients
-                        modalActive={componentModalActive}
-                        setModalActive={setComponentModalActive}
-                      />
-                    )}
-                  </div>
-                  <div className="mt-15">
-                    {loading ? (
-                      <p className="text text_type_main-medium">Loading...</p>
-                    ) : (
-                      <BurgerConstructor />
-                    )}
-                  </div>
+          <Route exact path="/">
+            <DndProvider backend={HTML5Backend}>
+              <div className={styles.sections}>
+                <div className="pl-4">
+                  <p className="text text_type_main-large mb-5">
+                    Соберите бургер
+                  </p>
+                  {loading ? (
+                    <p className="text text_type_main-medium">Loading...</p>
+                  ) : (
+                    <BurgerIngredients
+                      modalActive={componentModalActive}
+                      setModalActive={setComponentModalActive}
+                    />
+                  )}
                 </div>
-              </DndProvider>
-            </Route>
-            <Route path="/login" children={<Login />} />
-            <Route path="/register" children={<Register />} />
-            <Route path="/forgot-password" children={<ForgotPassword />} />
-            <Route path="/reset-password" children={<ResetPassword />} />
-            <Route path="/profile" children={<Profile />} />
-          </Switch>
+                <div className="mt-15">
+                  {loading ? (
+                    <p className="text text_type_main-medium">Loading...</p>
+                  ) : (
+                    <BurgerConstructor />
+                  )}
+                </div>
+              </div>
+            </DndProvider>
+          </Route>
+          <Route path="/login" children={<Login />} />
+          <Route path="/register" children={<Register />} />
+          <Route path="/forgot-password" children={<ForgotPassword />} />
+          <Route path="/reset-password" children={<ResetPassword />} />
+          <Route exact path="/profile" children={<ProfileRegister />} />
+          <Route path="/profile/orders" children={<ProfileOrders />} />
         </main>
-      </Router>
+      </Switch>
     </>
   );
 }

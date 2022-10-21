@@ -3,7 +3,7 @@ import icon from "../../images/done.png";
 import PropTypes from "prop-types";
 import { ingredientType } from "../../utils/types";
 import { useSelector } from "react-redux";
-
+import React from "react";
 export const OrderDetails = ({ active, setActive, orderNumber }) => {
   const loading = useSelector((state) => state.getOrderNumber.loading);
   return (

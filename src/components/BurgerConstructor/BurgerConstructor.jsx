@@ -17,7 +17,7 @@ import {
   REMOVE_CONSTRUCTOR_ELEMENT,
   UPDATE_SELECTED_ITEMS_ORDER,
 } from "../../services/actions/actions";
-import { Reorder } from "framer-motion";
+// import { Reorder } from "framer-motion";
 import { generateKeys } from "../../utils/generateKeys";
 import {  typeBun } from "../../utils/constans";
 
@@ -125,12 +125,12 @@ export const BurgerConstructor = () => {
           )}
         </div>
         <div className={styles.scrollBar} ref={dropRef}>
-          <Reorder.Group
+          {/* <Reorder.Group
             as="ol"
             axys="y"
             values={ingredient}
             onReorder={setItem}
-          >
+          > */}
             <div className={styles.items}>
               {ingredient.map((el) => (
                 <ConstructorIngredients
@@ -144,7 +144,7 @@ export const BurgerConstructor = () => {
                 />
               ))}
             </div>
-          </Reorder.Group>
+          {/* </Reorder.Group> */}
         </div>
         <div className={styles.bread}>
           <div className={styles.secret} />
