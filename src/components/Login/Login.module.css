@@ -10,6 +10,7 @@
 }
 .register {
   color: #4c4cff;
+  text-decoration: none;
   transition: all 0.1s linear;
 }
 

@@ -17,6 +17,7 @@ import { registerPerson } from "../../services/asyncActions/registerPerson";
 import { person } from "../../utils/constans";
 import { ProfileRegister } from "../ProfileRegister/ProfileRegister";
 import { ProfileOrders } from "../ProfileOrders/ProfileOrders";
+import { Text } from "../Text/Text";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,11 +42,11 @@ function App() {
             <DndProvider backend={HTML5Backend}>
               <div className={styles.sections}>
                 <div className="pl-4">
-                  <p className="text text_type_main-large mb-5">
+                  <Text size='large' className="mb-5">
                     Соберите бургер
-                  </p>
+                  </Text>
                   {loading ? (
-                    <p className="text text_type_main-medium">Loading...</p>
+                    <Text size='medium'>Loading...</Text>
                   ) : (
                     <BurgerIngredients
                       modalActive={componentModalActive}
@@ -55,7 +56,7 @@ function App() {
                 </div>
                 <div className="mt-15">
                   {loading ? (
-                    <p className="text text_type_main-medium">Loading...</p>
+                    <Text size='medium'>Loading...</Text>
                   ) : (
                     <BurgerConstructor />
                   )}

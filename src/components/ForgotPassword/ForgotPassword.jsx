@@ -1,43 +1,34 @@
 /* eslint-disable */
-import React, { useCallback, useEffect } from "react";
+import React, { useState } from "react";
 import { ModalRegister } from "../ModalRegister/ModalRegister";
 import styles from "./ForgotPassword.module.css";
 import ReactDom from "react-dom";
-import { useSelector, useDispatch } from "react-redux";
 import {
   Button,
   EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { NavLink, useHistory } from "react-router-dom";
-import { fetchPassword } from "../../services/asyncActions/forgotPassword";
+import { fetchPasswordBase } from "../../services/asyncActions/forgotPassword";
+import { Text } from "../Text/Text";
 
 export const ForgotPassword = () => {
-  const dispatch = useDispatch();
-  const loading = useSelector((state) => state.getPassword.loading);
   const history = useHistory();
-  const [value, setValue] = React.useState("bob@example.com");
+  const [email, setEmail] = useState("bob@example.com");
   const onChange = (e) => {
-    setValue(e.target.value);
+    setEmail(e.target.value);
   };
-  const sendEmail = () => {
-    dispatch(fetchPassword(value));
-  };
-  useEffect(() => {
-    if (loading) {
-      toResetPassword();
+  const sendEmail = async () => {
+    const result = await fetchPasswordBase(email);
+    if (result.success) {
+      history.push({ pathname: "/reset-password" });
     }
-  }, [loading]);
-
-  const toResetPassword = useCallback(() => {
-    history.replace({ pathname: "/reset-password" });
-    window.location.reload();
-  }, [history]);
+  };
 
   return ReactDom.createPortal(
     <ModalRegister>
-      <p className="text text_type_main-medium mb-6">Восстановление пароля</p>
+      <Text size="medium" className="mb-6">Восстановление пароля</Text>
       <form className={styles.form}>
-        <EmailInput onChange={onChange} value={value} name={"email"} />
+        <EmailInput onChange={onChange} value={email} name={"email"} />
       </form>
       <Button type="primary" size="large" onClick={sendEmail}>
         Восстановить

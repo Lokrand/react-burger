@@ -5,6 +5,7 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerConstructor.module.css";
+import { Text } from "../Text/Text";
 // import { Reorder } from "framer-motion";
 
 export const ConstructorIngredients = (props) => {
@@ -25,9 +26,9 @@ export const ConstructorIngredients = (props) => {
             alt={props.text}
           />
           <div className={styles.description}>
-            <p className="text text_type_main-default mr-5">{props.text}</p>
+            <Text className="mr-5">{props.text}</Text>
             <div className={styles.price}>
-              <p className="text text_type_digits-default">{props.price}</p>
+              <Text type="digits">{props.price}</Text>
               <div className={styles.icons}>
                 <CurrencyIcon type="primary" />
                 <div

@@ -1,113 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
-import {
-  BurgerIcon,
-  ListIcon,
-  ProfileIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { ListIcon, BurgerIcon, ProfileIcon } from "../../icons";
 import styles from "./AppHeader.module.css";
-import { NavLink, useLocation } from "react-router-dom";
-
+import { NavLink } from "react-router-dom";
+import { Text } from "../Text/Text";
 export const AppHeader = () => {
-  const location = useLocation();
-  const [hover, setHover] = useState(true);
-  const [constructorIcon, setConstructorIcon] = useState(true);
-  const [ordersIcon, setOrdersIcon] = useState(true);
-
-  const showHover = () => {
-    setHover(false);
-  };
-  const hideHover = () => {
-    setHover(true);
-  };
-  const showConstIcon = () => {
-    setConstructorIcon(false);
-  };
-  const hideConstIcon = () => {
-    setConstructorIcon(true);
-  };
-  const showOrdersIcon = () => {
-    setOrdersIcon(false);
-  };
-  const hideOrdersIcon = () => {
-    setOrdersIcon(true);
-  };
-
   return (
     <header>
       <div className={styles.header}>
         <NavLink
+          exact
           to="/"
-          className={
-            location.pathname.endsWith("/")
-              ? styles.constructor_active
-              : styles.constructor_disabled
-          }
-          onMouseEnter={showConstIcon}
-          onMouseLeave={hideConstIcon}
+          className={styles.link_disables}
+          activeClassName={styles.link_active}
         >
-          {constructorIcon ? (
-            <BurgerIcon
-              type={location.pathname.endsWith("/") ? "primary" : "secondary"}
-            />
-          ) : (
-            <BurgerIcon type="primary" />
-          )}
-          <p className="text text_type_main-default text_color_active ml-2">
-            Конструктор
-          </p>
+          <BurgerIcon />
+          <Text className="ml-2">Конструктор</Text>
         </NavLink>
         <NavLink
+          exact
           to="/orders"
-          className={
-            location.pathname.startsWith("/orders")
-              ? styles.constructor_active
-              : styles.constructor_disabled
-          }
-          onMouseEnter={showOrdersIcon}
-          onMouseLeave={hideOrdersIcon}
+          className={`${styles.link_disables} mr-30`}
+          activeClassName={styles.link_active}
         >
-          {ordersIcon ? (
-            <ListIcon
-              type={
-                location.pathname.startsWith("/orders")
-                  ? "primary"
-                  : "secondary"
-              }
-            />
-          ) : (
-            <ListIcon type="primary" />
-          )}
-          <p className="text text_type_main-default text_color_active ml-2 mr-30">
-            Лента заказов
-          </p>
+          <ListIcon />
+          <Text className="ml-2">Лента заказов</Text>
         </NavLink>
         <Logo />
         <div className={styles.account}>
           <NavLink
+            exact
             to="/profile"
-            className={
-              location.pathname.includes("/profile")
-                ? styles.link_active
-                : styles.link_disables
-            }
-            onMouseEnter={showHover}
-            onMouseLeave={hideHover}
+            className={styles.link_disables}
+            activeClassName={styles.link_active}
           >
-            {hover ? (
-              <ProfileIcon
-                type={
-                  location.pathname.includes("/profile")
-                    ? "primary"
-                    : "secondary"
-                }
-              />
-            ) : (
-              <ProfileIcon type="primary" />
-            )}
-            <p className="text text_type_main-default text_color_active ml-2">
-              Личный кабинет
-            </p>
+            <ProfileIcon />
+            <Text className="ml-2">Личный кабинет</Text>
           </NavLink>
         </div>
       </div>

@@ -9,6 +9,7 @@ import { ingredientType } from "../../utils/types";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 import { typeBun } from "../../utils/constans";
+import { Text } from "../Text/Text";
 
 export const BurgerIngredient = ({ data, onClick }) => {
   const id = data._id;
@@ -30,11 +31,11 @@ export const BurgerIngredient = ({ data, onClick }) => {
     >
       <img src={data.image} alt={data.name} className={styles.image} />
       <div className={styles.price}>
-        <p className="text text_type_digits-default">{data.price}</p>
+        <Text type="digits">{data.price}</Text>
         <CurrencyIcon type="primary" />
       </div>
       <div className={styles.title}>
-        <p className="text text_type_main-default">{data.name}</p>
+        <Text>{data.name}</Text>
       </div>
       {counter !== 0 ? (
         <div className={styles.counter}>

@@ -8,6 +8,7 @@ import { ingredientType } from "../../utils/types";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_DETAILS } from "../../services/actions/actions";
 import { typeBun } from "../../utils/constans";
+import { Text } from "../Text/Text";
 
 export const BurgerIngredients = ({ modalActive, setModalActive }) => {
   const [modalIngredient, setModalIngredient] = useState(null);
@@ -77,9 +78,9 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
       </div>
       <div className={styles.main} id="main" onScroll={scrollBar}>
         <div ref={bunRef}>
-          <p className="text text_type_main-medium mb-6" id="buns">
+          <Text size="medium" className="mb-6" id="buns">
             Булки
-          </p>
+          </Text>
           <div className={styles.items}>
             {items
               .filter((item) => item.type === typeBun)
@@ -96,9 +97,9 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
           </div>
         </div>
         <div ref={souceRef}>
-          <p className="text text_type_main-medium mb-6 mt-15" id="souce">
+          <Text size="medium" className="mb-6 mt-15" id="souce">
             Соусы
-          </p>
+          </Text>
           <div className={styles.items}>
             {items
               .filter((item) => item.type === "sauce")
@@ -114,9 +115,9 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
               ))}
           </div>
         </div>
-        <p className="text text_type_main-medium mb-6 mt-15" id="stuff">
+        <Text size="medium" className="mb-6 mt-15" id="stuff">
           Начинки
-        </p>
+        </Text>
         <div className={styles.items}>
           {items
             .filter((item) => item.type === "main")

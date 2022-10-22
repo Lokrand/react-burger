@@ -5,54 +5,27 @@
   background-color: #1c1c21;
 }
 
-.constructor_active {
-  display: flex;
-  align-items: center;
-  margin: 0 40px 0 20px;
-  color: #fff;
-  text-decoration: none;
-  cursor: auto;
-}
-
-.constructor_disabled {
-  display: flex;
-  align-items: center;
-  margin: 0 40px 0 20px;
-  text-decoration: none;
-  color: #8585AD;
-}
-
-.constructor_disabled:hover {
-  cursor: pointer;
-  color: #fff;
-}
-
-.orders_active {
-  display: flex;
-  align-items: center;
-  margin-left: 8px;
-  text-decoration: none;
-  color: #fff;
-  cursor: auto;
-}
-
-.orders_disabled {
-  display: flex;
-  align-items: center;
-  margin-left: 8px;
-  text-decoration: none;
-  color: #8585AD;
-}
-
-.orders_disabled:hover {
-  cursor: pointer;
-  color: #fff;
-}
-
 .account {
   display: flex;
   align-items: center;
   margin-left: 310px;
+}
+
+.link_disables {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  color: #8585ad;
+  transition: color 0.1s linear;
+}
+
+.link_disables + .link_disables {
+  margin-left: 49px;
+}
+
+.link_disables:hover {
+  color: #fff;
 }
 
 .link_active {
@@ -61,16 +34,4 @@
   text-decoration: none;
   color: #fff;
   cursor: auto;
-}
-
-.link_disables {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #8585AD;
-}
-
-.link_disables:hover {
-  color: #fff;
-  cursor: pointer;
 }
