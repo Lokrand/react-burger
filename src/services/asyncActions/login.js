@@ -4,13 +4,14 @@ import {
   loginError,
 } from "../reducers/login";
 
-export const login = (email, password) => {
+export const login = (email, password, accessToken) => {
   if (password?.length > 0 && email?.length > 0) {
     return function (dispatch) {
       dispatch(loginRequest());
       fetch("https://norma.nomoreparties.space/api/auth/login", {
         method: "POST",
         headers: {
+          authorization: accessToken,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
