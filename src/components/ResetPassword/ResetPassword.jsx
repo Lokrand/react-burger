@@ -11,6 +11,7 @@ import {
 import { NavLink, useHistory } from "react-router-dom";
 import { resetPassword } from "../../services/asyncActions/resetPassword";
 import { useDispatch, useSelector } from "react-redux";
+import { Text } from "../Text/Text";
 
 export const ResetPassword = () => {
   const dispatch = useDispatch();
@@ -36,7 +37,9 @@ export const ResetPassword = () => {
 
   return ReactDom.createPortal(
     <ModalRegister>
-      <p className="text text_type_main-medium mb-6">Восстановление пароля</p>
+      <Text size="medium" className="mb-6">
+        Восстановление пароля
+      </Text>
       <form className={styles.form}>
         <PasswordInput
           onChange={(e) => setPassword(e.target.value)}
@@ -58,13 +61,9 @@ export const ResetPassword = () => {
         Сохранить
       </Button>
       <div className={styles.already_exist}>
-        <p className="text text_type_main-default text_color_inactive">
-          Вспомнили пароль?
-        </p>
+        <Text inactive>Вспомнили пароль?</Text>
         <NavLink to="/login">
-          <p className={`${styles.log_in} text text_type_main-default`}>
-            Войти
-          </p>
+          <Text className={styles.log_in}>Войти</Text>
         </NavLink>
       </div>
     </ModalRegister>,

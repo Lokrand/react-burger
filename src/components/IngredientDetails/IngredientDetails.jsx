@@ -4,6 +4,7 @@ import styles from "./IngredientDetails.module.css";
 import PropTypes from "prop-types";
 import { ingredientType } from "../../utils/types";
 import { useSelector } from "react-redux";
+import { Text } from "../Text/Text";
 
 export const IngredientDetails = ({ active, setActive }) => {
   const data = useSelector((state) => state.getDetails.details);
@@ -11,42 +12,46 @@ export const IngredientDetails = ({ active, setActive }) => {
   return (
     <Modal active={active} setActive={setActive}>
       <div className={styles.title}>
-        <p className="text text_type_main-large mt-4">Детали ингредиента</p>
+        <Text size="large" className="mt-4">
+          Детали ингредиента
+        </Text>
       </div>
       <img src={data.image} alt={data.name} className={styles.image} />
-      <p className="text text_type_main-medium mt-4">{data.name}</p>
+      <Text size="medium" className="mt-4">
+        {data.name}
+      </Text>
       <div className={styles.items}>
         <div className={styles.item}>
-          <p className="text text_type_main-default text_color_inactive mb-2">
+          <Text className="mb-2" inactive>
             Калории,ккал
-          </p>
-          <p className="text text_type_main-default text_color_inactive">
+          </Text>
+          <Text inactive type="digits">
             {data.calories}
-          </p>
+          </Text>
         </div>
         <div>
-          <p className="text text_type_main-default text_color_inactive mb-2">
+          <Text className="mb-2" inactive>
             Белки, г
-          </p>
-          <p className="text text_type_main-default text_color_inactive">
+          </Text>
+          <Text inactive type="digits">
             {data.proteins}
-          </p>
+          </Text>
         </div>
         <div>
-          <p className="text text_type_main-default text_color_inactive mb-2">
+          <Text className="mb-2" inactive>
             Жиры, г
-          </p>
-          <p className="text text_type_main-default text_color_inactive">
+          </Text>
+          <Text inactive type="digits">
             {data.fat}
-          </p>
+          </Text>
         </div>
         <div>
-          <p className="text text_type_main-default text_color_inactive mb-2">
+          <Text className="mb-2" inactive>
             Углеводы, г
-          </p>
-          <p className="text text_type_main-default text_color_inactive">
+          </Text>
+          <Text inactive type="digits">
             {data.carbohydrates}
-          </p>
+          </Text>
         </div>
       </div>
     </Modal>

@@ -34,13 +34,13 @@ export const ForgotPassword = () => {
         Восстановить
       </Button>
       <div className={styles.already_exist}>
-        <p className="text text_type_main-default text_color_inactive">
+        <Text inactive>
           Вспомнили пароль?
-        </p>
-        <NavLink to="/login">
-          <p className={`${styles.log_in} text text_type_main-default`}>
+        </Text>
+        <NavLink className={styles.login_link} to="/login">
+          <Text className={styles.log_in}>
             Войти
-          </p>
+          </Text>
         </NavLink>
       </div>
     </ModalRegister>,

@@ -9,6 +9,7 @@ import styles from "./Register.module.css";
 import { ModalRegister } from "../ModalRegister/ModalRegister";
 import ReactDom from "react-dom";
 import { NavLink } from "react-router-dom";
+import { Text } from "../Text/Text";
 
 export const Register = () => {
   const [value, setValue] = React.useState("password");
@@ -28,7 +29,9 @@ export const Register = () => {
 
   return ReactDom.createPortal(
     <ModalRegister>
-      <p className="text text_type_main-medium mb-6">Регистрация</p>
+      <Text size="medium" className="mb-6">
+        Регистрация
+      </Text>
       <form className={styles.form}>
         <Input
           type={"text"}
@@ -49,13 +52,9 @@ export const Register = () => {
         Зарегистрироваться
       </Button>
       <div className={styles.already_exist}>
-        <p className="text text_type_main-default text_color_inactive">
-          Уже зарегистрированы?
-        </p>
+        <Text inactive>Уже зарегистрированы?</Text>
         <NavLink to="/login">
-          <p className={`${styles.log_in} text text_type_main-default`}>
-            Войти
-          </p>
+          <Text className={styles.log_in}>Войти</Text>
         </NavLink>
       </div>
     </ModalRegister>,

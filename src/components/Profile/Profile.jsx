@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Profile.module.css";
 import { NavLink, useLocation } from "react-router-dom";
+import { Text } from "../Text/Text";
 
 export const Profile = ({ children }) => {
   const location = useLocation();
@@ -34,9 +35,9 @@ export const Profile = ({ children }) => {
         >
           Выход
         </NavLink>
-        <p className="text text_type_main-default text_color_inactive mt-20">
+        <Text className="mt-20" inactive>
           В этом разделе вы можете изменить&nbsp;свои персональные данные
-        </p>
+        </Text>
       </div>
       <div>{children}</div>
     </div>
