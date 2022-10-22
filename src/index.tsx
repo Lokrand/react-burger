@@ -19,14 +19,4 @@ const root = ReactDOM.render(
   document.getElementById("root") as HTMLElement
 );
 
-// root.render(
-//   <React.StrictMode>
-//     <Provider store={store}>
-//       <Router>
-//         <App />
-//       </Router>
-//     </Provider>
-//   </React.StrictMode>
-// );
-
 reportWebVitals();

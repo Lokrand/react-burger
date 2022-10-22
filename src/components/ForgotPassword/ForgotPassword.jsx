@@ -26,7 +26,9 @@ export const ForgotPassword = () => {
 
   return ReactDom.createPortal(
     <ModalRegister>
-      <Text size="medium" className="mb-6">Восстановление пароля</Text>
+      <Text size="medium" className="mb-6">
+        Восстановление пароля
+      </Text>
       <form className={styles.form}>
         <EmailInput onChange={onChange} value={email} name={"email"} />
       </form>
@@ -34,13 +36,9 @@ export const ForgotPassword = () => {
         Восстановить
       </Button>
       <div className={styles.already_exist}>
-        <Text inactive>
-          Вспомнили пароль?
-        </Text>
+        <Text inactive>Вспомнили пароль?</Text>
         <NavLink className={styles.login_link} to="/login">
-          <Text className={styles.log_in}>
-            Войти
-          </Text>
+          <Text className={styles.log_in}>Войти</Text>
         </NavLink>
       </div>
     </ModalRegister>,
