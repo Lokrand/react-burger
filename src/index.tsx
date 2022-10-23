@@ -11,11 +11,13 @@ import { BrowserRouter as Router, HashRouter, Route } from "react-router-dom";
 const root = ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-    <HashRouter>
+    {/* <HashRouter> */}
       <Router>
-        <Route path="/" children={<App />}></Route>
+        {/* <Route path="/" children={ */}
+        <App />
+        {/* }></Route> */}
       </Router>
-    </HashRouter>
+    {/* </HashRouter> */}
     </Provider>
   </React.StrictMode>,
   document.getElementById("root") as HTMLElement
