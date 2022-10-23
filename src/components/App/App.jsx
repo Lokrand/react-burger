@@ -38,7 +38,7 @@ function App() {
       <Switch>
         <AppHeader />
         <main>
-          <Route exact path="/">
+          <Route exact path="/react-burger/">
             <DndProvider backend={HTML5Backend}>
               <div className={styles.sections}>
                 <div className="pl-4">

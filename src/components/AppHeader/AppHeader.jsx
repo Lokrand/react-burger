@@ -10,7 +10,7 @@ export const AppHeader = () => {
       <div className={styles.header}>
         <NavLink
           exact
-          to="/"
+          to="/react-burger/"
           className={styles.link_disables}
           activeClassName={styles.link_active}
         >
