@@ -6,17 +6,17 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerConstructor.module.css";
 import { Text } from "../Text/Text";
-// import { Reorder } from "framer-motion";
+import { Reorder } from "framer-motion";
 
 export const ConstructorIngredients = (props) => {
   return (
-    // <Reorder.Item
-    //   value={props.el}
-    //   id={props.el}
-    //   whileDrag={{
-    //     filter: "invert(1)",
-    //   }}
-    // >
+    <Reorder.Item
+      value={props.el}
+      id={props.el}
+      whileDrag={{
+        filter: "invert(1)",
+      }}
+    >
       <div className={styles.item}>
         <DragIcon type="primary" />
         <div className={styles.constructor_element}>
@@ -44,6 +44,6 @@ export const ConstructorIngredients = (props) => {
           </div>
         </div>
       </div>
-    // </Reorder.Item>
+    </Reorder.Item>
   );
 };
