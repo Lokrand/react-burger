@@ -18,6 +18,7 @@ import { person } from "../../utils/constans";
 import { ProfileRegister } from "../ProfileRegister/ProfileRegister";
 import { ProfileOrders } from "../ProfileOrders/ProfileOrders";
 import { Text } from "../Text/Text";
+import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -68,8 +69,9 @@ function App() {
           <Route path="/register" children={<Register />} />
           <Route path="/forgot-password" children={<ForgotPassword />} />
           <Route path="/reset-password" children={<ResetPassword />} />
-          <Route exact path="/profile" children={<ProfileRegister />} />
           <Route path="/profile/orders" children={<ProfileOrders />} />
+          <ProtectedRoute path="/profile" children={<ProfileRegister />} exact={true} />
+          <ProtectedRoute path="/profile/orders/:id" children={<ProfileOrders />} exact={true} />
         </main>
       </Switch>
     </>

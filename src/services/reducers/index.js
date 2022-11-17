@@ -10,7 +10,7 @@ import { registerPerson } from "./registerPerson";
 import { resetPassword } from "./resetPassword";
 import { login } from "./login";
 import { logout } from "./logout";
-
+import { user } from "./user";
 const rootReducer = combineReducers({
   app: reducer,
   getIngredientsReducer,
@@ -21,6 +21,7 @@ const rootReducer = combineReducers({
   resetPassword,
   login,
   logout,
+  user,
 });
 
 export const store = configureStore({
