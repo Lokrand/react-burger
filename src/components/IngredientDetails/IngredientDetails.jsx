@@ -8,9 +8,12 @@ import { Text } from "../Text/Text";
 
 export const IngredientDetails = ({ active, setActive }) => {
   const data = useSelector((state) => state.getDetails.details);
+  const onClose = () => {
+    window.history.back();
+  };
 
   return (
-    <Modal active={active} setActive={setActive}>
+    <Modal active={active} setActive={setActive} onClose={onClose}>
       <div className={styles.title}>
         <Text size="large" className="mt-4">
           Детали ингредиента

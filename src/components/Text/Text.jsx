@@ -4,6 +4,7 @@ export const Text = ({
   inactive = false,
   children,
   className,
+  id,
 }) => {
   const classes = [
     "text",
@@ -13,5 +14,9 @@ export const Text = ({
   ]
     .filter((el) => el)
     .join(" ");
-  return <p className={classes}>{children}</p>;
+  return (
+    <p className={classes} id={id}>
+      {children}
+    </p>
+  );
 };

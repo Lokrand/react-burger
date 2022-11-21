@@ -21,9 +21,8 @@ export const getOrderNumber = (orderFor) => {
           dispatch(getOrderSuccess(json.order.number));
         })
         .catch((err) => {
-          console.error("Error", err)
+          console.error("Error", err);
           dispatch(getOrderError(err));
-
         });
     };
   }

@@ -1,11 +1,19 @@
 import React from "react";
 import styles from "./Profile.module.css";
 import { NavLink, useLocation } from "react-router-dom";
-import { Text } from "../Text/Text";
+import { Text } from "../../components/Text/Text";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../services/asyncActions/logout";
 
 export const Profile = ({ children }) => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.user.isAuthenticated);
 
+  const logOut = () => {
+    dispatch(logout());
+    localStorage.removeItem("persist:root");
+  };
   return (
     <div className={styles.section}>
       <div className={styles.menu}>
@@ -30,8 +38,10 @@ export const Profile = ({ children }) => {
           История заказов
         </NavLink>
         <NavLink
-          to="/profile/orders/:id"
+          to={!auth ? { pathname: `/login` } : { pathname: `` }}
           className={`${styles.link} text text_type_main-medium text_color_active mt-4 mb-4`}
+          exact={true}
+          onClick={logOut}
         >
           Выход
         </NavLink>

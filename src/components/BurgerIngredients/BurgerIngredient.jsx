@@ -26,7 +26,10 @@ export const BurgerIngredient = ({ data, onClick }) => {
   return (
     <div
       className={isDrag ? styles.isDragging : styles.item}
-      onClick={onClick}
+      onClick={() => {
+        window.history.pushState(null, null, `/ingredients/${id}`);
+        onClick();
+      }}
       ref={dragRef}
     >
       <img src={data.image} alt={data.name} className={styles.image} />

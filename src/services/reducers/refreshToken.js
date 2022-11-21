@@ -6,8 +6,6 @@ import {
 
 const initialState = {
   loading: false,
-  accessToken: null,
-  refreshToken: null,
   error: null,
 };
 
@@ -19,7 +17,6 @@ export const refreshToken = (state = initialState, action) => {
       return {
         ...state,
         loading: action.payload.success,
-        message: action.payload.message,
       };
     case REFRESH_TOKEN_ERROR:
       return { ...state, error: action.payload, loading: false };

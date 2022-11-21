@@ -1,3 +1,3 @@
-export * from './burger-icon';
-export * from './list-icon';
-export * from './profile-icon';
+export * from "./burger-icon";
+export * from "./list-icon";
+export * from "./profile-icon";

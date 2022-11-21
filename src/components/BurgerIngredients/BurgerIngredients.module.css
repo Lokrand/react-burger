@@ -31,6 +31,8 @@
   position: relative;
   flex-direction: column;
   row-gap: 9px;
+  text-decoration: none;
+  color: #fff;
   cursor: pointer;
   transition: 0.2s linear;
 }
@@ -40,6 +42,7 @@
   position: relative;
   flex-direction: column;
   row-gap: 9px;
+  text-decoration: none;
   cursor: pointer;
   transition: 0.2s linear;
   border: 5px solid red;

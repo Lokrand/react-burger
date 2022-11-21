@@ -15,8 +15,8 @@
 
 .link {
   text-decoration: none;
-  color: #8585AD;
-  transition: all .1s linear;
+  color: #8585ad;
+  transition: all 0.1s linear;
 }
 
 .link:hover {

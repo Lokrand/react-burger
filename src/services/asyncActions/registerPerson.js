@@ -5,7 +5,7 @@ import {
 } from "../reducers/registerPerson";
 
 export const registerPerson = ({ email, password, username, accessToken }) => {
-  console.log(email, password, username)
+  console.log(email, password, username);
   return function (dispatch) {
     dispatch(registerPersonRequest());
     fetch("https://norma.nomoreparties.space/api/auth/register", {
@@ -19,11 +19,11 @@ export const registerPerson = ({ email, password, username, accessToken }) => {
         email: email,
         password: password,
         name: username,
-      })
+      }),
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json)
+        console.log(json);
         dispatch(registerPersonSuccess(json));
       })
       .catch((err) => {

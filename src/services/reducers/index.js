@@ -1,31 +1,44 @@
-import { combineReducers } from "redux";
+import { compose, createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { reducer } from "./BugrerReducer";
 import { getIngredientsReducer } from "./getIngredients";
 import { getDetails } from "./getDetails";
 import { getOrderNumber } from "./getOrderNumber";
-import { configureStore } from "@reduxjs/toolkit";
 import { getPassword } from "./getPassword";
-import { registerPerson } from "./registerPerson";
 import { resetPassword } from "./resetPassword";
 import { login } from "./login";
 import { logout } from "./logout";
 import { user } from "./user";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["user", "app"],
+};
+
+const composeEnhancers =
+  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    : compose;
+
+const enhancer = composeEnhancers(applyMiddleware(thunk));
+
 const rootReducer = combineReducers({
   app: reducer,
   getIngredientsReducer,
   getDetails,
   getOrderNumber,
   getPassword,
-  registerPerson,
   resetPassword,
   login,
   logout,
   user,
 });
 
-export const store = configureStore({
-  reducer: rootReducer,
-  middleware: [thunk],
-  devTools: true,
-});
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = createStore(persistedReducer, enhancer);
+
+export const persistor = persistStore(store);

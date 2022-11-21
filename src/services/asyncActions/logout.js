@@ -1,32 +1,32 @@
-import {
-  logoutRequest,
-  logoutSuccess,
-  logoutError,
-} from "../reducers/logout";
+import { setCookie } from "../../utils/cookie";
+import { logoutRequest, logoutSuccess, logoutError } from "../reducers/logout";
+import { resetUser } from "../reducers/user";
 
-export const logout = (refreshToken) => {
-  if (refreshToken?.length > 0) {
-    return function (dispatch) {
-      dispatch(logoutRequest());
-      fetch("https://norma.nomoreparties.space/api/auth/logout", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stroutgify({
-          token: refreshToken,
-        }),
-      })
-        .then((res) => res.json())
-        .then((json) => {
-          console.log("logout json =>", json);
+export const logout = () => {
+  return function (dispatch) {
+    dispatch(logoutRequest());
+    fetch("https://norma.nomoreparties.space/api/auth/logout", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: localStorage.getItem("token"),
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log("logout json =>", json);
+        if (json.success) {
+          setCookie("token", "");
+          dispatch(resetUser());
           dispatch(logoutSuccess(json));
-        })
-        .catch((err) => {
-          console.error("Error", err);
-          dispatch(logoutError(err));
-        });
-    };
-  }
+        }
+      })
+      .catch((err) => {
+        console.error("Error", err);
+        dispatch(logoutError(err));
+      });
+  };
 };

@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "./ProfileOrders.module.css";
 import { Profile } from "../Profile/Profile";
-import { Text } from "../Text/Text";
+import { Text } from "../../components/Text/Text";
 
 export const ProfileOrders = () => {
   return (

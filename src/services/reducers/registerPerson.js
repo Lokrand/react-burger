@@ -7,8 +7,6 @@ import {
 const initialState = {
   loading: false,
   user: {},
-  accessToken: null,
-  refreshToken: null,
   error: null,
 };
 
@@ -21,8 +19,6 @@ export const registerPerson = (state = initialState, action) => {
         ...state,
         loading: action.payload.success,
         user: action.payload.user,
-        accessToken: action.payload.accessToken,
-        refreshToken: action.payload.refreshToken,
       };
     case REGISTER_PERSON_ERROR:
       return { ...state, error: action.payload, loading: false };

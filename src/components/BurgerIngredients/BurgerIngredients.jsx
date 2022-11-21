@@ -25,7 +25,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
       payload: el,
     });
   };
-  function scrollBar() {
+  const scrollBar = () => {
     const bunsBlockHeight = bunRef.current.offsetHeight;
     const souceBlockHeight = souceRef.current.offsetHeight;
 
@@ -40,7 +40,12 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
     } else if (scrollPosition > bunsBlockHeight + souceBlockHeight / 2) {
       setCurrent("three");
     }
-  }
+  };
+
+  const scrollView = (type) => {
+    const mainRoot = document.getElementById(type);
+    mainRoot.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div>
@@ -49,7 +54,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
           value="one"
           active={current === "one"}
           onClick={() => {
-            document.getElementById("buns").scrollIntoView({ behavior: 'smooth', block: 'start' });
+            scrollView("buns");
             setCurrent("one");
           }}
         >
@@ -59,7 +64,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
           value="two"
           active={current === "two"}
           onClick={() => {
-            document.getElementById("souce").scrollIntoView({ behavior: 'smooth', block: 'start' });
+            scrollView("souce");
             setCurrent("two");
           }}
         >
@@ -69,7 +74,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
           value="three"
           active={current === "three"}
           onClick={() => {
-            document.getElementById("stuff").scrollIntoView({ behavior: 'smooth', block: 'start' });
+            scrollView("stuff");
             setCurrent("three");
           }}
         >

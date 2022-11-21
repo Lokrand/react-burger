@@ -1,14 +1,16 @@
+import React from "react";
 import styles from "./Modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useCallback, useEffect } from "react";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import PropTypes from "prop-types";
 import ReactDom from "react-dom";
-import React from "react";
-export const Modal = ({ active, setActive, children }) => {
+
+export const Modal = ({ active, setActive, children, onClose }) => {
   const closePopup = useCallback(() => {
     setActive(false);
-  }, [setActive]);
+    onClose?.();
+  }, [setActive, onClose]);
 
   const isOpen = active;
 

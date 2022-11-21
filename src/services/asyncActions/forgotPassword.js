@@ -4,14 +4,21 @@ import {
   getPasswordError,
 } from "../reducers/getPassword";
 
-export const fetchPassword = (email) => {
+export const fetchPassword = (email, redirect) => {
   if (email.length > 0) {
     return function (dispatch) {
-      console.log("email", email);
       dispatch(getPasswordRequest());
       fetchPasswordBase(email)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+        })
         .then((json) => {
           console.log("Успешный запрос", json);
+          if (json.success === true) {
+            redirect();
+          }
           dispatch(getPasswordSuccess(json));
         })
         .catch((err) => {
@@ -30,5 +37,5 @@ export const fetchPasswordBase = (email) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email: email }),
-  }).then((res) => res.json());
+  });
 };

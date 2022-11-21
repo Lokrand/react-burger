@@ -19,21 +19,31 @@ import {
 } from "../../services/actions/actions";
 import { Reorder } from "framer-motion";
 import { generateKeys } from "../../utils/generateKeys";
-import {  typeBun } from "../../utils/constans";
+import { typeBun } from "../../utils/constans";
+import { useHistory } from "react-router-dom";
+import { getCookie } from "../../utils/cookie";
+import { isTokenExpired } from "../../utils/token";
+import { refreshToken } from "../../services/asyncActions/refreshToken";
 
 export const BurgerConstructor = () => {
+  const history = useHistory();
   const items = useSelector((state) => state.getIngredientsReducer.components);
   const selectedItems = useSelector((state) => state.app.selectedItems);
   const reduxDispatch = useDispatch();
   const order = useSelector((state) => state.getOrderNumber.orderNumber);
   const [modalActive, setModalActive] = useState(false);
-  const bun = useMemo(() => selectedItems.find((el) => el.type === typeBun), [selectedItems]);
+  const bun = useMemo(
+    () => selectedItems.find((el) => el.type === typeBun),
+    [selectedItems]
+  );
   const bunTop = bun?.name + " (верх)";
   const bunBot = bun?.name + " (низ)";
   const ingredient = selectedItems.filter((item) => item.type !== typeBun);
   const totalPrice = getPrice(selectedItems);
   let doIHaveABun = false;
   const currectOrder = [];
+  const auth = useSelector((state) => state.user.isAuthenticated);
+  const token = getCookie("token");
   const [, drop] = useDrop(() => ({
     accept: typeBun,
     drop: (item) => addIngredientToBoard(item.id),
@@ -109,6 +119,22 @@ export const BurgerConstructor = () => {
       });
     }
   };
+
+  const redirect = () => {
+    history.replace({ pathname: "/login", state: "/" });
+  };
+
+  const checkToken = () => {
+    if (token === undefined) {
+      reduxDispatch(refreshToken());
+    }
+    if (token !== undefined) {
+      const isExpired = isTokenExpired(token);
+      if (isExpired) {
+        reduxDispatch(refreshToken());
+      }
+    }
+  };
   return (
     <>
       <div className={styles.section} ref={drop}>
@@ -171,8 +197,13 @@ export const BurgerConstructor = () => {
             type="primary"
             size="large"
             onClick={() => {
-              setModalActive(true);
-              handleOrderClick();
+              if (auth) {
+                checkToken();
+                setModalActive(true);
+                handleOrderClick();
+              } else {
+                redirect();
+              }
             }}
           >
             Оформить заказ

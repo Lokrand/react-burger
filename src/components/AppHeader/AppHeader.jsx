@@ -4,6 +4,7 @@ import { ListIcon, BurgerIcon, ProfileIcon } from "../../icons";
 import styles from "./AppHeader.module.css";
 import { NavLink } from "react-router-dom";
 import { Text } from "../Text/Text";
+
 export const AppHeader = () => {
   return (
     <header>
