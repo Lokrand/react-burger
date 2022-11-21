@@ -23,7 +23,6 @@ export const registerPerson = ({ email, password, username, accessToken }) => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         dispatch(registerPersonSuccess(json));
       })
       .catch((err) => {

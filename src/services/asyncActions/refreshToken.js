@@ -21,7 +21,6 @@ export const refreshToken = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log("refreshToken json =>", json);
         let authToken;
         let refreshToken;
         if (json.success === true) {

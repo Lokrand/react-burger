@@ -15,7 +15,6 @@ export const fetchPassword = (email, redirect) => {
           }
         })
         .then((json) => {
-          console.log("Успешный запрос", json);
           if (json.success === true) {
             redirect();
           }

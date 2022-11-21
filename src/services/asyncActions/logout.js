@@ -17,7 +17,6 @@ export const logout = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log("logout json =>", json);
         if (json.success) {
           setCookie("token", "");
           dispatch(resetUser());

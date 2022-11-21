@@ -22,7 +22,6 @@ export const login = (email, password) => {
         }
       })
       .then((json) => {
-        console.log("user", json);
         let authToken;
         let refreshToken;
         if (json.success === true) {

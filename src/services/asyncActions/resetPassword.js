@@ -21,7 +21,6 @@ export const resetPassword = (password, token) => {
       })
         .then((res) => res.json())
         .then((json) => {
-          console.log("json", json);
           dispatch(resetPasswordSuccess(json));
         })
         .catch((err) => {
