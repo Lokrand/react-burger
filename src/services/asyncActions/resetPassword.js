@@ -1,3 +1,4 @@
+import { BASE_URL } from "../../utils/constans";
 import {
   resetPasswordRequest,
   resetPasswordSuccess,
@@ -8,7 +9,7 @@ export const resetPassword = (password, token) => {
   if (password?.length > 0 && token?.length > 0) {
     return function (dispatch) {
       dispatch(resetPasswordRequest());
-      fetch("https://norma.nomoreparties.space/api/password-reset/reset", {
+      fetch(`${BASE_URL}/password-reset/reset`, {
         method: "POST",
         headers: {
           Accept: "application/json",

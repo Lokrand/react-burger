@@ -12,7 +12,6 @@ import { Text } from "../../components/Text/Text";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { registerNewUser } from "../../services/reducers/user";
-import { registerPerson } from "../../services/asyncActions/registerPerson";
 
 export const Register = () => {
   const auth = useSelector((state) => state.user.isAuthenticated);
@@ -30,7 +29,7 @@ export const Register = () => {
   }
 
   const redirect = () => {
-    window.history.pushState(null, null, `/react-burger`);
+    window.history.pushState(null, null, `/`);
   };
 
   const onSubmit = (e) => {
@@ -59,7 +58,7 @@ export const Register = () => {
           name={"password"}
           onChange={onChange}
         />
-        <Button type="primary" size="large">
+        <Button htmltType="Button" type="primary" size="large">
           Зарегистрироваться
         </Button>
       </form>

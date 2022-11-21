@@ -1,3 +1,4 @@
+import { BASE_URL } from "../../utils/constans";
 import {
   getIngredientsRequest,
   getIngredientsSuccess,
@@ -7,7 +8,7 @@ import {
 export const fetchIngredients = () => {
   return function (dispatch) {
     dispatch(getIngredientsRequest());
-    fetch("https://norma.nomoreparties.space/api/ingredients")
+    fetch(`${BASE_URL}/ingredients`)
       .then((res) => res.json())
       .then((json) => {
         dispatch(getIngredientsSuccess(json.data));

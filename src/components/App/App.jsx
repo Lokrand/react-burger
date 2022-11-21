@@ -12,9 +12,7 @@ import { Login } from "../../pages/Login/Login";
 import { Register } from "../../pages/Register/Register";
 import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword";
 import { ResetPassword } from "../../pages/ResetPassword/ResetPassword";
-import { BrowserRouter as Switch, Route, useLocation } from "react-router-dom";
-import { registerPerson } from "../../services/asyncActions/registerPerson";
-import { person } from "../../utils/constans";
+import { BrowserRouter as Switch, Route } from "react-router-dom";
 import { ProfileRegister } from "../../pages/ProfileRegister/ProfileRegister";
 import { ProfileOrders } from "../../pages/ProfileOrders/ProfileOrders";
 import { Text } from "../Text/Text";
@@ -27,7 +25,6 @@ function App() {
   const [componentModalActive, setComponentModalActive] = useState(false);
   useEffect(() => {
     dispatch(fetchIngredients());
-    dispatch(registerPerson(person));
   }, []);
 
   return (
@@ -35,7 +32,7 @@ function App() {
       <Switch>
         <AppHeader />
         <main>
-          <Route exact path="/react-burger/">
+          <Route exact path="/">
             <DndProvider backend={HTML5Backend}>
               <div className={styles.sections}>
                 <div className="pl-4">

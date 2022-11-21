@@ -1,3 +1,4 @@
+import { BASE_URL } from "../../utils/constans";
 import { setCookie } from "../../utils/cookie";
 import { logoutRequest, logoutSuccess, logoutError } from "../reducers/logout";
 import { resetUser } from "../reducers/user";
@@ -5,7 +6,7 @@ import { resetUser } from "../reducers/user";
 export const logout = () => {
   return function (dispatch) {
     dispatch(logoutRequest());
-    fetch("https://norma.nomoreparties.space/api/auth/logout", {
+    fetch(`${BASE_URL}/auth/logout`, {
       method: "POST",
       headers: {
         Accept: "application/json",

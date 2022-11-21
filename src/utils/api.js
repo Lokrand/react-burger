@@ -1,25 +1,28 @@
 /* eslint-disable */
 import axios from "axios";
+import { BASE_URL } from "./constans";
 import { getCookie, setCookie, deleteCookie } from "./cookie";
 
 export const refreshTokenRequest = () => {
-  (async () => {
-    try {
-      const res = await axios.post(
-        `https://norma.nomoreparties.space/api/auth/token`,
-        {
-          token: getCookie("refreshToken"),
-        }
-      );
-      deleteCookie("accessToken");
-      deleteCookie("refreshToken");
-      setCookie("accessToken", res.data.accessToken);
-      setCookie("refreshToken", res.data.refreshToken);
-    } catch (err) {
-      console.error(err.response);
+      return fetch(`${BASE_URL}/auth/token`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({
+            token: getCookie("refreshToken"),
+          })
+      }
+      ).then(res => res.json())
+      .then(res => {
+        deleteCookie("accessToken");
+        deleteCookie("refreshToken");
+        setCookie("accessToken", res.data.accessToken);
+        setCookie("refreshToken", res.data.refreshToken);
+      })
+      .catch(err => console.error(err))
     }
-  })();
-};
+
 
 const checkResponse = (res) => {
   if (res.ok) {
@@ -33,7 +36,7 @@ const commonFetch = (path, params = {}) => {
 };
 
 export const sendRegister = (email, password, name) => {
-  return commonFetch("https://norma.nomoreparties.space/api/auth/register", {
+  return commonFetch(`${BASE_URL}/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -47,7 +50,7 @@ export const sendRegister = (email, password, name) => {
 };
 
 export const getUserDetails = () => {
-  return commonFetch("https://norma.nomoreparties.space/api/auth/user", {
+  return commonFetch(`${BASE_URL}/auth/user`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -57,7 +60,7 @@ export const getUserDetails = () => {
 };
 
 export function editUser(email, password, name) {
-  return commonFetch("https://norma.nomoreparties.space/api/auth/user", {
+  return commonFetch(`${BASE_URL}/auth/user`, {
     method: "PATCH",
     mode: "cors",
     cache: "no-cache",

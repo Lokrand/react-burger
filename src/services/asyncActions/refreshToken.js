@@ -1,3 +1,4 @@
+import { BASE_URL } from "../../utils/constans";
 import { setCookie } from "../../utils/cookie";
 import {
   refreshTokenRequest,
@@ -9,7 +10,7 @@ import { authenticate } from "../reducers/user";
 export const refreshToken = () => {
   return function (dispatch) {
     dispatch(refreshTokenRequest());
-    fetch("https://norma.nomoreparties.space/api/auth/token", {
+    fetch(`${BASE_URL}/auth/token`, {
       method: "POST",
       headers: {
         Accept: "application/json",

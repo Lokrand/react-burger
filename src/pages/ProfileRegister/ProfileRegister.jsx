@@ -113,10 +113,10 @@ export const ProfileRegister = () => {
           <div>
             {isChanged && (
               <div className={styles.buttons}>
-                <Button type="primary" size="medium" onClick={cancelChanges}>
+                <Button htmltType="Button" type="primary" size="medium" onClick={cancelChanges}>
                   Отмена
                 </Button>
-                <Button type="primary" size="medium">
+                <Button htmltType="Button" type="primary" size="medium">
                   Сохранить
                 </Button>
               </div>

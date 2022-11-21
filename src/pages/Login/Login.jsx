@@ -46,7 +46,7 @@ export const Login = () => {
           value={value.password}
           name={"password"}
         />
-        <Button type="primary" size="large">
+        <Button htmltType="Button" type="primary" size="large">
           Войти
         </Button>
       </form>

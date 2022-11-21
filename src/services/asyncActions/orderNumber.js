@@ -1,3 +1,4 @@
+import { BASE_URL } from "../../utils/constans";
 import {
   getOrderRequest,
   getOrderSuccess,
@@ -8,7 +9,7 @@ export const getOrderNumber = (orderFor) => {
   if (orderFor?.length > 0) {
     return function (dispatch) {
       dispatch(getOrderRequest());
-      fetch("https://norma.nomoreparties.space/api/orders", {
+      fetch(`${BASE_URL}/orders`, {
         method: "POST",
         headers: {
           Accept: "application/json",

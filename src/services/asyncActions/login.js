@@ -1,3 +1,4 @@
+import { BASE_URL } from "../../utils/constans";
 import { setCookie } from "../../utils/cookie";
 import { loginRequest, loginSuccess, loginError } from "../reducers/login";
 import { authenticate, setUser } from "../reducers/user";
@@ -5,7 +6,7 @@ import { authenticate, setUser } from "../reducers/user";
 export const login = (email, password) => {
   return function (dispatch) {
     dispatch(loginRequest());
-    fetch("https://norma.nomoreparties.space/api/auth/login", {
+    fetch(`${BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
         Accept: "application/json",

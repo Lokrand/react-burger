@@ -1,9 +1,10 @@
+import { BASE_URL } from "../../utils/constans";
 import { getCookie } from "../../utils/cookie";
 import { setUser } from "../reducers/user";
 
 export const userDetails = (email, password, name) => {
   return function (dispatch) {
-    fetch("https://norma.nomoreparties.space/api/auth/user", {
+    fetch(`${BASE_URL}/auth/user`, {
       method: "PATCH",
       mode: "cors",
       cache: "no-cache",

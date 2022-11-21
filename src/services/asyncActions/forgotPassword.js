@@ -1,3 +1,4 @@
+import { BASE_URL } from "../../utils/constans";
 import {
   getPasswordRequest,
   getPasswordSuccess,
@@ -29,7 +30,7 @@ export const fetchPassword = (email, redirect) => {
 };
 
 export const fetchPasswordBase = (email) => {
-  return fetch("https://norma.nomoreparties.space/api/password-reset", {
+  return fetch(`${BASE_URL}/password-reset`, {
     method: "POST",
     headers: {
       Accept: "application/json",
