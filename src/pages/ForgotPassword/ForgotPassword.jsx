@@ -43,7 +43,7 @@ export const ForgotPassword = () => {
       </Text>
       <form className={styles.form} onSubmit={onSubmit}>
         <EmailInput onChange={onChange} value={email} name={"email"} />
-        <Button htmltType="Button" type="primary" size="large">
+        <Button htmlttype="Button" type="primary" size="large">
           Восстановить
         </Button>
       </form>

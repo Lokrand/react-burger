@@ -11,7 +11,7 @@ export const fetchFeed = () => {
     fetch(`${BASE_URL}/orders/all`)
       .then((res) => res.json())
       .then((json) => {
-        console.log(json)
+        // console.log(json)
         dispatch(getFeedSuccess(json));
       })
       .catch((err) => {

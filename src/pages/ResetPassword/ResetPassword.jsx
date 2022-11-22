@@ -58,7 +58,7 @@ export const ResetPassword = () => {
           value={value.code}
           name={"code"}
         />
-        <Button htmltType="Button" type="primary" size="large">
+        <Button htmlttype="Button" type="primary" size="large">
           Сохранить
         </Button>
       </form>

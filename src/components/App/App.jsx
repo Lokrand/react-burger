@@ -19,6 +19,7 @@ import { Text } from "../Text/Text";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import Ingredients from "../../pages/Ingredients/Ingredients";
 import { Feed } from "../Feed/Feed";
+import { fetchFeed } from "../../services/asyncActions/feed";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,8 @@ function App() {
   const [componentModalActive, setComponentModalActive] = useState(false);
   useEffect(() => {
     dispatch(fetchIngredients());
+    dispatch(fetchFeed())
+
   }, []);
 
   return (

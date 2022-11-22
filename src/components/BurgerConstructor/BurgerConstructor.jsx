@@ -193,7 +193,7 @@ export const BurgerConstructor = () => {
           </span>
         </div>
         {doIHaveABun ? (
-          <Button htmltType="Button"
+          <Button htmlttype="Button"
             type="primary"
             size="large"
             onClick={() => {
@@ -209,7 +209,7 @@ export const BurgerConstructor = () => {
             Оформить заказ
           </Button>
         ) : (
-          <Button htmltType="Button" type="primary" size="large" disabled>
+          <Button htmlttype="Button" type="primary" size="large" disabled>
             Оформить заказ
           </Button>
         )}

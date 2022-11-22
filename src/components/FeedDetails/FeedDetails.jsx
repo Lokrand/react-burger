@@ -17,18 +17,18 @@ export const FeedDetails = ({ active, setActive }) => {
   );
   let price = 0;
   const items = [];
-  for (let i = 0; i < ingredients.length; i++) {
-    for (let j = 0; j < order.ingredients.length; j++) {
-      if (ingredients[i]._id === order.ingredients[j]) {
-        price += ingredients[i].price;
-        items.push(ingredients[i]);
+  if (order.length > 0) {
+    for (let i = 0; i < ingredients.length; i++) {
+      for (let j = 0; j < order.ingredients.length; j++) {
+        if (ingredients[i]._id === order.ingredients[j]) {
+          price += ingredients[i].price;
+          items.push(ingredients[i]);
+        }
       }
     }
   }
   let count = 0;
-  for (let i = 0; i < items.length; i++) {
-    // if ()
-  }
+  
   const time = getDate(order.createdAt);
   return (
     <Modal active={active} setActive={setActive}>
