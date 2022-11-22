@@ -1,13 +1,12 @@
 import React from "react";
-import { Modal } from "../Modal/Modal";
 import icon from "../../images/done.png";
 import { useSelector } from "react-redux";
 import { Text } from "../Text/Text";
 
-export const OrderDetails = ({ active, setActive, orderNumber }) => {
+export const OrderDetails = ({ orderNumber }) => {
   const loading = useSelector((state) => state.getOrderNumber.loading);
   return (
-    <Modal active={active} setActive={setActive}>
+    <>
       {loading ? (
         <Text size="large">Loading...</Text>
       ) : (
@@ -25,6 +24,6 @@ export const OrderDetails = ({ active, setActive, orderNumber }) => {
           </Text>
         </>
       )}
-    </Modal>
+      </>
   );
 };

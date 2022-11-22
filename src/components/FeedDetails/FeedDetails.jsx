@@ -1,5 +1,4 @@
 import React from "react";
-import { Modal } from "../Modal/Modal";
 import { useSelector } from "react-redux";
 import { Text } from "../Text/Text";
 import styles from "./FeedDetails.module.css";
@@ -7,7 +6,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { getDate } from "../../utils/date";
 import { Item } from "./Item/Item";
 
-export const FeedDetails = ({ active, setActive }) => {
+export const FeedDetails = () => {
   const loading = useSelector((state) => state.getFeedReducer.loading);
   const order = useSelector((state) => state.getFeed.details);
   const ingredients = useSelector(
@@ -26,10 +25,10 @@ export const FeedDetails = ({ active, setActive }) => {
     }
   }
   let count = 0;
-  
+
   const time = getDate(order.createdAt);
   return (
-    <Modal active={active} setActive={setActive}>
+    <>
       {loading ? (
         <Text size="large">Loading...</Text>
       ) : (
@@ -73,6 +72,6 @@ export const FeedDetails = ({ active, setActive }) => {
           </div>
         </>
       )}
-    </Modal>
+    </>
   );
 };

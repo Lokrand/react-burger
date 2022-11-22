@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { GET_DETAILS } from "../../services/actions/actions";
 import { typeBun } from "../../utils/constans";
 import { Text } from "../Text/Text";
+import { useHistory } from "react-router-dom";
+import { Modal } from "../Modal/Modal";
 
 export const BurgerIngredients = ({ modalActive, setModalActive }) => {
   const [modalIngredient, setModalIngredient] = useState(null);
@@ -15,7 +17,10 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
   const bunRef = useRef(null);
   const souceRef = useRef(null);
   const detailsDispatch = useDispatch();
-
+  const history = useHistory();
+  const onClose = () => {
+    history.goBack();
+  };
   const getIngredientDetails = (el) => {
     setModalIngredient(true);
     detailsDispatch({
@@ -137,7 +142,9 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
         </div>
       </div>
       {modalIngredient && (
-        <IngredientDetails active={modalActive} setActive={setModalActive} />
+        <Modal active={modalActive} setActive={setModalActive} onClose={onClose}>
+          <IngredientDetails />
+        </Modal>
       )}
     </div>
   );

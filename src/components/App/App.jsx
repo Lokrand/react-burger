@@ -12,7 +12,7 @@ import { Login } from "../../pages/Login/Login";
 import { Register } from "../../pages/Register/Register";
 import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword";
 import { ResetPassword } from "../../pages/ResetPassword/ResetPassword";
-import { BrowserRouter as Switch, Route } from "react-router-dom";
+import { BrowserRouter as Switch, Route, useHistory } from "react-router-dom";
 import { ProfileRegister } from "../../pages/ProfileRegister/ProfileRegister";
 import { ProfileOrders } from "../../pages/ProfileOrders/ProfileOrders";
 import { Text } from "../Text/Text";

@@ -22,6 +22,7 @@ import { useHistory } from "react-router-dom";
 import { getCookie } from "../../utils/cookie";
 import { isTokenExpired } from "../../utils/token";
 import { refreshToken } from "../../services/asyncActions/refreshToken";
+import { Modal } from "../Modal/Modal";
 
 export const BurgerConstructor = () => {
   const history = useHistory();
@@ -212,11 +213,9 @@ export const BurgerConstructor = () => {
           </Button>
         )}
       </div>
-      <OrderDetails
-        active={modalActive}
-        setActive={setModalActive}
-        orderNumber={order}
-      />
+      <Modal active={modalActive} setActive={setModalActive}>
+        <OrderDetails orderNumber={order} />
+      </Modal>
     </>
   );
 };

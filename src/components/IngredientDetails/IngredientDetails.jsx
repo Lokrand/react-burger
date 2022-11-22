@@ -1,17 +1,13 @@
 import React from "react";
-import { Modal } from "../Modal/Modal";
 import styles from "./IngredientDetails.module.css";
 import { useSelector } from "react-redux";
 import { Text } from "../Text/Text";
 
-export const IngredientDetails = ({ active, setActive }) => {
+export const IngredientDetails = () => {
   const data = useSelector((state) => state.getDetails.details);
-  const onClose = () => {
-    window.history.back();
-  };
 
   return (
-    <Modal active={active} setActive={setActive} onClose={onClose}>
+    <>
       <div className={styles.title}>
         <Text size="large" className="mt-4">
           Детали ингредиента
@@ -55,6 +51,6 @@ export const IngredientDetails = ({ active, setActive }) => {
           </Text>
         </div>
       </div>
-    </Modal>
+    </>
   );
 };

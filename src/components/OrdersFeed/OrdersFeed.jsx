@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { GET_FEED } from "../../services/actions/actions";
 import { generateKeys } from "../../utils/generateKeys";
 import { FeedDetails } from "../FeedDetails/FeedDetails";
+import { Modal } from "../Modal/Modal";
 import { Order } from "./Order/Order";
 import styles from "./OrdersFeed.module.css";
 
@@ -35,7 +36,9 @@ export const OrdersFeed = ({ modalActive, setModalActive }) => {
           );
         })}
       </section>
-      <FeedDetails active={modalActive} setActive={setModalActive} />
+      <Modal active={modalActive} setActive={setModalActive}>
+        <FeedDetails />
+      </Modal>
     </>
   );
 };
