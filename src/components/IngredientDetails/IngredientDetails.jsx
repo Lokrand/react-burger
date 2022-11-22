@@ -1,8 +1,6 @@
 import React from "react";
 import { Modal } from "../Modal/Modal";
 import styles from "./IngredientDetails.module.css";
-import PropTypes from "prop-types";
-import { ingredientType } from "../../utils/types";
 import { useSelector } from "react-redux";
 import { Text } from "../Text/Text";
 
@@ -59,8 +57,4 @@ export const IngredientDetails = ({ active, setActive }) => {
       </div>
     </Modal>
   );
-};
-
-IngredientDetails.propTypes = {
-  data: PropTypes.shape(ingredientType),
 };

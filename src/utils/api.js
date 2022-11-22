@@ -1,5 +1,4 @@
 /* eslint-disable */
-import axios from "axios";
 import { BASE_URL } from "./constans";
 import { getCookie, setCookie, deleteCookie } from "./cookie";
 
@@ -31,7 +30,7 @@ const checkResponse = (res) => {
   return Promise.reject(res.status);
 };
 
-const commonFetch = (path, params = {}) => {
+export const commonFetch = (path, params = {}) => {
   return fetch(path, params).then(checkResponse);
 };
 

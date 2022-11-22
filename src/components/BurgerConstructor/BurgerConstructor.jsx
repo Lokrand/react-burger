@@ -3,11 +3,9 @@ import React, { useMemo, useState } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorIngredients } from "./ConstructorIngredients";
 import styles from "./BurgerConstructor.module.css";
-import PropTypes from "prop-types";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
-import { ingredientType } from "../../utils/types";
 import { getPrice } from "./BurgerConstructor.utils";
 import { getOrderNumber } from "../../services/asyncActions/orderNumber";
 import { useDispatch, useSelector } from "react-redux";
@@ -221,8 +219,4 @@ export const BurgerConstructor = () => {
       />
     </>
   );
-};
-
-BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape(ingredientType)),
 };

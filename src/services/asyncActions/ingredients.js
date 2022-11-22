@@ -1,3 +1,4 @@
+import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
 import {
   getIngredientsRequest,
@@ -8,8 +9,7 @@ import {
 export const fetchIngredients = () => {
   return function (dispatch) {
     dispatch(getIngredientsRequest());
-    fetch(`${BASE_URL}/ingredients`)
-      .then((res) => res.json())
+    commonFetch(`${BASE_URL}/ingredients`)
       .then((json) => {
         dispatch(getIngredientsSuccess(json.data));
       })

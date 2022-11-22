@@ -4,8 +4,6 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerIngredients.module.css";
-import PropTypes from "prop-types";
-import { ingredientType } from "../../utils/types";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 import { typeBun } from "../../utils/constans";
@@ -47,9 +45,4 @@ export const BurgerIngredient = ({ data, onClick }) => {
       ) : null}
     </div>
   );
-};
-
-BurgerIngredient.propTypes = {
-  data: PropTypes.shape(ingredientType).isRequired,
-  onClick: PropTypes.func.isRequired,
 };

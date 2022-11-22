@@ -48,3 +48,8 @@ export const reducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const removeSelectedItems = (payload) => ({
+  type: UPDATE_SELECTED_ITEMS_ORDER,
+  payload,
+});

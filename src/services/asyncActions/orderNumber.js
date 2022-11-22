@@ -1,4 +1,5 @@
 import { BASE_URL } from "../../utils/constans";
+import { removeSelectedItems } from "../reducers/BugrerReducer";
 import {
   getOrderRequest,
   getOrderSuccess,
@@ -20,6 +21,7 @@ export const getOrderNumber = (orderFor) => {
         .then((res) => res.json())
         .then((json) => {
           dispatch(getOrderSuccess(json.order.number));
+          dispatch(removeSelectedItems([]))
         })
         .catch((err) => {
           console.error("Error", err);

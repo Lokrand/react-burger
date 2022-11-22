@@ -1,7 +1,5 @@
 import React from "react";
 import { Modal } from "../Modal/Modal";
-import PropTypes from "prop-types";
-import { ingredientType } from "../../utils/types";
 import { useSelector } from "react-redux";
 import { Text } from "../Text/Text";
 import styles from "./FeedDetails.module.css";

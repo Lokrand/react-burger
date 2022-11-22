@@ -35,3 +35,12 @@
   color: #fff;
   cursor: auto;
 }
+
+.logo {
+  transition: opacity .2s linear;
+}
+
+.logo:hover {
+  opacity: .6;
+  cursor: pointer;
+}

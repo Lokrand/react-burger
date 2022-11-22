@@ -1,10 +1,8 @@
 import React, { useRef, useState } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIngredient } from "./BurgerIngredient";
-import PropTypes from "prop-types";
 import styles from "./BurgerIngredients.module.css";
 import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
-import { ingredientType } from "../../utils/types";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_DETAILS } from "../../services/actions/actions";
 import { typeBun } from "../../utils/constans";
@@ -143,8 +141,4 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
       )}
     </div>
   );
-};
-
-BurgerIngredients.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape(ingredientType)),
 };

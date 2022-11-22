@@ -13,7 +13,7 @@ export const AppHeader = () => {
   const onClick = () => {
     dispatch(fetchFeed())
   }
-  
+
   return (
     <header>
       <div className={styles.header}>
@@ -36,7 +36,9 @@ export const AppHeader = () => {
           <ListIcon />
           <Text className="ml-2">Лента заказов</Text>
         </NavLink>
-        <Logo />
+        <NavLink to='/' className={styles.logo}>
+          <Logo />
+        </NavLink>
         <div className={styles.account}>
           <NavLink
             exact

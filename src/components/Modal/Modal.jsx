@@ -45,8 +45,3 @@ export const Modal = ({ active, setActive, children, onClose }) => {
     document.getElementById("modals")
   );
 };
-
-Modal.propTypes = {
-  active: PropTypes.bool.isRequired,
-  setActive: PropTypes.func.isRequired,
-};
