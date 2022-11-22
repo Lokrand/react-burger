@@ -17,11 +17,11 @@ export const logout = () => {
         token: localStorage.getItem("token"),
       }),
     })
-      .then((json) => {
-        if (json.success) {
+      .then((data) => {
+        if (data.success) {
           setCookie("token", "");
           dispatch(resetUser());
-          dispatch(logoutSuccess(json));
+          dispatch(logoutSuccess(data));
         }
       })
       .catch((err) => {

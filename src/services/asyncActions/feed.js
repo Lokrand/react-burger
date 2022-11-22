@@ -10,8 +10,8 @@ export const fetchFeed = () => {
   return function (dispatch) {
     dispatch(getFeedRequest());
     commonFetch(`${BASE_URL}/orders/all`)
-      .then((json) => {
-        dispatch(getFeedSuccess(json));
+      .then((data) => {
+        dispatch(getFeedSuccess(data));
       })
       .catch((err) => {
         console.error("Error", err);

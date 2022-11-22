@@ -20,17 +20,24 @@ import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import Ingredients from "../../pages/Ingredients/Ingredients";
 import { Feed } from "../Feed/Feed";
 import { fetchFeed } from "../../services/asyncActions/feed";
+import { Modal } from "../Modal/Modal";
+import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
+import { OrderDetails } from "../OrderDetails/OrderDetails";
 
 function App() {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.getIngredientsReducer.loading);
   const [componentModalActive, setComponentModalActive] = useState(false);
+  const order = useSelector((state) => state.getOrderNumber.orderNumber);
+  const [modal, setModal] = useState("");
   useEffect(() => {
     dispatch(fetchIngredients());
-    dispatch(fetchFeed())
-
+    dispatch(fetchFeed());
   }, []);
-
+  const history = useHistory();
+  const onClose = () => {
+    history.goBack();
+  };
   return (
     <>
       <Switch>
@@ -46,17 +53,14 @@ function App() {
                   {loading ? (
                     <Text size="medium">Loading...</Text>
                   ) : (
-                    <BurgerIngredients
-                      modalActive={componentModalActive}
-                      setModalActive={setComponentModalActive}
-                    />
+                    <BurgerIngredients setModal={setModal} />
                   )}
                 </div>
                 <div className="mt-15">
                   {loading ? (
                     <Text size="medium">Loading...</Text>
                   ) : (
-                    <BurgerConstructor />
+                    <BurgerConstructor setModal={setModal} />
                   )}
                 </div>
               </div>
@@ -91,6 +95,17 @@ function App() {
           </Route>
         </main>
       </Switch>
+      <Modal
+        active={modal === "IngredientPopup"}
+        setActive={setModal}
+        onClose={onClose}
+      >
+        <IngredientDetails />
+      </Modal>
+
+      <Modal active={modal === "OrderPopup"} setActive={setModal}>
+        <OrderDetails orderNumber={order} />
+      </Modal>
     </>
   );
 }

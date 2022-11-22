@@ -1,11 +1,10 @@
 /* eslint-disable */
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorIngredients } from "./ConstructorIngredients";
 import styles from "./BurgerConstructor.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { OrderDetails } from "../OrderDetails/OrderDetails";
 import { getPrice } from "./BurgerConstructor.utils";
 import { getOrderNumber } from "../../services/asyncActions/orderNumber";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,15 +21,12 @@ import { useHistory } from "react-router-dom";
 import { getCookie } from "../../utils/cookie";
 import { isTokenExpired } from "../../utils/token";
 import { refreshToken } from "../../services/asyncActions/refreshToken";
-import { Modal } from "../Modal/Modal";
 
-export const BurgerConstructor = () => {
+export const BurgerConstructor = ({ setModal }) => {
   const history = useHistory();
   const items = useSelector((state) => state.getIngredientsReducer.components);
   const selectedItems = useSelector((state) => state.app.selectedItems);
   const reduxDispatch = useDispatch();
-  const order = useSelector((state) => state.getOrderNumber.orderNumber);
-  const [modalActive, setModalActive] = useState(false);
   const bun = useMemo(
     () => selectedItems.find((el) => el.type === typeBun),
     [selectedItems]
@@ -86,7 +82,7 @@ export const BurgerConstructor = () => {
   const getCurrentOrder = currectOrder.map((el) => el._id);
 
   const handleOrderClick = () => {
-    reduxDispatch(getOrderNumber(getCurrentOrder));
+    reduxDispatch(getOrderNumber(getCurrentOrder, setModal));
   };
 
   const [, dropRef] = useDrop(() => ({
@@ -192,13 +188,13 @@ export const BurgerConstructor = () => {
           </span>
         </div>
         {doIHaveABun ? (
-          <Button htmlttype="Button"
+          <Button
+            htmlttype="Button"
             type="primary"
             size="large"
             onClick={() => {
               if (auth) {
                 checkToken();
-                setModalActive(true);
                 handleOrderClick();
               } else {
                 redirect();
@@ -213,9 +209,6 @@ export const BurgerConstructor = () => {
           </Button>
         )}
       </div>
-      <Modal active={modalActive} setActive={setModalActive}>
-        <OrderDetails orderNumber={order} />
-      </Modal>
     </>
   );
 };

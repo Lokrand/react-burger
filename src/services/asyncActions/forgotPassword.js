@@ -11,11 +11,11 @@ export const fetchPassword = (email, redirect) => {
     return function (dispatch) {
       dispatch(getPasswordRequest());
       fetchPasswordBase(email)
-        .then((json) => {
-          if (json.success === true) {
+        .then((data) => {
+          if (data.success === true) {
             redirect();
           }
-          dispatch(getPasswordSuccess(json));
+          dispatch(getPasswordSuccess(data));
         })
         .catch((err) => {
           console.error("Error", err);

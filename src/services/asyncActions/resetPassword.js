@@ -21,8 +21,8 @@ export const resetPassword = (password, token) => {
           token: token,
         }),
       })
-        .then((json) => {
-          dispatch(resetPasswordSuccess(json));
+        .then((data) => {
+          dispatch(resetPasswordSuccess(data));
         })
         .catch((err) => {
           console.error("Error", err);

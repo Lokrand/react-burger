@@ -3,7 +3,6 @@ import styles from "./Modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useCallback, useEffect } from "react";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
-import PropTypes from "prop-types";
 import ReactDom from "react-dom";
 
 export const Modal = ({ active, setActive, children, onClose }) => {

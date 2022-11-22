@@ -5,7 +5,6 @@ import { Text } from "../Text/Text";
 
 export const IngredientDetails = () => {
   const data = useSelector((state) => state.getDetails.details);
-
   return (
     <>
       <div className={styles.title}>

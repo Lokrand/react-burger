@@ -21,16 +21,16 @@ export const refreshToken = () => {
         token: localStorage.getItem("token"),
       }),
     })
-      .then((json) => {
+      .then((data) => {
         let authToken;
         let refreshToken;
-        if (json.success === true) {
+        if (data.success === true) {
           dispatch(authenticate());
-          authToken = json.accessToken.split("Bearer ")[1];
-          refreshToken = json.refreshToken;
+          authToken = data.accessToken.split("Bearer ")[1];
+          refreshToken = data.refreshToken;
           setCookie("token", authToken);
           localStorage.setItem("token", refreshToken);
-          dispatch(refreshTokenSuccess(json));
+          dispatch(refreshTokenSuccess(data));
         }
       })
       .catch((err) => {

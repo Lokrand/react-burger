@@ -5,14 +5,14 @@ import { setUser, authenticate } from "../actions/userActions";
 export const registerNewUser = (name, email, password, redirect) => {
   return function (dispatch) {
     sendRegister(name, email, password)
-      .then((json) => {
+      .then((data) => {
         let authToken;
         let refreshToken;
-        if (json.success) {
+        if (data.success) {
           dispatch(authenticate());
           dispatch(setUser(name, email, password));
-          authToken = json.accessToken.split("Bearer ")[1];
-          refreshToken = json.refreshToken;
+          authToken = data.accessToken.split("Bearer ")[1];
+          refreshToken = data.refreshToken;
           setCookie("token", authToken);
           localStorage.setItem("token", refreshToken);
           redirect();
@@ -28,9 +28,9 @@ export const registerNewUser = (name, email, password, redirect) => {
 export const getUser = (password) => {
   return function (dispatch) {
     getUserDetails()
-      .then((json) => {
-        if (json.success) {
-          dispatch(setUser(json.user.name, json.user.email, password));
+      .then((data) => {
+        if (data.success) {
+          dispatch(setUser(data.user.name, data.user.email, password));
           dispatch(authenticate());
         }
       })
@@ -43,9 +43,9 @@ export const getUser = (password) => {
 export const editUserDetails = (email, password, name) => {
   return function (dispatch) {
     editUser(email, password, name)
-      .then((json) => {
-        if (json.success) {
-          dispatch(setUser(json.user.name, json.user.email, password));
+      .then((data) => {
+        if (data.success) {
+          dispatch(setUser(data.user.name, data.user.email, password));
         }
       })
       .catch((err) => {

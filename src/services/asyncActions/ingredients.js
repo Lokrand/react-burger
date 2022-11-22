@@ -10,8 +10,8 @@ export const fetchIngredients = () => {
   return function (dispatch) {
     dispatch(getIngredientsRequest());
     commonFetch(`${BASE_URL}/ingredients`)
-      .then((json) => {
-        dispatch(getIngredientsSuccess(json.data));
+      .then((data) => {
+        dispatch(getIngredientsSuccess(data.data));
       })
       .catch((err) => {
         console.error("Error", err);

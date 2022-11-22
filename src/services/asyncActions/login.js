@@ -18,14 +18,14 @@ export const login = (email, password) => {
         password: password,
       }),
     })
-      .then((json) => {
+      .then((data) => {
         let authToken;
         let refreshToken;
-        if (json.success === true) {
+        if (data.success === true) {
           dispatch(authenticate());
-          dispatch(setUser(json.user.name, email, password));
-          authToken = json.accessToken.split("Bearer ")[1];
-          refreshToken = json.refreshToken;
+          dispatch(setUser(data.user.name, email, password));
+          authToken = data.accessToken.split("Bearer ")[1];
+          refreshToken = data.refreshToken;
           setCookie("token", authToken);
           localStorage.setItem("token", refreshToken);
         }

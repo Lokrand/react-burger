@@ -7,7 +7,7 @@ import {
   getOrderError,
 } from "../reducers/getOrderNumber";
 
-export const getOrderNumber = (orderFor) => {
+export const getOrderNumber = (orderFor, setModal) => {
   if (orderFor?.length > 0) {
     return function (dispatch) {
       dispatch(getOrderRequest());
@@ -19,9 +19,10 @@ export const getOrderNumber = (orderFor) => {
         },
         body: JSON.stringify({ ingredients: orderFor }),
       })
-        .then((json) => {
-          dispatch(getOrderSuccess(json.order.number));
-          dispatch(removeSelectedItems([]))
+        .then((data) => {
+          dispatch(getOrderSuccess(data.order.number));
+          dispatch(removeSelectedItems([]));
+          setModal("OrderPopup");
         })
         .catch((err) => {
           console.error("Error", err);

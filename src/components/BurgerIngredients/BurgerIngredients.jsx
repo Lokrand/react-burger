@@ -2,27 +2,19 @@ import React, { useRef, useState } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIngredient } from "./BurgerIngredient";
 import styles from "./BurgerIngredients.module.css";
-import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_DETAILS } from "../../services/actions/actions";
 import { typeBun } from "../../utils/constans";
 import { Text } from "../Text/Text";
-import { useHistory } from "react-router-dom";
-import { Modal } from "../Modal/Modal";
 
-export const BurgerIngredients = ({ modalActive, setModalActive }) => {
-  const [modalIngredient, setModalIngredient] = useState(null);
+export const BurgerIngredients = ({ setModal }) => {
   const items = useSelector((state) => state.getIngredientsReducer.components);
   const [current, setCurrent] = useState("one");
   const bunRef = useRef(null);
   const souceRef = useRef(null);
   const detailsDispatch = useDispatch();
-  const history = useHistory();
-  const onClose = () => {
-    history.goBack();
-  };
+
   const getIngredientDetails = (el) => {
-    setModalIngredient(true);
     detailsDispatch({
       type: GET_DETAILS,
       payload: el,
@@ -97,7 +89,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
                   data={el}
                   key={el._id}
                   onClick={() => {
-                    setModalActive(true);
+                    setModal("IngredientPopup");
                     getIngredientDetails(el);
                   }}
                 />
@@ -116,7 +108,8 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
                   data={el}
                   key={el._id}
                   onClick={() => {
-                    setModalActive(true);
+                    setModal("IngredientPopup");
+
                     getIngredientDetails(el);
                   }}
                 />
@@ -134,18 +127,14 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
                 data={el}
                 key={el._id}
                 onClick={() => {
-                  setModalActive(true);
+                  setModal("IngredientPopup");
+
                   getIngredientDetails(el);
                 }}
               />
             ))}
         </div>
       </div>
-      {modalIngredient && (
-        <Modal active={modalActive} setActive={setModalActive} onClose={onClose}>
-          <IngredientDetails />
-        </Modal>
-      )}
     </div>
   );
 };
