@@ -7,7 +7,7 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { getUser } from "../../services/reducers/user";
+import { getUser } from "../../services/asyncActions/user";
 import { isTokenExpired } from "../../utils/token";
 import { getCookie } from "../../utils/cookie";
 import { refreshToken } from "../../services/asyncActions/refreshToken";

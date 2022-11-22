@@ -11,7 +11,7 @@ import ReactDom from "react-dom";
 import { Text } from "../../components/Text/Text";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
-import { registerNewUser } from "../../services/reducers/user";
+import { registerNewUser } from "../../services/asyncActions/user";
 
 export const Register = () => {
   const auth = useSelector((state) => state.user.isAuthenticated);
