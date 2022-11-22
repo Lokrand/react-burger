@@ -1,0 +1,19 @@
+.section {
+  max-height: 820px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  overflow-y: scroll;
+}
+
+.section::-webkit-scrollbar {
+  width: 8px;
+}
+
+.section::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+
+.section::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}

@@ -33,3 +33,7 @@ export const REGISTER_USER = "REGISTER_USER";
 export const LOG_OUT = "LOG_OUT";
 export const LOG_IN = "LOG_IN";
 export const SET_USER = "SET_USER";
+export const GET_FEED_REQUEST = "GET_FEED_REQUEST";
+export const GET_FEED_SUCCESS = "GET_FEED_SUCCESS";
+export const GET_FEED_ERROR = "GET_FEED_ERROR";
+export const GET_FEED = "GET_FEED";

@@ -1,3 +1,5 @@
+import styles from "./Text.module.css";
+
 export const Text = ({
   size = "default",
   type = "main",
@@ -14,9 +16,17 @@ export const Text = ({
   ]
     .filter((el) => el)
     .join(" ");
-  return (
-    <p className={classes} id={id}>
-      {children}
-    </p>
-  );
+  if (type === "digits" && size === "large") {
+    return (
+      <p className={`${classes} ${styles.text}`} id={id}>
+        {children}
+      </p>
+    );
+  } else {
+    return (
+      <p className={classes} id={id}>
+        {children}
+      </p>
+    );
+  }
 };

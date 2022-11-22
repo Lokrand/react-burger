@@ -18,6 +18,7 @@ import { ProfileOrders } from "../../pages/ProfileOrders/ProfileOrders";
 import { Text } from "../Text/Text";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import Ingredients from "../../pages/Ingredients/Ingredients";
+import { Feed } from "../Feed/Feed";
 
 function App() {
   const dispatch = useDispatch();
@@ -63,6 +64,15 @@ function App() {
           <Route path="/forgot-password" children={<ForgotPassword />} />
           <Route path="/reset-password" children={<ResetPassword />} />
           <Route path="/profile/orders" children={<ProfileOrders />} />
+          <Route
+            path="/feed"
+            children={
+              <Feed
+                modalActive={componentModalActive}
+                setModalActive={setComponentModalActive}
+              />
+            }
+          />
           <ProtectedRoute
             path="/profile"
             children={<ProfileRegister />}

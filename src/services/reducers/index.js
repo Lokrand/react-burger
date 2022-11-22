@@ -11,7 +11,8 @@ import { logout } from "./logout";
 import { user } from "./user";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-
+import { getFeedReducer } from "../reducers/feed";
+import { getFeed } from "../reducers/getFeed";
 const persistConfig = {
   key: "root",
   storage,
@@ -35,6 +36,8 @@ const rootReducer = combineReducers({
   login,
   logout,
   user,
+  getFeedReducer,
+  getFeed
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
