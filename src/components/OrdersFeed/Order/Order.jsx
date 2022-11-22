@@ -1,39 +1,41 @@
+import React from "react";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import React, {useState} from "react";
 import { useSelector } from "react-redux";
 import { getDate } from "../../../utils/date";
-import { FeedDetails } from "../../FeedDetails/FeedDetails";
 import { Text } from "../../Text/Text";
 import styles from "./Order.module.css";
-export const Order = ({ data, onClick, modalActive, setModalActive }) => {
-  const [modalIngredient, setModalIngredient] = useState(null);
-  const getFeedDetails = (el) => {
-    setModalIngredient(true);
-  };
+
+export const Order = ({ data, onClick, setModalActive }) => {
   let zIndex = 999;
   let left = 15;
-  // const id = data._id;
-  // const selectedItems = useSelector((state) => state.app.selectedItems);
-  // const counter = selectedItems.filter((el) => el._id === id).length;
   const time = getDate(data.createdAt);
   const ingredients = useSelector(
     (state) => state.getIngredientsReducer.components
   );
-  const icons = [];
   let price = 0;
   for (let i = 0; i < ingredients.length; i++) {
     for (let j = 0; j < data.ingredients.length; j++) {
       if (ingredients[i]._id === data.ingredients[j]) {
-        // if (ingredients[i].type === "bun") {
-        // price += ingredients[i].price*2
-        // } else {
         price += ingredients[i].price;
-        // }
-        icons.push(ingredients[i].image_mobile);
       }
     }
   }
-  // console.log("icons", icons);
+  const counter = (items, ingredients) => {
+    const newArr = [];
+    for (let i = 0; i < ingredients.length; i++) {
+      let count = null;
+      count = items.filter((el) => el === ingredients[i]._id).length;
+      if (count) {
+        newArr.push({
+          id: count,
+          img: ingredients[i].image_mobile,
+        });
+      }
+    }
+    return newArr;
+  };
+  const result = counter(data.ingredients, ingredients);
+
   return (
     <>
       <section
@@ -41,7 +43,6 @@ export const Order = ({ data, onClick, modalActive, setModalActive }) => {
         onClick={() => {
           onClick();
           setModalActive(true);
-          getFeedDetails();
         }}
       >
         <div className={styles.number}>
@@ -53,15 +54,31 @@ export const Order = ({ data, onClick, modalActive, setModalActive }) => {
         </div>
         <div className={styles.items}>
           <div className={styles.icons}>
-            {icons.map((el) => {
+            {result.map((el) => {
               zIndex--;
-              left = left - 15;
+              left -= 15;
               return (
-                <img
-                  src={el}
-                  className={styles.icon}
-                  style={{ zIndex: zIndex, left: `${left}px` }}
-                />
+                <>
+                  {el.id > 1 ? (
+                    <div className={styles.item} style={{ zIndex: zIndex, left: `${left}px` }}>
+                      <div className={styles.counter}>
+                        <Text type="digits" size="small">
+                          +{el.id}
+                        </Text>
+                      </div>
+                      <img
+                        src={el.img}
+                        className={styles.icon}
+                      />
+                    </div>
+                  ) : (
+                    <img
+                      src={el.img}
+                      className={styles.icon}
+                      style={{ zIndex: zIndex, left: `${left}px` }}
+                    />
+                  )}
+                </>
               );
             })}
           </div>
@@ -71,9 +88,6 @@ export const Order = ({ data, onClick, modalActive, setModalActive }) => {
           </div>
         </div>
       </section>
-      {/* {modalIngredient && (
-        <FeedDetails active={modalActive} setActive={setModalActive} />
-      )} */}
     </>
   );
 };

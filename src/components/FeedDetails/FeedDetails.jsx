@@ -25,8 +25,11 @@ export const FeedDetails = () => {
     }
   }
   let count = 0;
-
-  const time = getDate(order.createdAt);
+  // let time
+  // if (order) {
+  //   time = getDate(order.createdAt);
+  // console.log(time)
+  // }
   return (
     <>
       {loading ? (
@@ -63,7 +66,7 @@ export const FeedDetails = () => {
               })}
             </div>
             <div className={styles.time_price}>
-              <Text inactive>{time}</Text>
+              <Text inactive>22:00</Text>
               <div className={styles.icon}>
                 <Text type="digits">{price}</Text>
                 <CurrencyIcon type="primary" />

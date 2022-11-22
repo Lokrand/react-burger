@@ -46,6 +46,7 @@
   display: flex;
   position: relative;
   flex-direction: row;
+  flex-wrap: nowrap;
   max-width: 436px;
   overflow: hidden;
 }
@@ -54,13 +55,31 @@
   width: 60px;
   height: 60px;
   position: relative;
-  left: -10px;
   border: 2px solid #4C4CFF;
   background-color: #131316;
   object-fit: cover;
   border-radius: 9999px;
+  z-index: 1;
 }
 
 .icon:first-child {
   left: 0;
+}
+
+.counter {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 9999px;
+  background: rgba(19, 19, 22, .6);
+  z-index: 2;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: row;
 }

@@ -9,7 +9,6 @@ export const Profile = ({ children }) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.user.isAuthenticated);
-
   const logOut = () => {
     dispatch(logout());
     localStorage.removeItem("persist:root");
@@ -45,9 +44,16 @@ export const Profile = ({ children }) => {
         >
           Выход
         </NavLink>
-        <Text className="mt-20" inactive>
-          В этом разделе вы можете изменить&nbsp;свои персональные данные
-        </Text>
+        { location.pathname === '/profile' && (
+          <Text className="mt-20" inactive>
+            В этом разделе вы можете изменить&nbsp;свои персональные данные
+          </Text>
+        )}
+        { location.pathname === '/profile/orders' && (
+          <Text className="mt-20" inactive>
+            В этом разделе вы можете просмотреть свою историю заказов
+          </Text>
+        )}
       </div>
       <div>{children}</div>
     </div>
