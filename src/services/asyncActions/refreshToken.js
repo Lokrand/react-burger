@@ -1,3 +1,4 @@
+import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
 import { setCookie } from "../../utils/cookie";
 import {
@@ -10,7 +11,7 @@ import { authenticate } from "../reducers/user";
 export const refreshToken = () => {
   return function (dispatch) {
     dispatch(refreshTokenRequest());
-    fetch(`${BASE_URL}/auth/token`, {
+    commonFetch(`${BASE_URL}/auth/token`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -20,7 +21,6 @@ export const refreshToken = () => {
         token: localStorage.getItem("token"),
       }),
     })
-      .then((res) => res.json())
       .then((json) => {
         let authToken;
         let refreshToken;

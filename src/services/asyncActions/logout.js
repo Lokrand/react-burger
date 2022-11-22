@@ -1,3 +1,4 @@
+import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
 import { setCookie } from "../../utils/cookie";
 import { logoutRequest, logoutSuccess, logoutError } from "../reducers/logout";
@@ -6,7 +7,7 @@ import { resetUser } from "../reducers/user";
 export const logout = () => {
   return function (dispatch) {
     dispatch(logoutRequest());
-    fetch(`${BASE_URL}/auth/logout`, {
+    commonFetch(`${BASE_URL}/auth/logout`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -16,7 +17,6 @@ export const logout = () => {
         token: localStorage.getItem("token"),
       }),
     })
-      .then((res) => res.json())
       .then((json) => {
         if (json.success) {
           setCookie("token", "");

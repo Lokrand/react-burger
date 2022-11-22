@@ -1,3 +1,4 @@
+import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
 import {
   getPasswordRequest,
@@ -10,11 +11,6 @@ export const fetchPassword = (email, redirect) => {
     return function (dispatch) {
       dispatch(getPasswordRequest());
       fetchPasswordBase(email)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-        })
         .then((json) => {
           if (json.success === true) {
             redirect();
@@ -30,7 +26,7 @@ export const fetchPassword = (email, redirect) => {
 };
 
 export const fetchPasswordBase = (email) => {
-  return fetch(`${BASE_URL}/password-reset`, {
+  return commonFetch(`${BASE_URL}/password-reset`, {
     method: "POST",
     headers: {
       Accept: "application/json",

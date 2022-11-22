@@ -1,3 +1,4 @@
+import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
 import { setCookie } from "../../utils/cookie";
 import { loginRequest, loginSuccess, loginError } from "../reducers/login";
@@ -6,7 +7,7 @@ import { authenticate, setUser } from "../reducers/user";
 export const login = (email, password) => {
   return function (dispatch) {
     dispatch(loginRequest());
-    fetch(`${BASE_URL}/auth/login`, {
+    commonFetch(`${BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -17,11 +18,6 @@ export const login = (email, password) => {
         password: password,
       }),
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
       .then((json) => {
         let authToken;
         let refreshToken;

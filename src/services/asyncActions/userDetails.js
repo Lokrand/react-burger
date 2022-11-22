@@ -1,10 +1,11 @@
+import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
 import { getCookie } from "../../utils/cookie";
 import { setUser } from "../reducers/user";
 
 export const userDetails = (email, password, name) => {
   return function (dispatch) {
-    fetch(`${BASE_URL}/auth/user`, {
+    commonFetch(`${BASE_URL}/auth/user`, {
       method: "PATCH",
       mode: "cors",
       cache: "no-cache",
@@ -19,11 +20,6 @@ export const userDetails = (email, password, name) => {
         name: name,
       }),
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-      })
       .then((data) => {
         if (data.success) {
           dispatch(setUser(data.user.name, data.user.email, password));

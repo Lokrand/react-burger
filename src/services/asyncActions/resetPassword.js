@@ -1,3 +1,4 @@
+import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
 import {
   resetPasswordRequest,
@@ -9,7 +10,7 @@ export const resetPassword = (password, token) => {
   if (password?.length > 0 && token?.length > 0) {
     return function (dispatch) {
       dispatch(resetPasswordRequest());
-      fetch(`${BASE_URL}/password-reset/reset`, {
+      commonFetch(`${BASE_URL}/password-reset/reset`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -20,7 +21,6 @@ export const resetPassword = (password, token) => {
           token: token,
         }),
       })
-        .then((res) => res.json())
         .then((json) => {
           dispatch(resetPasswordSuccess(json));
         })
