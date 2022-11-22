@@ -7,6 +7,7 @@ import {
 } from "../actions/actions.js";
 import { editUser, sendRegister, getUserDetails } from "../../utils/api";
 import { setCookie } from "../../utils/cookie.js";
+import {setUser, authenticate} from '../actions/userActions';
 
 const initialState = {
   name: "",
@@ -54,40 +55,7 @@ export const user = (state = initialState, action) => {
   }
 };
 
-export const resetPassword = (value) => {
-  return {
-    type: RESET_PASSWORD,
-    payload: value,
-  };
-};
 
-export const authenticate = (isAuthenticated) => {
-  return {
-    type: LOG_IN,
-    payload: { isAuthenticated },
-  };
-};
-
-export const registerUser = (name, email, password) => {
-  return {
-    type: REGISTER_USER,
-    payload: { name, email, password },
-  };
-};
-
-export const setUser = (name, email, password) => {
-  return {
-    type: SET_USER,
-    payload: { name, email, password },
-  };
-};
-
-export const resetUser = (name, email, password, isAuthenticated) => {
-  return {
-    type: LOG_OUT,
-    payload: { name, email, password, isAuthenticated },
-  };
-};
 
 export const registerNewUser = (name, email, password, redirect) => {
   return function (dispatch) {

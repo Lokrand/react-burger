@@ -6,7 +6,7 @@ import {
   refreshTokenSuccess,
   refreshTokenError,
 } from "../reducers/refreshToken";
-import { authenticate } from "../reducers/user";
+import { authenticate } from "../actions/userActions";
 
 export const refreshToken = () => {
   return function (dispatch) {

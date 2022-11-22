@@ -10,7 +10,7 @@ import {
 import { Text } from "../../components/Text/Text";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
-import { resetPassword } from "../../services/reducers/user";
+import { resetPassword } from "../../services/actions/userActions";
 import { fetchPassword } from "../../services/asyncActions/forgotPassword";
 
 export const ForgotPassword = () => {

@@ -1,7 +1,7 @@
 import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
 import { getCookie } from "../../utils/cookie";
-import { setUser } from "../reducers/user";
+import { setUser } from "../actions/userActions";
 
 export const userDetails = (email, password, name) => {
   return function (dispatch) {
