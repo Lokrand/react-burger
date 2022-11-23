@@ -22,17 +22,3 @@ export const getIngredientsReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export const getIngredientsRequest = () => ({
-  type: GET_INGREDIENTS_REQUEST,
-});
-
-export const getIngredientsSuccess = (payload) => ({
-  type: GET_INGREDIENTS_SUCCESS,
-  payload,
-});
-
-export const getIngredientsError = (payload) => ({
-  type: GET_INGREDIENTS_ERROR,
-  payload,
-});

@@ -4,7 +4,7 @@ import {
   getFeedRequest,
   getFeedSuccess,
   getFeedError,
-} from "../reducers/feed";
+} from "../actions/feed";
 
 export const fetchFeed = () => {
   return function (dispatch) {

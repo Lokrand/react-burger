@@ -1,7 +1,7 @@
 import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
 import { setCookie } from "../../utils/cookie";
-import { logoutRequest, logoutSuccess, logoutError } from "../reducers/logout";
+import { logoutRequest, logoutSuccess, logoutError } from "../actions/loguot";
 import { resetUser } from "../actions/userActions";
 
 export const logout = () => {

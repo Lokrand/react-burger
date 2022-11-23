@@ -22,17 +22,3 @@ export const getOrderNumber = (state = initialState, action) => {
       return state;
   }
 };
-
-export const getOrderRequest = () => ({
-  type: GET_ORDER_REQUEST,
-});
-
-export const getOrderSuccess = (payload) => ({
-  type: GET_ORDER_SUCCESS,
-  payload,
-});
-
-export const getOrderError = (payload) => ({
-  type: GET_ORDER_ERROR,
-  payload,
-});

@@ -4,7 +4,7 @@ import {
   getIngredientsRequest,
   getIngredientsSuccess,
   getIngredientsError,
-} from "../reducers/getIngredients";
+} from "../actions/ingredients";
 
 export const fetchIngredients = () => {
   return function (dispatch) {

@@ -1,7 +1,7 @@
 import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
 import { setCookie } from "../../utils/cookie";
-import { loginRequest, loginSuccess, loginError } from "../reducers/login";
+import { loginRequest, loginSuccess, loginError } from "../actions/login";
 import { authenticate, setUser } from "../actions/userActions";
 
 export const login = (email, password) => {

@@ -2,27 +2,6 @@
 import { BASE_URL } from "./constans";
 import { getCookie, setCookie, deleteCookie } from "./cookie";
 
-export const refreshTokenRequest = () => {
-      return fetch(`${BASE_URL}/auth/token`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify({
-            token: getCookie("refreshToken"),
-          })
-      }
-      ).then(res => res.json())
-      .then(res => {
-        deleteCookie("accessToken");
-        deleteCookie("refreshToken");
-        setCookie("accessToken", res.data.accessToken);
-        setCookie("refreshToken", res.data.refreshToken);
-      })
-      .catch(err => console.error(err))
-    }
-
-
 const checkResponse = (res) => {
   if (res.ok) {
     return res.json();
@@ -32,6 +11,25 @@ const checkResponse = (res) => {
 
 export const commonFetch = (path, params = {}) => {
   return fetch(path, params).then(checkResponse);
+};
+
+export const refreshTokenRequest = () => {
+  return commonFetch(`${BASE_URL}/auth/token`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify({
+      token: getCookie("refreshToken"),
+    }),
+  })
+    .then((res) => {
+      deleteCookie("accessToken");
+      deleteCookie("refreshToken");
+      setCookie("accessToken", res.data.accessToken);
+      setCookie("refreshToken", res.data.refreshToken);
+    })
+    .catch((err) => console.error(err));
 };
 
 export const sendRegister = (email, password, name) => {

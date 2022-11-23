@@ -30,17 +30,3 @@ export const login = (state = initialState, action) => {
       return state;
   }
 };
-
-export const loginRequest = () => ({
-  type: LOGIN_REQUEST,
-});
-
-export const loginSuccess = (payload) => ({
-  type: LOGIN_SUCCESS,
-  payload,
-});
-
-export const loginError = (payload) => ({
-  type: LOGIN_ERROR,
-  payload,
-});

@@ -4,7 +4,7 @@ import {
   resetPasswordRequest,
   resetPasswordSuccess,
   resetPasswordError,
-} from "../reducers/resetPassword";
+} from "../actions/resetPassword";
 
 export const resetPassword = (password, token) => {
   if (password?.length > 0 && token?.length > 0) {

@@ -26,17 +26,3 @@ export const getPassword = (state = initialState, action) => {
       return state;
   }
 };
-
-export const getPasswordRequest = () => ({
-  type: GET_PASSWORD_REQUEST,
-});
-
-export const getPasswordSuccess = (payload) => ({
-  type: GET_PASSWORD_SUCCESS,
-  payload,
-});
-
-export const getPasswordError = (payload) => ({
-  type: GET_PASSWORD_ERROR,
-  payload,
-});

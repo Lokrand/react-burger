@@ -4,7 +4,7 @@ import {
   getPasswordRequest,
   getPasswordSuccess,
   getPasswordError,
-} from "../reducers/getPassword";
+} from "../actions/password";
 
 export const fetchPassword = (email, redirect) => {
   if (email.length > 0) {
