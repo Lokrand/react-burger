@@ -28,8 +28,10 @@ import { OrderDetails } from "../OrderDetails/OrderDetails";
 import { OrderPage } from "../../pages/OrderPage/OrderPage";
 import { Main } from "../../pages/Main/Main";
 import { getCookie } from "../../utils/cookie";
-import { deleteDetails } from "../../services/reducers/getDetails";
+import { deleteDetails } from "../../services/actions/details";
 import { Page404 } from "../../pages/Page404/Page404";
+import { FeedDetails } from "../FeedDetails/FeedDetails";
+import { deleteCurrentOrder } from "../../services/reducers/getFeed";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +56,11 @@ function App() {
     dispatch(deleteDetails())
   };
 
+  const onCloseOrderModal = () => {
+    setModal("")
+    history.goBack();
+    setTimeout(() => dispatch(deleteCurrentOrder()), 0)
+  }
 
   if (auth && token === undefined) {
     dispatch(getNewToken())
@@ -92,9 +99,16 @@ function App() {
             }
             />
       </Modal>
-
+      
       <Modal active={modal === "OrderPopup"} setActive={setModal}>
         <OrderDetails orderNumber={order} />
+      </Modal>
+
+      <Modal
+        isOpen={modal === 'OrderFeedPopup'}
+        onClose={onCloseOrderModal}
+        >
+        <Route path="/feed/:id" children={<FeedDetails />} />
       </Modal>
     </>
   );

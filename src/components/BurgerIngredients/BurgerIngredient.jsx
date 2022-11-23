@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { typeBun } from "../../utils/constans";
 import { Text } from "../Text/Text";
 import { Link, useLocation } from "react-router-dom";
-import { setDetails } from "../../services/reducers/getDetails";
+import { setDetails } from "../../services/actions/details";
 import { useDispatch } from "react-redux";
 
 export const BurgerIngredient = ({ data, setModal }) => {

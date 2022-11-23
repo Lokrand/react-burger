@@ -29,7 +29,6 @@ export const FeedDetails = () => {
     const newArr = [];
     for (let i = 0; i < ingredients.length; i++) {
       let count = null;
-      // let count = 0;
       count = it.filter((el) => el === ingredients[i]._id).length;
       if (count) {
         newArr.push({
@@ -45,7 +44,6 @@ export const FeedDetails = () => {
   const result = counter(order.ingredients, ingredients);
   
   const date = getDate(order.createdAt)
-  // console.log(date)
   return (
     <>
       {loading ? (

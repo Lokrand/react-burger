@@ -16,18 +16,3 @@ export const getDetails = (state = initialState, action) => {
       return state;
   }
 };
-
-
-export function setDetails(item) {
-  return {
-      type: GET_DETAILS,
-      payload: { item },
-  };
-}
-
-export const deleteDetails = () => {
-  return {
-      type: DELETE_DETAILS,
-      payload: {}
-  };
-}
