@@ -88,10 +88,7 @@ export const BurgerIngredients = ({ setModal }) => {
                 <BurgerIngredient
                   data={el}
                   key={el._id}
-                  onClick={() => {
-                    setModal("IngredientPopup");
-                    getIngredientDetails(el);
-                  }}
+                  setModal={setModal}
                 />
               ))}
           </div>
@@ -107,10 +104,7 @@ export const BurgerIngredients = ({ setModal }) => {
                 <BurgerIngredient
                   data={el}
                   key={el._id}
-                  onClick={() => {
-                    setModal("IngredientPopup");
-                    getIngredientDetails(el);
-                  }}
+                  setModal={setModal}
                 />
               ))}
           </div>
@@ -125,10 +119,7 @@ export const BurgerIngredients = ({ setModal }) => {
               <BurgerIngredient
                 data={el}
                 key={el._id}
-                onClick={() => {
-                  setModal("IngredientPopup");
-                  getIngredientDetails(el);
-                }}
+                setModal={setModal}
               />
             ))}
         </div>

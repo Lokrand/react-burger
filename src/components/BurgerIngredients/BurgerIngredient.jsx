@@ -8,9 +8,12 @@ import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 import { typeBun } from "../../utils/constans";
 import { Text } from "../Text/Text";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { setDetails } from "../../services/reducers/getDetails";
+import { useDispatch } from "react-redux";
 
-export const BurgerIngredient = ({ data, onClick }) => {
+export const BurgerIngredient = ({ data, setModal }) => {
+  const dispatch = useDispatch();
 
   const id = data._id;
   const selectedItems = useSelector((state) => state.app.selectedItems);
@@ -23,18 +26,17 @@ export const BurgerIngredient = ({ data, onClick }) => {
     }),
   });
   const location = useLocation()
-  // console.log(location)
   
   return (
-    <NavLink
+    <Link
       to={{
         pathname: `/ingredients/${id}`,
         state: { background: location }
       }}
       className={isDrag ? styles.isDragging : styles.item}
       onClick={() => {
-        // window.history.pushState(null, null, `/ingredients/${id}`);
-        onClick();
+        setModal("IngredientPopup");
+        dispatch(setDetails(data))
       }}
       ref={dragRef}
     >
@@ -51,6 +53,6 @@ export const BurgerIngredient = ({ data, onClick }) => {
           <Counter count={counter} size="default" />
         </div>
       ) : null}
-    </NavLink>
+    </Link>
   );
 };

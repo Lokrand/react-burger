@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { getDate } from "../../../utils/date";
 import { Text } from "../../Text/Text";
 import styles from "./Order.module.css";
+import { NavLink } from "react-router-dom";
 
 export const Order = ({ data, onClick, setModalActive, width }) => {
   let zIndex = 999;
@@ -38,7 +39,8 @@ export const Order = ({ data, onClick, setModalActive, width }) => {
 
   return (
     <>
-      <section
+      <NavLink
+        to={`/feed:${data.number}`}
         className={styles.section}
         style={{width: width}}
         onClick={() => {
@@ -88,7 +90,7 @@ export const Order = ({ data, onClick, setModalActive, width }) => {
             <CurrencyIcon type="primary" />
           </div>
         </div>
-      </section>
+      </NavLink>
     </>
   );
 };

@@ -24,16 +24,16 @@ export const OrdersFeed = ({ modalActive, setModalActive, width }) => {
       <section className={styles.section}>
         {feeds.map((el) => {
           return (
-            <Order
-              key={generateKeys()}
-              data={el}
-              width={width}
-              onClick={() => {
-                onClick(el);
-              }}
-              modalActive={modalActive}
-              setModalActive={setModalActive}
-            />
+            <div key={generateKeys()}>
+              <Order
+                data={el}
+                width={width}
+                onClick={() => {
+                  onClick(el);
+                }}
+                setModalActive={setModalActive}
+              />
+            </div>
           );
         })}
       </section>

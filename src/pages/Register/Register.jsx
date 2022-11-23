@@ -58,7 +58,7 @@ export const Register = () => {
           name={"password"}
           onChange={onChange}
         />
-        <Button htmlType="button" type="primary" size="large" onClick={onSubmit}>
+        <Button htmlType="submit" type="primary" size="large">
           Зарегистрироваться
         </Button>
       </form>

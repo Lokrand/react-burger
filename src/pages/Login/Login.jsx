@@ -45,7 +45,7 @@ export const Login = () => {
             value={value.password}
             name={"password"}
           />
-          <Button htmlType="button" type="primary" size="large" onClick={toLogin}>
+          <Button htmlType="submit" type="primary" size="large">
             Войти
           </Button>
         </form>

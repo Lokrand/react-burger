@@ -2,9 +2,9 @@ import React from 'react'
 import styles from './IngredientsModal.module.css'
 import { Text } from "../Text/Text";
 
-export const IngredientsModal = ({data, key}) => {
+export const IngredientsModal = ({data}) => {
   return (
-    <div key={key}>
+    <div>
       <div className={styles.title}>
         <Text size="large" className="mt-4">
           Детали ингредиента
