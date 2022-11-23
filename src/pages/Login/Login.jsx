@@ -34,7 +34,7 @@ export const Login = () => {
     return <Redirect to={history.location.state?.from || "/"} />;
   }
 
-  return ReactDom.createPortal(
+  return (
     <ModalRegister>
       <Text size="medium" className="mb-6">
         Вход
@@ -46,7 +46,7 @@ export const Login = () => {
           value={value.password}
           name={"password"}
         />
-        <Button htmlttype="Button" type="primary" size="large">
+        <Button htmlType="button" type="primary" size="large">
           Войти
         </Button>
       </form>

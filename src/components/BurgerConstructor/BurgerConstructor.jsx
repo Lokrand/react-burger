@@ -189,7 +189,7 @@ export const BurgerConstructor = ({ setModal }) => {
         </div>
         {doIHaveABun ? (
           <Button
-            htmlttype="Button"
+            htmlType="button"
             type="primary"
             size="large"
             onClick={() => {
@@ -204,7 +204,7 @@ export const BurgerConstructor = ({ setModal }) => {
             Оформить заказ
           </Button>
         ) : (
-          <Button htmlttype="Button" type="primary" size="large" disabled>
+          <Button htmlType="button" type="primary" size="large" disabled>
             Оформить заказ
           </Button>
         )}

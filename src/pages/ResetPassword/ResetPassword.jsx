@@ -39,7 +39,7 @@ export const ResetPassword = () => {
     return <Redirect to={history.location.state?.from || "/"} />;
   }
 
-  return ReactDom.createPortal(
+  return (
     <ModalRegister>
       <Text size="medium" className="mb-6">
         Восстановление пароля
@@ -58,7 +58,7 @@ export const ResetPassword = () => {
           value={value.code}
           name={"code"}
         />
-        <Button htmlttype="Button" type="primary" size="large">
+        <Button htmlType="button" type="primary" size="large">
           Сохранить
         </Button>
       </form>

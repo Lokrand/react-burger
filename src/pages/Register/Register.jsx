@@ -39,7 +39,7 @@ export const Register = () => {
     );
   };
 
-  return ReactDom.createPortal(
+  return (
     <ModalRegister>
       <Text size="medium" className="mb-6">
         Регистрация
@@ -58,7 +58,7 @@ export const Register = () => {
           name={"password"}
           onChange={onChange}
         />
-        <Button htmlttype="Button" type="primary" size="large">
+        <Button htmlType="button" type="primary" size="large">
           Зарегистрироваться
         </Button>
       </form>

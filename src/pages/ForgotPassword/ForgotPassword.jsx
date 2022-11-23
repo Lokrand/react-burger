@@ -36,14 +36,14 @@ export const ForgotPassword = () => {
     return <Redirect to={history.location.state?.from || "/"} />;
   }
 
-  return ReactDom.createPortal(
+  return (
     <ModalRegister>
       <Text size="medium" className="mb-6">
         Восстановление пароля
       </Text>
       <form className={styles.form} onSubmit={onSubmit}>
         <EmailInput onChange={onChange} value={email} name={"email"} />
-        <Button htmlttype="Button" type="primary" size="large">
+        <Button htmlType="button" type="primary" size="large">
           Восстановить
         </Button>
       </form>
