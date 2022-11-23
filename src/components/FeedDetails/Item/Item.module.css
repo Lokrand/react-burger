@@ -3,7 +3,7 @@
   width: 608px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   text-align: start;
 }
@@ -29,4 +29,12 @@
   background-color: #131316;
   object-fit: cover;
   border-radius: 9999px;
+}
+
+.block {
+  margin-left: 16px;
+  width: 528px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

@@ -1,7 +1,10 @@
 import { GET_FEED } from "../actions/actions.js";
 
 const initialState = {
-  details: [],
+  details: [{
+    ingredients: [],
+    price: 0,
+  }],
 };
 
 export const getFeed = (state = initialState, action) => {

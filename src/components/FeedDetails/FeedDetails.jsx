@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect }  from "react";
 import { useSelector } from "react-redux";
 import { Text } from "../Text/Text";
 import styles from "./FeedDetails.module.css";
@@ -9,27 +9,45 @@ import { Item } from "./Item/Item";
 export const FeedDetails = () => {
   const loading = useSelector((state) => state.getFeedReducer.loading);
   const order = useSelector((state) => state.getFeed.details);
+  console.log('order', order)
   const ingredients = useSelector(
     (state) => state.getIngredientsReducer.components
   );
   let price = 0;
-  const items = [];
-  if (order.length > 0) {
-    for (let i = 0; i < ingredients.length; i++) {
-      for (let j = 0; j < order.ingredients.length; j++) {
-        if (ingredients[i]._id === order.ingredients[j]) {
-          price += ingredients[i].price;
-          items.push(ingredients[i]);
-        }
-      }
-    }
-  }
-  let count = 0;
-  // let time
-  // if (order) {
-  //   time = getDate(order.createdAt);
-  // console.log(time)
+  // if (order.ingredients.length > 0) {
+  //   for (let i = 0; i < ingredients.length; i++) {
+  //     for (let j = 0; j < order.ingredients.length; j++) {
+  //       if (ingredients[i]._id === order.ingredients[j]) {
+  //         price += ingredients[i].price;
+  //       }
+  //     }
+  //   }
   // }
+
+  const counter = (it, ingredients) => {
+    const newArr = [];
+    for (let i = 0; i < ingredients.length; i++) {
+      // let count = null;
+      let count = 0;
+      // count = it.filter((el) => el === ingredients[i]._id).length;
+      // if (count) {
+      //   newArr.push({
+      //     id: count,
+      //     img: ingredients[i].image_mobile,
+      //     name: ingredients[i].name,
+      //     price: ingredients[i].price,
+      //   });
+      // }
+    }
+    return newArr;
+  };
+  const result = counter(order.ingredients, ingredients);
+  useEffect(() => {
+
+  }, [order])
+
+  // const date = getDate(order.createdAt)
+  // console.log(date)
   return (
     <>
       {loading ? (
@@ -54,13 +72,13 @@ export const FeedDetails = () => {
               Состав:
             </Text>
             <div className={styles.items}>
-              {items.map((el) => {
+              {result.map((el) => {
                 return (
                   <Item
-                    img={el.image_mobile}
+                    img={el.img}
                     price={el.price}
                     name={el.name}
-                    count={count}
+                    count={el.id}
                   />
                 );
               })}

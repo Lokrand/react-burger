@@ -11,6 +11,7 @@ export const fetchFeed = () => {
     dispatch(getFeedRequest());
     commonFetch(`${BASE_URL}/orders/all`)
       .then((data) => {
+        console.log(data)
         dispatch(getFeedSuccess(data));
       })
       .catch((err) => {

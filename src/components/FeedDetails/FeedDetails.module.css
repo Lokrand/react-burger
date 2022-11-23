@@ -19,7 +19,7 @@
   flex-direction: column;
   row-gap: 16px;
   max-height: 312px;
-  overflow-y: scroll;
+  overflow: auto;
   margin: 24px 0 40px;
 }
 
