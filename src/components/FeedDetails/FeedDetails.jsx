@@ -1,4 +1,4 @@
-import React, { useEffect }  from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Text } from "../Text/Text";
 import styles from "./FeedDetails.module.css";
@@ -13,14 +13,13 @@ export const FeedDetails = () => {
     (state) => state.getIngredientsReducer.components
   );
   if (!order) return null;
-  console.log('order', order)
+  if (!order.ingredients) return null;
+  console.log("order", order);
   let price = 0;
-  if (order.ingredients.length > 0) {
-    for (let i = 0; i < ingredients.length; i++) {
-      for (let j = 0; j < order.ingredients.length; j++) {
-        if (ingredients[i]._id === order.ingredients[j]) {
-          price += ingredients[i].price;
-        }
+  for (let i = 0; i < ingredients.length; i++) {
+    for (let j = 0; j < order.ingredients.length; j++) {
+      if (ingredients[i]._id === order.ingredients[j]) {
+        price += ingredients[i].price;
       }
     }
   }
@@ -42,8 +41,8 @@ export const FeedDetails = () => {
     return newArr;
   };
   const result = counter(order.ingredients, ingredients);
-  
-  const date = getDate(order.createdAt)
+
+  const date = getDate(order.createdAt);
   return (
     <>
       {loading ? (
@@ -61,7 +60,13 @@ export const FeedDetails = () => {
               {order.status === "done" ? (
                 <Text>Выполнен</Text>
               ) : (
-                <Text>В процессе</Text>
+                <div className={styles.status_white}>
+                  {order.status === "created" ? (
+                    <Text>Создан</Text>
+                  ) : (
+                    <Text>Готовится</Text>
+                  )}
+                </div>
               )}
             </div>
             <Text size="medium" className="mt-15 mb-6">

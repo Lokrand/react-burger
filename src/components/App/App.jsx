@@ -59,7 +59,8 @@ function App() {
   const onCloseOrderModal = () => {
     setModal("")
     history.goBack();
-    setTimeout(() => dispatch(deleteCurrentOrder()), 0)
+    dispatch(deleteCurrentOrder());
+    // setTimeout(() => dispatch(deleteCurrentOrder()), 0)
   }
 
   if (auth && token === undefined) {
@@ -84,9 +85,9 @@ function App() {
               />
             }
           />
-          <Route path="/feed:id" children={<OrderPage />} />
           <ProtectedRoute path="/profile" children={<ProfileRegister />} exact={true} />
           <ProtectedRoute path="/profile/orders/:id" children={<ProfileOrders />} exact={true} />
+          <Route path="/feed/:id" children={<OrderPage />} exact={true} />
           <Route path="/ingredients/:id" children={<Ingredients />} />
           <Route><Page404 /></Route>
       </Switch>
@@ -105,10 +106,11 @@ function App() {
       </Modal>
 
       <Modal
-        isOpen={modal === 'OrderFeedPopup'}
+        active={modal === 'OrderFeedPopup'}
+        setActive={setModal}
         onClose={onCloseOrderModal}
         >
-        <Route path="/feed/:id" children={<FeedDetails />} />
+        <Route path="/feed/:id" children={<FeedDetails />}/>
       </Modal>
     </>
   );

@@ -4,7 +4,7 @@ import { OrdersFeed } from "../OrdersFeed/OrdersFeed";
 import { Text } from "../Text/Text";
 import styles from "./Feed.module.css";
 
-export const Feed = ({ modalActive, setModalActive }) => {
+export const Feed = ({ setModal }) => {
   const total = useSelector((state) => state.getFeedReducer.total);
   const totalToday = useSelector((state) => state.getFeedReducer.totalToday);
   const orders = useSelector((state) => state.getFeedReducer.components);
@@ -12,8 +12,15 @@ export const Feed = ({ modalActive, setModalActive }) => {
   const inProgress = [];
   for (let i = 0; i < orders.length; i++) {
     if (orders[i].status === "done") {
-      ready.push(orders[i].number);
-    } else inProgress.push(orders[i].number);
+      ready.push({
+        number: orders[i].number,
+        id: orders[i]._id,
+      });
+    } else
+      inProgress.push({
+        number: orders[i].number,
+        id: orders[i]._id,
+      });
   }
   return (
     <section className={styles.section}>
@@ -22,7 +29,7 @@ export const Feed = ({ modalActive, setModalActive }) => {
       </Text>
       <div className={styles.blocks}>
         <div className={styles.orders}>
-          <OrdersFeed modalActive={modalActive} setModalActive={setModalActive} width='536px'/>
+          <OrdersFeed setModal={setModal} width="536px" />
         </div>
         <div>
           <div className={styles.items}>
@@ -34,7 +41,11 @@ export const Feed = ({ modalActive, setModalActive }) => {
                 className={`${styles.order_numbers} ${styles.order_numbers_ready}`}
               >
                 {ready.map((el) => {
-                  return <Text type="digits">{el}</Text>;
+                  return (
+                    <Text key={el.id} type="digits">
+                      {el.number}
+                    </Text>
+                  );
                 })}
               </div>
             </div>
@@ -44,7 +55,11 @@ export const Feed = ({ modalActive, setModalActive }) => {
               </Text>
               <div className={styles.order_numbers}>
                 {inProgress.map((el) => {
-                  return <Text type="digits">{el}</Text>;
+                  return (
+                    <Text key={el.id} type="digits">
+                      {el.number}
+                    </Text>
+                  );
                 })}
               </div>
             </div>

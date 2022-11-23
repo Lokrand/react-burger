@@ -12,7 +12,6 @@ export const fetchFeed = () => {
     commonFetch(`${BASE_URL}/orders/all`)
     // commonFetch('http://norma.nomoreparties.space/orders/all')
       .then((data) => {
-        // console.log(data)
         dispatch(getFeedSuccess(data));
       })
       .catch((err) => {

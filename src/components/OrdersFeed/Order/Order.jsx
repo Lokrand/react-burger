@@ -40,19 +40,16 @@ export const Order = ({ data, onClick, setModalActive, width }) => {
   return (
     <>
       <NavLink
-        to={`/feed:${data.number}`}
+        to={`/feed/${data._id}`}
         className={styles.section}
-        style={{width: width}}
-        onClick={() => {
-          onClick();
-          setModalActive(true);
-        }}
+        style={{ width: width }}
+        onClick={onClick}
       >
         <div className={styles.number}>
           <Text type="digits">{data.number}</Text>
           <Text inactive>{time}</Text>
         </div>
-        <div className={styles.title} style={{maxWidth: width}}>
+        <div className={styles.title} style={{ maxWidth: width }}>
           <Text size="medium">{data.name}</Text>
         </div>
         <div className={styles.items}>
@@ -63,16 +60,16 @@ export const Order = ({ data, onClick, setModalActive, width }) => {
               return (
                 <>
                   {el.id > 1 ? (
-                    <div className={styles.item} style={{ zIndex: zIndex, left: `${left}px` }}>
+                    <div
+                      className={styles.item}
+                      style={{ zIndex: zIndex, left: `${left}px` }}
+                    >
                       <div className={styles.counter}>
                         <Text type="digits" size="small">
                           +{el.id}
                         </Text>
                       </div>
-                      <img
-                        src={el.img}
-                        className={styles.icon}
-                      />
+                      <img src={el.img} className={styles.icon} />
                     </div>
                   ) : (
                     <img

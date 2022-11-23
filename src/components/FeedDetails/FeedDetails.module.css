@@ -11,7 +11,11 @@
 }
 
 .status {
-  color: #00CCCC;
+  color: #00cccc;
+}
+
+.status_white {
+  color: #fff;
 }
 
 .items {

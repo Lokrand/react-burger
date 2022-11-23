@@ -7,13 +7,20 @@ const initialState = {
 export const getFeed = (state = initialState, action) => {
   switch (action.type) {
     case GET_FEED:
-      return { details: action.payload };
+      return { details: action.payload.order };
     case DELETE_FEED:
       return { details: action.payload };
     default:
       return state;
   }
 };
+
+export const setCurrentOrder = (order) => {
+  return {
+    type: GET_FEED,
+    payload: { order }
+  }
+}
 
 export const deleteCurrentOrder = () => {
   return {
