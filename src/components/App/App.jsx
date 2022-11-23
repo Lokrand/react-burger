@@ -32,20 +32,20 @@ import { deleteDetails } from "../../services/reducers/getDetails";
 import { Page404 } from "../../pages/Page404/Page404";
 
 function App() {
-  const dispatch = useDispatch();//
-  const state = useSelector((state) => state)//
-  const history = useHistory()//
-  const auth = state.user.isAuthenticated//
-  const token = getCookie('token')//
-  const location = useLocation();//
-  const background = location.state && location.state.background;//
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  const history = useHistory();
+  const auth = state.user.isAuthenticated;
+  const token = getCookie('token');
+  const location = useLocation();
+  const background = location.state && location.state.background;
   const order = useSelector((state) => state.getOrderNumber.orderNumber);
-  // const [componentModalActive, setComponentModalActive] = useState(false);
-  const [modal, setModal] = useState("");//
+
+  const [modal, setModal] = useState("");
   useEffect(() => {
     dispatch(fetchIngredients());
-    dispatch(fetchFeed());// ???
-    history.replace({ pathname: location.pathname }) // why
+    dispatch(fetchFeed());
+    history.replace({ pathname: location.pathname })
   }, [dispatch]);
 
   const onCloseDetailsModal = () => {
