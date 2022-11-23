@@ -58,7 +58,7 @@ export const Register = () => {
           name={"password"}
           onChange={onChange}
         />
-        <Button htmlType="button" type="primary" size="large">
+        <Button htmlType="button" type="primary" size="large" onClick={onSubmit}>
           Зарегистрироваться
         </Button>
       </form>
@@ -68,7 +68,6 @@ export const Register = () => {
           <Text className={styles.log_in}>Войти</Text>
         </NavLink>
       </div>
-    </ModalRegister>,
-    document.getElementById("modals")
+    </ModalRegister>
   );
 };

@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { ModalRegister } from "../../components/ModalRegister/ModalRegister";
 import styles from "./ForgotPassword.module.css";
-import ReactDom from "react-dom";
 import {
   Button,
   EmailInput,
@@ -43,7 +42,7 @@ export const ForgotPassword = () => {
       </Text>
       <form className={styles.form} onSubmit={onSubmit}>
         <EmailInput onChange={onChange} value={email} name={"email"} />
-        <Button htmlType="button" type="primary" size="large">
+        <Button htmlType="button" type="primary" size="large" onClick={onSubmit}>
           Восстановить
         </Button>
       </form>
@@ -53,7 +52,6 @@ export const ForgotPassword = () => {
           <Text className={styles.log_in}>Войти</Text>
         </NavLink>
       </div>
-    </ModalRegister>,
-    document.getElementById("modals")
+    </ModalRegister>
   );
 };

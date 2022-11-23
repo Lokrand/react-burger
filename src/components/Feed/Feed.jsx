@@ -22,7 +22,7 @@ export const Feed = ({ modalActive, setModalActive }) => {
       </Text>
       <div className={styles.blocks}>
         <div className={styles.orders}>
-          <OrdersFeed modalActive={modalActive} setModalActive={setModalActive}/>
+          <OrdersFeed modalActive={modalActive} setModalActive={setModalActive} width='536px'/>
         </div>
         <div>
           <div className={styles.items}>

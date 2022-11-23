@@ -1,5 +1,4 @@
 .section {
-  width: 536px;
   height: 166px;
   display: flex;
   flex-direction: column;
@@ -21,7 +20,6 @@
 }
 
 .title {
-  max-width: 536px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

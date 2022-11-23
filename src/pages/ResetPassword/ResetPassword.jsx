@@ -58,7 +58,7 @@ export const ResetPassword = () => {
           value={value.code}
           name={"code"}
         />
-        <Button htmlType="button" type="primary" size="large">
+        <Button htmlType="button" type="primary" size="large" onClick={onSubmit}>
           Сохранить
         </Button>
       </form>
@@ -68,7 +68,6 @@ export const ResetPassword = () => {
           <Text className={styles.log_in}>Войти</Text>
         </NavLink>
       </div>
-    </ModalRegister>,
-    document.getElementById("modals")
+    </ModalRegister>
   );
 };

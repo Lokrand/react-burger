@@ -6,6 +6,7 @@
 .main {
   max-height: 716px;
   overflow: auto;
+  padding-right: 8px;
 }
 
 .main::-webkit-scrollbar {

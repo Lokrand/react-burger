@@ -4,6 +4,7 @@
   flex-direction: column;
   row-gap: 16px;
   overflow-y: scroll;
+  padding-right: 8px;
 }
 
 .section::-webkit-scrollbar {

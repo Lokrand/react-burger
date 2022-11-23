@@ -8,7 +8,7 @@ import { Modal } from "../Modal/Modal";
 import { Order } from "./Order/Order";
 import styles from "./OrdersFeed.module.css";
 
-export const OrdersFeed = ({ modalActive, setModalActive }) => {
+export const OrdersFeed = ({ modalActive, setModalActive, width }) => {
   const feeds = useSelector((state) => state.getFeedReducer.components);
   const dispatch = useDispatch();
   const onClick = (el) => {
@@ -27,6 +27,7 @@ export const OrdersFeed = ({ modalActive, setModalActive }) => {
             <Order
               key={generateKeys()}
               data={el}
+              width={width}
               onClick={() => {
                 onClick(el);
               }}

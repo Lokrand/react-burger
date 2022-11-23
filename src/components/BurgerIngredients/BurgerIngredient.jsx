@@ -8,8 +8,10 @@ import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 import { typeBun } from "../../utils/constans";
 import { Text } from "../Text/Text";
+import { NavLink, useLocation } from "react-router-dom";
 
 export const BurgerIngredient = ({ data, onClick }) => {
+
   const id = data._id;
   const selectedItems = useSelector((state) => state.app.selectedItems);
   const counter = selectedItems.filter((el) => el._id === id).length;
@@ -20,12 +22,18 @@ export const BurgerIngredient = ({ data, onClick }) => {
       isDrag: monitor.isDragging(),
     }),
   });
-
+  const location = useLocation()
+  // console.log(location)
+  
   return (
-    <div
+    <NavLink
+      to={{
+        pathname: `/ingredients/${id}`,
+        state: { background: location }
+      }}
       className={isDrag ? styles.isDragging : styles.item}
       onClick={() => {
-        window.history.pushState(null, null, `/ingredients/${id}`);
+        // window.history.pushState(null, null, `/ingredients/${id}`);
         onClick();
       }}
       ref={dragRef}
@@ -43,6 +51,6 @@ export const BurgerIngredient = ({ data, onClick }) => {
           <Counter count={counter} size="default" />
         </div>
       ) : null}
-    </div>
+    </NavLink>
   );
 };

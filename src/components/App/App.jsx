@@ -12,7 +12,12 @@ import { Login } from "../../pages/Login/Login";
 import { Register } from "../../pages/Register/Register";
 import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword";
 import { ResetPassword } from "../../pages/ResetPassword/ResetPassword";
-import { BrowserRouter as Switch, Route, useHistory } from "react-router-dom";
+import {
+  BrowserRouter as Switch,
+  Route,
+  useHistory,
+  useLocation,
+} from "react-router-dom";
 import { ProfileRegister } from "../../pages/ProfileRegister/ProfileRegister";
 import { ProfileOrders } from "../../pages/ProfileOrders/ProfileOrders";
 import { Text } from "../Text/Text";
@@ -38,9 +43,12 @@ function App() {
   const onClose = () => {
     history.goBack();
   };
+  let location = useLocation();
+
+  let background = location.state && location.state.background;
   return (
     <>
-      <Switch>
+      <Switch location={background || location}>
         <AppHeader />
         <main>
           <Route exact path="/">
@@ -70,7 +78,15 @@ function App() {
           <Route path="/register" children={<Register />} />
           <Route path="/forgot-password" children={<ForgotPassword />} />
           <Route path="/reset-password" children={<ResetPassword />} />
-          <Route path="/profile/orders" children={<ProfileOrders />} />
+          <ProtectedRoute
+            path="/profile/orders"
+            children={
+              <ProfileOrders
+                modalActive={componentModalActive}
+                setModalActive={setComponentModalActive}
+              />
+            }
+          />
           <Route
             path="/feed"
             children={
@@ -90,7 +106,10 @@ function App() {
             children={<ProfileOrders />}
             exact={true}
           />
-          <Route path="/ingredients/:id">
+          {/* <Route path="/ingredients/:id">
+            <IngredientDetails />
+          </Route> */}
+          <Route path="/ingredients/:id" exact={true}>
             <Ingredients />
           </Route>
         </main>
@@ -100,7 +119,9 @@ function App() {
         setActive={setModal}
         onClose={onClose}
       >
-        <IngredientDetails />
+        <Route path="/ingredients/:id" exact={true}>
+          <IngredientDetails />
+        </Route>
       </Modal>
 
       <Modal active={modal === "OrderPopup"} setActive={setModal}>

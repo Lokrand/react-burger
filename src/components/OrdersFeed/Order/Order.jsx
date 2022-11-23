@@ -5,7 +5,7 @@ import { getDate } from "../../../utils/date";
 import { Text } from "../../Text/Text";
 import styles from "./Order.module.css";
 
-export const Order = ({ data, onClick, setModalActive }) => {
+export const Order = ({ data, onClick, setModalActive, width }) => {
   let zIndex = 999;
   let left = 15;
   const time = getDate(data.createdAt);
@@ -40,6 +40,7 @@ export const Order = ({ data, onClick, setModalActive }) => {
     <>
       <section
         className={styles.section}
+        style={{width: width}}
         onClick={() => {
           onClick();
           setModalActive(true);
@@ -49,7 +50,7 @@ export const Order = ({ data, onClick, setModalActive }) => {
           <Text type="digits">{data.number}</Text>
           <Text inactive>{time}</Text>
         </div>
-        <div className={styles.title}>
+        <div className={styles.title} style={{maxWidth: width}}>
           <Text size="medium">{data.name}</Text>
         </div>
         <div className={styles.items}>

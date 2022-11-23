@@ -109,7 +109,6 @@ export const BurgerIngredients = ({ setModal }) => {
                   key={el._id}
                   onClick={() => {
                     setModal("IngredientPopup");
-
                     getIngredientDetails(el);
                   }}
                 />
@@ -128,7 +127,6 @@ export const BurgerIngredients = ({ setModal }) => {
                 key={el._id}
                 onClick={() => {
                   setModal("IngredientPopup");
-
                   getIngredientDetails(el);
                 }}
               />
