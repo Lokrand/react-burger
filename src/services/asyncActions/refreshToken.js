@@ -28,8 +28,9 @@ export const refreshToken = () => {
           dispatch(authenticate());
           authToken = data.accessToken.split("Bearer ")[1];
           refreshToken = data.refreshToken;
-          setCookie("token", authToken);
+          // setCookie("token", authToken);
           localStorage.setItem("token", refreshToken);
+          setCookie('token', authToken, { path: "/", expires: 1140 });
           dispatch(refreshTokenSuccess(data));
         }
       })

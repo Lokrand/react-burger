@@ -32,6 +32,7 @@ import { deleteDetails } from "../../services/actions/details";
 import { Page404 } from "../../pages/Page404/Page404";
 import { FeedDetails } from "../FeedDetails/FeedDetails";
 import { deleteCurrentOrder } from "../../services/reducers/getFeed";
+import { refreshToken } from "../../services/asyncActions/refreshToken";
 
 function App() {
   const dispatch = useDispatch();
@@ -60,11 +61,10 @@ function App() {
     setModal("")
     history.goBack();
     dispatch(deleteCurrentOrder());
-    // setTimeout(() => dispatch(deleteCurrentOrder()), 0)
   }
 
   if (auth && token === undefined) {
-    dispatch(getNewToken())
+    dispatch(refreshToken())
   }
 
   return (

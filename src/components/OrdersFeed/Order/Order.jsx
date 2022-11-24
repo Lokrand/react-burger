@@ -61,6 +61,7 @@ export const Order = ({ data, onClick, setModalActive, width }) => {
                 <>
                   {el.id > 1 ? (
                     <div
+                      key={data._id}
                       className={styles.item}
                       style={{ zIndex: zIndex, left: `${left}px` }}
                     >
@@ -73,6 +74,7 @@ export const Order = ({ data, onClick, setModalActive, width }) => {
                     </div>
                   ) : (
                     <img
+                      key={data._id}
                       src={el.img}
                       className={styles.icon}
                       style={{ zIndex: zIndex, left: `${left}px` }}
