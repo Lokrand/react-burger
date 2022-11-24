@@ -2,48 +2,59 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { WSS_CONNECTION_CLOSED, WSS_CONNECTION_REQUEST, WSS_DELETE_ORDERS, WSS_GET_MESSAGE } from "../../services/actions/wssActions";
+import { getCookie } from "../../utils/cookie";
 import { OrdersFeed } from "../OrdersFeed/OrdersFeed";
 import { Text } from "../Text/Text";
 import styles from "./Feed.module.css";
 
 export const Feed = ({ setModal }) => {
-  const total = useSelector((state) => state.getFeedReducer.total);
-  const totalToday = useSelector((state) => state.getFeedReducer.totalToday);
-  const orders = useSelector((state) => state.getFeedReducer.components);
+  const accessToken = getCookie("token");
   const ready = [];
   const inProgress = [];
   const dispatch = useDispatch()
-//   useEffect(() => {
-//     dispatch({ type: WSS_CONNECTION_REQUEST, payload: `/all` });
-//     dispatch({ type: WSS_GET_MESSAGE })
+  useEffect(() => {
+    dispatch({ type: WSS_CONNECTION_REQUEST, payload: `/all?token=${accessToken}` });
+    dispatch({ type: WSS_GET_MESSAGE })
 
-//     return () => {
-//         dispatch({ type: WSS_CONNECTION_CLOSED })
-//         dispatch({type: WSS_DELETE_ORDERS })
-//     }
+    return () => {
+        dispatch({ type: WSS_CONNECTION_CLOSED })
+        dispatch({type: WSS_DELETE_ORDERS })
+    }
 
-// }, [dispatch])
-
-  for (let i = 0; i < orders.length; i++) {
-    if (orders[i].status === "done") {
-      ready.push({
-        number: orders[i].number,
-        id: orders[i]._id,
-      });
-    } else
-      inProgress.push({
-        number: orders[i].number,
-        id: orders[i]._id,
-      });
+}, [])
+  const data = useSelector((state => (state.wssReducer.orders)));
+  let orders;
+  let total;
+  let totalToday;
+  if ( data !== undefined) {
+    orders = data.orders
+    total = data.total
+    totalToday = data.totalToday
+    if (!orders) return <Text size="medium">Загружаем страницу...</Text>
+      for (let i = 0; i < orders.length; i++) {
+        if (orders[i].status === "done") {
+          ready.push({
+            number: orders[i].number,
+            id: orders[i]._id,
+          });
+        } else
+          inProgress.push({
+            number: orders[i].number,
+            id: orders[i]._id,
+          });
+      }
   }
   return (
     <section className={styles.section}>
+      {orders === undefined && <Text size="medium">Загружаем страницу...</Text>}
+      {orders !== undefined && (
+        <>
       <Text size="large" className="mb-5">
         Лента заказов
       </Text>
       <div className={styles.blocks}>
         <div className={styles.orders}>
-          <OrdersFeed setModal={setModal} width="536px" />
+          <OrdersFeed setModal={setModal} width="536px" orders={orders} />
         </div>
         <div>
           <div className={styles.items}>
@@ -89,7 +100,7 @@ export const Feed = ({ setModal }) => {
             {totalToday}
           </Text>
         </div>
-      </div>
+      </div></>)}
     </section>
   );
 };

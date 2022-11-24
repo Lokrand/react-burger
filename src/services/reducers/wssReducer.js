@@ -8,9 +8,11 @@ import {
 } from "../actions/wssActions";
 
 const initialState = {
-  wsConnected: false,
+  wssConnected: false,
   orders: [],
   error: undefined,
+  total: 0,
+  totalToday: 0,
 };
 
 export const wssReducer = (state = initialState, action) => {
@@ -19,21 +21,21 @@ export const wssReducer = (state = initialState, action) => {
       return {
         ...state,
         error: undefined,
-        wsConnected: true,
+        wssConnected: true,
       };
 
     case WSS_CONNECTION_ERROR:
       return {
         ...state,
         error: action.payload,
-        wsConnected: false,
+        wssConnected: false,
       };
 
     case WSS_CONNECTION_CLOSED:
       return {
         ...state,
         error: undefined,
-        wsConnected: false,
+        wssConnected: false,
       };
 
     case WSS_GET_MESSAGE:

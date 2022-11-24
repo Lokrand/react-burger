@@ -35,6 +35,7 @@ export const Order = ({ data, status, width, setModal }) => {
         newArr.push({
           id: count,
           img: ingredients[i].image_mobile,
+          key: ingredients[i]._id,
         });
       }
     }
@@ -84,7 +85,7 @@ export const Order = ({ data, status, width, setModal }) => {
                   <>
                     {el.id > 1 ? (
                       <div
-                        key={data._id}
+                        key={el.key}
                         className={styles.item}
                         style={{ zIndex: zIndex, left: `${left}px` }}
                       >
@@ -97,7 +98,7 @@ export const Order = ({ data, status, width, setModal }) => {
                       </div>
                     ) : (
                       <img
-                        key={data._id}
+                        key={el.key}
                         src={el.img}
                         className={styles.icon}
                         style={{ zIndex: zIndex, left: `${left}px` }}
@@ -142,7 +143,7 @@ export const Order = ({ data, status, width, setModal }) => {
                   <>
                     {el.id > 1 ? (
                       <div
-                        key={data._id}
+                        key={el.key}
                         className={styles.item}
                         style={{ zIndex: zIndex, left: `${left}px` }}
                       >
@@ -155,7 +156,7 @@ export const Order = ({ data, status, width, setModal }) => {
                       </div>
                     ) : (
                       <img
-                        key={data._id}
+                        key={el.key}
                         src={el.img}
                         className={styles.icon}
                         style={{ zIndex: zIndex, left: `${left}px` }}

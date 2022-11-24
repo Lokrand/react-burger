@@ -43,12 +43,8 @@ export const ProfileOrders = ({ setModal }) => {
       {orders !== undefined && (
         <div>
           {orders.length > 0 ? (
-            // orders.map((el) => {
-            // return (
-            <OrdersFeed setModal={setModal} width="796px" orders={orders} />
+            <OrdersFeed setModal={setModal} width="796px" orders={orders} isProfile={true} />
           ) : (
-            // );
-            // })
             <Text size="medium">Вы ещё не сделали ни одного заказа</Text>
           )}
         </div>

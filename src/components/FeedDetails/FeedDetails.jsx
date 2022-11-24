@@ -7,7 +7,6 @@ import { getDate } from "../../utils/date";
 import { Item } from "./Item/Item";
 
 export const FeedDetails = () => {
-  const loading = useSelector((state) => state.getFeedReducer.loading);
   const order = useSelector((state) => state.getFeed.details);
   const ingredients = useSelector(
     (state) => state.getIngredientsReducer.components
@@ -34,6 +33,7 @@ export const FeedDetails = () => {
           img: ingredients[i].image_mobile,
           name: ingredients[i].name,
           price: ingredients[i].price,
+          key: ingredients[i]._id,
         });
       }
     }
@@ -44,55 +44,50 @@ export const FeedDetails = () => {
   const date = getDate(order.createdAt);
   return (
     <>
-      {loading ? (
-        <Text size="large">Loading...</Text>
-      ) : (
-        <>
-          <div className={styles.modal}>
-            <div className={styles.number}>
-              <Text type="digits">#{order.number}</Text>
-            </div>
-            <div className={styles.title}>
-              <Text size="medium">{order.name}</Text>
-            </div>
-            <div className={styles.status}>
-              {order.status === "done" ? (
-                <Text>Выполнен</Text>
+      <div className={styles.modal}>
+        <div className={styles.number}>
+          <Text type="digits">#{order.number}</Text>
+        </div>
+        <div className={styles.title}>
+          <Text size="medium">{order.name}</Text>
+        </div>
+        <div className={styles.status}>
+          {order.status === "done" ? (
+            <Text>Выполнен</Text>
+          ) : (
+            <div className={styles.status_white}>
+              {order.status === "created" ? (
+                <Text>Создан</Text>
               ) : (
-                <div className={styles.status_white}>
-                  {order.status === "created" ? (
-                    <Text>Создан</Text>
-                  ) : (
-                    <Text>Готовится</Text>
-                  )}
-                </div>
+                <Text>Готовится</Text>
               )}
             </div>
-            <Text size="medium" className="mt-15 mb-6">
-              Состав:
-            </Text>
-            <div className={styles.items}>
-              {result.map((el) => {
-                return (
-                  <Item
-                    img={el.img}
-                    price={el.price}
-                    name={el.name}
-                    count={el.id}
-                  />
-                );
-              })}
-            </div>
-            <div className={styles.time_price}>
-              <Text inactive>{date}</Text>
-              <div className={styles.icon}>
-                <Text type="digits">{price}</Text>
-                <CurrencyIcon type="primary" />
-              </div>
-            </div>
+          )}
+        </div>
+        <Text size="medium" className="mt-15 mb-6">
+          Состав:
+        </Text>
+        <div className={styles.items}>
+          {result.map((el) => {
+            return (
+              <Item
+                key={el.key}
+                img={el.img}
+                price={el.price}
+                name={el.name}
+                count={el.id}
+              />
+            );
+          })}
+        </div>
+        <div className={styles.time_price}>
+          <Text inactive>{date}</Text>
+          <div className={styles.icon}>
+            <Text type="digits">{price}</Text>
+            <CurrencyIcon type="primary" />
           </div>
-        </>
-      )}
+        </div>
+      </div>
     </>
   );
 };

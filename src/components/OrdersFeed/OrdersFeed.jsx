@@ -1,16 +1,12 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { generateKeys } from "../../utils/generateKeys";
 import { Order } from "./Order/Order";
 import styles from "./OrdersFeed.module.css";
 
-export const OrdersFeed = ({ setModal, width, orders }) => {
-  const feeds = useSelector((state) => state.getFeedReducer.components);
-  const dispatch = useDispatch();
-
+export const OrdersFeed = ({ setModal, width, orders, isProfile }) => {
+  
   return (
     <>
-      {orders ? (
+      {isProfile ? (
         <section className={`${styles.section} ${styles.section_profile}`}>
           {orders.map((el) => {
             return (
@@ -26,9 +22,14 @@ export const OrdersFeed = ({ setModal, width, orders }) => {
         </section>
       ) : (
         <section className={styles.section}>
-          {feeds.map((el) => {
+          {orders.map((el) => {
             return (
-              <Order key={el._id} data={el} width={width} setModal={setModal} />
+              <Order
+                key={el._id}
+                data={el}
+                width={width}
+                setModal={setModal}
+              />
             );
           })}
         </section>

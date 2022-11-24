@@ -4,16 +4,8 @@ import { ListIcon, BurgerIcon, ProfileIcon } from "../../icons";
 import styles from "./AppHeader.module.css";
 import { NavLink } from "react-router-dom";
 import { Text } from "../Text/Text";
-import { useDispatch } from "react-redux";
-import { fetchFeed } from "../../services/asyncActions/feed";
 
 export const AppHeader = () => {
-  const dispatch = useDispatch();
-
-  const onClick = () => {
-    dispatch(fetchFeed())
-  }
-
   return (
     <header>
       <div className={styles.header}>
@@ -31,7 +23,6 @@ export const AppHeader = () => {
           to="/feed"
           className={`${styles.link_disables} mr-30`}
           activeClassName={styles.link_active}
-          onClick={onClick}
         >
           <ListIcon />
           <Text className="ml-2">Лента заказов</Text>
