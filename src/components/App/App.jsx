@@ -62,10 +62,12 @@ function App() {
     history.goBack();
     dispatch(deleteCurrentOrder());
   }
-
-  if (auth && token === undefined) {
-    dispatch(refreshToken())
-  }
+  useEffect(() => {
+    if (auth && token === undefined) {
+        dispatch(refreshToken())
+      }
+  }, [])
+  
 
   return (
     <>

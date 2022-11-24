@@ -82,7 +82,7 @@ export const Order = ({ data, status, width, setModal }) => {
                 zIndex--;
                 left -= 15;
                 return (
-                  <>
+                  <div key={el.key}>
                     {el.id > 1 ? (
                       <div
                         key={el.key}
@@ -104,7 +104,7 @@ export const Order = ({ data, status, width, setModal }) => {
                         style={{ zIndex: zIndex, left: `${left}px` }}
                       />
                     )}
-                  </>
+                  </div>
                 );
               })}
             </div>
@@ -140,7 +140,7 @@ export const Order = ({ data, status, width, setModal }) => {
                 zIndex--;
                 left -= 15;
                 return (
-                  <>
+                  <div key={el.key}>
                     {el.id > 1 ? (
                       <div
                         key={el.key}
@@ -162,7 +162,7 @@ export const Order = ({ data, status, width, setModal }) => {
                         style={{ zIndex: zIndex, left: `${left}px` }}
                       />
                     )}
-                  </>
+                  </div>
                 );
               })}
             </div>
