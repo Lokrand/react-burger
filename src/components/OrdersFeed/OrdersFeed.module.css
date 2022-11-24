@@ -7,6 +7,9 @@
   padding-right: 8px;
 }
 
+.section_profile {
+  max-height: 783px;
+}
 .section::-webkit-scrollbar {
   width: 8px;
 }

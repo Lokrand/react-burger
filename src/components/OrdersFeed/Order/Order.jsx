@@ -4,9 +4,14 @@ import { useSelector } from "react-redux";
 import { getDate } from "../../../utils/date";
 import { Text } from "../../Text/Text";
 import styles from "./Order.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { setCurrentOrder } from "../../../services/reducers/getFeed";
+import { useDispatch } from "react-redux";
 
-export const Order = ({ data, onClick, setModalActive, width }) => {
+export const Order = ({ data, status, width, setModal }) => {
+  const dispatch = useDispatch();
+  let location = useLocation();
+
   let zIndex = 999;
   let left = 15;
   const time = getDate(data.createdAt);
@@ -39,57 +44,134 @@ export const Order = ({ data, onClick, setModalActive, width }) => {
 
   return (
     <>
-      <NavLink
-        to={`/feed/${data._id}`}
-        className={styles.section}
-        style={{ width: width }}
-        onClick={onClick}
-      >
-        <div className={styles.number}>
-          <Text type="digits">{data.number}</Text>
-          <Text inactive>{time}</Text>
-        </div>
-        <div className={styles.title} style={{ maxWidth: width }}>
-          <Text size="medium">{data.name}</Text>
-        </div>
-        <div className={styles.items}>
-          <div className={styles.icons}>
-            {result.map((el) => {
-              zIndex--;
-              left -= 15;
-              return (
-                <>
-                  {el.id > 1 ? (
-                    <div
-                      key={data._id}
-                      className={styles.item}
-                      style={{ zIndex: zIndex, left: `${left}px` }}
-                    >
-                      <div className={styles.counter}>
-                        <Text type="digits" size="small">
-                          +{el.id}
-                        </Text>
+      {status ? (
+        <NavLink
+          to={{
+            pathname: `/profile/orders/${data._id}`,
+            state: { background: location },
+          }}
+          className={`${styles.section} ${styles.section_profile}`}
+          style={{ width: width }}
+          onClick={() => {
+            setModal("OrderProfileOrderPopup");
+            dispatch(setCurrentOrder(data));
+          }}
+        >
+          <div className={styles.number}>
+            <Text type="digits">{data.number}</Text>
+            <Text inactive>{time}</Text>
+          </div>
+          <div className={styles.title} style={{ maxWidth: width }}>
+            <Text size="medium" className="mb-2">
+              {data.name}
+            </Text>
+            {status === "done" ? (
+              <div className={styles.status_color}>
+                <Text>Выполнен</Text>
+              </div>
+            ) : status === "created" ? (
+              <Text>Создан</Text>
+            ) : (
+              <Text>Готовится</Text>
+            )}
+          </div>
+          <div className={styles.items}>
+            <div className={`${styles.icons} ${styles.icons_profile}`}>
+              {result.map((el) => {
+                zIndex--;
+                left -= 15;
+                return (
+                  <>
+                    {el.id > 1 ? (
+                      <div
+                        key={data._id}
+                        className={styles.item}
+                        style={{ zIndex: zIndex, left: `${left}px` }}
+                      >
+                        <div className={styles.counter}>
+                          <Text type="digits" size="small">
+                            +{el.id}
+                          </Text>
+                        </div>
+                        <img src={el.img} className={styles.icon} />
                       </div>
-                      <img src={el.img} className={styles.icon} />
-                    </div>
-                  ) : (
-                    <img
-                      key={data._id}
-                      src={el.img}
-                      className={styles.icon}
-                      style={{ zIndex: zIndex, left: `${left}px` }}
-                    />
-                  )}
-                </>
-              );
-            })}
+                    ) : (
+                      <img
+                        key={data._id}
+                        src={el.img}
+                        className={styles.icon}
+                        style={{ zIndex: zIndex, left: `${left}px` }}
+                      />
+                    )}
+                  </>
+                );
+              })}
+            </div>
+            <div className={styles.price}>
+              <Text type="digits">{price}</Text>
+              <CurrencyIcon type="primary" />
+            </div>
           </div>
-          <div className={styles.price}>
-            <Text type="digits">{price}</Text>
-            <CurrencyIcon type="primary" />
+        </NavLink>
+      ) : (
+        <NavLink
+          to={{
+            pathname: `/feed/${data._id}`,
+            state: { background: location },
+          }}
+          className={styles.section}
+          style={{ width: width }}
+          onClick={() => {
+            setModal("OrderFeedPopup");
+            dispatch(setCurrentOrder(data));
+          }}
+        >
+          <div className={styles.number}>
+            <Text type="digits">{data.number}</Text>
+            <Text inactive>{time}</Text>
           </div>
-        </div>
-      </NavLink>
+          <div className={styles.title} style={{ maxWidth: width }}>
+            <Text size="medium">{data.name}</Text>
+          </div>
+          <div className={styles.items}>
+            <div className={styles.icons}>
+              {result.map((el) => {
+                zIndex--;
+                left -= 15;
+                return (
+                  <>
+                    {el.id > 1 ? (
+                      <div
+                        key={data._id}
+                        className={styles.item}
+                        style={{ zIndex: zIndex, left: `${left}px` }}
+                      >
+                        <div className={styles.counter}>
+                          <Text type="digits" size="small">
+                            +{el.id}
+                          </Text>
+                        </div>
+                        <img src={el.img} className={styles.icon} />
+                      </div>
+                    ) : (
+                      <img
+                        key={data._id}
+                        src={el.img}
+                        className={styles.icon}
+                        style={{ zIndex: zIndex, left: `${left}px` }}
+                      />
+                    )}
+                  </>
+                );
+              })}
+            </div>
+            <div className={styles.price}>
+              <Text type="digits">{price}</Text>
+              <CurrencyIcon type="primary" />
+            </div>
+          </div>
+        </NavLink>
+      )}
     </>
   );
 };

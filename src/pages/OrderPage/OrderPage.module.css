@@ -1,5 +1,6 @@
 .block {
   display: flex;
   justify-content: center;
-  margin-top: 120px;
+  width: 624px;
+  margin: 120px auto 0;
 }

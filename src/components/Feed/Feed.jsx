@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { WSS_CONNECTION_CLOSED, WSS_CONNECTION_REQUEST, WSS_DELETE_ORDERS, WSS_GET_MESSAGE } from "../../services/actions/feedActions";
+import { WSS_CONNECTION_CLOSED, WSS_CONNECTION_REQUEST, WSS_DELETE_ORDERS, WSS_GET_MESSAGE } from "../../services/actions/wssActions";
 import { OrdersFeed } from "../OrdersFeed/OrdersFeed";
 import { Text } from "../Text/Text";
 import styles from "./Feed.module.css";

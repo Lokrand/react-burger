@@ -12,12 +12,9 @@ import {
   Route,
   useHistory,
   useLocation,
-  Link,
-  useParams,
 } from "react-router-dom";
 import { ProfileRegister } from "../../pages/ProfileRegister/ProfileRegister";
 import { ProfileOrders } from "../../pages/ProfileOrders/ProfileOrders";
-
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import Ingredients from "../../pages/Ingredients/Ingredients";
 import { Feed } from "../Feed/Feed";
@@ -62,6 +59,11 @@ function App() {
     history.goBack();
     dispatch(deleteCurrentOrder());
   }
+  const onCloseProfileOrderModal = () => {
+    setModal("")
+    history.goBack();
+    dispatch(deleteCurrentOrder());
+  }
 
   if (auth && token === undefined) {
     dispatch(refreshToken())
@@ -78,40 +80,40 @@ function App() {
           <Route path="/reset-password" children={<ResetPassword />} />
           <ProtectedRoute 
             path="/profile/orders"
-            children={
-              <ProfileOrders
-              setModal={setModal}
-              />
-            }
+            children={<ProfileOrders setModal={setModal} />}
+            exact={true}
           />
           <ProtectedRoute path="/profile" children={<ProfileRegister />} exact={true} />
-          <ProtectedRoute path="/profile/orders/:id" children={<ProfileOrders />} exact={true} />
           <Route path="/feed" children={<Feed setModal={setModal} />} exact={true}/>
+          <ProtectedRoute path="/profile/orders/:id" children={<OrderPage />} exact={true} />
           <Route path="/feed/:id" children={<OrderPage />} exact={true} />
           <Route path="/ingredients/:id" children={<Ingredients />} exact={true}/>
           <Route><Page404 /></Route>
       </Switch>
       
       <Modal active={modal==='IngredientPopup'} setActive={setModal} onClose={onCloseDetailsModal}>
-        <Route
-          path="/ingredients/:id"
-          children={
-              <IngredientDetails />
-            }
-            />
+        <Route path="/ingredients/:id" children={<IngredientDetails />} />
       </Modal>
       
       <Modal active={modal === "OrderPopup"} setActive={setModal}>
         <OrderDetails orderNumber={order} />
       </Modal>
 
-      {background && <Modal
-        active={modal === 'OrderFeedPopup'}
+      <Modal
+        active={modal === "OrderFeedPopup"}
         setActive={setModal}
         onClose={onCloseOrderModal}
         >
         <Route path="/feed/:id" children={<FeedDetails />}/>
-      </Modal>}
+      </Modal>
+
+      <Modal
+        active={modal === "OrderProfileOrderPopup"}
+        setActive={setModal}
+        onClose={onCloseProfileOrderModal}
+        >
+        <Route path="/profile/orders/:id" children={<FeedDetails />}/>
+      </Modal>
     </>
   );
 }

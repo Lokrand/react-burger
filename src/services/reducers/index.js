@@ -14,12 +14,13 @@ import storage from "redux-persist/lib/storage";
 import { getFeedReducer } from "../reducers/feed";
 import { getFeed } from "../reducers/getFeed";
 import { socketMiddleware } from "../middleware/socketMiddleWare";
-import { wsActions } from "../actions/feedActions";
+import { wssActions } from "../actions/wssActions";
+import { wssReducer } from "./wssReducer";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "app", "getFeedReducer"],
+  whitelist: ["user", "app", "getFeedReducer", "getFeed", "wssReducer"],
 };
 
 const composeEnhancers =
@@ -28,7 +29,7 @@ const composeEnhancers =
     : compose;
 
 // const enhancer = composeEnhancers(applyMiddleware(thunk));
-const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware('wss://norma.nomoreparties.space/orders', wsActions)));
+const enhancer = composeEnhancers(applyMiddleware(thunk, socketMiddleware('wss://norma.nomoreparties.space/orders', wssActions)));
 
 const rootReducer = combineReducers({
   app: reducer,
@@ -42,6 +43,7 @@ const rootReducer = combineReducers({
   user,
   getFeedReducer,
   getFeed,
+  wssReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

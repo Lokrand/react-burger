@@ -1,5 +1,6 @@
 import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
+import { getCookie } from "../../utils/cookie";
 import { removeSelectedItems } from "../actions/burger";
 import {
   getOrderRequest,
@@ -14,8 +15,8 @@ export const getOrderNumber = (orderFor, setModal) => {
       commonFetch(`${BASE_URL}/orders`, {
         method: "POST",
         headers: {
-          Accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: 'Bearer ' + getCookie('token')
         },
         body: JSON.stringify({ ingredients: orderFor }),
       })

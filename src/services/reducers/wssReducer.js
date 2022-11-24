@@ -4,15 +4,14 @@ import {
   WSS_CONNECTION_CLOSED,
   WSS_GET_MESSAGE,
   WSS_SEND_MESSAGE,
-  WSS_DELETE_ORDERS
-} from '../actions/wsActions';
+  WSS_DELETE_ORDERS,
+} from "../actions/wssActions";
 
 const initialState = {
   wsConnected: false,
   orders: [],
-  error: undefined
+  error: undefined,
 };
-
 
 export const wssReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -20,42 +19,42 @@ export const wssReducer = (state = initialState, action) => {
       return {
         ...state,
         error: undefined,
-        wsConnected: true
+        wsConnected: true,
       };
 
     case WSS_CONNECTION_ERROR:
       return {
         ...state,
         error: action.payload,
-        wsConnected: false
+        wsConnected: false,
       };
 
     case WSS_CONNECTION_CLOSED:
       return {
         ...state,
         error: undefined,
-        wsConnected: false
+        wsConnected: false,
       };
 
     case WSS_GET_MESSAGE:
       return {
         ...state,
         error: undefined,
-        orders: action.payload
+        orders: action.payload,
       };
 
     case WSS_SEND_MESSAGE:
       return {
         ...state,
         error: undefined,
-        orders: action.payload
+        orders: action.payload,
       };
 
     case WSS_DELETE_ORDERS:
       return {
         ...state,
         error: undefined,
-        orders: []
+        orders: [],
       };
 
     default:

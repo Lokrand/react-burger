@@ -1,21 +1,15 @@
-export const socketMiddleware = (wsUrl, wsActions) => {
+export const socketMiddleware = (wssUrl, wssActions) => {
   return (store) => {
-
     let socket = null;
 
     return (next) => (action) => {
       const { dispatch } = store;
       const { type, payload } = action;
-      const { wsInit,
-        wsSendMessage,
-        onOpen,
-        onClose,
-        onError,
-        onMessage } = wsActions;
+      const { wssInit, wssSendMessage, onOpen, onClose, onError, onMessage } =
+        wssActions;
 
-
-      if (type === wsInit) {
-        socket = new WebSocket(`${wsUrl}${payload}`);
+      if (type === wssInit) {
+        socket = new WebSocket(`${wssUrl}${payload}`);
       }
 
       if (socket) {
@@ -35,17 +29,16 @@ export const socketMiddleware = (wsUrl, wsActions) => {
         };
 
         if (type === onClose) {
-          socket.close()
+          socket.close();
         }
 
-        if (type === wsSendMessage) {
+        if (type === wssSendMessage) {
           const message = payload;
           socket.send(JSON.stringify(message));
         }
       }
 
       next(action);
-
     };
   };
 };

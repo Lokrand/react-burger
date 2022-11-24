@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Text } from "../Text/Text";
 import styles from "./FeedDetails.module.css";
@@ -14,7 +14,6 @@ export const FeedDetails = () => {
   );
   if (!order) return null;
   if (!order.ingredients) return null;
-  console.log("order", order);
   let price = 0;
   for (let i = 0; i < ingredients.length; i++) {
     for (let j = 0; j < order.ingredients.length; j++) {

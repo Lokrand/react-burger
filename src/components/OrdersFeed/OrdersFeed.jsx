@@ -1,35 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { GET_FEED } from "../../services/actions/actions";
-import { setCurrentOrder } from "../../services/reducers/getFeed";
-import { generateKeys } from "../../utils/generateKeys";
-import { FeedDetails } from "../FeedDetails/FeedDetails";
-import { Modal } from "../Modal/Modal";
 import { Order } from "./Order/Order";
 import styles from "./OrdersFeed.module.css";
 
-export const OrdersFeed = ({ setModal, width }) => {
+export const OrdersFeed = ({ setModal, width, orders }) => {
   const feeds = useSelector((state) => state.getFeedReducer.components);
   const dispatch = useDispatch();
 
   return (
     <>
-      <section className={styles.section}>
-        {feeds.map((el) => {
-          return (
-            <Order
-              key={el._id}
-              data={el}
-              width={width}
-              onClick={() => {
-                setModal("OrderFeedPopup");
-                dispatch(setCurrentOrder(el));
-              }}
-            />
-          );
-        })}
-      </section>
+      {orders ? (
+        <section className={`${styles.section} ${styles.section_profile}`}>
+          {orders.map((el) => {
+            return (
+              <Order
+                key={el._id}
+                data={el}
+                status={el.status}
+                width={width}
+                setModal={setModal}
+              />
+            );
+          })}
+        </section>
+      ) : (
+        <section className={styles.section}>
+          {feeds.map((el) => {
+            return (
+              <Order key={el._id} data={el} width={width} setModal={setModal} />
+            );
+          })}
+        </section>
+      )}
     </>
   );
 };

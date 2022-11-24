@@ -4,16 +4,20 @@
   flex-direction: column;
   row-gap: 24px;
   border-radius: 40px;
-  background-color: #1C1C21;
+  background-color: #1c1c21;
   padding: 24px;
-  transition: opacity .2s linear;
+  transition: opacity 0.2s linear;
   text-decoration: none;
   color: #fff;
 }
 
+.section_profile {
+  height: 198px;
+}
+
 .section:hover {
   cursor: pointer;
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .number {
@@ -51,11 +55,15 @@
   overflow: hidden;
 }
 
+.icons_profile {
+  max-width: 680px;
+}
+
 .icon {
   width: 60px;
   height: 60px;
   position: relative;
-  border: 2px solid #4C4CFF;
+  border: 2px solid #4c4cff;
   background-color: #131316;
   object-fit: cover;
   border-radius: 9999px;
@@ -74,7 +82,7 @@
   width: 64px;
   height: 64px;
   border-radius: 9999px;
-  background: rgba(19, 19, 22, .6);
+  background: rgba(19, 19, 22, 0.6);
   z-index: 2;
 }
 
@@ -82,4 +90,8 @@
   position: relative;
   display: flex;
   flex-direction: row;
+}
+
+.status_color {
+  color: #00cccc;
 }
