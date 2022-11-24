@@ -10,7 +10,7 @@ export const fetchFeed = () => {
   return function (dispatch) {
     dispatch(getFeedRequest());
     commonFetch(`${BASE_URL}/orders/all`)
-    // commonFetch('http://norma.nomoreparties.space/orders/all')
+    // commonFetch('wss://norma.nomoreparties.space/orders/all')
       .then((data) => {
         dispatch(getFeedSuccess(data));
       })

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { WSS_CONNECTION_CLOSED, WSS_CONNECTION_REQUEST, WSS_DELETE_ORDERS, WSS_GET_MESSAGE } from "../../services/actions/feedActions";
 import { OrdersFeed } from "../OrdersFeed/OrdersFeed";
 import { Text } from "../Text/Text";
 import styles from "./Feed.module.css";
@@ -10,6 +12,18 @@ export const Feed = ({ setModal }) => {
   const orders = useSelector((state) => state.getFeedReducer.components);
   const ready = [];
   const inProgress = [];
+  const dispatch = useDispatch()
+//   useEffect(() => {
+//     dispatch({ type: WSS_CONNECTION_REQUEST, payload: `/all` });
+//     dispatch({ type: WSS_GET_MESSAGE })
+
+//     return () => {
+//         dispatch({ type: WSS_CONNECTION_CLOSED })
+//         dispatch({type: WSS_DELETE_ORDERS })
+//     }
+
+// }, [dispatch])
+
   for (let i = 0; i < orders.length; i++) {
     if (orders[i].status === "done") {
       ready.push({

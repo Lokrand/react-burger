@@ -76,19 +76,19 @@ function App() {
           <Route path="/register" children={<Register />} />
           <Route path="/forgot-password" children={<ForgotPassword />} />
           <Route path="/reset-password" children={<ResetPassword />} />
-          <Route path="/feed" children={<Feed setModal={setModal} />}/>
           <ProtectedRoute 
             path="/profile/orders"
             children={
               <ProfileOrders
-                setModal={setModal}
+              setModal={setModal}
               />
             }
           />
           <ProtectedRoute path="/profile" children={<ProfileRegister />} exact={true} />
           <ProtectedRoute path="/profile/orders/:id" children={<ProfileOrders />} exact={true} />
+          <Route path="/feed" children={<Feed setModal={setModal} />} exact={true}/>
           <Route path="/feed/:id" children={<OrderPage />} exact={true} />
-          <Route path="/ingredients/:id" children={<Ingredients />} />
+          <Route path="/ingredients/:id" children={<Ingredients />} exact={true}/>
           <Route><Page404 /></Route>
       </Switch>
       
@@ -105,13 +105,13 @@ function App() {
         <OrderDetails orderNumber={order} />
       </Modal>
 
-      <Modal
+      {background && <Modal
         active={modal === 'OrderFeedPopup'}
         setActive={setModal}
         onClose={onCloseOrderModal}
         >
         <Route path="/feed/:id" children={<FeedDetails />}/>
-      </Modal>
+      </Modal>}
     </>
   );
 }
