@@ -13,6 +13,7 @@ import {
 import { getCookie } from "../../utils/cookie";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { Spinner } from "../../components/Spinner/Spinner";
 
 export const ProfileOrders = ({ setModal }) => {
   const dispatch = useDispatch();
@@ -32,18 +33,23 @@ export const ProfileOrders = ({ setModal }) => {
   }, []);
   const data = useSelector((state) => state.wssReducer.orders);
   let orders;
-
+  let reverseOrders = [];
   if (data !== undefined) {
     orders = data.orders;
   }
-
+  if (orders !== undefined) {
+    for (let i = orders.length-1; i >= 0; i--) {
+      reverseOrders.push(orders[i])
+    }
+  }
   return (
     <Profile>
-      {orders === undefined && <Text size="medium">Загружаем заказы...</Text>}
+      {orders === undefined && <Spinner />}
       {orders !== undefined && (
         <div>
           {orders.length > 0 ? (
-            <OrdersFeed setModal={setModal} width="796px" orders={orders} isProfile={true} />
+            
+            <OrdersFeed setModal={setModal} width="796px" orders={reverseOrders} isProfile={true} />
           ) : (
             <Text size="medium">Вы ещё не сделали ни одного заказа</Text>
           )}

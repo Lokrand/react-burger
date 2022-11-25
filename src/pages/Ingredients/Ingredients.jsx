@@ -2,7 +2,6 @@ import styles from "./Ingredients.module.css";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { IngredientsModal } from "../../components/IngredientsModal/IngredientsModal";
-import { generateKeys } from "../../utils/generateKeys";
 
 const Ingredients = () => {
   const state = useSelector((state) => state);
@@ -14,9 +13,7 @@ const Ingredients = () => {
       {ingredients.map((el) => {
         if (el._id === id) {
           return (
-            <div key={generateKeys()} >
-              <IngredientsModal data={el}/>
-            </div>
+              <IngredientsModal key={el._id} data={el}/>
           );
         }
       })}

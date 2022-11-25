@@ -29,6 +29,7 @@ import { Page404 } from "../../pages/Page404/Page404";
 import { FeedDetails } from "../FeedDetails/FeedDetails";
 import { deleteCurrentOrder } from "../../services/reducers/getFeed";
 import { refreshToken } from "../../services/asyncActions/refreshToken";
+import { Spinner } from "../Spinner/Spinner";
 
 function App() {
   const dispatch = useDispatch();
