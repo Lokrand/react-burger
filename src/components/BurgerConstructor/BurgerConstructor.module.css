@@ -117,3 +117,8 @@ ol {
   width: 388px;
   justify-content: space-between;
 }
+
+.loading {
+  display: flex;
+  column-gap: 10px;
+}

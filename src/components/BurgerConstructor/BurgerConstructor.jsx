@@ -21,10 +21,13 @@ import { useHistory } from "react-router-dom";
 import { getCookie } from "../../utils/cookie";
 import { isTokenExpired } from "../../utils/token";
 import { refreshToken } from "../../services/asyncActions/refreshToken";
+import { Spinner } from "../Spinner/Spinner";
+import { LoadingDots } from "../LoadingDots/LoadingDots";
 
 export const BurgerConstructor = ({ setModal }) => {
   const history = useHistory();
   const items = useSelector((state) => state.getIngredientsReducer.components);
+  const loading = useSelector((state) => state.getOrderNumber.loading);
   const selectedItems = useSelector((state) => state.app.selectedItems);
   const reduxDispatch = useDispatch();
   const bun = useMemo(
@@ -201,7 +204,13 @@ export const BurgerConstructor = ({ setModal }) => {
               }
             }}
           >
-            Оформить заказ
+            {loading && "Оформить заказ"}
+            {!loading && (
+              <div className={styles.loading}>
+                Ожидайте номер заказа
+                <LoadingDots />
+              </div>
+            )}
           </Button>
         ) : (
           <Button htmlType="button" type="primary" size="large" disabled>

@@ -1,0 +1,40 @@
+.spinner_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.pulse_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pulse_bubble {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.pulse_bubble_1 {
+    animation: pulse .4s ease 0s infinite alternate;
+}
+.pulse_bubble_2 {
+    animation: pulse .4s ease .2s infinite alternate;
+}
+.pulse_bubble_3 {
+    animation: pulse .4s ease .4s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: .25;
+    transform: scale(.75);
+  }
+}

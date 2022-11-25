@@ -21,6 +21,7 @@ export const ProfileRegister = () => {
   const token = getCookie("token");
 
   const checkToken = () => {
+  
     if (token === undefined) {
       dispatch(refreshToken());
     }
