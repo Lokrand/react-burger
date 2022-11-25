@@ -11,7 +11,7 @@ export const AppHeader = () => {
       <div className={styles.header}>
         <NavLink
           exact
-          to="/"
+          to="/react-burger"
           className={styles.link_disables}
           activeClassName={styles.link_active}
         >
@@ -20,7 +20,7 @@ export const AppHeader = () => {
         </NavLink>
         <NavLink
           exact
-          to="/feed"
+          to="/react-burger/feed"
           className={`${styles.link_disables} mr-30`}
           activeClassName={styles.link_active}
         >

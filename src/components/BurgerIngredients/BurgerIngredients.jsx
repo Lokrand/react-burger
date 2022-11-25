@@ -2,8 +2,7 @@ import React, { useRef, useState } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIngredient } from "./BurgerIngredient";
 import styles from "./BurgerIngredients.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { GET_DETAILS } from "../../services/actions/actions";
+import { useSelector } from "react-redux";
 import { typeBun } from "../../utils/constans";
 import { Text } from "../Text/Text";
 
@@ -12,14 +11,7 @@ export const BurgerIngredients = ({ setModal }) => {
   const [current, setCurrent] = useState("one");
   const bunRef = useRef(null);
   const souceRef = useRef(null);
-  const detailsDispatch = useDispatch();
 
-  const getIngredientDetails = (el) => {
-    detailsDispatch({
-      type: GET_DETAILS,
-      payload: el,
-    });
-  };
   const scrollBar = () => {
     const bunsBlockHeight = bunRef.current.offsetHeight;
     const souceBlockHeight = souceRef.current.offsetHeight;

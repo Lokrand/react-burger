@@ -17,7 +17,7 @@ export const Main = ({ setModal }) => {
       ) : (
         <div className={styles.sections}>
           <div className="pl-4">
-            <Text size="large" className="mb-5">
+            <Text size="large" className="mb-5 pl-3">
               Соберите бургер
             </Text>
 

@@ -25,11 +25,11 @@ export const Register = () => {
   };
 
   if (auth) {
-    return <Redirect to={history.location.state?.from || "/"} />;
+    return <Redirect to={history.location.state?.from || "/react-burger"} />;
   }
 
   const redirect = () => {
-    window.history.pushState(null, null, `/`);
+    window.history.pushState(null, null, `/react-burger`);
   };
 
   const onSubmit = (e) => {

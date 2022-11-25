@@ -75,7 +75,7 @@ function App() {
     <>
       <AppHeader />
       <Switch location={background || location}>
-          <Route exact path="/" children={<Main setModal={setModal}/>} />
+          <Route exact path="/react-burger" children={<Main setModal={setModal}/>} />
           <Route path="/login" children={<Login />} />
           <Route path="/register" children={<Register />} />
           <Route path="/forgot-password" children={<ForgotPassword />} />
@@ -86,7 +86,7 @@ function App() {
             exact={true}
           />
           <ProtectedRoute path="/profile" children={<ProfileRegister />} exact={true} />
-          <Route path="/feed" children={<Feed setModal={setModal} />} exact={true}/>
+          <Route path="/react-burger/feed" children={<Feed setModal={setModal} />} exact={true}/>
           <Route path="/feed/:id" children={<OrderPage />} exact={true} />
           <ProtectedRoute path="/profile/orders/:id" children={<OrderPage />} exact={true} />
           <Route path="/ingredients/:id" children={<Ingredients />} exact={true}/>

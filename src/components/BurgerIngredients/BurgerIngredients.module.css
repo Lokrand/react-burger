@@ -6,7 +6,7 @@
 .main {
   max-height: 716px;
   overflow: auto;
-  padding-right: 8px;
+  padding: 0 8px 0 12px;
 }
 
 .main::-webkit-scrollbar {
@@ -45,8 +45,10 @@
   row-gap: 9px;
   text-decoration: none;
   cursor: pointer;
+  color: #fff;
   transition: 0.2s linear;
-  border: 5px solid red;
+  box-shadow: inset 0px 0px 10px 5px rgba(255, 0, 0, 1), 0px 0px 10px 5px rgba(255, 0, 0, 1);
+  border: 3px solid red;
 }
 
 .item:hover {
