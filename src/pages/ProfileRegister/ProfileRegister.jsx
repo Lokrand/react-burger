@@ -16,6 +16,7 @@ import { userDetails } from "../../services/asyncActions/userDetails";
 export const ProfileRegister = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  
   const password = user.password;
   const token = getCookie("token");
 
