@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorIngredients } from "./ConstructorIngredients";
 import styles from "./BurgerConstructor.module.css";
@@ -21,8 +21,8 @@ import { useHistory } from "react-router-dom";
 import { getCookie } from "../../utils/cookie";
 import { isTokenExpired } from "../../utils/token";
 import { refreshToken } from "../../services/asyncActions/refreshToken";
-import { Spinner } from "../Spinner/Spinner";
 import { LoadingDots } from "../LoadingDots/LoadingDots";
+import { Arrows } from "../Arrows/Arrows";
 
 export const BurgerConstructor = ({ setModal }) => {
   const history = useHistory();
@@ -42,6 +42,7 @@ export const BurgerConstructor = ({ setModal }) => {
   const currectOrder = [];
   const auth = useSelector((state) => state.user.isAuthenticated);
   const token = getCookie("token");
+  const [wantDrop, setWantDrop] = useState(false);
   const [, drop] = useDrop(() => ({
     accept: typeBun,
     drop: (item) => addIngredientToBoard(item.id),
@@ -49,6 +50,15 @@ export const BurgerConstructor = ({ setModal }) => {
       isOver: monitor.isOver(),
     }),
   }));
+
+  useEffect(() => {
+    if (selectedItems.length === 0) {
+      setWantDrop(true);
+    }
+    if (selectedItems.length > 0) {
+      setWantDrop(false)
+    }
+  }, [selectedItems.length]);
 
   const addIngredientToBoard = (id) => {
     const innredientsList = items.filter((item) => id === item._id);
@@ -136,52 +146,58 @@ export const BurgerConstructor = ({ setModal }) => {
   return (
     <>
       <div className={styles.section} ref={drop}>
-        <div className={styles.bread}>
-          <div className={styles.secret} />
-          {bun && (
-            <ConstructorElement
-              type="top"
-              isLocked={true}
-              text={bunTop}
-              price={bun.price}
-              thumbnail={bun.image}
-            />
-          )}
-        </div>
-        <div className={styles.scrollBar} ref={dropRef}>
-          <Reorder.Group
-            as="ol"
-            axys="y"
-            values={ingredient}
-            onReorder={setItem}
-          >
-            <div className={styles.items}>
-              {ingredient.map((el) => (
-                <ConstructorIngredients
-                  key={el.key}
-                  el={el}
-                  id={el.key}
-                  remove={removeIngredient}
-                  text={el.name}
-                  price={el.price}
-                  thumbnail={el.image}
+        {wantDrop ? (
+          <div className={styles.drop}><Arrows /></div>
+        ) : (
+          <>
+            <div className={styles.bread}>
+              <div className={styles.secret} />
+              {bun && (
+                <ConstructorElement
+                  type="top"
+                  isLocked={true}
+                  text={bunTop}
+                  price={bun.price}
+                  thumbnail={bun.image}
                 />
-              ))}
+              )}
             </div>
-          </Reorder.Group>
-        </div>
-        <div className={styles.bread}>
-          <div className={styles.secret} />
-          {bun && (
-            <ConstructorElement
-              type="bottom"
-              isLocked={true}
-              text={bunBot}
-              price={bun.price}
-              thumbnail={bun.image}
-            />
-          )}
-        </div>
+            <div className={styles.scrollBar} ref={dropRef}>
+              <Reorder.Group
+                as="ol"
+                axys="y"
+                values={ingredient}
+                onReorder={setItem}
+              >
+                <div className={styles.items}>
+                  {ingredient.map((el) => (
+                    <ConstructorIngredients
+                      key={el.key}
+                      el={el}
+                      id={el.key}
+                      remove={removeIngredient}
+                      text={el.name}
+                      price={el.price}
+                      thumbnail={el.image}
+                    />
+                  ))}
+                </div>
+              </Reorder.Group>
+            </div>
+            <div className={styles.bread}>
+              <div className={styles.secret} />
+              {bun && (
+                <ConstructorElement
+                  type="bottom"
+                  isLocked={true}
+                  text={bunBot}
+                  price={bun.price}
+                  thumbnail={bun.image}
+                />
+              )}
+            </div>
+          </>
+        )}
       </div>
       <div className={styles.block}>
         <div className={styles.total}>

@@ -1,0 +1,55 @@
+.text {
+  opacity: 0.25;
+  animation: pulse 2s linear alternate infinite;
+}
+
+@keyframes pulse {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  to {
+    opacity: 1;
+  }
+}
+
+.container {
+  text-align: center;
+}
+
+.arrow_7 {
+  margin: 40px auto 10px auto;
+  width: 38px;
+  height: 100px;
+}
+.arrow_7 span {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-bottom: 5px solid #337ab7;
+  border-right: 5px solid #337ab7;
+  transform: rotate(45deg);
+  margin: -16px 0;
+  animation: arrow_7 2s infinite;
+}
+.arrow_7 span:nth-child(2) {
+  animation-delay: -0.2s;
+}
+.arrow_7 span:nth-child(3) {
+  animation-delay: -0.4s;
+}
+@keyframes arrow_7 {
+  0% {
+    opacity: 0;
+    transform: translate(0, -20px) rotate(45deg);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 20px) rotate(45deg);
+  }
+}
