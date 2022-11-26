@@ -5,7 +5,7 @@ import { IngredientsModal } from "../../components/IngredientsModal/IngredientsM
 
 const Ingredients = () => {
   const state = useSelector((state) => state);
-  const ingredients = state.getIngredientsReducer.components;
+  const ingredients = state.ingredients.components;
   const { id } = useParams();
 
   return (

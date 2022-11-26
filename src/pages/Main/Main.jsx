@@ -8,26 +8,24 @@ import { Text } from "../../components/Text/Text";
 import { useSelector } from "react-redux";
 import { Spinner } from "../../components/Spinner/Spinner";
 
-export const Main = ({ setModal }) => {
-  const loading = useSelector((state) => state.getIngredientsReducer.loading);
+export const Main = () => {
+  const loading = useSelector((state) => state.ingredients.loading);
+  if (loading) return <Spinner />;
+
   return (
     <DndProvider backend={HTML5Backend}>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <div className={styles.sections}>
-          <div className="pl-4">
-            <Text size="large" className="mb-5 pl-3">
-              Соберите бургер
-            </Text>
+      <div className={styles.sections}>
+        <div className="pl-4">
+          <Text size="large" className="mb-5 pl-3">
+            Соберите бургер
+          </Text>
 
-            <BurgerIngredients setModal={setModal} />
-          </div>
-          <div className="mt-15">
-            <BurgerConstructor setModal={setModal} />
-          </div>
+          <BurgerIngredients />
         </div>
-      )}
+        <div className="mt-15">
+          <BurgerConstructor />
+        </div>
+      </div>
     </DndProvider>
   );
 };

@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import { typeBun } from "../../utils/constans";
 import { Text } from "../Text/Text";
 
-export const BurgerIngredients = ({ setModal }) => {
-  const items = useSelector((state) => state.getIngredientsReducer.components);
+export const BurgerIngredients = () => {
+  const items = useSelector((state) => state.ingredients.components);
   const [current, setCurrent] = useState("one");
   const bunRef = useRef(null);
   const souceRef = useRef(null);
@@ -77,11 +77,7 @@ export const BurgerIngredients = ({ setModal }) => {
             {items
               .filter((item) => item.type === typeBun)
               .map((el) => (
-                <BurgerIngredient
-                  data={el}
-                  key={el._id}
-                  setModal={setModal}
-                />
+                <BurgerIngredient data={el} key={el._id} />
               ))}
           </div>
         </div>
@@ -93,11 +89,7 @@ export const BurgerIngredients = ({ setModal }) => {
             {items
               .filter((item) => item.type === "sauce")
               .map((el) => (
-                <BurgerIngredient
-                  data={el}
-                  key={el._id}
-                  setModal={setModal}
-                />
+                <BurgerIngredient data={el} key={el._id} />
               ))}
           </div>
         </div>
@@ -108,11 +100,7 @@ export const BurgerIngredients = ({ setModal }) => {
           {items
             .filter((item) => item.type === "main")
             .map((el) => (
-              <BurgerIngredient
-                data={el}
-                key={el._id}
-                setModal={setModal}
-              />
+              <BurgerIngredient data={el} key={el._id} />
             ))}
         </div>
       </div>

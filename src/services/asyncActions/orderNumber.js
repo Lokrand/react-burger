@@ -2,13 +2,14 @@ import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
 import { getCookie } from "../../utils/cookie";
 import { removeSelectedItems } from "../actions/burger";
+import { openModal } from "../actions/modal";
 import {
   getOrderRequest,
   getOrderSuccess,
   getOrderError,
 } from "../actions/orderNumber";
 
-export const getOrderNumber = (orderFor, setModal) => {
+export const getOrderNumber = (orderFor) => {
   if (orderFor?.length > 0) {
     return function (dispatch) {
       dispatch(getOrderRequest());
@@ -23,7 +24,7 @@ export const getOrderNumber = (orderFor, setModal) => {
         .then((data) => {
           dispatch(getOrderSuccess(data.order.number));
           dispatch(removeSelectedItems([]));
-          setModal("OrderPopup");
+          dispatch(openModal("OrderPopup"));
         })
         .catch((err) => {
           console.error("Error", err);

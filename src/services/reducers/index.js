@@ -4,7 +4,6 @@ import { reducer } from "./BugrerReducer";
 import { getIngredientsReducer } from "./getIngredients";
 import { getDetails } from "./getDetails";
 import { getOrderNumber } from "./getOrderNumber";
-import { getPassword } from "./getPassword";
 import { resetPassword } from "./resetPassword";
 import { login } from "./login";
 import { logout } from "./logout";
@@ -15,7 +14,7 @@ import { getFeed } from "../reducers/getFeed";
 import { socketMiddleware } from "../middleware/socketMiddleWare";
 import { wssActions } from "../actions/wssActions";
 import { wssReducer } from "./wssReducer";
-
+import { modal } from "./modal";
 const persistConfig = {
   key: "root",
   storage,
@@ -36,16 +35,16 @@ const enhancer = composeEnhancers(
 
 const rootReducer = combineReducers({
   app: reducer,
-  getIngredientsReducer,
+  ingredients: getIngredientsReducer,
   getDetails,
   getOrderNumber,
-  getPassword,
   resetPassword,
   login,
   logout,
   user,
   getFeed,
   wssReducer,
+  modal
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -9,7 +9,7 @@ import { Item } from "./Item/Item";
 export const FeedDetails = () => {
   const order = useSelector((state) => state.getFeed.details);
   const ingredients = useSelector(
-    (state) => state.getIngredientsReducer.components
+    (state) => state.ingredients.components
   );
   if (!order) return null;
   if (!order.ingredients) return null;

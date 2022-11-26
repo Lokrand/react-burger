@@ -7,17 +7,16 @@ import styles from "./Order.module.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { setCurrentOrder } from "../../../services/reducers/getFeed";
 import { useDispatch } from "react-redux";
+import { openModal } from "../../../services/actions/modal";
 
-export const Order = ({ data, status, width, setModal }) => {
+export const Order = ({ data, status, width }) => {
   const dispatch = useDispatch();
   let location = useLocation();
 
   let zIndex = 999;
   let left = 15;
   const time = getDate(data.createdAt);
-  const ingredients = useSelector(
-    (state) => state.getIngredientsReducer.components
-  );
+  const ingredients = useSelector((state) => state.ingredients.components);
   let price = 0;
   for (let i = 0; i < ingredients.length; i++) {
     for (let j = 0; j < data.ingredients.length; j++) {
@@ -54,7 +53,7 @@ export const Order = ({ data, status, width, setModal }) => {
           className={`${styles.section} ${styles.section_profile}`}
           style={{ width: width }}
           onClick={() => {
-            setModal("OrderProfileOrderPopup");
+            dispatch(openModal("OrderProfileOrderPopup"));
             dispatch(setCurrentOrder(data));
           }}
         >
@@ -123,7 +122,7 @@ export const Order = ({ data, status, width, setModal }) => {
           className={styles.section}
           style={{ width: width }}
           onClick={() => {
-            setModal("OrderFeedPopup");
+            dispatch(openModal("OrderFeedPopup"));
             dispatch(setCurrentOrder(data));
           }}
         >

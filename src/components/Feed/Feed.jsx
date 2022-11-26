@@ -12,7 +12,7 @@ import { Spinner } from "../Spinner/Spinner";
 import { Text } from "../Text/Text";
 import styles from "./Feed.module.css";
 
-export const Feed = ({ setModal }) => {
+export const Feed = () => {
   const ready = [];
   const inProgress = [];
   const dispatch = useDispatch();
@@ -57,7 +57,7 @@ export const Feed = ({ setModal }) => {
           </Text>
           <div className={styles.blocks}>
             <div className={styles.orders}>
-              <OrdersFeed setModal={setModal} width="536px" orders={orders} />
+              <OrdersFeed width="536px" orders={orders} />
             </div>
             <div>
               <div className={styles.items}>

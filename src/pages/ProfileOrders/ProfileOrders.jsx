@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Spinner } from "../../components/Spinner/Spinner";
 
-export const ProfileOrders = ({ setModal }) => {
+export const ProfileOrders = () => {
   const dispatch = useDispatch();
   const accessToken = getCookie("token");
 
@@ -49,7 +49,7 @@ export const ProfileOrders = ({ setModal }) => {
         <div>
           {orders.length > 0 ? (
             
-            <OrdersFeed setModal={setModal} width="796px" orders={reverseOrders} isProfile={true} />
+            <OrdersFeed width="796px" orders={reverseOrders} isProfile={true} />
           ) : (
             <Text size="medium">Вы ещё не сделали ни одного заказа</Text>
           )}

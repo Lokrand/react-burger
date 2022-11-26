@@ -1,37 +1,23 @@
 import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
-import {
-  getPasswordRequest,
-  getPasswordSuccess,
-  getPasswordError,
-} from "../actions/password";
 
 export const fetchPassword = (email, redirect) => {
   if (email.length > 0) {
-    return function (dispatch) {
-      dispatch(getPasswordRequest());
-      fetchPasswordBase(email)
-        .then((data) => {
-          if (data.success === true) {
-            redirect();
-          }
-          dispatch(getPasswordSuccess(data));
-        })
-        .catch((err) => {
-          console.error("Error", err);
-          dispatch(getPasswordError(err));
-        });
-    };
+    commonFetch(`${BASE_URL}/password-reset`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: email }),
+    })
+      .then((data) => {
+        if (data.success === true) {
+          redirect();
+        }
+      })
+      .catch((err) => {
+        console.error("Error", err);
+      });
   }
-};
-
-export const fetchPasswordBase = (email) => {
-  return commonFetch(`${BASE_URL}/password-reset`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email: email }),
-  });
 };

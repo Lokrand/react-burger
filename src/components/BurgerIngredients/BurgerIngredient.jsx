@@ -11,8 +11,9 @@ import { Text } from "../Text/Text";
 import { Link, useLocation } from "react-router-dom";
 import { setDetails } from "../../services/actions/details";
 import { useDispatch } from "react-redux";
+import { openModal } from "../../services/actions/modal";
 
-export const BurgerIngredient = ({ data, setModal }) => {
+export const BurgerIngredient = ({ data }) => {
   const dispatch = useDispatch();
 
   const id = data._id;
@@ -25,18 +26,18 @@ export const BurgerIngredient = ({ data, setModal }) => {
       isDrag: monitor.isDragging(),
     }),
   });
-  const location = useLocation()
-  
+  const location = useLocation();
+
   return (
     <Link
       to={{
         pathname: `/ingredients/${id}`,
-        state: { background: location }
+        state: { background: location },
       }}
       className={isDrag ? styles.isDragging : styles.item}
       onClick={() => {
-        setModal("IngredientPopup");
-        dispatch(setDetails(data))
+        dispatch(openModal("IngredientPopup"));
+        dispatch(setDetails(data));
       }}
       ref={dragRef}
     >

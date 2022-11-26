@@ -24,9 +24,9 @@ import { refreshToken } from "../../services/asyncActions/refreshToken";
 import { LoadingDots } from "../LoadingDots/LoadingDots";
 import { Arrows } from "../Arrows/Arrows";
 
-export const BurgerConstructor = ({ setModal }) => {
+export const BurgerConstructor = () => {
   const history = useHistory();
-  const items = useSelector((state) => state.getIngredientsReducer.components);
+  const items = useSelector((state) => state.ingredients.components);
   const loading = useSelector((state) => state.getOrderNumber.loading);
   const selectedItems = useSelector((state) => state.app.selectedItems);
   const reduxDispatch = useDispatch();
@@ -95,7 +95,7 @@ export const BurgerConstructor = ({ setModal }) => {
   const getCurrentOrder = currectOrder.map((el) => el._id);
 
   const handleOrderClick = () => {
-    reduxDispatch(getOrderNumber(getCurrentOrder, setModal));
+    reduxDispatch(getOrderNumber(getCurrentOrder));
   };
 
   const [, dropRef] = useDrop(() => ({

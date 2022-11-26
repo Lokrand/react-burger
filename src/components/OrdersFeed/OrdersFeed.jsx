@@ -2,7 +2,7 @@ import { generateKeys } from "../../utils/generateKeys";
 import { Order } from "./Order/Order";
 import styles from "./OrdersFeed.module.css";
 
-export const OrdersFeed = ({ setModal, width, orders, isProfile }) => {
+export const OrdersFeed = ({ width, orders, isProfile }) => {
   
   return (
     <>
@@ -15,7 +15,6 @@ export const OrdersFeed = ({ setModal, width, orders, isProfile }) => {
                 data={el}
                 status={el.status}
                 width={width}
-                setModal={setModal}
               />
             );
           })}
@@ -28,7 +27,6 @@ export const OrdersFeed = ({ setModal, width, orders, isProfile }) => {
                 key={el._id}
                 data={el}
                 width={width}
-                setModal={setModal}
               />
             );
           })}

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from "react";
+import React from "react";
 import { ModalRegister } from "../../components/ModalRegister/ModalRegister";
 import styles from "./ForgotPassword.module.css";
 import {
@@ -28,7 +28,7 @@ export const ForgotPassword = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchPassword(email, redirect));
+    fetchPassword(email, redirect);
   };
 
   if (auth) {
@@ -42,7 +42,12 @@ export const ForgotPassword = () => {
       </Text>
       <form className={styles.form} onSubmit={onSubmit}>
         <EmailInput onChange={onChange} value={email} name={"email"} />
-        <Button htmlType="submit" type="primary" size="large" onClick={onSubmit}>
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="large"
+          onClick={onSubmit}
+        >
           Восстановить
         </Button>
       </form>

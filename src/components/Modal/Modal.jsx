@@ -5,11 +5,10 @@ import { useCallback, useEffect } from "react";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import ReactDom from "react-dom";
 
-export const Modal = ({ active, setActive, children, onClose }) => {
+export const Modal = ({ active, children, onClose }) => {
   const closePopup = useCallback(() => {
-    setActive(false);
     onClose?.();
-  }, [setActive, onClose]);
+  }, [onClose]);
 
   const isOpen = active;
 
