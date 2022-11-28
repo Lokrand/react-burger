@@ -1,14 +1,18 @@
+import React from "react";
 import styles from "./Modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useCallback, useEffect } from "react";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
-import PropTypes from "prop-types";
 import ReactDom from "react-dom";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../services/actions/modal";
 
-export const Modal = ({ active, setActive, children }) => {
+export const Modal = ({ active, children, onClose }) => {
+  const dispatch = useDispatch();
   const closePopup = useCallback(() => {
-    setActive(false);
-  }, [setActive]);
+    dispatch(openModal(""));
+    onClose?.();
+  }, [onClose]);
 
   const isOpen = active;
 
@@ -42,9 +46,4 @@ export const Modal = ({ active, setActive, children }) => {
     </ModalOverlay>,
     document.getElementById("modals")
   );
-};
-
-Modal.propTypes = {
-  active: PropTypes.bool.isRequired,
-  setActive: PropTypes.func.isRequired,
 };

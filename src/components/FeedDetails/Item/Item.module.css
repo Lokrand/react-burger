@@ -1,0 +1,40 @@
+.item {
+  height: 64px;
+  width: 608px;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  align-items: center;
+  text-align: start;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+  column-gap: 9px;
+}
+
+.text {
+  text-align: start;
+  max-width: 414px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #4C4CFF;
+  background-color: #131316;
+  object-fit: cover;
+  border-radius: 9999px;
+}
+
+.block {
+  margin-left: 16px;
+  width: 528px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

@@ -1,30 +1,18 @@
 import React, { useRef, useState } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIngredient } from "./BurgerIngredient";
-import PropTypes from "prop-types";
 import styles from "./BurgerIngredients.module.css";
-import { IngredientDetails } from "../IngredientDetails/IngredientDetails";
-import { ingredientType } from "../../utils/types";
-import { useDispatch, useSelector } from "react-redux";
-import { GET_DETAILS } from "../../services/actions/actions";
+import { useSelector } from "react-redux";
 import { typeBun } from "../../utils/constans";
+import { Text } from "../Text/Text";
 
-export const BurgerIngredients = ({ modalActive, setModalActive }) => {
-  const [modalIngredient, setModalIngredient] = useState(null);
-  const items = useSelector((state) => state.getIngredientsReducer.components);
+export const BurgerIngredients = () => {
+  const items = useSelector((state) => state.ingredients.components);
   const [current, setCurrent] = useState("one");
   const bunRef = useRef(null);
   const souceRef = useRef(null);
-  const detailsDispatch = useDispatch();
 
-  const getIngredientDetails = (el) => {
-    setModalIngredient(true);
-    detailsDispatch({
-      type: GET_DETAILS,
-      payload: el,
-    });
-  };
-  function scrollBar() {
+  const scrollBar = () => {
     const bunsBlockHeight = bunRef.current.offsetHeight;
     const souceBlockHeight = souceRef.current.offsetHeight;
 
@@ -39,7 +27,12 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
     } else if (scrollPosition > bunsBlockHeight + souceBlockHeight / 2) {
       setCurrent("three");
     }
-  }
+  };
+
+  const scrollView = (type) => {
+    const mainRoot = document.getElementById(type);
+    mainRoot.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div>
@@ -48,7 +41,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
           value="one"
           active={current === "one"}
           onClick={() => {
-            document.getElementById("buns").scrollIntoView({ behavior: 'smooth', block: 'start' });
+            scrollView("buns");
             setCurrent("one");
           }}
         >
@@ -58,7 +51,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
           value="two"
           active={current === "two"}
           onClick={() => {
-            document.getElementById("souce").scrollIntoView({ behavior: 'smooth', block: 'start' });
+            scrollView("souce");
             setCurrent("two");
           }}
         >
@@ -68,7 +61,7 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
           value="three"
           active={current === "three"}
           onClick={() => {
-            document.getElementById("stuff").scrollIntoView({ behavior: 'smooth', block: 'start' });
+            scrollView("stuff");
             setCurrent("three");
           }}
         >
@@ -77,68 +70,40 @@ export const BurgerIngredients = ({ modalActive, setModalActive }) => {
       </div>
       <div className={styles.main} id="main" onScroll={scrollBar}>
         <div ref={bunRef}>
-          <p className="text text_type_main-medium mb-6" id="buns">
+          <Text size="medium" className="mb-6" id="buns">
             Булки
-          </p>
+          </Text>
           <div className={styles.items}>
             {items
               .filter((item) => item.type === typeBun)
               .map((el) => (
-                <BurgerIngredient
-                  data={el}
-                  key={el._id}
-                  onClick={() => {
-                    setModalActive(true);
-                    getIngredientDetails(el);
-                  }}
-                />
+                <BurgerIngredient data={el} key={el._id} />
               ))}
           </div>
         </div>
         <div ref={souceRef}>
-          <p className="text text_type_main-medium mb-6 mt-15" id="souce">
+          <Text size="medium" className="mb-6 mt-15" id="souce">
             Соусы
-          </p>
+          </Text>
           <div className={styles.items}>
             {items
               .filter((item) => item.type === "sauce")
               .map((el) => (
-                <BurgerIngredient
-                  data={el}
-                  key={el._id}
-                  onClick={() => {
-                    setModalActive(true);
-                    getIngredientDetails(el);
-                  }}
-                />
+                <BurgerIngredient data={el} key={el._id} />
               ))}
           </div>
         </div>
-        <p className="text text_type_main-medium mb-6 mt-15" id="stuff">
+        <Text size="medium" className="mb-6 mt-15" id="stuff">
           Начинки
-        </p>
+        </Text>
         <div className={styles.items}>
           {items
             .filter((item) => item.type === "main")
             .map((el) => (
-              <BurgerIngredient
-                data={el}
-                key={el._id}
-                onClick={() => {
-                  setModalActive(true);
-                  getIngredientDetails(el);
-                }}
-              />
+              <BurgerIngredient data={el} key={el._id} />
             ))}
         </div>
       </div>
-      {modalIngredient && (
-        <IngredientDetails active={modalActive} setActive={setModalActive} />
-      )}
     </div>
   );
-};
-
-BurgerIngredients.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape(ingredientType)),
 };

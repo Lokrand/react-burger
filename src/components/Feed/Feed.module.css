@@ -1,0 +1,54 @@
+.section {
+  max-width: 1240px;
+  margin: 37px auto 0;
+}
+
+.blocks {
+  display: flex;
+  column-gap: 60px;
+}
+
+.orders {
+  width: 600px;
+}
+
+.items {
+  display: flex;
+  column-gap: 36px;
+}
+
+.order_numbers {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column: auto;
+  column-gap: 20px;
+  max-width: 200px;
+  overflow-x: auto;
+  max-height: 320px;
+  row-gap: 8px;
+}
+
+.order_numbers::-webkit-scrollbar {
+  height: 8px;
+  width: 0;
+}
+
+.order_numbers::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+
+.order_numbers::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}
+
+.order_numbers_ready {
+  color: #00cccc;
+}
+
+.ready {
+  min-width: 272px;
+}
+
+.inProgress {
+  min-width: 272px;
+}

@@ -1,0 +1,51 @@
+.modal {
+  text-align: start;
+}
+
+.number {
+  margin: 20px 0 40px;
+}
+
+.title {
+  margin-bottom: 12px;
+}
+
+.status {
+  color: #00cccc;
+}
+
+.status_white {
+  color: #fff;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  max-height: 312px;
+  overflow: auto;
+  margin: 24px 0 40px;
+}
+
+.items::-webkit-scrollbar {
+  width: 8px;
+}
+
+.items::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+
+.items::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}
+
+.time_price {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon {
+  display: flex;
+  flex-direction: row;
+  column-gap: 9px;
+}

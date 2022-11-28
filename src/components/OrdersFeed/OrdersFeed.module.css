@@ -1,0 +1,27 @@
+.section {
+  max-height: 820px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  overflow-y: scroll;
+  padding-right: 8px;
+}
+
+.section_profile {
+  max-height: 783px;
+}
+.section::-webkit-scrollbar {
+  width: 8px;
+}
+
+.section::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+
+.section::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}
+
+.order_profile {
+  height: 198px;
+}

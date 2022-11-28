@@ -1,0 +1,27 @@
+.form {
+  composes: form from "../../styles/forms.css";
+}
+
+.new_person {
+  display: flex;
+  margin: 72px 0 16px;
+  column-gap: 8px;
+  justify-content: center;
+}
+
+.register {
+  color: #4c4cff;
+  text-decoration: none;
+  transition: all 0.1s linear;
+}
+
+.register:hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+.forget_password {
+  display: flex;
+  column-gap: 8px;
+  justify-content: center;
+}

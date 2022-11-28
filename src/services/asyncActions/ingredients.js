@@ -1,16 +1,17 @@
+import { commonFetch } from "../../utils/api";
+import { BASE_URL } from "../../utils/constans";
 import {
   getIngredientsRequest,
   getIngredientsSuccess,
   getIngredientsError,
-} from "../reducers/getIngredients";
+} from "../actions/ingredients";
 
 export const fetchIngredients = () => {
   return function (dispatch) {
     dispatch(getIngredientsRequest());
-    fetch("https://norma.nomoreparties.space/api/ingredients")
-      .then((res) => res.json())
-      .then((json) => {
-        dispatch(getIngredientsSuccess(json.data));
+    commonFetch(`${BASE_URL}/ingredients`)
+      .then((data) => {
+        dispatch(getIngredientsSuccess(data.data));
       })
       .catch((err) => {
         console.error("Error", err);

@@ -1,29 +1,34 @@
+import { commonFetch } from "../../utils/api";
+import { BASE_URL } from "../../utils/constans";
+import { getCookie } from "../../utils/cookie";
+import { removeSelectedItems } from "../actions/burger";
+import { openModal } from "../actions/modal";
 import {
   getOrderRequest,
   getOrderSuccess,
   getOrderError,
-} from "../reducers/getOrderNumber";
+} from "../actions/orderNumber";
 
 export const getOrderNumber = (orderFor) => {
   if (orderFor?.length > 0) {
     return function (dispatch) {
       dispatch(getOrderRequest());
-      fetch("https://norma.nomoreparties.space/api/orders", {
+      commonFetch(`${BASE_URL}/orders`, {
         method: "POST",
         headers: {
-          Accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: 'Bearer ' + getCookie('token')
         },
         body: JSON.stringify({ ingredients: orderFor }),
       })
-        .then((res) => res.json())
-        .then((json) => {
-          dispatch(getOrderSuccess(json.order.number));
+        .then((data) => {
+          dispatch(getOrderSuccess(data.order.number));
+          dispatch(removeSelectedItems([]));
+          dispatch(openModal("OrderPopup"));
         })
         .catch((err) => {
-          console.error("Error", err)
+          console.error("Error", err);
           dispatch(getOrderError(err));
-
         });
     };
   }

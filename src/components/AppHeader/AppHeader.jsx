@@ -1,30 +1,45 @@
+import React from "react";
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
-import {
-  BurgerIcon,
-  ListIcon,
-  ProfileIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { ListIcon, BurgerIcon, ProfileIcon } from "../../icons";
 import styles from "./AppHeader.module.css";
+import { NavLink } from "react-router-dom";
+import { Text } from "../Text/Text";
+
 export const AppHeader = () => {
   return (
     <header>
       <div className={styles.header}>
-        <div className={styles.constructor}>
-          <BurgerIcon type="primary" />
-          <p className="text text_type_main-default ml-2">Конструктор</p>
-        </div>
-        <div className={styles.order}>
-          <ListIcon type="secondary" />
-          <p className="text text_type_main-default text_color_inactive ml-2 mr-30">
-            Лента заказов
-          </p>
-        </div>
-        <Logo />
+        <NavLink
+          exact
+          to="/react-burger"
+          className={styles.link_disables}
+          activeClassName={styles.link_active}
+        >
+          <BurgerIcon />
+          <Text className="ml-2">Конструктор</Text>
+        </NavLink>
+        <NavLink
+          exact
+          to="/react-burger/feed"
+          className={`${styles.link_disables} mr-30`}
+          activeClassName={styles.link_active}
+        >
+          <ListIcon />
+          <Text className="ml-2">Лента заказов</Text>
+        </NavLink>
+        <NavLink to='/' className={styles.logo}>
+          <Logo />
+        </NavLink>
         <div className={styles.account}>
-          <ProfileIcon type="secondary" />
-          <p className="text text_type_main-default text_color_inactive ml-2">
-            Личный кабинет
-          </p>
+          <NavLink
+            exact
+            to="/profile"
+            className={styles.link_disables}
+            activeClassName={styles.link_active}
+          >
+            <ProfileIcon />
+            <Text className="ml-2">Личный кабинет</Text>
+          </NavLink>
         </div>
       </div>
     </header>

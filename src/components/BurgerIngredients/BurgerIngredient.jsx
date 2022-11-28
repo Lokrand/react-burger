@@ -1,15 +1,21 @@
+import React from "react";
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./BurgerIngredients.module.css";
-import PropTypes from "prop-types";
-import { ingredientType } from "../../utils/types";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 import { typeBun } from "../../utils/constans";
+import { Text } from "../Text/Text";
+import { Link, useLocation } from "react-router-dom";
+import { setDetails } from "../../services/actions/details";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../services/actions/modal";
 
-export const BurgerIngredient = ({ data, onClick }) => {
+export const BurgerIngredient = ({ data }) => {
+  const dispatch = useDispatch();
+
   const id = data._id;
   const selectedItems = useSelector((state) => state.app.selectedItems);
   const counter = selectedItems.filter((el) => el._id === id).length;
@@ -20,31 +26,34 @@ export const BurgerIngredient = ({ data, onClick }) => {
       isDrag: monitor.isDragging(),
     }),
   });
+  const location = useLocation();
 
   return (
-    <div
+    <Link
+      to={{
+        pathname: `/ingredients/${id}`,
+        state: { background: location },
+      }}
       className={isDrag ? styles.isDragging : styles.item}
-      onClick={onClick}
+      onClick={() => {
+        dispatch(openModal("IngredientPopup"));
+        dispatch(setDetails(data));
+      }}
       ref={dragRef}
     >
       <img src={data.image} alt={data.name} className={styles.image} />
       <div className={styles.price}>
-        <p className="text text_type_digits-default">{data.price}</p>
+        <Text type="digits">{data.price}</Text>
         <CurrencyIcon type="primary" />
       </div>
       <div className={styles.title}>
-        <p className="text text_type_main-default">{data.name}</p>
+        <Text>{data.name}</Text>
       </div>
       {counter !== 0 ? (
         <div className={styles.counter}>
           <Counter count={counter} size="default" />
         </div>
       ) : null}
-    </div>
+    </Link>
   );
-};
-
-BurgerIngredient.propTypes = {
-  data: PropTypes.shape(ingredientType).isRequired,
-  onClick: PropTypes.func.isRequired,
 };

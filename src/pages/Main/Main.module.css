@@ -1,0 +1,6 @@
+.sections {
+  display: flex;
+  column-gap: 44px;
+  justify-content: center;
+  margin-top: 40px;
+}

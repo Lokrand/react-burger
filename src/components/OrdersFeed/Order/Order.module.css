@@ -1,0 +1,51 @@
+.section {
+  height: 166px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  border-radius: 40px;
+  background-color: #1c1c21;
+  padding: 24px;
+  transition: opacity 0.2s linear;
+  text-decoration: none;
+  color: #fff;
+}
+
+.section_profile {
+  height: 198px;
+}
+
+.section:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.number {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.items {
+  min-height: 64px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+  column-gap: 9px;
+}
+
+.icons_profile {
+  max-width: 680px;
+}

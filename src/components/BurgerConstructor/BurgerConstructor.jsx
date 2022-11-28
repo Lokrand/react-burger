@@ -1,13 +1,10 @@
 /* eslint-disable */
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorIngredients } from "./ConstructorIngredients";
 import styles from "./BurgerConstructor.module.css";
-import PropTypes from "prop-types";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { OrderDetails } from "../OrderDetails/OrderDetails";
-import { ingredientType } from "../../utils/types";
 import { getPrice } from "./BurgerConstructor.utils";
 import { getOrderNumber } from "../../services/asyncActions/orderNumber";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,21 +16,33 @@ import {
 } from "../../services/actions/actions";
 import { Reorder } from "framer-motion";
 import { generateKeys } from "../../utils/generateKeys";
-import {  typeBun } from "../../utils/constans";
+import { typeBun } from "../../utils/constans";
+import { useHistory } from "react-router-dom";
+import { getCookie } from "../../utils/cookie";
+import { isTokenExpired } from "../../utils/token";
+import { refreshToken } from "../../services/asyncActions/refreshToken";
+import { LoadingDots } from "../LoadingDots/LoadingDots";
+import { Arrows } from "../Arrows/Arrows";
 
 export const BurgerConstructor = () => {
-  const items = useSelector((state) => state.getIngredientsReducer.components);
+  const history = useHistory();
+  const items = useSelector((state) => state.ingredients.components);
+  const loading = useSelector((state) => state.getOrderNumber.loading);
   const selectedItems = useSelector((state) => state.app.selectedItems);
   const reduxDispatch = useDispatch();
-  const order = useSelector((state) => state.getOrderNumber.orderNumber);
-  const [modalActive, setModalActive] = useState(false);
-  const bun = useMemo(() => selectedItems.find((el) => el.type === typeBun), [selectedItems]);
+  const bun = useMemo(
+    () => selectedItems.find((el) => el.type === typeBun),
+    [selectedItems]
+  );
   const bunTop = bun?.name + " (верх)";
   const bunBot = bun?.name + " (низ)";
   const ingredient = selectedItems.filter((item) => item.type !== typeBun);
   const totalPrice = getPrice(selectedItems);
   let doIHaveABun = false;
   const currectOrder = [];
+  const auth = useSelector((state) => state.user.isAuthenticated);
+  const token = getCookie("token");
+  const [wantDrop, setWantDrop] = useState(false);
   const [, drop] = useDrop(() => ({
     accept: typeBun,
     drop: (item) => addIngredientToBoard(item.id),
@@ -41,6 +50,15 @@ export const BurgerConstructor = () => {
       isOver: monitor.isOver(),
     }),
   }));
+
+  useEffect(() => {
+    if (selectedItems.length === 0) {
+      setWantDrop(true);
+    }
+    if (selectedItems.length > 0) {
+      setWantDrop(false)
+    }
+  }, [selectedItems.length]);
 
   const addIngredientToBoard = (id) => {
     const innredientsList = items.filter((item) => id === item._id);
@@ -109,55 +127,77 @@ export const BurgerConstructor = () => {
       });
     }
   };
+
+  const redirect = () => {
+    history.replace({ pathname: "/login", state: "/react-burger" });
+  };
+
+  const checkToken = () => {
+    if (token === undefined) {
+      reduxDispatch(refreshToken());
+    }
+    if (token !== undefined) {
+      const isExpired = isTokenExpired(token);
+      if (isExpired) {
+        reduxDispatch(refreshToken());
+      }
+    }
+  };
   return (
     <>
       <div className={styles.section} ref={drop}>
-        <div className={styles.bread}>
-          <div className={styles.secret} />
-          {bun && (
-            <ConstructorElement
-              type="top"
-              isLocked={true}
-              text={bunTop}
-              price={bun.price}
-              thumbnail={bun.image}
-            />
-          )}
-        </div>
-        <div className={styles.scrollBar} ref={dropRef}>
-          <Reorder.Group
-            as="ol"
-            axys="y"
-            values={ingredient}
-            onReorder={setItem}
-          >
-            <div className={styles.items}>
-              {ingredient.map((el) => (
-                <ConstructorIngredients
-                  key={el.key}
-                  el={el}
-                  id={el.key}
-                  remove={removeIngredient}
-                  text={el.name}
-                  price={el.price}
-                  thumbnail={el.image}
+        {wantDrop ? (
+          <div className={styles.drop}><Arrows /></div>
+        ) : (
+          <>
+            <div className={styles.bread}>
+              <div className={styles.secret} />
+              {bun && (
+                <ConstructorElement
+                  type="top"
+                  isLocked={true}
+                  text={bunTop}
+                  price={bun.price}
+                  thumbnail={bun.image}
                 />
-              ))}
+              )}
             </div>
-          </Reorder.Group>
-        </div>
-        <div className={styles.bread}>
-          <div className={styles.secret} />
-          {bun && (
-            <ConstructorElement
-              type="bottom"
-              isLocked={true}
-              text={bunBot}
-              price={bun.price}
-              thumbnail={bun.image}
-            />
-          )}
-        </div>
+            <div className={styles.scrollBar} ref={dropRef}>
+              <Reorder.Group
+                as="ol"
+                axys="y"
+                values={ingredient}
+                onReorder={setItem}
+              >
+                <div className={styles.items}>
+                  {ingredient.map((el) => (
+                    <ConstructorIngredients
+                      key={el.key}
+                      el={el}
+                      id={el.key}
+                      remove={removeIngredient}
+                      text={el.name}
+                      price={el.price}
+                      thumbnail={el.image}
+                    />
+                  ))}
+                </div>
+              </Reorder.Group>
+            </div>
+            <div className={styles.bread}>
+              <div className={styles.secret} />
+              {bun && (
+                <ConstructorElement
+                  type="bottom"
+                  isLocked={true}
+                  text={bunBot}
+                  price={bun.price}
+                  thumbnail={bun.image}
+                />
+              )}
+            </div>
+          </>
+        )}
       </div>
       <div className={styles.block}>
         <div className={styles.total}>
@@ -168,30 +208,32 @@ export const BurgerConstructor = () => {
         </div>
         {doIHaveABun ? (
           <Button
+            htmlType="button"
             type="primary"
             size="large"
             onClick={() => {
-              setModalActive(true);
-              handleOrderClick();
+              if (auth) {
+                checkToken();
+                handleOrderClick();
+              } else {
+                redirect();
+              }
             }}
           >
-            Оформить заказ
+            {loading && "Оформить заказ"}
+            {!loading && (
+              <div className={styles.loading}>
+                Ожидайте номер заказа
+                <LoadingDots />
+              </div>
+            )}
           </Button>
         ) : (
-          <Button type="primary" size="large" disabled>
+          <Button htmlType="button" type="primary" size="large" disabled>
             Оформить заказ
           </Button>
         )}
       </div>
-      <OrderDetails
-        active={modalActive}
-        setActive={setModalActive}
-        orderNumber={order}
-      />
     </>
   );
-};
-
-BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape(ingredientType)),
 };
