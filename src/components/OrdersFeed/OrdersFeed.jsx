@@ -1,9 +1,12 @@
-import { generateKeys } from "../../utils/generateKeys";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../services/actions/modal";
+import { setCurrentOrder } from "../../services/reducers/getFeed";
 import { Order } from "./Order/Order";
 import styles from "./OrdersFeed.module.css";
 
 export const OrdersFeed = ({ width, orders, isProfile }) => {
-  
+  const dispatch = useDispatch();
+
   return (
     <>
       {isProfile ? (
@@ -15,6 +18,12 @@ export const OrdersFeed = ({ width, orders, isProfile }) => {
                 data={el}
                 status={el.status}
                 width={width}
+                className={styles.order_profile}
+                pathname={`/profile/orders/${el._id}`}
+                onClick={() => {
+                  dispatch(openModal("OrderProfileOrderPopup"));
+                  dispatch(setCurrentOrder(el));
+                }}
               />
             );
           })}
@@ -27,6 +36,11 @@ export const OrdersFeed = ({ width, orders, isProfile }) => {
                 key={el._id}
                 data={el}
                 width={width}
+                pathname={`/feed/${el._id}`}
+                onClick={() => {
+                  dispatch(openModal("OrderFeedPopup"));
+                  dispatch(setCurrentOrder(el));
+                }}
               />
             );
           })}

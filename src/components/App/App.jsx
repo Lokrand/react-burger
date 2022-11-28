@@ -42,13 +42,11 @@ function App() {
   }, [dispatch]);
 
   const onCloseDetailsModal = () => {
-    dispatch(openModal(""));
     history.goBack();
     dispatch(deleteDetails());
   };
 
   const onCloseOrderModal = () => {
-    dispatch(openModal(""));
     history.goBack();
     dispatch(deleteCurrentOrder());
   };

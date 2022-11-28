@@ -4,9 +4,13 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useCallback, useEffect } from "react";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import ReactDom from "react-dom";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../services/actions/modal";
 
 export const Modal = ({ active, children, onClose }) => {
+  const dispatch = useDispatch();
   const closePopup = useCallback(() => {
+    dispatch(openModal(""));
     onClose?.();
   }, [onClose]);
 

@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "./",
   "dependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.1",
@@ -14,6 +15,7 @@
     "@types/react-dom": "^18.0.6",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.13.1",
     "axios": "^0.27.2",
+    "faker": "^6.6.6",
     "framer-motion": "^7.6.6",
     "jsx-runtime": "^1.2.0",
     "moment": "^2.29.4",

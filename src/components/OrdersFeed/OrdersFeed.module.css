@@ -21,3 +21,7 @@
 .section::-webkit-scrollbar-thumb {
   background-color: #8585ad;
 }
+
+.order_profile {
+  height: 198px;
+}
