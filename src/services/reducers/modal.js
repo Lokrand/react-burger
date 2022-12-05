@@ -14,4 +14,3 @@ export const modal = (state = initialState, action) => {
       return state;
   }
 };
-

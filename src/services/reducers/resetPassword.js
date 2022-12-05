@@ -2,7 +2,7 @@ import {
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_ERROR,
-} from "../actions/actions.js";
+} from "../actions/actions";
 
 const initialState = {
   loading: false,

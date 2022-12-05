@@ -2,7 +2,7 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_ERROR,
-} from "../actions/actions.js";
+} from "../actions/actions";
 
 const initialState = {
   loading: false,

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "./Spinner.module.css";
 
-export const Spinner = () => {
+export const Spinner: FC = () => {
   return (
         <div className={styles.loader}>
           <div className={`${styles.inner} ${styles.one}`}></div>

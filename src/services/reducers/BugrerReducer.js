@@ -1,9 +1,9 @@
-import { typeBun } from "../../utils/constans.js";
+import { typeBun } from "../../utils/constans";
 import {
   ADD_CONSTRUCTOR_ELEMENT,
   REMOVE_CONSTRUCTOR_ELEMENT,
   UPDATE_SELECTED_ITEMS_ORDER,
-} from "../actions/actions.js";
+} from "../actions/actions";
 
 const initialState = {
   selectedItems: [],

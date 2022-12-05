@@ -4,7 +4,7 @@ import {
   LOG_OUT,
   LOG_IN,
   SET_USER,
-} from "./actions.js";
+} from "./actions";
 
 export const resetPassword = (value) => {
   return {

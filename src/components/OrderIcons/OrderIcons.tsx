@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import { Text } from "../Text/Text";
 import styles from "./OrderIcons.module.css";
+import { IOrderIcons } from "./types";
 
-
-export const OrderIcons = ({ icons, className = "" }) => {
+export const OrderIcons: FC<IOrderIcons> = ({ icons, className = "" }) => {
   let zIndex = 999;
   let left = 15;
   return (

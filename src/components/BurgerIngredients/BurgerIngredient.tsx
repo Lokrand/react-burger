@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import {
   Counter,
   CurrencyIcon,
@@ -12,13 +12,15 @@ import { Link, useLocation } from "react-router-dom";
 import { setDetails } from "../../services/actions/details";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../services/actions/modal";
+import { IIngredientProps } from "./types";
 
-export const BurgerIngredient = ({ data }) => {
+export const BurgerIngredient:FC<IIngredientProps> = ({ data }) => {
+  console.log(data)
   const dispatch = useDispatch();
 
   const id = data._id;
-  const selectedItems = useSelector((state) => state.app.selectedItems);
-  const counter = selectedItems.filter((el) => el._id === id).length;
+  const selectedItems = useSelector((state:any) => state.app.selectedItems);
+  const counter = selectedItems.filter((el:any) => el._id === id).length;
   const [{ isDrag }, dragRef] = useDrag({
     type: typeBun,
     item: { id },

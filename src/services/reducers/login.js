@@ -2,7 +2,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
-} from "../actions/actions.js";
+} from "../actions/actions";
 
 const initialState = {
   loading: false,

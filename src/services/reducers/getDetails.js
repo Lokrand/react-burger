@@ -1,4 +1,4 @@
-import { DELETE_DETAILS, GET_DETAILS } from "../actions/actions.js";
+import { DELETE_DETAILS, GET_DETAILS } from "../actions/actions";
 
 const initialState = {
   details: [],
