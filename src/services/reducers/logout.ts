@@ -10,7 +10,7 @@ const initialState = {
   error: null,
 };
 
-export const logout = (state = initialState, action) => {
+export const logout = (state = initialState, action: any) => {
   switch (action.type) {
     case LOGOUT_REQUEST:
       return { ...state, loading: false };

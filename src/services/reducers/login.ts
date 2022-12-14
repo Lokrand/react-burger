@@ -12,7 +12,7 @@ const initialState = {
   error: null,
 };
 
-export const login = (state = initialState, action) => {
+export const login = (state = initialState, action: any) => {
   switch (action.type) {
     case LOGIN_REQUEST:
       return { ...state, loading: false };

@@ -10,7 +10,7 @@ import { logout } from "./logout";
 import { user } from "./user";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { getFeed } from "../reducers/getFeed";
+import { getFeed } from "./getFeed";
 import { socketMiddleware } from "../middleware/socketMiddleWare";
 import { wssActions } from "../actions/wssActions";
 import { wssReducer } from "./wssReducer";
@@ -22,10 +22,17 @@ const persistConfig = {
   whitelist: ["user", "app", "getFeed", "wssReducer"],
 };
 
-const composeEnhancers =
-  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-    : compose;
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+// const composeEnhancers =
+  // typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    // ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    // : compose;
 
 const enhancer = composeEnhancers(
   applyMiddleware(
@@ -53,3 +60,5 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = createStore(persistedReducer, enhancer);
 
 export const persistor = persistStore(store);
+
+export type AppDispatch = typeof store.dispatch;

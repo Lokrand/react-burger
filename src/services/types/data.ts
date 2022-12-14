@@ -66,6 +66,7 @@ export interface IOrder {
   _id: string,
 }
 
+
 export interface IOrdersFeed {
   width: string,
   orders: IOrder[],

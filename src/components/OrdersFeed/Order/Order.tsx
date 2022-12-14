@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector } from "react-redux";
 import { getDate } from "../../../utils/date";
@@ -8,8 +8,18 @@ import { NavLink, useLocation } from "react-router-dom";
 import { getIngredientsAmount, getTotalPrice } from "./Order.utils";
 import { OrderStatus } from "../../OrderStatus/OrderStatus";
 import { OrderIcons } from "../../OrderIcons/OrderIcons";
+import { IOrder, TIngredient } from "../../../services/types/data";
 
-export const Order = ({
+interface IOrderComponent {
+  data: IOrder,
+  status?: string,
+  width: string,
+  onClick?: () => {},
+  pathname: string,
+  className: string,
+}
+
+export const Order:FC<IOrderComponent> = ({
   data,
   status,
   width,
