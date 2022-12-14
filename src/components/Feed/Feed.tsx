@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
@@ -12,7 +12,7 @@ import { Spinner } from "../Spinner/Spinner";
 import { Text } from "../Text/Text";
 import styles from "./Feed.module.css";
 
-export const Feed = () => {
+export const Feed: FC = () => {
   const ready = [];
   const inProgress = [];
   const dispatch = useDispatch();

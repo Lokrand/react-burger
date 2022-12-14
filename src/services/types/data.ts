@@ -1,3 +1,4 @@
+import { string } from "prop-types";
 import React from "react";
 
 export type TIngredient = {
@@ -53,4 +54,20 @@ export type TText = {
   children: React.ReactNode,
   className?: string,
   id?: string,
+}
+
+export interface IOrder {
+  createdAt: string,
+  ingredients: string[],
+  name: string,
+  number: number,
+  status: string,
+  updatedAt: string,
+  _id: string,
+}
+
+export interface IOrdersFeed {
+  width: string,
+  orders: IOrder[],
+  isProfile: boolean,
 }
