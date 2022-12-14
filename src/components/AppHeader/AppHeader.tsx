@@ -1,11 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ListIcon, BurgerIcon, ProfileIcon } from "../../icons";
 import styles from "./AppHeader.module.css";
 import { NavLink } from "react-router-dom";
 import { Text } from "../Text/Text";
 
-export const AppHeader = () => {
+export const AppHeader: FC = () => {
   return (
     <header>
       <div className={styles.header}>
@@ -27,7 +27,7 @@ export const AppHeader = () => {
           <ListIcon />
           <Text className="ml-2">Лента заказов</Text>
         </NavLink>
-        <NavLink to='/' className={styles.logo}>
+        <NavLink to="/" className={styles.logo}>
           <Logo />
         </NavLink>
         <div className={styles.account}>

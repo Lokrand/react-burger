@@ -13,6 +13,28 @@ export type TIngredient = {
   _id: string;
 };
 
+export type TIngredientState = {
+  components: TIngredient[],
+  loading: boolean,
+  error: string | null,
+}
+
+export interface ILogOut {
+  message: string,
+  success: boolean,
+}
+
+export interface IAction {
+  type: string,
+  payload?: any,
+}
+
+export interface IUser {
+  name: string,
+  email: string,
+  password: string,
+}
+
 export type TText = {
   size?: string,
   type?: string,
