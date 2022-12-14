@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { Text } from "../Text/Text";
 import styles from "./FeedDetails.module.css";
@@ -6,11 +6,9 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { getDate } from "../../utils/date";
 import { Item } from "./Item/Item";
 
-export const FeedDetails = () => {
+export const FeedDetails: FC = () => {
   const order = useSelector((state) => state.getFeed.details);
-  const ingredients = useSelector(
-    (state) => state.ingredients.components
-  );
+  const ingredients = useSelector((state) => state.ingredients.components);
   if (!order) return null;
   if (!order.ingredients) return null;
   let price = 0;

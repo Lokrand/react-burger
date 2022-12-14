@@ -1,8 +1,8 @@
-import React from "react";
+import React, { FC } from "react";
 import { Text } from "../../components/Text/Text";
 import styles from "./Page404.module.css";
 
-export const Page404 = () => {
+export const Page404: FC = () => {
   return (
     <div className={styles.block}>
       <div className={styles.container}>

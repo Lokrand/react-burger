@@ -10,7 +10,7 @@ const initialState = {
   error: null,
 };
 
-export const getOrderNumber = (state = initialState, action) => {
+export const getOrderNumber = (state = initialState, action: any) => {
   switch (action.type) {
     case GET_ORDER_REQUEST:
       return { ...state, loading: false };
