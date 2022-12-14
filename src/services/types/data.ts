@@ -1,3 +1,5 @@
+import React from "react";
+
 export type TIngredient = {
   calories: number;
   carbohydrates: number;
@@ -12,6 +14,15 @@ export type TIngredient = {
   __v: number;
   _id: string;
 };
+
+export interface IConstructorIngredient {
+  el: TIngredient,
+  id: number,
+  price: number,
+  remove: (key:number) => {},
+  text: string,
+  thumbnail: string,
+}
 
 export type TIngredientState = {
   components: TIngredient[],
@@ -39,7 +50,7 @@ export type TText = {
   size?: string,
   type?: string,
   inactive?: boolean,
-  children: string|number,
+  children: React.ReactNode,
   className?: string,
   id?: string,
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import {
   CurrencyIcon,
   DeleteIcon,
@@ -7,12 +7,13 @@ import {
 import styles from "./BurgerConstructor.module.css";
 import { Text } from "../Text/Text";
 import { Reorder } from "framer-motion";
+import { IConstructorIngredient } from "../../services/types/data";
 
-export const ConstructorIngredients = (props) => {
+export const ConstructorIngredients: FC<IConstructorIngredient> = (props) => {
   return (
     <Reorder.Item
       value={props.el}
-      id={props.el}
+      id={props.el._id}
       whileDrag={{
         filter: "invert(1)",
       }}

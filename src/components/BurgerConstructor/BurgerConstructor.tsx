@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, FC } from "react";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorIngredients } from "./ConstructorIngredients";
 import styles from "./BurgerConstructor.module.css";
@@ -23,8 +23,9 @@ import { isTokenExpired } from "../../utils/token";
 import { refreshToken } from "../../services/asyncActions/refreshToken";
 import { LoadingDots } from "../LoadingDots/LoadingDots";
 import { Arrows } from "../Arrows/Arrows";
+import { IConstructorIngredient, TIngredient } from "../../services/types/data";
 
-export const BurgerConstructor = () => {
+export const BurgerConstructor: FC = () => {
   const history = useHistory();
   const items = useSelector((state) => state.ingredients.components);
   const loading = useSelector((state) => state.getOrderNumber.loading);
@@ -39,13 +40,13 @@ export const BurgerConstructor = () => {
   const ingredient = selectedItems.filter((item) => item.type !== typeBun);
   const totalPrice = getPrice(selectedItems);
   let doIHaveABun = false;
-  const currectOrder = [];
+  const currectOrder: TIngredient[] = [];
   const auth = useSelector((state) => state.user.isAuthenticated);
   const token = getCookie("token");
   const [wantDrop, setWantDrop] = useState(false);
   const [, drop] = useDrop(() => ({
     accept: typeBun,
-    drop: (item) => addIngredientToBoard(item.id),
+    drop: (item: IConstructorIngredient) => addIngredientToBoard(item.id),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
     }),
@@ -56,11 +57,11 @@ export const BurgerConstructor = () => {
       setWantDrop(true);
     }
     if (selectedItems.length > 0) {
-      setWantDrop(false)
+      setWantDrop(false);
     }
   }, [selectedItems.length]);
 
-  const addIngredientToBoard = (id) => {
+  const addIngredientToBoard = (id: number) => {
     const innredientsList = items.filter((item) => id === item._id);
     reduxDispatch({
       type: ADD_CONSTRUCTOR_ELEMENT,
@@ -68,24 +69,24 @@ export const BurgerConstructor = () => {
     });
   };
 
-  const removeIngredient = (key) => {
+  const removeIngredient = (key: string) => {
     reduxDispatch({
       type: REMOVE_CONSTRUCTOR_ELEMENT,
       payload: key,
     });
   };
-  selectedItems.forEach((el) => {
+  selectedItems.forEach((el: TIngredient) => {
     if (el.type === typeBun) {
       doIHaveABun = true;
     }
   });
   if (doIHaveABun) {
-    selectedItems.forEach((el) => {
+    selectedItems.forEach((el: TIngredient) => {
       if (el.type !== typeBun) {
         currectOrder.push(el);
       }
     });
-    selectedItems.forEach((el) => {
+    selectedItems.forEach((el: TIngredient) => {
       if (el.type === typeBun) {
         currectOrder.push(el);
         currectOrder.unshift(el);
@@ -147,7 +148,9 @@ export const BurgerConstructor = () => {
     <>
       <div className={styles.section} ref={drop}>
         {wantDrop ? (
-          <div className={styles.drop}><Arrows /></div>
+          <div className={styles.drop}>
+            <Arrows />
+          </div>
         ) : (
           <>
             <div className={styles.bread}>
