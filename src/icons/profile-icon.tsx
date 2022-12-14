@@ -1,6 +1,6 @@
-import React from "react";
+import React, { FC } from "react";
 
-export const ProfileIcon = () => {
+export const ProfileIcon: FC = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

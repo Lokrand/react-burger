@@ -8,7 +8,6 @@ import { Order } from "./Order/Order";
 
 export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
   const dispatch = useDispatch();
-  console.log('orders', orders)
   return (
     <>
       {isProfile ? (
