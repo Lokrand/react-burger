@@ -2,7 +2,7 @@ import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_ERROR,
-} from "../actions/actions.js";
+} from "../actions/actions";
 
 const initialState = {
   components: [],

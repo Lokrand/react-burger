@@ -2,7 +2,7 @@ import {
   REFRESH_TOKEN_REQUEST,
   REFRESH_TOKEN_SUCCESS,
   REFRESH_TOKEN_ERROR,
-} from "../actions/actions.js";
+} from "../actions/actions";
 
 const initialState = {
   loading: false,

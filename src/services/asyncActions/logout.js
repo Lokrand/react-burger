@@ -19,6 +19,7 @@ export const logout = () => {
     })
       .then((data) => {
         if (data.success) {
+          console.log('logout data', data)
           setCookie("token", "");
           dispatch(resetUser());
           dispatch(logoutSuccess(data));

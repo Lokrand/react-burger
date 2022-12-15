@@ -1,4 +1,4 @@
-import { DELETE_FEED, GET_FEED } from "../actions/actions.js";
+import { DELETE_FEED, GET_FEED } from "../actions/actions";
 
 const initialState = {
   details: null,

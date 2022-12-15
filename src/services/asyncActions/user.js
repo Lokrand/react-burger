@@ -1,5 +1,5 @@
 import { editUser, sendRegister, getUserDetails } from "../../utils/api";
-import { setCookie } from "../../utils/cookie.js";
+import { setCookie } from "../../utils/cookie.ts";
 import { setUser, authenticate } from "../actions/userActions";
 
 export const registerNewUser = (name, email, password, redirect) => {

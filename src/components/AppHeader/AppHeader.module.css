@@ -37,10 +37,10 @@
 }
 
 .logo {
-  transition: opacity .2s linear;
+  transition: opacity 0.2s linear;
 }
 
 .logo:hover {
-  opacity: .6;
+  opacity: 0.6;
   cursor: pointer;
 }

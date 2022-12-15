@@ -4,7 +4,7 @@ import {
   LOG_OUT,
   LOG_IN,
   SET_USER,
-} from "../actions/actions.js";
+} from "../actions/actions";
 
 const initialState = {
   name: "",

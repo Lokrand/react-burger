@@ -1,7 +1,7 @@
 import {
-  RESET_PASSWORD_REQUEST,
-  RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_ERROR,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_ERROR,
 } from "../actions/actions";
 
 const initialState = {
@@ -10,17 +10,17 @@ const initialState = {
   error: null,
 };
 
-export const resetPassword = (state = initialState, action) => {
+export const logout = (state = initialState, action: any) => {
   switch (action.type) {
-    case RESET_PASSWORD_REQUEST:
+    case LOGOUT_REQUEST:
       return { ...state, loading: false };
-    case RESET_PASSWORD_SUCCESS:
+    case LOGOUT_SUCCESS:
       return {
         ...state,
         loading: action.payload.success,
         message: action.payload.message,
       };
-    case RESET_PASSWORD_ERROR:
+    case LOGOUT_ERROR:
       return { ...state, error: action.payload, loading: false };
     default:
       return state;
