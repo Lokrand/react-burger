@@ -15,7 +15,6 @@ import { openModal } from "../../services/actions/modal";
 import { IIngredientProps } from "./types";
 
 export const BurgerIngredient:FC<IIngredientProps> = ({ data }) => {
-  console.log(data)
   const dispatch = useDispatch();
 
   const id = data._id;

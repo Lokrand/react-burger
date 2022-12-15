@@ -9,10 +9,12 @@ export type TIngredient = {
   image_mobile: string;
   name: string;
   price: number;
+  key?: string;
   proteins: number;
   type: string;
   __v: number;
   _id: string;
+  
 };
 
 export interface IConstructorIngredient {

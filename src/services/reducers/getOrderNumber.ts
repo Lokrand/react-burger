@@ -4,13 +4,19 @@ import {
   GET_ORDER_ERROR,
 } from "../actions/actions";
 
+interface IOrderNumberReducer {
+  orderNumber: number,
+  loading: boolean,
+  error: null | boolean,
+}
+
 const initialState = {
   orderNumber: 0,
   loading: true,
   error: null,
 };
 
-export const getOrderNumber = (state = initialState, action: any) => {
+export const getOrderNumber = (state = initialState, action: any):IOrderNumberReducer => {
   switch (action.type) {
     case GET_ORDER_REQUEST:
       return { ...state, loading: false };
