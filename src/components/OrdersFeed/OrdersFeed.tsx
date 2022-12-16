@@ -3,11 +3,19 @@ import styles from "./OrdersFeed.module.css";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../services/actions/modal";
 import { setCurrentOrder } from "../../services/reducers/getFeed";
-import { IOrdersFeed } from "../../services/types/data";
+import { IOrder, IOrdersFeed, TIngredient } from "../../services/types/data";
 import { Order } from "./Order/Order";
+
+interface IOnClick {
+  onClick?: (() => {}) | undefined
+}
 
 export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
   const dispatch = useDispatch();
+  const handleOnClickProfileModal = (el:IOrder):void => {
+    dispatch(openModal("OrderProfileOrderPopup"));
+    dispatch(setCurrentOrder(el));
+  }
   return (
     <>
       {isProfile ? (
@@ -21,10 +29,7 @@ export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
                 width={width}
                 className={styles.order_profile}
                 pathname={`/profile/orders/${el._id}`}
-                onClick={() => {
-                  dispatch(openModal("OrderProfileOrderPopup"));
-                  dispatch(setCurrentOrder(el));
-                }}
+                onClick={() => handleOnClickProfileModal(el)}
               />
             );
           })}

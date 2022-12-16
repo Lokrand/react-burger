@@ -27,21 +27,21 @@ import { IConstructorIngredient, TIngredient } from "../../services/types/data";
 
 export const BurgerConstructor: FC = () => {
   const history = useHistory();
-  const items = useSelector((state) => state.ingredients.components);
-  const loading = useSelector((state) => state.getOrderNumber.loading);
-  const selectedItems = useSelector((state) => state.app.selectedItems);
+  const items = useSelector((state:any) => state.ingredients.components);
+  const loading = useSelector((state:any) => state.getOrderNumber.loading);
+  const selectedItems = useSelector((state:any) => state.app.selectedItems);
   const reduxDispatch = useDispatch();
   const bun = useMemo(
-    () => selectedItems.find((el) => el.type === typeBun),
+    () => selectedItems.find((el:TIngredient) => el.type === typeBun),
     [selectedItems]
   );
   const bunTop = bun?.name + " (верх)";
   const bunBot = bun?.name + " (низ)";
-  const ingredient = selectedItems.filter((item) => item.type !== typeBun);
+  const ingredient = selectedItems.filter((item:TIngredient) => item.type !== typeBun);
   const totalPrice = getPrice(selectedItems);
   let doIHaveABun = false;
   const currectOrder: TIngredient[] = [];
-  const auth = useSelector((state) => state.user.isAuthenticated);
+  const auth = useSelector((state:any) => state.user.isAuthenticated);
   const token = getCookie("token");
   const [wantDrop, setWantDrop] = useState(false);
   const [, drop] = useDrop(() => ({
@@ -101,8 +101,8 @@ export const BurgerConstructor: FC = () => {
 
   const [, dropRef] = useDrop(() => ({
     accept: typeBun,
-    drop: (item) => {
-      selectedItems.map((el) => {
+    drop: (item:TIngredient) => {
+      selectedItems.map((el:TIngredient) => {
         if (el.key === item.key) {
           return { ...el, key: item.key };
         }
@@ -113,8 +113,8 @@ export const BurgerConstructor: FC = () => {
     }),
   }));
 
-  const setItem = (item) => {
-    const bun = selectedItems.find((el) => el.type === typeBun);
+  const setItem = (item:any):void => {
+    const bun = selectedItems.find((el:TIngredient) => el.type === typeBun);
     if (bun) {
       item.push(bun);
       reduxDispatch({

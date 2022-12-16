@@ -13,6 +13,7 @@ import { setDetails } from "../../services/actions/details";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../services/actions/modal";
 import { IIngredientProps } from "./types";
+import { TIngredient } from "../../services/types/data";
 
 export const BurgerIngredient:FC<IIngredientProps> = ({ data }) => {
   const dispatch = useDispatch();
