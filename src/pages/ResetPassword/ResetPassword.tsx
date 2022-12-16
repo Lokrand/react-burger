@@ -1,31 +1,31 @@
 /* eslint-disable */
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useState, FC, ChangeEvent, FormEvent } from "react";
 import { ModalRegister } from "../../components/ModalRegister/ModalRegister";
 import styles from "./ResetPassword.module.css";
-import ReactDom from "react-dom";
 import {
   Button,
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Text } from "../../components/Text/Text";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { resetPassword } from "../../services/asyncActions/resetPassword";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-export const ResetPassword = () => {
+export const ResetPassword: FC = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
-  const auth = useSelector((state) => state.user.isAuthenticated);
+  const history = useHistory<{ from: string }>();
+  const auth = useTypedSelector((state) => state.user.isAuthenticated);
 
   const [value, setValue] = useState({ newPassword: "", code: "" });
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setValue({ ...value, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(resetPassword(value.newPassword, value.code));
     history.replace({ pathname: "/login" });

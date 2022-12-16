@@ -1,6 +1,5 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
-import styles from "./ProfileOrders.module.css";
+import React, { useEffect, FC } from "react";
 import { Profile } from "../Profile/Profile";
 import { Text } from "../../components/Text/Text";
 import { OrdersFeed } from "../../components/OrdersFeed/OrdersFeed";
@@ -12,10 +11,10 @@ import {
 } from "../../services/actions/wssActions";
 import { getCookie } from "../../utils/cookie";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { Spinner } from "../../components/Spinner/Spinner";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-export const ProfileOrders = () => {
+export const ProfileOrders: FC = () => {
   const dispatch = useDispatch();
   const accessToken = getCookie("token");
 
@@ -31,15 +30,15 @@ export const ProfileOrders = () => {
       dispatch({ type: WSS_DELETE_ORDERS });
     };
   }, []);
-  const data = useSelector((state) => state.wssReducer.orders);
+  const data = useTypedSelector((state) => state.wssReducer.orders);
   let orders;
   let reverseOrders = [];
   if (data !== undefined) {
     orders = data.orders;
   }
   if (orders !== undefined) {
-    for (let i = orders.length-1; i >= 0; i--) {
-      reverseOrders.push(orders[i])
+    for (let i = orders.length - 1; i >= 0; i--) {
+      reverseOrders.push(orders[i]);
     }
   }
   return (
@@ -48,7 +47,6 @@ export const ProfileOrders = () => {
       {orders !== undefined && (
         <div>
           {orders.length > 0 ? (
-            
             <OrdersFeed width="796px" orders={reverseOrders} isProfile={true} />
           ) : (
             <Text size="medium">Вы ещё не сделали ни одного заказа</Text>

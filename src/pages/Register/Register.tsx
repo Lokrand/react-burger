@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import {
   Button,
   EmailInput,
@@ -7,16 +7,16 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./Register.module.css";
 import { ModalRegister } from "../../components/ModalRegister/ModalRegister";
-import ReactDom from "react-dom";
 import { Text } from "../../components/Text/Text";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { registerNewUser } from "../../services/asyncActions/user";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-export const Register = () => {
-  const auth = useSelector((state) => state.user.isAuthenticated);
+export const Register: FC = () => {
+  const auth = useTypedSelector((state) => state.user.isAuthenticated);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const history = useHistory<{ from: string }>();
   const [value, setValue] = useState({ email: "", password: "", user: "" });
 
   const onChange = (e) => {
@@ -29,10 +29,10 @@ export const Register = () => {
   }
 
   const redirect = () => {
-    window.history.pushState(null, null, `/react-burger`);
+    window.history.pushState(null, "", `/react-burger`);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e:Event) => {
     e.preventDefault();
     dispatch(
       registerNewUser(value.email, value.password, value.user, redirect)

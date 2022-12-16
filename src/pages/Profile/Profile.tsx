@@ -1,14 +1,16 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "./Profile.module.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { Text } from "../../components/Text/Text";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout } from "../../services/asyncActions/logout";
+import { IModalRegister } from "../../services/types/data";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-export const Profile = ({ children }) => {
+export const Profile: FC<IModalRegister> = ({ children }) => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.user.isAuthenticated);
+  const auth = useTypedSelector((state) => state.user.isAuthenticated);
   const logOut = () => {
     dispatch(logout());
     localStorage.removeItem("persist:root");
@@ -44,12 +46,12 @@ export const Profile = ({ children }) => {
         >
           Выход
         </NavLink>
-        { location.pathname === '/profile' && (
+        {location.pathname === "/profile" && (
           <Text className="mt-20" inactive>
             В этом разделе вы можете изменить&nbsp;свои персональные данные
           </Text>
         )}
-        { location.pathname === '/profile/orders' && (
+        {location.pathname === "/profile/orders" && (
           <Text className="mt-20" inactive>
             В этом разделе вы можете просмотреть свою историю заказов
           </Text>

@@ -91,7 +91,7 @@ export interface IEventKey {
 }
 
 export interface IModalRegister {
-  children: JSX.Element|JSX.Element[],
+  children: JSX.Element| JSX.Element[],
 }
 
 export interface IOrderDetails {

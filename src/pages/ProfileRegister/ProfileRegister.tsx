@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, FC } from "react";
 import { Profile } from "../Profile/Profile";
 import styles from "./ProfileRegister.module.css";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   Input,
   Button,
@@ -12,9 +12,10 @@ import { isTokenExpired } from "../../utils/token";
 import { getCookie } from "../../utils/cookie";
 import { refreshToken } from "../../services/asyncActions/refreshToken";
 import { userDetails } from "../../services/asyncActions/userDetails";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-export const ProfileRegister = () => {
-  const user = useSelector((state) => state.user);
+export const ProfileRegister: FC = () => {
+  const user = useTypedSelector((state) => state.user);
   const dispatch = useDispatch();
   
   const password = user.password;
@@ -60,7 +61,7 @@ export const ProfileRegister = () => {
     setIsChanged(false);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e:Event) => {
     e.preventDefault();
     checkToken();
     setTimeout(

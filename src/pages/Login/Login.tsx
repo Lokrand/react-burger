@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, FC } from "react";
 import {
   Button,
   EmailInput,
@@ -10,11 +10,12 @@ import { Text } from "../../components/Text/Text";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { login } from "../../services/asyncActions/login";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-export const Login = () => {
-  const history = useHistory();
+export const Login: FC = () => {
+  const history = useHistory<{from: string}>();
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.user.isAuthenticated);
+  const auth = useTypedSelector((state) => state.user.isAuthenticated);
   const [value, setValue] = useState({ email: "", password: "" });
 
   const onChange = (e) => {
@@ -22,7 +23,7 @@ export const Login = () => {
   };
 
   const toLogin = useCallback(
-    (e) => {
+    (e: Event) => {
       e.preventDefault();
       dispatch(login(value.email, value.password));
     },
