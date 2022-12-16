@@ -55,6 +55,8 @@ const rootReducer = combineReducers({
   modal,
 });
 
+export type RootState = ReturnType<typeof rootReducer>
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = createStore(persistedReducer, enhancer);

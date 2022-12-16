@@ -1,3 +1,4 @@
+import { Dispatch } from "react";
 import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
 import { getCookie } from "../../utils/cookie";
@@ -8,10 +9,12 @@ import {
   getOrderSuccess,
   getOrderError,
 } from "../actions/orderNumber";
+import { TGetOrderNumberAction } from "../reducers/getOrderNumber";
+import { IOrderItem } from "../types/data";
 
-export const getOrderNumber = (orderFor) => {
+export const getOrderNumber = (orderFor:IOrderItem[]) => {
   if (orderFor?.length > 0) {
-    return function (dispatch) {
+    return function (dispatch: Dispatch<TGetOrderNumberAction>) {
       dispatch(getOrderRequest());
       commonFetch(`${BASE_URL}/orders`, {
         method: "POST",

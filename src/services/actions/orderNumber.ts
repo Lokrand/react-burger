@@ -1,3 +1,4 @@
+import { orderNumberActionTypes, TGetOrderNumberAction } from "../reducers/getOrderNumber";
 import { IAction } from "../types/data";
 import {
   GET_ORDER_ERROR,
@@ -5,16 +6,16 @@ import {
   GET_ORDER_SUCCESS,
 } from "./actions";
 
-export const getOrderRequest = (): IAction => ({
-  type: GET_ORDER_REQUEST,
+export const getOrderRequest = (): TGetOrderNumberAction => ({
+  type: orderNumberActionTypes.GET_ORDER_REQUEST,
 });
 
-export const getOrderSuccess = (payload: number): IAction => ({
-  type: GET_ORDER_SUCCESS,
+export const getOrderSuccess = (payload: number): TGetOrderNumberAction => ({
+  type: orderNumberActionTypes.GET_ORDER_SUCCESS,
   payload,
 });
 
-export const getOrderError = (payload: string): IAction => ({
-  type: GET_ORDER_ERROR,
+export const getOrderError = (payload: string): TGetOrderNumberAction => ({
+  type: orderNumberActionTypes.GET_ORDER_ERROR,
   payload,
 });

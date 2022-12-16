@@ -1,36 +1,41 @@
-import React, { useRef, useState } from "react";
+import React, { FC, MutableRefObject, useRef, useState } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIngredient } from "./BurgerIngredient";
 import styles from "./BurgerIngredients.module.css";
 import { useSelector } from "react-redux";
 import { typeBun } from "../../utils/constans";
 import { Text } from "../Text/Text";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { TIngredient } from "../../services/types/data";
 
-export const BurgerIngredients = () => {
-  const items = useSelector((state) => state.ingredients.components);
-  const [current, setCurrent] = useState("one");
-  const bunRef = useRef(null);
-  const souceRef = useRef(null);
+export const BurgerIngredients:FC = () => {
+  const items = useTypedSelector((state) => state.ingredients.components);
+  const [current, setCurrent] = useState<string>("one");
+  const bunRef:any = useRef<HTMLDivElement | null>(null);
+  const souceRef:any = useRef<HTMLDivElement | null>(null);
 
   const scrollBar = () => {
     const bunsBlockHeight = bunRef.current.offsetHeight;
     const souceBlockHeight = souceRef.current.offsetHeight;
 
-    let scrollPosition = document.querySelector("#main").scrollTop;
-    if (scrollPosition > 0 && scrollPosition < bunsBlockHeight / 2) {
-      setCurrent("one");
-    } else if (
-      scrollPosition > bunsBlockHeight / 2 &&
-      scrollPosition < bunsBlockHeight + souceBlockHeight / 2
-    ) {
-      setCurrent("two");
-    } else if (scrollPosition > bunsBlockHeight + souceBlockHeight / 2) {
-      setCurrent("three");
+    let scrollElement = document.querySelector("#main")  ;
+    let scrollPosition: number | undefined = scrollElement?.scrollTop;
+    if (scrollPosition !== undefined) {
+      if (scrollPosition > 0 && scrollPosition < bunsBlockHeight / 2) {
+        setCurrent("one");
+      } else if (
+        scrollPosition > bunsBlockHeight / 2 &&
+        scrollPosition < bunsBlockHeight + souceBlockHeight / 2
+      ) {
+        setCurrent("two");
+      } else if (scrollPosition > bunsBlockHeight + souceBlockHeight / 2) {
+        setCurrent("three");
+      }
     }
   };
 
-  const scrollView = (type) => {
-    const mainRoot = document.getElementById(type);
+  const scrollView = (type:string) => {
+    const mainRoot:any = document.getElementById(type);
     mainRoot.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -75,8 +80,8 @@ export const BurgerIngredients = () => {
           </Text>
           <div className={styles.items}>
             {items
-              .filter((item) => item.type === typeBun)
-              .map((el) => (
+              .filter((item:TIngredient) => item.type === typeBun)
+              .map((el:TIngredient) => (
                 <BurgerIngredient data={el} key={el._id} />
               ))}
           </div>
@@ -87,8 +92,8 @@ export const BurgerIngredients = () => {
           </Text>
           <div className={styles.items}>
             {items
-              .filter((item) => item.type === "sauce")
-              .map((el) => (
+              .filter((item:TIngredient) => item.type === "sauce")
+              .map((el:TIngredient) => (
                 <BurgerIngredient data={el} key={el._id} />
               ))}
           </div>
@@ -98,8 +103,8 @@ export const BurgerIngredients = () => {
         </Text>
         <div className={styles.items}>
           {items
-            .filter((item) => item.type === "main")
-            .map((el) => (
+            .filter((item:TIngredient) => item.type === "main")
+            .map((el:TIngredient) => (
               <BurgerIngredient data={el} key={el._id} />
             ))}
         </div>

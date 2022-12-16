@@ -25,17 +25,20 @@ import { FeedDetails } from "../FeedDetails/FeedDetails";
 import { deleteCurrentOrder } from "../../services/reducers/getFeed";
 import { refreshToken } from "../../services/asyncActions/refreshToken";
 import { openModal } from "../../services/actions/modal";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { Location } from 'history';
 
 function App() {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+  const state = useTypedSelector((state) => state);
   const history = useHistory();
   const auth = state.user.isAuthenticated;
   const token = getCookie("token");
-  const location = useLocation();
+  const location = useLocation<{background: Location}>();
   const background = location.state && location.state.background;
-  const order = useSelector((state) => state.getOrderNumber.orderNumber);
-  const modalType = useSelector((state) => state.modal.modalType);
+  const order = state.getOrderNumber.orderNumber;
+  const modalType = state.modal.modalType;
+
   useEffect(() => {
     dispatch(fetchIngredients());
     history.replace({ pathname: location.pathname });

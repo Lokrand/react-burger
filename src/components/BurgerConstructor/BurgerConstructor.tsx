@@ -24,12 +24,13 @@ import { refreshToken } from "../../services/asyncActions/refreshToken";
 import { LoadingDots } from "../LoadingDots/LoadingDots";
 import { Arrows } from "../Arrows/Arrows";
 import { IConstructorIngredient, TIngredient } from "../../services/types/data";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 export const BurgerConstructor: FC = () => {
   const history = useHistory();
-  const items = useSelector((state:any) => state.ingredients.components);
-  const loading = useSelector((state:any) => state.getOrderNumber.loading);
-  const selectedItems = useSelector((state:any) => state.app.selectedItems);
+  const items = useTypedSelector((state) => state.ingredients.components);
+  const loading = useTypedSelector((state) => state.getOrderNumber.loading);
+  const selectedItems = useTypedSelector((state) => state.app.selectedItems);
   const reduxDispatch = useDispatch();
   const bun = useMemo(
     () => selectedItems.find((el:TIngredient) => el.type === typeBun),
@@ -41,7 +42,7 @@ export const BurgerConstructor: FC = () => {
   const totalPrice = getPrice(selectedItems);
   let doIHaveABun = false;
   const currectOrder: TIngredient[] = [];
-  const auth = useSelector((state:any) => state.user.isAuthenticated);
+  const auth = useTypedSelector((state) => state.user.isAuthenticated);
   const token = getCookie("token");
   const [wantDrop, setWantDrop] = useState(false);
   const [, drop] = useDrop(() => ({
