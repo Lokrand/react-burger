@@ -7,13 +7,8 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { getPrice } from "./BurgerConstructor.utils";
 import { getOrderNumber } from "../../services/asyncActions/orderNumber";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
-import {
-  ADD_CONSTRUCTOR_ELEMENT,
-  REMOVE_CONSTRUCTOR_ELEMENT,
-  UPDATE_SELECTED_ITEMS_ORDER,
-} from "../../services/actions/actions";
 import { Reorder } from "framer-motion";
 import { generateKeys } from "../../utils/generateKeys";
 import { typeBun } from "../../utils/constans";
@@ -25,6 +20,13 @@ import { LoadingDots } from "../LoadingDots/LoadingDots";
 import { Arrows } from "../Arrows/Arrows";
 import { IConstructorIngredient, TIngredient } from "../../services/types/data";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import {
+  addConstructorElement,
+  removeConstructorElement,
+  updateSelectedItemsOrder,
+} from "../../services/actions/burger";
+import { Dispatch } from "@reduxjs/toolkit";
+import { store } from "../../services/reducers";
 
 export const BurgerConstructor: FC = () => {
   const history = useHistory();
@@ -33,12 +35,14 @@ export const BurgerConstructor: FC = () => {
   const selectedItems = useTypedSelector((state) => state.app.selectedItems);
   const reduxDispatch = useDispatch();
   const bun = useMemo(
-    () => selectedItems.find((el:TIngredient) => el.type === typeBun),
+    () => selectedItems.find((el: TIngredient) => el.type === typeBun),
     [selectedItems]
   );
   const bunTop = bun?.name + " (верх)";
   const bunBot = bun?.name + " (низ)";
-  const ingredient = selectedItems.filter((item:TIngredient) => item.type !== typeBun);
+  const ingredient = selectedItems.filter(
+    (item: TIngredient) => item.type !== typeBun
+  );
   const totalPrice = getPrice(selectedItems);
   let doIHaveABun = false;
   const currectOrder: TIngredient[] = [];
@@ -62,25 +66,23 @@ export const BurgerConstructor: FC = () => {
     }
   }, [selectedItems.length]);
 
-  const addIngredientToBoard = (id: number) => {
+  const addIngredientToBoard = (id: string | undefined) => {
     const innredientsList = items.filter((item) => id === item._id);
-    reduxDispatch({
-      type: ADD_CONSTRUCTOR_ELEMENT,
-      payload: { ...innredientsList[0], key: generateKeys() },
-    });
+    reduxDispatch(
+      addConstructorElement({ ...innredientsList[0], key: generateKeys() })
+    );
   };
 
   const removeIngredient = (key: string) => {
-    reduxDispatch({
-      type: REMOVE_CONSTRUCTOR_ELEMENT,
-      payload: key,
-    });
+    reduxDispatch(removeConstructorElement(key));
   };
+
   selectedItems.forEach((el: TIngredient) => {
     if (el.type === typeBun) {
       doIHaveABun = true;
     }
   });
+
   if (doIHaveABun) {
     selectedItems.forEach((el: TIngredient) => {
       if (el.type !== typeBun) {
@@ -94,16 +96,17 @@ export const BurgerConstructor: FC = () => {
       }
     });
   }
-  const getCurrentOrder = currectOrder.map((el) => el._id);
 
+  const getCurrentOrder = currectOrder.map((el) => el._id);
+  const dispatchStore = store.dispatch as typeof store.dispatch | Dispatch<any>;
   const handleOrderClick = () => {
-    reduxDispatch(getOrderNumber(getCurrentOrder));
+    dispatchStore(getOrderNumber(getCurrentOrder));
   };
 
   const [, dropRef] = useDrop(() => ({
     accept: typeBun,
-    drop: (item:TIngredient) => {
-      selectedItems.map((el:TIngredient) => {
+    drop: (item: TIngredient) => {
+      selectedItems.map((el: TIngredient) => {
         if (el.key === item.key) {
           return { ...el, key: item.key };
         }
@@ -114,19 +117,13 @@ export const BurgerConstructor: FC = () => {
     }),
   }));
 
-  const setItem = (item:any):void => {
-    const bun = selectedItems.find((el:TIngredient) => el.type === typeBun);
+  const setItem = (item: any): void => {
+    const bun = selectedItems.find((el: TIngredient) => el.type === typeBun);
     if (bun) {
       item.push(bun);
-      reduxDispatch({
-        type: UPDATE_SELECTED_ITEMS_ORDER,
-        payload: item,
-      });
+      reduxDispatch(updateSelectedItemsOrder(item));
     } else {
-      reduxDispatch({
-        type: UPDATE_SELECTED_ITEMS_ORDER,
-        payload: item,
-      });
+      reduxDispatch(updateSelectedItemsOrder(item));
     }
   };
 

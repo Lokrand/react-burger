@@ -1,5 +1,4 @@
-import { IAction, TIngredient } from "../types/data";
-// import { UPDATE_SELECTED_ITEMS_ORDER } from "./actions";
+import { TIngredient } from "../types/data";
 
 export enum BurgerActionTypes {
   ADD_CONSTRUCTOR_ELEMENT = "ADD_CONSTRUCTOR_ELEMENT",
@@ -21,22 +20,22 @@ interface IRemoveConstructorElementAction {
   payload: string;
 }
 
-export type TBurgerAction =
+export type TBurgerActions =
   | IAddConstructorElementAction
   | IRemoveConstructorElementAction
   | IUpdateSelectedItemsAction;
 
-export const addConstructorElement = (payload: TIngredient): TBurgerAction => ({
+export const addConstructorElement = (payload: TIngredient): TBurgerActions => ({
   type: BurgerActionTypes.ADD_CONSTRUCTOR_ELEMENT,
   payload,
 });
 
-export const removeConstructorElement = (payload: string): TBurgerAction => ({
+export const removeConstructorElement = (payload: string): TBurgerActions => ({
   type: BurgerActionTypes.REMOVE_CONSTRUCTOR_ELEMENT,
   payload,
 });
 
-export const removeSelectedItems = (payload: TIngredient[]): TBurgerAction => ({
+export const updateSelectedItemsOrder = (payload: TIngredient[]): TBurgerActions => ({
   type: BurgerActionTypes.UPDATE_SELECTED_ITEMS_ORDER,
   payload,
 });

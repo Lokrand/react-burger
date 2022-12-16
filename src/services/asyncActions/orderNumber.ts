@@ -2,7 +2,7 @@ import { Dispatch } from "react";
 import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
 import { getCookie } from "../../utils/cookie";
-import { IRemoveSelectedItemsAction, removeSelectedItems } from "../actions/burger";
+import { TBurgerActions, updateSelectedItemsOrder } from "../actions/burger";
 import { IOpenModalAction, openModal } from "../actions/modal";
 import {
   getOrderRequest,
@@ -12,9 +12,9 @@ import {
 } from "../actions/orderNumber";
 import { IOrderItem } from "../types/data";
 
-export const getOrderNumber = (orderFor:IOrderItem[]) => {
+export const getOrderNumber = (orderFor:string[]) => {
   if (orderFor?.length > 0) {
-    return function (dispatch: Dispatch<TGetOrderNumberAction | IOpenModalAction | IRemoveSelectedItemsAction>) {
+    return function (dispatch: Dispatch<TGetOrderNumberAction | IOpenModalAction | TBurgerActions>) {
       dispatch(getOrderRequest());
       commonFetch(`${BASE_URL}/orders`, {
         method: "POST",
@@ -26,7 +26,7 @@ export const getOrderNumber = (orderFor:IOrderItem[]) => {
       })
         .then((data) => {
           dispatch(getOrderSuccess(data.order.number));
-          dispatch(removeSelectedItems([]));
+          dispatch(updateSelectedItemsOrder([]));
           dispatch(openModal("OrderPopup"));
         })
         .catch((err) => {

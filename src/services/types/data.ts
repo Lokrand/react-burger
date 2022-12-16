@@ -19,9 +19,9 @@ export type TIngredient = {
 
 export interface IConstructorIngredient {
   el: TIngredient;
-  id: number;
+  id: string | undefined;
   price: number;
-  remove: (key: number) => {};
+  remove: (key: string) => void;
   text: string;
   thumbnail: string;
 }
@@ -69,7 +69,7 @@ export interface IOrder {
 
 export interface IOrdersFeed {
   width: string;
-  orders: IOrder[];
+  orders: string[];
   isProfile: boolean;
 }
 

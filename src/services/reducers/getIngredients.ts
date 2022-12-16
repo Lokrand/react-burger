@@ -1,33 +1,10 @@
-import { Interface } from "readline";
 import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_ERROR,
 } from "../actions/actions";
+import { TGetIngredientsActions } from "../actions/ingredients";
 import { TIngredient } from "../types/data";
-
-enum getIngredientsActionTypes {
-  GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST",
-  GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS",
-  GET_INGREDIENTS_ERROR = "GET_INGREDIENTS_ERROR",
-}
-
-interface IGetIngredientsRequest {
-  type: getIngredientsActionTypes.GET_INGREDIENTS_REQUEST;
-}
-interface IGetIngredientsSuccess {
-  type: getIngredientsActionTypes.GET_INGREDIENTS_SUCCESS;
-  payload: TIngredient[];
-}
-interface IGetIngredientsError {
-  type: getIngredientsActionTypes.GET_INGREDIENTS_ERROR;
-  payload: string | null;
-}
-
-type TGetIngredientsActions =
-  | IGetIngredientsRequest
-  | IGetIngredientsSuccess
-  | IGetIngredientsError;
 
 interface IGetIngredientsState {
   components: TIngredient[];

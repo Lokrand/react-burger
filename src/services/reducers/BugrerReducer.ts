@@ -1,5 +1,5 @@
 import { typeBun } from "../../utils/constans";
-import { BurgerActionTypes, TBurgerAction } from "../actions/burger";
+import { BurgerActionTypes, TBurgerActions } from "../actions/burger";
 import { TIngredient } from "../types/data";
 
 interface IBurgerState {
@@ -12,7 +12,7 @@ const initialState: IBurgerState = {
 
 export const reducer = (
   state = initialState,
-  action: TBurgerAction
+  action: TBurgerActions
 ): IBurgerState => {
   switch (action.type) {
     case BurgerActionTypes.ADD_CONSTRUCTOR_ELEMENT:

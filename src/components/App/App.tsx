@@ -103,7 +103,7 @@ function App() {
         <Route path="/ingredients/:id" children={<IngredientDetails />} />
       </Modal>
 
-      <Modal active={modalType === "OrderPopup"}>
+      <Modal active={modalType === "OrderPopup"} onClose={() => {}}>
         <OrderDetails orderNumber={order} />
       </Modal>
 
