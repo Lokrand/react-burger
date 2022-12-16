@@ -1,12 +1,11 @@
 import React, { FC } from 'react'
 import styles from "./Ingredients.module.css";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { IngredientsModal } from "../../components/IngredientsModal/IngredientsModal";
-import { TIngredientState } from "../../services/types/data";
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
-const Ingredients = () => {
-  const ingredients = useSelector((state) => state.ingredients.components);
+const Ingredients: FC = () => {
+  const ingredients = useTypedSelector((state) => state.ingredients.components);
   const { id } = useParams();
 
   return (

@@ -1,8 +1,9 @@
-import React from 'react'
-import styles from './IngredientsModal.module.css'
+import React, { FC } from "react";
+import styles from "./IngredientsModal.module.css";
 import { Text } from "../Text/Text";
+import { TIngredient } from "../../services/types/data";
 
-export const IngredientsModal = ({data}) => {
+export const IngredientsModal: FC<TIngredient> = (data) => {
   return (
     <div>
       <div className={styles.title}>
@@ -49,5 +50,5 @@ export const IngredientsModal = ({data}) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

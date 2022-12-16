@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from "react";
+import React, { ChangeEvent, FormEventHandler, FC } from "react";
 import { ModalRegister } from "../../components/ModalRegister/ModalRegister";
 import styles from "./ForgotPassword.module.css";
 import {
@@ -7,26 +7,27 @@ import {
   EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Text } from "../../components/Text/Text";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { resetPassword } from "../../services/actions/userActions";
 import { fetchPassword } from "../../services/asyncActions/forgotPassword";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-export const ForgotPassword = () => {
+export const ForgotPassword: FC = () => {
   const dispatch = useDispatch();
-  const email = useSelector((state) => state.user.email);
-  const history = useHistory();
-  const auth = useSelector((state) => state.user.isAuthenticated);
+  const email = useTypedSelector((state) => state.user.email);
+  const history = useHistory<{ from: string }>();
+  const auth = useTypedSelector((state) => state.user.isAuthenticated);
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(resetPassword(e.target.value));
   };
 
-  function redirect() {
+  const redirect = () => {
     history.push(`/reset-password`, { from: "forgot-password" });
   }
 
-  const onSubmit = (e) => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     fetchPassword(email, redirect);
   };
@@ -42,12 +43,7 @@ export const ForgotPassword = () => {
       </Text>
       <form className={styles.form} onSubmit={onSubmit}>
         <EmailInput onChange={onChange} value={email} name={"email"} />
-        <Button
-          htmlType="submit"
-          type="primary"
-          size="large"
-          onClick={onSubmit}
-        >
+        <Button htmlType="submit" type="primary" size="large">
           Восстановить
         </Button>
       </form>

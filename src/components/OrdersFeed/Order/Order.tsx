@@ -9,6 +9,7 @@ import { getIngredientsAmount, getTotalPrice } from "./Order.utils";
 import { OrderStatus } from "../../OrderStatus/OrderStatus";
 import { OrderIcons } from "../../OrderIcons/OrderIcons";
 import { IOrder, TIngredient } from "../../../services/types/data";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 interface IOrderComponent {
   data: IOrder,
@@ -29,7 +30,7 @@ export const Order:FC<IOrderComponent> = ({
 }) => {
   const location = useLocation();
   const time = getDate(data.createdAt);
-  const ingredients = useSelector((state) => state.ingredients.components);
+  const ingredients = useTypedSelector((state) => state.ingredients.components);
   const result = getIngredientsAmount(data.ingredients, ingredients);
   const price = getTotalPrice(data.ingredients, ingredients);
 

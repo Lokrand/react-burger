@@ -79,3 +79,25 @@ export interface IOrderItem {
   name: string;
   count: number;
 }
+
+export interface IModal {
+  active: boolean,
+  children: JSX.Element|JSX.Element[],
+  onClose: () => void,
+}
+
+export interface IEventKey {
+  key: string;
+}
+
+export interface IModalRegister {
+  children: JSX.Element|JSX.Element[],
+}
+
+export interface IOrderDetails {
+  orderNumber: number
+}
+
+export interface IProtectedRoute {
+  children: JSX.Element | JSX.Element[];
+}

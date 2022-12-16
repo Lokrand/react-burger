@@ -1,8 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import icon from "../../images/done.png";
+import { IOrderDetails } from "../../services/types/data";
 import { Text } from "../Text/Text";
 
-export const OrderDetails = ({ orderNumber }) => {
+export const OrderDetails: FC<IOrderDetails> = ({ orderNumber }) => {
   return (
     <>
       <Text size="large" type="digits" className="mt-25 mb-8">

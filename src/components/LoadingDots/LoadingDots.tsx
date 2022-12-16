@@ -1,7 +1,7 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "./LoadingDots.module.css";
 
-export const LoadingDots = () => {
+export const LoadingDots: FC = () => {
   return (
     <div className={styles.spinner_box}>
       <div className={styles.pulse_container}>
