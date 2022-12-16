@@ -1,10 +1,14 @@
-import { SET_MODAL } from "../actions/modal";
+import { IOpenModalAction, SET_MODAL } from "../actions/modal";
 
-const initialState = {
+interface IModalState {
+  modalType: string;
+}
+
+const initialState: IModalState = {
   modalType: "",
 };
 
-export const modal = (state = initialState, action: any) => {
+export const modal = (state = initialState, action: IOpenModalAction): IModalState => {
   switch (action.type) {
     case SET_MODAL:
       return {

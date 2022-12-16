@@ -1,34 +1,6 @@
 import { typeBun } from "../../utils/constans";
-// import {
-//   ADD_CONSTRUCTOR_ELEMENT,
-//   REMOVE_CONSTRUCTOR_ELEMENT,
-//   UPDATE_SELECTED_ITEMS_ORDER,
-// } from "../actions/actions";
+import { BurgerActionTypes, TBurgerAction } from "../actions/burger";
 import { TIngredient } from "../types/data";
-
-enum BurgerActionTypes {
-  ADD_CONSTRUCTOR_ELEMENT = "ADD_CONSTRUCTOR_ELEMENT",
-  REMOVE_CONSTRUCTOR_ELEMENT = "REMOVE_CONSTRUCTOR_ELEMENT",
-  UPDATE_SELECTED_ITEMS_ORDER = "UPDATE_SELECTED_ITEMS_ORDER",
-}
-
-interface IAddConstructorElementAction {
-  type: BurgerActionTypes.ADD_CONSTRUCTOR_ELEMENT;
-  payload: TIngredient;
-}
-interface IRemoveConstructorElementAction {
-  type: BurgerActionTypes.REMOVE_CONSTRUCTOR_ELEMENT;
-  payload: string;
-}
-interface IUpdateSelectedItemsAction {
-  type: BurgerActionTypes.UPDATE_SELECTED_ITEMS_ORDER;
-  payload: TIngredient[];
-}
-
-type TBurgerAction =
-  | IAddConstructorElementAction
-  | IRemoveConstructorElementAction
-  | IUpdateSelectedItemsAction;
 
 interface IBurgerState {
   selectedItems: TIngredient[];

@@ -2,19 +2,19 @@ import { Dispatch } from "react";
 import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
 import { getCookie } from "../../utils/cookie";
-import { removeSelectedItems } from "../actions/burger";
-import { openModal } from "../actions/modal";
+import { IRemoveSelectedItemsAction, removeSelectedItems } from "../actions/burger";
+import { IOpenModalAction, openModal } from "../actions/modal";
 import {
   getOrderRequest,
   getOrderSuccess,
   getOrderError,
+  TGetOrderNumberAction,
 } from "../actions/orderNumber";
-import { TGetOrderNumberAction } from "../reducers/getOrderNumber";
 import { IOrderItem } from "../types/data";
 
 export const getOrderNumber = (orderFor:IOrderItem[]) => {
   if (orderFor?.length > 0) {
-    return function (dispatch: Dispatch<TGetOrderNumberAction>) {
+    return function (dispatch: Dispatch<TGetOrderNumberAction | IOpenModalAction | IRemoveSelectedItemsAction>) {
       dispatch(getOrderRequest());
       commonFetch(`${BASE_URL}/orders`, {
         method: "POST",

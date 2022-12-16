@@ -1,10 +1,30 @@
-import { orderNumberActionTypes, TGetOrderNumberAction } from "../reducers/getOrderNumber";
-import { IAction } from "../types/data";
-import {
-  GET_ORDER_ERROR,
-  GET_ORDER_REQUEST,
-  GET_ORDER_SUCCESS,
-} from "./actions";
+export enum orderNumberActionTypes {
+  GET_ORDER_REQUEST = "GET_ORDER_REQUEST",
+  GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS",
+  GET_ORDER_ERROR = "GET_ORDER_ERROR",
+}
+
+interface IGetOrderNumberRequest {
+  type: orderNumberActionTypes.GET_ORDER_REQUEST;
+}
+interface IGetOrderNumberSuccess {
+  type: orderNumberActionTypes.GET_ORDER_SUCCESS;
+  payload: number;
+}
+interface IGetOrderNumberError {
+  type: orderNumberActionTypes.GET_ORDER_ERROR;
+  payload: string | null;
+}
+
+export type TGetOrderNumberAction =
+  | IGetOrderNumberRequest
+  | IGetOrderNumberSuccess
+  | IGetOrderNumberError;
+export interface IGetOrderNumberState {
+  orderNumber: number;
+  loading: boolean;
+  error: null | string;
+}
 
 export const getOrderRequest = (): TGetOrderNumberAction => ({
   type: orderNumberActionTypes.GET_ORDER_REQUEST,
