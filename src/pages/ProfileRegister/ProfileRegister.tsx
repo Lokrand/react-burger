@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, FC } from "react";
 import { Profile } from "../Profile/Profile";
 import styles from "./ProfileRegister.module.css";
-
 import { useDispatch } from "react-redux";
 import {
   Input,

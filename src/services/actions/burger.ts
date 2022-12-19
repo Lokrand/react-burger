@@ -10,7 +10,12 @@ interface IUpdateSelectedItemsAction {
   type: BurgerActionTypes.UPDATE_SELECTED_ITEMS_ORDER;
   payload: TIngredient[];
 }
-
+/////
+type TUpdateSelectedItemsAction = IReduxAction<
+  BurgerActionTypes.UPDATE_SELECTED_ITEMS_ORDER,
+  TIngredient[]
+>;
+/////
 interface IAddConstructorElementAction {
   type: BurgerActionTypes.ADD_CONSTRUCTOR_ELEMENT;
   payload: TIngredient;
@@ -20,12 +25,21 @@ interface IRemoveConstructorElementAction {
   payload: string;
 }
 
+////
+interface IReduxAction<Type, Payload> {
+  type: Type;
+  payload: Payload;
+}
+////
+
 export type TBurgerActions =
   | IAddConstructorElementAction
   | IRemoveConstructorElementAction
   | IUpdateSelectedItemsAction;
 
-export const addConstructorElement = (payload: TIngredient): TBurgerActions => ({
+export const addConstructorElement = (
+  payload: TIngredient
+): TBurgerActions => ({
   type: BurgerActionTypes.ADD_CONSTRUCTOR_ELEMENT,
   payload,
 });
@@ -35,7 +49,9 @@ export const removeConstructorElement = (payload: string): TBurgerActions => ({
   payload,
 });
 
-export const updateSelectedItemsOrder = (payload: TIngredient[]): TBurgerActions => ({
+export const updateSelectedItemsOrder = (
+  payload: TIngredient[]
+): TBurgerActions => ({
   type: BurgerActionTypes.UPDATE_SELECTED_ITEMS_ORDER,
   payload,
 });

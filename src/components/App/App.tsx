@@ -1,8 +1,8 @@
 /* eslint-disable */
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect } from "react";
 import { AppHeader } from "../AppHeader/AppHeader";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchIngredients } from "../../services/asyncActions/ingredients.js";
+import { useDispatch } from "react-redux";
+import { fetchIngredients } from "../../services/asyncActions/ingredients";
 import { Login } from "../../pages/Login/Login";
 import { Register } from "../../pages/Register/Register";
 import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword";
@@ -24,17 +24,16 @@ import { Page404 } from "../../pages/Page404/Page404";
 import { FeedDetails } from "../FeedDetails/FeedDetails";
 import { deleteCurrentOrder } from "../../services/reducers/getFeed";
 import { refreshToken } from "../../services/asyncActions/refreshToken";
-import { openModal } from "../../services/actions/modal";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { Location } from 'history';
+import { Location } from "history";
 
-function App() {
+const App: FC = () => {
   const dispatch = useDispatch();
   const state = useTypedSelector((state) => state);
   const history = useHistory();
   const auth = state.user.isAuthenticated;
   const token = getCookie("token");
-  const location = useLocation<{background: Location}>();
+  const location = useLocation<{ background: Location }>();
   const background = location.state && location.state.background;
   const order = state.getOrderNumber.orderNumber;
   const modalType = state.modal.modalType;
@@ -103,7 +102,7 @@ function App() {
         <Route path="/ingredients/:id" children={<IngredientDetails />} />
       </Modal>
 
-      <Modal active={modalType === "OrderPopup"} onClose={() => {}}>
+      <Modal active={modalType === "OrderPopup"}>
         <OrderDetails orderNumber={order} />
       </Modal>
 
@@ -122,6 +121,6 @@ function App() {
       </Modal>
     </>
   );
-}
+};
 
 export default App;

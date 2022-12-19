@@ -6,9 +6,15 @@ import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import ReactDom from "react-dom";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../services/actions/modal";
-import { IEventKey, IModal } from "../../services/types/data";
+import { IEventKey } from "../../services/types/data";
 
-export const Modal: FC<IModal> = ({ active, children, onClose }) => {
+export interface IModalProps {
+  active: boolean;
+  children: JSX.Element | JSX.Element[];
+  onClose?: () => void;
+}
+
+export const Modal: FC<IModalProps> = ({ active, children, onClose }) => {
   const dispatch = useDispatch();
   const closePopup = useCallback(() => {
     dispatch(openModal(""));
@@ -18,7 +24,7 @@ export const Modal: FC<IModal> = ({ active, children, onClose }) => {
   const isOpen = active;
 
   useEffect(() => {
-    function closeByEscape(evt: IEventKey) {
+    function closeByEscape(evt: KeyboardEvent) {
       if (evt.key === "Escape") {
         closePopup();
       }

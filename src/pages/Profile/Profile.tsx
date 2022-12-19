@@ -4,10 +4,9 @@ import { NavLink, useLocation } from "react-router-dom";
 import { Text } from "../../components/Text/Text";
 import { useDispatch } from "react-redux";
 import { logout } from "../../services/asyncActions/logout";
-import { IModalRegister } from "../../services/types/data";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-export const Profile: FC<IModalRegister> = ({ children }) => {
+export const Profile: FC<React.PropsWithChildren> = ({ children }) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const auth = useTypedSelector((state) => state.user.isAuthenticated);

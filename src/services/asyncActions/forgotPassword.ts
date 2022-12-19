@@ -1,7 +1,7 @@
 import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
 
-export const fetchPassword = (email, redirect) => {
+export const fetchPassword = (email: string, redirect: VoidFunction) => {
   if (email.length > 0) {
     commonFetch(`${BASE_URL}/password-reset`, {
       method: "POST",

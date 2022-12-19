@@ -1,10 +1,14 @@
 import React, { FC } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, RouteProps } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { IProtectedRoute } from "../../services/types/data";
+// import { IProtectedRoute } from "../../services/types/data";
 
+export type TProtectedRoute = Pick<RouteProps, "children" | "path" | "exact">;
 
-export const ProtectedRoute: FC<IProtectedRoute> = ({ children, ...rest }) => {
+export const ProtectedRoute: FC<TProtectedRoute> = ({
+  children,
+  ...rest
+}) => {
   const user = useTypedSelector((state) => state.user);
   const auth = user.isAuthenticated;
 
@@ -13,7 +17,7 @@ export const ProtectedRoute: FC<IProtectedRoute> = ({ children, ...rest }) => {
       {...rest}
       render={({ location }) =>
         auth ? (
-          children
+          children as JSX.Element
         ) : (
           <Redirect
             to={{

@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 import {
   WSS_CONNECTION_CLOSED,
   WSS_CONNECTION_REQUEST,
@@ -25,7 +26,7 @@ export const Feed: FC = () => {
       dispatch({ type: WSS_DELETE_ORDERS });
     };
   }, []);
-  const data = useSelector((state) => state.wssReducer.orders);
+  const data = useTypedSelector((state) => state.wssReducer.orders);
   let orders;
   let total;
   let totalToday;

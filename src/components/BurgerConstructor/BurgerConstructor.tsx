@@ -166,7 +166,7 @@ export const BurgerConstructor: FC = () => {
             <div className={styles.scrollBar} ref={dropRef}>
               <Reorder.Group
                 as="ol"
-                axys="y"
+                axis="y"
                 values={ingredient}
                 onReorder={setItem}
               >

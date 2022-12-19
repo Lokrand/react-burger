@@ -7,7 +7,7 @@ import {
 import styles from "./Login.module.css";
 import { ModalRegister } from "../../components/ModalRegister/ModalRegister";
 import { Text } from "../../components/Text/Text";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { login } from "../../services/asyncActions/login";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
@@ -18,12 +18,12 @@ export const Login: FC = () => {
   const auth = useTypedSelector((state) => state.user.isAuthenticated);
   const [value, setValue] = useState({ email: "", password: "" });
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
 
   const toLogin = useCallback(
-    (e: Event) => {
+    (e: React.FormEvent) => {
       e.preventDefault();
       dispatch(login(value.email, value.password));
     },

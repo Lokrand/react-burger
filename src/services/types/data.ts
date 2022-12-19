@@ -14,7 +14,6 @@ export type TIngredient = {
   type: string;
   __v: number;
   _id: string;
-  
 };
 
 export interface IConstructorIngredient {
@@ -70,7 +69,7 @@ export interface IOrder {
 export interface IOrdersFeed {
   width: string;
   orders: string[];
-  isProfile: boolean;
+  isProfile?: boolean;
 }
 
 export interface IOrderItem {
@@ -80,24 +79,8 @@ export interface IOrderItem {
   count: number;
 }
 
-export interface IModal {
-  active: boolean,
-  children: JSX.Element|JSX.Element[],
-  onClose: () => void,
-}
-
-export interface IEventKey {
-  key: string;
-}
-
-export interface IModalRegister {
-  children: JSX.Element| JSX.Element[],
-}
-
 export interface IOrderDetails {
-  orderNumber: number
+  orderNumber: number;
 }
 
-export interface IProtectedRoute {
-  children: JSX.Element | JSX.Element[];
-}
+

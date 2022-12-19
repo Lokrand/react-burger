@@ -4,7 +4,7 @@ import { setCookie } from "../../utils/cookie";
 import { loginRequest, loginSuccess, loginError } from "../actions/login";
 import { authenticate, setUser } from "../actions/userActions";
 
-export const login = (email, password) => {
+export const login = (email: string, password: string) => {
   return function (dispatch) {
     dispatch(loginRequest());
     commonFetch(`${BASE_URL}/auth/login`, {
