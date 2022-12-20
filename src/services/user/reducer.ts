@@ -1,38 +1,42 @@
-import {
-  RESET_PASSWORD,
-  REGISTER_USER,
-  LOG_OUT,
-  LOG_IN,
-  SET_USER,
-} from "../actions/actions";
+import { TUserActions, UserActionTypes } from "./actions";
 
-const initialState = {
+interface IUserState {
+  name: string;
+  email: string;
+  password: string;
+  isAuthenticated: boolean;
+}
+
+const initialState: IUserState = {
   name: "",
   email: "",
   password: "",
   isAuthenticated: false,
 };
 
-export const user = (state = initialState, action) => {
+export const user = (
+  state = initialState,
+  action: TUserActions
+): IUserState => {
   switch (action.type) {
-    case REGISTER_USER:
+    case UserActionTypes.REGISTER_USER:
       return {
         ...state,
         name: action.payload.name,
         email: action.payload.email,
         password: action.payload.password,
       };
-    case RESET_PASSWORD:
+    case UserActionTypes.RESET_PASSWORD:
       return {
         ...state,
         email: action.payload,
       };
-    case LOG_IN:
+    case UserActionTypes.LOG_IN:
       return {
         ...state,
         isAuthenticated: true,
       };
-    case LOG_OUT:
+    case UserActionTypes.LOG_OUT:
       return {
         ...state,
         name: "",
@@ -40,7 +44,7 @@ export const user = (state = initialState, action) => {
         password: "",
         isAuthenticated: false,
       };
-    case SET_USER:
+    case UserActionTypes.SET_USER:
       return {
         ...state,
         name: action.payload.name,

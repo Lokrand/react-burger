@@ -1,63 +1,96 @@
-import { IAction } from "../types/data";
+import { AppDispatch } from "../../hooks/useTypedDispatch";
 import {
-  RESET_PASSWORD,
-  REGISTER_USER,
-  LOG_OUT,
-  LOG_IN,
-  SET_USER,
-} from "../actions/actions";
+  commonFetch,
+  editUser,
+  getUserDetails,
+  sendRegister,
+} from "../../utils/api";
+import { BASE_URL } from "../../utils/constans";
+import { getCookie, setCookie } from "../../utils/cookie";
 
-export const resetPassword = (value: string): IAction => {
-  return {
-    type: RESET_PASSWORD,
-    payload: value,
-  };
-};
+export enum UserActionTypes {
+  RESET_PASSWORD = "RESET_PASSWORD",
+  REGISTER_USER = "REGISTER_USER",
+  LOG_OUT = "LOG_OUT",
+  LOG_IN = "LOG_IN",
+  SET_USER = "SET_USER",
+}
 
-export const authenticate = (isAuthenticated: boolean): IAction => {
-  return {
-    type: LOG_IN,
-    payload: { isAuthenticated },
+interface IResetPassword {
+  type: UserActionTypes.RESET_PASSWORD;
+  payload: string;
+}
+
+interface IAuthenticate {
+  type: UserActionTypes.LOG_IN;
+}
+
+interface IRegisterUser {
+  type: UserActionTypes.REGISTER_USER;
+  payload: {
+    name: string;
+    email: string;
+    password: string;
   };
-};
+}
+
+interface ISetUser {
+  type: UserActionTypes.SET_USER;
+  payload: {
+    name: string;
+    email: string;
+    password: string;
+  };
+}
+
+interface IResetUser {
+  type: UserActionTypes.LOG_OUT;
+}
+export type TUserActions =
+  | IResetPassword
+  | IAuthenticate
+  | IRegisterUser
+  | ISetUser
+  | IResetUser;
+
+export const resetPassword = (payload: string): TUserActions => ({
+  type: UserActionTypes.RESET_PASSWORD,
+  payload,
+});
+
+export const authenticate = (): TUserActions => ({
+  type: UserActionTypes.LOG_IN,
+});
 
 export const registerUser = (
   name: string,
   email: string,
   password: string
-): IAction => {
-  return {
-    type: REGISTER_USER,
-    payload: { name, email, password },
-  };
-};
+): TUserActions => ({
+  type: UserActionTypes.REGISTER_USER,
+  payload: { name, email, password },
+});
 
 export const setUser = (
   name: string,
   email: string,
   password: string
-): IAction => {
+): TUserActions => {
   return {
-    type: SET_USER,
+    type: UserActionTypes.SET_USER,
     payload: { name, email, password },
   };
 };
 
-export const resetUser = (
-  name: string,
-  email: string,
-  password: string,
-  isAuthenticated: boolean
-): IAction => {
+export const resetUser = (): TUserActions => {
   return {
-    type: LOG_OUT,
-    payload: { name, email, password, isAuthenticated },
+    type: UserActionTypes.LOG_OUT,
   };
 };
 
 //// это из другого файла с асинк экшеном юзера
-export const userDetails = (email, password, name) => {
-  return function (dispatch) {
+export const userDetails = (email: string, password: string, name: string) => {
+  return function (dispatch: AppDispatch) {
     commonFetch(`${BASE_URL}/auth/user`, {
       method: "PATCH",
       mode: "cors",
@@ -85,8 +118,13 @@ export const userDetails = (email, password, name) => {
 };
 ////
 
-export const registerNewUser = (name, email, password, redirect) => {
-  return function (dispatch) {
+export const registerNewUser = (
+  name: string,
+  email: string,
+  password: string,
+  redirect: VoidFunction
+) => {
+  return function (dispatch: AppDispatch) {
     sendRegister(name, email, password)
       .then((data) => {
         let authToken;
@@ -99,7 +137,7 @@ export const registerNewUser = (name, email, password, redirect) => {
           setCookie("token", authToken);
           localStorage.setItem("token", refreshToken);
           redirect();
-          window.history.pushState(null, null, `/login`);
+          window.history.pushState(null, "", `/login`);
         }
       })
       .catch((err) => {
@@ -108,8 +146,8 @@ export const registerNewUser = (name, email, password, redirect) => {
   };
 };
 
-export const getUser = (password) => {
-  return function (dispatch) {
+export const getUser = (password: string) => {
+  return function (dispatch: AppDispatch) {
     getUserDetails()
       .then((data) => {
         if (data.success) {
@@ -123,8 +161,12 @@ export const getUser = (password) => {
   };
 };
 
-export const editUserDetails = (email, password, name) => {
-  return function (dispatch) {
+export const editUserDetails = (
+  email: string,
+  password: string,
+  name: string
+) => {
+  return function (dispatch: AppDispatch) {
     editUser(email, password, name)
       .then((data) => {
         if (data.success) {
@@ -138,7 +180,7 @@ export const editUserDetails = (email, password, name) => {
 };
 
 export const login = (email: string, password: string) => {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     commonFetch(`${BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
@@ -169,7 +211,7 @@ export const login = (email: string, password: string) => {
 };
 
 export const logout = () => {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     commonFetch(`${BASE_URL}/auth/logout`, {
       method: "POST",
       headers: {

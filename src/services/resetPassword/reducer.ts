@@ -1,26 +1,31 @@
-import {
-  RESET_PASSWORD_REQUEST,
-  RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_ERROR,
-} from "../actions/actions";
+import { ResetPasswordActionTypes, TResetPasswordActions } from "./actions";
 
-const initialState = {
+interface IResetPasswordState {
+  loading: boolean;
+  message: string;
+  error: null | string;
+}
+
+const initialState: IResetPasswordState = {
   loading: false,
-  message: null,
+  message: "",
   error: null,
 };
 
-export const resetPassword = (state = initialState, action) => {
+export const resetPassword = (
+  state = initialState,
+  action: TResetPasswordActions
+): IResetPasswordState => {
   switch (action.type) {
-    case RESET_PASSWORD_REQUEST:
+    case ResetPasswordActionTypes.RESET_PASSWORD_REQUEST:
       return { ...state, loading: false };
-    case RESET_PASSWORD_SUCCESS:
+    case ResetPasswordActionTypes.RESET_PASSWORD_SUCCESS:
       return {
         ...state,
         loading: action.payload.success,
         message: action.payload.message,
       };
-    case RESET_PASSWORD_ERROR:
+    case ResetPasswordActionTypes.RESET_PASSWORD_ERROR:
       return { ...state, error: action.payload, loading: false };
     default:
       return state;

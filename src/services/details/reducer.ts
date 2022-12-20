@@ -1,4 +1,3 @@
-import { DELETE_DETAILS, GET_DETAILS } from "../actions/actions";
 import { IIngredient } from "../types/data";
 import { DetailsActionTypes, TDetailsActions } from "./actions";
 

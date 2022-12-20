@@ -1,5 +1,3 @@
-import { IAction } from "../types/data";
-
 export const SET_MODAL: "SET_MODAL" = "SET_MODAL";
 
 export interface IOpenModalAction {
