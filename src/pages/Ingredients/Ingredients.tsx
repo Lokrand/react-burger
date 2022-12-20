@@ -3,6 +3,7 @@ import styles from "./Ingredients.module.css";
 import { useParams } from "react-router-dom";
 import { IngredientsModal } from "../../components/IngredientsModal/IngredientsModal";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { IIngredient } from "../../services/types/data";
 
 type IParams = {
   id: string;
@@ -14,7 +15,7 @@ const Ingredients: FC = () => {
 
   return (
     <main className={styles.block}>
-      {ingredients.map((el) => {
+      {ingredients.map((el: IIngredient) => {
         if (el._id === id) {
           return <IngredientsModal key={el._id} data={el} />;
         }

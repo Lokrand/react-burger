@@ -3,7 +3,23 @@ import styles from "./IngredientsModal.module.css";
 import { Text } from "../Text/Text";
 import { IIngredient } from "../../services/types/data";
 
-export const IngredientsModal: FC<IIngredient> = (data) => {
+interface IIngredientModal {
+  key?: string;
+  calories: number;
+  carbohydrates: number;
+  fat: number;
+  image: string;
+  image_large: string;
+  image_mobile: string;
+  name: string;
+  price: number;
+  proteins: number;
+  type: string;
+  __v: number;
+  _id: string;
+}
+
+export const IngredientsModal: FC<IIngredientModal> = (data) => {
   return (
     <div>
       <div className={styles.title}>

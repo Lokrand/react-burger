@@ -1,41 +1,38 @@
-import React, { useState, useEffect, useRef, FC } from "react";
+import React, { useState, useEffect, useRef, FC, ChangeEvent } from "react";
 import { Profile } from "../Profile/Profile";
 import styles from "./ProfileRegister.module.css";
-import { useDispatch } from "react-redux";
 import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { getUser } from "../../services/forgotPassword/user";
 import { isTokenExpired } from "../../utils/token";
 import { getCookie } from "../../utils/cookie";
-import { refreshToken } from "../../services/forgotPassword/refreshToken";
-import { userDetails } from "../../services/forgotPassword/userDetails";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { refreshToken } from "../../services/refreshToken/actions";
+import { dispatchStore } from "../../hooks/useTypedDispatch";
+import { getUser, userDetails } from "../../services/user/actions";
 
 export const ProfileRegister: FC = () => {
   const user = useTypedSelector((state) => state.user);
-  const dispatch = useDispatch();
-  
+
   const password = user.password;
   const token = getCookie("token");
 
   const checkToken = () => {
-  
     if (token === undefined) {
-      dispatch(refreshToken());
+      dispatchStore(refreshToken() as any);
     }
     if (token !== undefined) {
       const isExpired = isTokenExpired(token);
       if (isExpired) {
-        dispatch(refreshToken());
+        dispatchStore(refreshToken() as any);
       }
     }
   };
 
   useEffect(() => {
     checkToken();
-    setTimeout(() => dispatch(getUser(password)), 0);
+    setTimeout(() => dispatchStore(getUser(password) as any), 0);
   }, [token]);
 
   const [value, setValue] = useState({
@@ -46,7 +43,7 @@ export const ProfileRegister: FC = () => {
 
   const [isChanged, setIsChanged] = useState(false);
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setIsChanged(true);
     setValue({ ...value, [e.target.name]: e.target.value });
   };
@@ -60,17 +57,21 @@ export const ProfileRegister: FC = () => {
     setIsChanged(false);
   };
 
-  const onSubmit = (e:Event) => {
+  const onSubmit = (e: Event) => {
     e.preventDefault();
     checkToken();
     setTimeout(
-      () => dispatch(userDetails(value.email, value.password, value.name)),
+      () =>
+        dispatchStore(
+          userDetails(value.email, value.password, value.name) as any
+        ),
       0
     );
     setIsChanged(false);
   };
 
   const inputRef = useRef();
+
   const onIconClick = () => {
     setTimeout(() => inputRef.current.focus(), 0);
   };
@@ -115,7 +116,12 @@ export const ProfileRegister: FC = () => {
           <div>
             {isChanged && (
               <div className={styles.buttons}>
-                <Button htmlType="button" type="primary" size="medium" onClick={cancelChanges}>
+                <Button
+                  htmlType="button"
+                  type="primary"
+                  size="medium"
+                  onClick={cancelChanges}
+                >
                   Отмена
                 </Button>
                 <Button htmlType="button" type="primary" size="medium">

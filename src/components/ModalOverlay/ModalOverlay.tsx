@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import { IModal } from "../../services/types/data";
+import { IModalProps } from "../Modal/Modal";
 import styles from "./ModalOverlay.module.css";
 
-export const ModalOverlay: FC<IModal> = ({ active, children, onClose }) => {
+export const ModalOverlay: FC<IModalProps> = ({ active, children, onClose }) => {
   return (
     <div
       className={active ? `${styles.modal} ${styles.active}` : styles.modal}

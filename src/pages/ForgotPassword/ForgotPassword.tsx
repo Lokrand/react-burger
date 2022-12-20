@@ -25,7 +25,7 @@ export const ForgotPassword: FC = () => {
 
   const redirect = () => {
     history.push(`/reset-password`, { from: "forgot-password" });
-  }
+  };
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();

@@ -6,12 +6,11 @@ import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import ReactDom from "react-dom";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../services/modal/actions";
-import { IEventKey } from "../../services/types/data";
 
 export interface IModalProps {
   active: boolean;
   children: JSX.Element | JSX.Element[];
-  onClose?: () => void;
+  onClose?: VoidFunction;
 }
 
 export const Modal: FC<IModalProps> = ({ active, children, onClose }) => {

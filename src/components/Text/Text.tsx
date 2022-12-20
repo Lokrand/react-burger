@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import { TText } from '../../services/types/data';
+import React, { FC } from "react";
+import { TText } from "../../services/types/data";
 import styles from "./Text.module.css";
 
-export const Text:FC<TText> = ({
+export const Text: FC<TText> = ({
   size = "default",
   type = "main",
   inactive = false,

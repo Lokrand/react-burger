@@ -2,16 +2,15 @@ import React, { FC } from "react";
 import styles from "./Profile.module.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { Text } from "../../components/Text/Text";
-import { useDispatch } from "react-redux";
-import { logout } from "../../services/forgotPassword/logout";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { logout } from "../../services/user/actions";
+import { dispatchStore } from "../../hooks/useTypedDispatch";
 
 export const Profile: FC<React.PropsWithChildren> = ({ children }) => {
   const location = useLocation();
-  const dispatch = useDispatch();
   const auth = useTypedSelector((state) => state.user.isAuthenticated);
   const logOut = () => {
-    dispatch(logout());
+    dispatchStore(logout() as any);
     localStorage.removeItem("persist:root");
   };
   return (

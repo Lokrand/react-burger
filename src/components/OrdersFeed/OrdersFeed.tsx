@@ -2,20 +2,17 @@ import React, { FC } from "react";
 import styles from "./OrdersFeed.module.css";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../services/modal/actions";
-import { setCurrentOrder } from "../../services/currentOrder/reducer";
+// import { setCurrentOrder } from "../../services/currentOrder/reducer";
 import { IOrder, IOrdersFeed, IIngredient } from "../../services/types/data";
 import { Order } from "./Order/Order";
-
-interface IOnClick {
-  onClick?: (() => {}) | undefined
-}
+import { setCurrentOrder } from "../../services/currentOrder/actions";
 
 export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
   const dispatch = useDispatch();
-  const handleOnClickProfileModal = (el:IOrder):void => {
+  const handleOnClickProfileModal = (el: IOrder): void => {
     dispatch(openModal("OrderProfileOrderPopup"));
     dispatch(setCurrentOrder(el));
-  }
+  };
   return (
     <>
       {isProfile ? (

@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
 import { getDate } from "../../../utils/date";
 import { Text } from "../../Text/Text";
 import styles from "./Order.module.css";
@@ -8,7 +7,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { getIngredientsAmount, getTotalPrice } from "./Order.utils";
 import { OrderStatus } from "../../OrderStatus/OrderStatus";
 import { OrderIcons } from "../../OrderIcons/OrderIcons";
-import { IOrder, IIngredient } from "../../../services/types/data";
+import { IOrder } from "../../../services/types/data";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 interface IOrderComponent {
