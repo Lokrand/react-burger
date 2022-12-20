@@ -22,11 +22,14 @@ import { getCookie } from "../../utils/cookie";
 import { deleteDetails } from "../../services/details/actions";
 import { Page404 } from "../../pages/Page404/Page404";
 import { FeedDetails } from "../FeedDetails/FeedDetails";
-import { deleteCurrentOrder } from "../../services/currentOrder/reducer";
-import { refreshToken } from "../../services/forgotPassword/refreshToken";
+// import { deleteCurrentOrder } from "../../services/currentOrder/reducer";
+// import { refreshToken } from "../../services/forgotPassword/refreshToken";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { Location } from "history";
 import { fetchIngredients } from "../../services/ingredients/actions";
+import { dispatchStore } from "../../hooks/useTypedDispatch";
+import { deleteCurrentOrder } from "../../services/currentOrder/actions";
+import { refreshToken } from "../../services/refreshToken/actions";
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -40,7 +43,7 @@ const App: FC = () => {
   const modalType = state.modal.modalType;
 
   useEffect(() => {
-    dispatch(fetchIngredients());
+    dispatchStore(fetchIngredients() as any);
     history.replace({ pathname: location.pathname });
   }, [dispatch]);
 
@@ -56,7 +59,7 @@ const App: FC = () => {
 
   useEffect(() => {
     if (auth && token === undefined) {
-      dispatch(refreshToken());
+      dispatchStore(refreshToken() as any);
     }
   }, []);
 

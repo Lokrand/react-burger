@@ -20,7 +20,7 @@ export interface IConstructorIngredient {
   el: IIngredient;
   id: string | undefined;
   price: number;
-  remove: (key: string) => void;
+  remove: (key: string | undefined) => void;
   text: string;
   thumbnail: string;
 }

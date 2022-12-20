@@ -6,7 +6,7 @@ import styles from "./BurgerConstructor.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { getPrice } from "./BurgerConstructor.utils";
-import { getOrderNumber } from "../../services/forgotPassword/orderNumber";
+// import { getOrderNumber } from "../../services/forgotPassword/orderNumber";
 import { useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
 import { Reorder } from "framer-motion";
@@ -15,7 +15,7 @@ import { typeBun } from "../../utils/constans";
 import { useHistory } from "react-router-dom";
 import { getCookie } from "../../utils/cookie";
 import { isTokenExpired } from "../../utils/token";
-import { refreshToken } from "../../services/forgotPassword/refreshToken";
+// import { refreshToken } from "../../services/forgotPassword/refreshToken";
 import { LoadingDots } from "../LoadingDots/LoadingDots";
 import { Arrows } from "../Arrows/Arrows";
 import { IConstructorIngredient, IIngredient } from "../../services/types/data";
@@ -27,6 +27,9 @@ import {
 } from "../../services/burgerConstructor/actions";
 import { Dispatch } from "@reduxjs/toolkit";
 import { store } from "../../services/store";
+import { getOrderNumber } from "../../services/orderNumber/actions";
+import { dispatchStore } from "../../hooks/useTypedDispatch";
+import { refreshToken } from "../../services/refreshToken/actions";
 
 export const BurgerConstructor: FC = () => {
   const history = useHistory();
@@ -67,13 +70,13 @@ export const BurgerConstructor: FC = () => {
   }, [selectedItems.length]);
 
   const addIngredientToBoard = (id: string | undefined) => {
-    const innredientsList = items.filter((item) => id === item._id);
+    const innredientsList = items.filter((item: IIngredient) => id === item._id);
     reduxDispatch(
       addConstructorElement({ ...innredientsList[0], key: generateKeys() })
     );
   };
 
-  const removeIngredient = (key: string) => {
+  const removeIngredient = (key: string | undefined) => {
     reduxDispatch(removeConstructorElement(key));
   };
 
@@ -98,9 +101,9 @@ export const BurgerConstructor: FC = () => {
   }
 
   const getCurrentOrder = currectOrder.map((el) => el._id);
-  const dispatchStore = store.dispatch as typeof store.dispatch | Dispatch<any>;
+  // const dispatchStore = store.dispatch as typeof store.dispatch | Dispatch<any>;
   const handleOrderClick = () => {
-    dispatchStore(getOrderNumber(getCurrentOrder));
+    dispatchStore(getOrderNumber(getCurrentOrder) as any);
   };
 
   const [, dropRef] = useDrop(() => ({
@@ -133,12 +136,12 @@ export const BurgerConstructor: FC = () => {
 
   const checkToken = () => {
     if (token === undefined) {
-      reduxDispatch(refreshToken());
+      dispatchStore(refreshToken() as any);
     }
     if (token !== undefined) {
       const isExpired = isTokenExpired(token);
       if (isExpired) {
-        reduxDispatch(refreshToken());
+        dispatchStore(refreshToken() as any);
       }
     }
   };
@@ -171,7 +174,7 @@ export const BurgerConstructor: FC = () => {
                 onReorder={setItem}
               >
                 <div className={styles.items}>
-                  {ingredient.map((el) => (
+                  {ingredient.map((el: IIngredient) => (
                     <ConstructorIngredients
                       key={el.key}
                       el={el}

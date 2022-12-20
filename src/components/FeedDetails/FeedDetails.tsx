@@ -6,14 +6,11 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { getDate } from "../../utils/date";
 import { Item } from "./Item/Item";
 import { IIngredient } from "../../services/types/data";
-
-interface IComponentsState {
-  ingredients: components,
-}
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 export const FeedDetails: FC = () => {
-  const order = useSelector((state) => state.getCurrentOrder.details);
-  const ingredients = useSelector((state:IComponentsState) => state.ingredients.components);
+  const order = useTypedSelector((state) => state.getCurrentOrder.details);
+  const ingredients = useTypedSelector((state) => state.ingredients.components);
   if (!order) return null;
   if (!order.ingredients) return null;
   let price = 0;
@@ -25,13 +22,13 @@ export const FeedDetails: FC = () => {
     }
   }
 
-  const counter = (it, ingredients) => {
+  const counter = (it: string[], ingredients: IIngredient[]) => {
     console.log("counter_it", it)
     console.log("counter_ingredients", ingredients)
     const newArr = [];
     for (let i = 0; i < ingredients.length; i++) {
       let count = null;
-      count = it.filter((el) => el === ingredients[i]._id).length;
+      count = it.filter((el: string) => el === ingredients[i]._id).length;
       if (count) {
         newArr.push({
           id: count,

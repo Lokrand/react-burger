@@ -22,7 +22,7 @@ interface IAddConstructorElementAction {
 }
 interface IRemoveConstructorElementAction {
   type: BurgerActionTypes.REMOVE_CONSTRUCTOR_ELEMENT;
-  payload: string;
+  payload: string | undefined;
 }
 
 ////
@@ -44,7 +44,7 @@ export const addConstructorElement = (
   payload,
 });
 
-export const removeConstructorElement = (payload: string): TBurgerActions => ({
+export const removeConstructorElement = (payload: string | undefined): TBurgerActions => ({
   type: BurgerActionTypes.REMOVE_CONSTRUCTOR_ELEMENT,
   payload,
 });
