@@ -10,7 +10,7 @@ import {
 import { Text } from "../../components/Text/Text";
 import { useDispatch } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
-import { resetPassword } from "../../services/asyncActions/resetPassword";
+import { resetPassword } from "../../services/forgotPassword/resetPassword";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 export const ResetPassword: FC = () => {

@@ -8,7 +8,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { getIngredientsAmount, getTotalPrice } from "./Order.utils";
 import { OrderStatus } from "../../OrderStatus/OrderStatus";
 import { OrderIcons } from "../../OrderIcons/OrderIcons";
-import { IOrder, TIngredient } from "../../../services/types/data";
+import { IOrder, IIngredient } from "../../../services/types/data";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 interface IOrderComponent {

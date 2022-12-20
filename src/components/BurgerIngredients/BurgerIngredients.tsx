@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { typeBun } from "../../utils/constans";
 import { Text } from "../Text/Text";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { TIngredient } from "../../services/types/data";
+import { IIngredient } from "../../services/types/data";
 
 export const BurgerIngredients:FC = () => {
   const items = useTypedSelector((state) => state.ingredients.components);
@@ -80,8 +80,8 @@ export const BurgerIngredients:FC = () => {
           </Text>
           <div className={styles.items}>
             {items
-              .filter((item:TIngredient) => item.type === typeBun)
-              .map((el:TIngredient) => (
+              .filter((item:IIngredient) => item.type === typeBun)
+              .map((el:IIngredient) => (
                 <BurgerIngredient data={el} key={el._id} />
               ))}
           </div>
@@ -92,8 +92,8 @@ export const BurgerIngredients:FC = () => {
           </Text>
           <div className={styles.items}>
             {items
-              .filter((item:TIngredient) => item.type === "sauce")
-              .map((el:TIngredient) => (
+              .filter((item:IIngredient) => item.type === "sauce")
+              .map((el:IIngredient) => (
                 <BurgerIngredient data={el} key={el._id} />
               ))}
           </div>
@@ -103,8 +103,8 @@ export const BurgerIngredients:FC = () => {
         </Text>
         <div className={styles.items}>
           {items
-            .filter((item:TIngredient) => item.type === "main")
-            .map((el:TIngredient) => (
+            .filter((item:IIngredient) => item.type === "main")
+            .map((el:IIngredient) => (
               <BurgerIngredient data={el} key={el._id} />
             ))}
         </div>

@@ -1,9 +1,9 @@
 import { typeBun } from "../../utils/constans";
-import { BurgerActionTypes, TBurgerActions } from "../actions/burger";
-import { TIngredient } from "../types/data";
+import { BurgerActionTypes, TBurgerActions } from "./actions";
+import { IIngredient } from "../types/data";
 
 interface IBurgerState {
-  selectedItems: TIngredient[];
+  selectedItems: IIngredient[];
 }
 
 const initialState: IBurgerState = {
@@ -40,7 +40,7 @@ export const reducer = (
       };
     case BurgerActionTypes.REMOVE_CONSTRUCTOR_ELEMENT:
       const removedIngs = state.selectedItems.filter(
-        (el: TIngredient): boolean => el.key !== action.payload
+        (el: IIngredient): boolean => el.key !== action.payload
       );
       return {
         ...state,

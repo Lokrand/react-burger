@@ -1,4 +1,4 @@
-import { IOpenModalAction, SET_MODAL } from "../actions/modal";
+import { IOpenModalAction, SET_MODAL } from "./actions";
 
 interface IModalState {
   modalType: string;

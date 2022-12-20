@@ -1,4 +1,7 @@
-import { TIngredient } from "../types/data";
+import { AppDispatch } from "../../hooks/useTypedDispatch";
+import { commonFetch } from "../../utils/api";
+import { BASE_URL } from "../../utils/constans";
+import { IIngredient } from "../types/data";
 
 export enum getIngredientsActionTypes {
   GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST",
@@ -11,7 +14,7 @@ interface IGetIngredientsRequest {
 }
 interface IGetIngredientsSuccess {
   type: getIngredientsActionTypes.GET_INGREDIENTS_SUCCESS;
-  payload: TIngredient[];
+  payload: IIngredient[];
 }
 interface IGetIngredientsError {
   type: getIngredientsActionTypes.GET_INGREDIENTS_ERROR;
@@ -28,7 +31,7 @@ export const getIngredientsRequest = (): TGetIngredientsActions => ({
 });
 
 export const getIngredientsSuccess = (
-  payload: TIngredient[]
+  payload: IIngredient[]
 ): TGetIngredientsActions => ({
   type: getIngredientsActionTypes.GET_INGREDIENTS_SUCCESS,
   payload,
@@ -40,3 +43,18 @@ export const getIngredientsError = (
   type: getIngredientsActionTypes.GET_INGREDIENTS_ERROR,
   payload,
 });
+
+export const fetchIngredients = () => {
+  return function ( dispatch:AppDispatch ) {
+    dispatch(getIngredientsRequest());
+    commonFetch(`${BASE_URL}/ingredients`)
+      .then((data) => {
+        dispatch(getIngredientsSuccess(data.data));
+      })
+      .catch((err) => {
+        console.error("Error", err);
+        dispatch(getIngredientsError(err));
+      });
+  };
+};
+

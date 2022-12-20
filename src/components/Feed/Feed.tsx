@@ -7,7 +7,7 @@ import {
   WSS_CONNECTION_REQUEST,
   WSS_DELETE_ORDERS,
   WSS_GET_MESSAGE,
-} from "../../services/actions/wssActions";
+} from "../../services/wssServices/actions";
 import { OrdersFeed } from "../OrdersFeed/OrdersFeed";
 import { Spinner } from "../Spinner/Spinner";
 import { Text } from "../Text/Text";

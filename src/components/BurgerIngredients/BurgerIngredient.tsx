@@ -9,11 +9,11 @@ import { useSelector } from "react-redux";
 import { typeBun } from "../../utils/constans";
 import { Text } from "../Text/Text";
 import { Link, useLocation } from "react-router-dom";
-import { setDetails } from "../../services/actions/details";
+import { setDetails } from "../../services/details/actions";
 import { useDispatch } from "react-redux";
-import { openModal } from "../../services/actions/modal";
+import { openModal } from "../../services/modal/actions";
 import { IIngredientProps } from "./types";
-import { TIngredient } from "../../services/types/data";
+import { IIngredient } from "../../services/types/data";
 
 export const BurgerIngredient:FC<IIngredientProps> = ({ data }) => {
   const dispatch = useDispatch();

@@ -10,7 +10,7 @@ import { ModalRegister } from "../../components/ModalRegister/ModalRegister";
 import { Text } from "../../components/Text/Text";
 import { useDispatch } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
-import { registerNewUser } from "../../services/asyncActions/user";
+import { registerNewUser } from "../../services/forgotPassword/user";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 export const Register: FC = () => {

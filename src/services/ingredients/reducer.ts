@@ -3,11 +3,11 @@ import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_ERROR,
 } from "../actions/actions";
-import { TGetIngredientsActions } from "../actions/ingredients";
-import { TIngredient } from "../types/data";
+import { TGetIngredientsActions } from "./actions";
+import { IIngredient } from "../types/data";
 
 interface IGetIngredientsState {
-  components: TIngredient[];
+  components: IIngredient[];
   loading: boolean;
   error: null | string;
 }

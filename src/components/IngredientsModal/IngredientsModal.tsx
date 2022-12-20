@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import styles from "./IngredientsModal.module.css";
 import { Text } from "../Text/Text";
-import { TIngredient } from "../../services/types/data";
+import { IIngredient } from "../../services/types/data";
 
-export const IngredientsModal: FC<TIngredient> = (data) => {
+export const IngredientsModal: FC<IIngredient> = (data) => {
   return (
     <div>
       <div className={styles.title}>

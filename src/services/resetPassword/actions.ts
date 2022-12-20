@@ -1,10 +1,23 @@
-import { commonFetch } from "../../utils/api";
-import { BASE_URL } from "../../utils/constans";
+import { IAction } from "../types/data";
 import {
-  resetPasswordRequest,
-  resetPasswordSuccess,
-  resetPasswordError,
-} from "../actions/resetPassword";
+  RESET_PASSWORD_ERROR,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS,
+} from "../actions/actions";
+
+export const resetPasswordRequest = (): IAction => ({
+  type: RESET_PASSWORD_REQUEST,
+});
+
+export const resetPasswordSuccess = (payload: string): IAction => ({
+  type: RESET_PASSWORD_SUCCESS,
+  payload,
+});
+
+export const resetPasswordError = (payload: string): IAction => ({
+  type: RESET_PASSWORD_ERROR,
+  payload,
+});
 
 export const resetPassword = (password, token) => {
   if (password?.length > 0 && token?.length > 0) {

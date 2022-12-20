@@ -1,12 +1,23 @@
-import { commonFetch } from "../../utils/api";
-import { BASE_URL } from "../../utils/constans";
-import { setCookie } from "../../utils/cookie";
+import { IAction } from "../types/data";
 import {
-  refreshTokenRequest,
-  refreshTokenSuccess,
-  refreshTokenError,
-} from "../actions/refreshToken";
-import { authenticate } from "../actions/userActions";
+  REFRESH_TOKEN_ERROR,
+  REFRESH_TOKEN_REQUEST,
+  REFRESH_TOKEN_SUCCESS,
+} from "../actions/actions";
+
+export const refreshTokenRequest = (): IAction => ({
+  type: REFRESH_TOKEN_REQUEST,
+});
+
+export const refreshTokenSuccess = (payload: string): IAction => ({
+  type: REFRESH_TOKEN_SUCCESS,
+  payload,
+});
+
+export const refreshTokenError = (payload: string): IAction => ({
+  type: REFRESH_TOKEN_ERROR,
+  payload,
+});
 
 export const refreshToken = () => {
   return function (dispatch) {

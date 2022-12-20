@@ -9,7 +9,7 @@ import { ModalRegister } from "../../components/ModalRegister/ModalRegister";
 import { Text } from "../../components/Text/Text";
 import { useDispatch } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
-import { login } from "../../services/asyncActions/login";
+import { login } from "../../services/forgotPassword/login";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 export const Login: FC = () => {

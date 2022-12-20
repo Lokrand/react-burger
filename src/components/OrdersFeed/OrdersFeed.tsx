@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import styles from "./OrdersFeed.module.css";
 import { useDispatch } from "react-redux";
-import { openModal } from "../../services/actions/modal";
-import { setCurrentOrder } from "../../services/reducers/getFeed";
-import { IOrder, IOrdersFeed, TIngredient } from "../../services/types/data";
+import { openModal } from "../../services/modal/actions";
+import { setCurrentOrder } from "../../services/feed/reducer";
+import { IOrder, IOrdersFeed, IIngredient } from "../../services/types/data";
 import { Order } from "./Order/Order";
 
 interface IOnClick {

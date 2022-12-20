@@ -2,7 +2,7 @@
 import React, { FC, useEffect } from "react";
 import { AppHeader } from "../AppHeader/AppHeader";
 import { useDispatch } from "react-redux";
-import { fetchIngredients } from "../../services/asyncActions/ingredients";
+import { fetchIngredients } from "../../services/ingredients/asyncActions";
 import { Login } from "../../pages/Login/Login";
 import { Register } from "../../pages/Register/Register";
 import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword";
@@ -19,11 +19,11 @@ import { OrderDetails } from "../OrderDetails/OrderDetails";
 import { OrderPage } from "../../pages/OrderPage/OrderPage";
 import { Main } from "../../pages/Main/Main";
 import { getCookie } from "../../utils/cookie";
-import { deleteDetails } from "../../services/actions/details";
+import { deleteDetails } from "../../services/details/actions";
 import { Page404 } from "../../pages/Page404/Page404";
 import { FeedDetails } from "../FeedDetails/FeedDetails";
-import { deleteCurrentOrder } from "../../services/reducers/getFeed";
-import { refreshToken } from "../../services/asyncActions/refreshToken";
+import { deleteCurrentOrder } from "../../services/feed/reducer";
+import { refreshToken } from "../../services/forgotPassword/refreshToken";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { Location } from "history";
 

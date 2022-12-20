@@ -1,25 +1,25 @@
 import { compose, createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { reducer } from "./BugrerReducer";
-import { getIngredientsReducer } from "./getIngredients";
-import { getDetails } from "./getDetails";
-import { getOrderNumber } from "./getOrderNumber";
-import { resetPassword } from "./resetPassword";
-import { login } from "./login";
-import { logout } from "./logout";
-import { user } from "./user";
+import { reducer } from "./burgerConstructor/reducer";
+import { getIngredientsReducer } from "./ingredients/reducer";
+import { getDetails } from "./details/reducer";
+import { getOrderNumber } from "./orderNumber/reducer";
+import { resetPassword } from "./resetPassword/actions";
+import { login } from "./login/reducer";
+import { logout } from "./logout/reducer";
+import { user } from "./user/reducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { getFeed } from "./getFeed";
-import { socketMiddleware } from "../middleware/socketMiddleWare";
-import { wssActions } from "../actions/wssActions";
-import { wssReducer } from "./wssReducer";
-import { modal } from "./modal";
+import { getCurrentOrder } from "./feed/reducer";
+import { socketMiddleware } from "./middleware/socketMiddleWare";
+import { wssActions } from "./wssServices/actions";
+import { wssReducer } from "./wssServices/reducer";
+import { modal } from "./modal/reducer";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "app", "getFeed", "wssReducer"],
+  whitelist: ["user", "app", "getCurrentOrder", "wssReducer"],
 };
 
 declare global {
@@ -50,7 +50,7 @@ const rootReducer = combineReducers({
   login,
   logout,
   user,
-  getFeed,
+  getCurrentOrder,
   wssReducer,
   modal,
 });

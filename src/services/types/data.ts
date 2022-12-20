@@ -1,6 +1,6 @@
 import React from "react";
 
-export type TIngredient = {
+export type IIngredient = {
   calories: number;
   carbohydrates: number;
   fat: number;
@@ -17,7 +17,7 @@ export type TIngredient = {
 };
 
 export interface IConstructorIngredient {
-  el: TIngredient;
+  el: IIngredient;
   id: string | undefined;
   price: number;
   remove: (key: string) => void;
@@ -25,8 +25,8 @@ export interface IConstructorIngredient {
   thumbnail: string;
 }
 
-export type TIngredientState = {
-  components: TIngredient[];
+export type IIngredientState = {
+  components: IIngredient[];
   loading: boolean;
   error: string | null;
 };

@@ -3,7 +3,7 @@ import styles from "./Profile.module.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { Text } from "../../components/Text/Text";
 import { useDispatch } from "react-redux";
-import { logout } from "../../services/asyncActions/logout";
+import { logout } from "../../services/forgotPassword/logout";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 export const Profile: FC<React.PropsWithChildren> = ({ children }) => {

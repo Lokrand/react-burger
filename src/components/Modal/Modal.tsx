@@ -5,7 +5,7 @@ import { useCallback, useEffect } from "react";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import ReactDom from "react-dom";
 import { useDispatch } from "react-redux";
-import { openModal } from "../../services/actions/modal";
+import { openModal } from "../../services/modal/actions";
 import { IEventKey } from "../../services/types/data";
 
 export interface IModalProps {

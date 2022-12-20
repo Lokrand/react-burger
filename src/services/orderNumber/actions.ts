@@ -39,3 +39,28 @@ export const getOrderError = (payload: string): TGetOrderNumberAction => ({
   type: orderNumberActionTypes.GET_ORDER_ERROR,
   payload,
 });
+
+export const getOrderNumber = (orderFor:string[]) => {
+  if (orderFor?.length > 0) {
+    return function (dispatch: Dispatch<TGetOrderNumberAction | IOpenModalAction | TBurgerActions>) {
+      dispatch(getOrderRequest());
+      commonFetch(`${BASE_URL}/orders`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: 'Bearer ' + getCookie('token')
+        },
+        body: JSON.stringify({ ingredients: orderFor }),
+      })
+        .then((data) => {
+          dispatch(getOrderSuccess(data.order.number));
+          dispatch(updateSelectedItemsOrder([]));
+          dispatch(openModal("OrderPopup"));
+        })
+        .catch((err) => {
+          console.error("Error", err);
+          dispatch(getOrderError(err));
+        });
+    };
+  }
+};

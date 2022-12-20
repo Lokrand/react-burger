@@ -1,8 +1,19 @@
-import { commonFetch } from "../../utils/api";
-import { BASE_URL } from "../../utils/constans";
-import { setCookie } from "../../utils/cookie";
-import { logoutRequest, logoutSuccess, logoutError } from "../actions/loguot";
-import { resetUser } from "../actions/userActions";
+import { IAction, ILogOut } from "../types/data";
+import { LOGOUT_ERROR, LOGOUT_REQUEST, LOGOUT_SUCCESS } from "../actions/actions";
+
+export const logoutRequest = () => ({
+  type: LOGOUT_REQUEST,
+});
+
+export const logoutSuccess = (payload: ILogOut): IAction => ({
+  type: LOGOUT_SUCCESS,
+  payload,
+});
+
+export const logoutError = (payload: string): IAction => ({
+  type: LOGOUT_ERROR,
+  payload,
+});
 
 export const logout = () => {
   return function (dispatch) {

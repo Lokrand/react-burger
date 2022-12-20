@@ -5,14 +5,14 @@ import styles from "./FeedDetails.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { getDate } from "../../utils/date";
 import { Item } from "./Item/Item";
-import { TIngredient } from "../../services/types/data";
+import { IIngredient } from "../../services/types/data";
 
 interface IComponentsState {
   ingredients: components,
 }
 
 export const FeedDetails: FC = () => {
-  const order = useSelector((state) => state.getFeed.details);
+  const order = useSelector((state) => state.getCurrentOrder.details);
   const ingredients = useSelector((state:IComponentsState) => state.ingredients.components);
   if (!order) return null;
   if (!order.ingredients) return null;

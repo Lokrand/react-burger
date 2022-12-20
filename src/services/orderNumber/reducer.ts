@@ -2,7 +2,7 @@ import {
   IGetOrderNumberState,
   orderNumberActionTypes,
   TGetOrderNumberAction,
-} from "../actions/orderNumber";
+} from "./actions";
 
 const initialState: IGetOrderNumberState = {
   orderNumber: 0,

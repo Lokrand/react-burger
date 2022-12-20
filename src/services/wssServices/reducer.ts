@@ -5,7 +5,7 @@ import {
   WSS_GET_MESSAGE,
   WSS_SEND_MESSAGE,
   WSS_DELETE_ORDERS,
-} from "../actions/wssActions";
+} from "./actions";
 
 const initialState = {
   wssConnected: false,

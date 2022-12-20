@@ -6,11 +6,11 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { getUser } from "../../services/asyncActions/user";
+import { getUser } from "../../services/forgotPassword/user";
 import { isTokenExpired } from "../../utils/token";
 import { getCookie } from "../../utils/cookie";
-import { refreshToken } from "../../services/asyncActions/refreshToken";
-import { userDetails } from "../../services/asyncActions/userDetails";
+import { refreshToken } from "../../services/forgotPassword/refreshToken";
+import { userDetails } from "../../services/forgotPassword/userDetails";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 export const ProfileRegister: FC = () => {

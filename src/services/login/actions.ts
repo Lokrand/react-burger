@@ -1,8 +1,23 @@
+import { IAction, IUser } from "../types/data";
+import { LOGIN_ERROR, LOGIN_REQUEST, LOGIN_SUCCESS } from "../actions/actions";
 import { commonFetch } from "../../utils/api";
 import { BASE_URL } from "../../utils/constans";
+import { authenticate, setUser } from "../user/actions";
 import { setCookie } from "../../utils/cookie";
-import { loginRequest, loginSuccess, loginError } from "../actions/login";
-import { authenticate, setUser } from "../actions/userActions";
+
+export const loginRequest = (): IAction => ({
+  type: LOGIN_REQUEST,
+});
+
+export const loginSuccess = (payload: IUser): IAction => ({
+  type: LOGIN_SUCCESS,
+  payload,
+});
+
+export const loginError = (payload: string): IAction => ({
+  type: LOGIN_ERROR,
+  payload,
+});
 
 export const login = (email: string, password: string) => {
   return function (dispatch) {

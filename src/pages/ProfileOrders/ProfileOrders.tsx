@@ -8,7 +8,7 @@ import {
   WSS_CONNECTION_REQUEST,
   WSS_DELETE_ORDERS,
   WSS_GET_MESSAGE,
-} from "../../services/actions/wssActions";
+} from "../../services/wssServices/actions";
 import { getCookie } from "../../utils/cookie";
 import { useDispatch } from "react-redux";
 import { Spinner } from "../../components/Spinner/Spinner";
