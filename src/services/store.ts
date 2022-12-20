@@ -39,7 +39,7 @@ const enhancer = composeEnhancers(
   )
 );
 
-const rootReducer = combineReducers({
+const rootReducer: any = combineReducers({
   app: reducer,
   ingredients: getIngredientsReducer,
   getDetails,
