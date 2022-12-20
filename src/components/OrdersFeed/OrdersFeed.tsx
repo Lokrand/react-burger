@@ -2,22 +2,26 @@ import React, { FC } from "react";
 import styles from "./OrdersFeed.module.css";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../services/modal/actions";
-// import { setCurrentOrder } from "../../services/currentOrder/reducer";
-import { IOrder, IOrdersFeed, IIngredient } from "../../services/types/data";
+import { IOrder, IOrdersFeed } from "../../services/types/data";
 import { Order } from "./Order/Order";
 import { setCurrentOrder } from "../../services/currentOrder/actions";
 
 export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
   const dispatch = useDispatch();
-  const handleOnClickProfileModal = (el: IOrder): void => {
+  const handleOnClickProfileModal = (el: IOrder): any => {
     dispatch(openModal("OrderProfileOrderPopup"));
     dispatch(setCurrentOrder(el));
   };
+  const handleOnClickOrderFeedModal = (el: IOrder): any => {
+    dispatch(openModal("OrderFeedPopup"));
+    dispatch(setCurrentOrder(el));
+  };
+
   return (
     <>
       {isProfile ? (
         <section className={`${styles.section} ${styles.section_profile}`}>
-          {orders.map((el) => {
+          {orders.map((el: any) => {
             return (
               <Order
                 key={el._id}
@@ -33,17 +37,14 @@ export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
         </section>
       ) : (
         <section className={styles.section}>
-          {orders.map((el) => {
+          {orders.map((el: any) => {
             return (
               <Order
                 key={el._id}
                 data={el}
                 width={width}
                 pathname={`/feed/${el._id}`}
-                onClick={() => {
-                  dispatch(openModal("OrderFeedPopup"));
-                  dispatch(setCurrentOrder(el));
-                }}
+                onClick={() => handleOnClickOrderFeedModal(el)}
               />
             );
           })}

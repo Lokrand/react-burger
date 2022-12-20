@@ -6,8 +6,6 @@ import styles from "./BurgerConstructor.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { getPrice } from "./BurgerConstructor.utils";
-// import { getOrderNumber } from "../../services/forgotPassword/orderNumber";
-import { useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
 import { Reorder } from "framer-motion";
 import { generateKeys } from "../../utils/generateKeys";
@@ -15,7 +13,6 @@ import { typeBun } from "../../utils/constans";
 import { useHistory } from "react-router-dom";
 import { getCookie } from "../../utils/cookie";
 import { isTokenExpired } from "../../utils/token";
-// import { refreshToken } from "../../services/forgotPassword/refreshToken";
 import { LoadingDots } from "../LoadingDots/LoadingDots";
 import { Arrows } from "../Arrows/Arrows";
 import { IConstructorIngredient, IIngredient } from "../../services/types/data";
@@ -25,11 +22,9 @@ import {
   removeConstructorElement,
   updateSelectedItemsOrder,
 } from "../../services/burgerConstructor/actions";
-import { Dispatch } from "@reduxjs/toolkit";
-import { store } from "../../services/store";
 import { getOrderNumber } from "../../services/orderNumber/actions";
-import { dispatchStore } from "../../hooks/useTypedDispatch";
 import { refreshToken } from "../../services/refreshToken/actions";
+import { useDispatch } from "../../hooks/useTypedDispatch";
 
 export const BurgerConstructor: FC = () => {
   const history = useHistory();
@@ -101,9 +96,8 @@ export const BurgerConstructor: FC = () => {
   }
 
   const getCurrentOrder = currectOrder.map((el) => el._id);
-  // const dispatchStore = store.dispatch as typeof store.dispatch | Dispatch<any>;
   const handleOrderClick = () => {
-    dispatchStore(getOrderNumber(getCurrentOrder) as any);
+    reduxDispatch(getOrderNumber(getCurrentOrder));
   };
 
   const [, dropRef] = useDrop(() => ({
@@ -136,12 +130,12 @@ export const BurgerConstructor: FC = () => {
 
   const checkToken = () => {
     if (token === undefined) {
-      dispatchStore(refreshToken() as any);
+      reduxDispatch(refreshToken());
     }
     if (token !== undefined) {
       const isExpired = isTokenExpired(token);
       if (isExpired) {
-        dispatchStore(refreshToken() as any);
+        reduxDispatch(refreshToken());
       }
     }
   };

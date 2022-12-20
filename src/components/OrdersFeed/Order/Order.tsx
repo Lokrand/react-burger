@@ -16,7 +16,7 @@ interface IOrderComponent {
   width: string,
   onClick?: () => {},
   pathname: string,
-  className: string,
+  className?: string,
 }
 
 export const Order:FC<IOrderComponent> = ({

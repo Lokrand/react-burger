@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, ChangeEvent, FormEventHandler } from "react";
 import {
   Button,
   EmailInput,
@@ -8,18 +8,17 @@ import {
 import styles from "./Register.module.css";
 import { ModalRegister } from "../../components/ModalRegister/ModalRegister";
 import { Text } from "../../components/Text/Text";
-import { useDispatch } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
-import { registerNewUser } from "../../services/forgotPassword/user";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { registerNewUser } from "../../services/user/actions";
+import { dispatchStore } from "../../hooks/useTypedDispatch";
 
 export const Register: FC = () => {
   const auth = useTypedSelector((state) => state.user.isAuthenticated);
-  const dispatch = useDispatch();
   const history = useHistory<{ from: string }>();
   const [value, setValue] = useState({ email: "", password: "", user: "" });
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setValue({ ...value, [e.target.name]: e.target.value });
   };
@@ -32,10 +31,10 @@ export const Register: FC = () => {
     window.history.pushState(null, "", `/react-burger`);
   };
 
-  const onSubmit = (e:Event) => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    dispatch(
-      registerNewUser(value.email, value.password, value.user, redirect)
+    dispatchStore(
+      registerNewUser(value.email, value.password, value.user, redirect) as any
     );
   };
 

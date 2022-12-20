@@ -1,8 +1,6 @@
 /* eslint-disable */
 import React, { FC, useEffect } from "react";
 import { AppHeader } from "../AppHeader/AppHeader";
-import { useDispatch } from "react-redux";
-// import { fetchIngredients } from "../../services/ingredients/asyncActions";
 import { Login } from "../../pages/Login/Login";
 import { Register } from "../../pages/Register/Register";
 import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword";
@@ -22,14 +20,12 @@ import { getCookie } from "../../utils/cookie";
 import { deleteDetails } from "../../services/details/actions";
 import { Page404 } from "../../pages/Page404/Page404";
 import { FeedDetails } from "../FeedDetails/FeedDetails";
-// import { deleteCurrentOrder } from "../../services/currentOrder/reducer";
-// import { refreshToken } from "../../services/forgotPassword/refreshToken";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { Location } from "history";
 import { fetchIngredients } from "../../services/ingredients/actions";
-import { dispatchStore } from "../../hooks/useTypedDispatch";
 import { deleteCurrentOrder } from "../../services/currentOrder/actions";
 import { refreshToken } from "../../services/refreshToken/actions";
+import { useDispatch } from "../../hooks/useTypedDispatch";
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -43,7 +39,7 @@ const App: FC = () => {
   const modalType = state.modal.modalType;
 
   useEffect(() => {
-    dispatchStore(fetchIngredients() as any);
+    dispatch(fetchIngredients());
     history.replace({ pathname: location.pathname });
   }, [dispatch]);
 
@@ -59,7 +55,7 @@ const App: FC = () => {
 
   useEffect(() => {
     if (auth && token === undefined) {
-      dispatchStore(refreshToken() as any);
+      dispatch(refreshToken());
     }
   }, []);
 

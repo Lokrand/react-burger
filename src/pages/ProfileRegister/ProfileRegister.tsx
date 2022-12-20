@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, FC, ChangeEvent } from "react";
+import React, { useState, useEffect, useRef, FC, ChangeEvent, FormEventHandler } from "react";
 import { Profile } from "../Profile/Profile";
 import styles from "./ProfileRegister.module.css";
 import {
@@ -57,7 +57,7 @@ export const ProfileRegister: FC = () => {
     setIsChanged(false);
   };
 
-  const onSubmit = (e: Event) => {
+  const onSubmit: FormEventHandler<HTMLFormElement>  = (e) => {
     e.preventDefault();
     checkToken();
     setTimeout(
@@ -70,11 +70,11 @@ export const ProfileRegister: FC = () => {
     setIsChanged(false);
   };
 
-  const inputRef = useRef();
+  // const inputRef = useRef();
 
-  const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0);
-  };
+  // const onIconClick = () => {
+  //   setTimeout(() => inputRef.current!.focus(), 0);
+  // };
 
   return (
     <Profile>
@@ -89,7 +89,7 @@ export const ProfileRegister: FC = () => {
             value={value.name}
             errorText={"Ошибка"}
             onChange={onChange}
-            onIconClick={onIconClick}
+            // onIconClick={onIconClick}
           />
           <Input
             type={"text"}
@@ -100,7 +100,7 @@ export const ProfileRegister: FC = () => {
             value={value.email}
             errorText={"Ошибка"}
             onChange={onChange}
-            onIconClick={onIconClick}
+            // onIconClick={onIconClick}
           />
           <Input
             type={"text"}
@@ -111,7 +111,7 @@ export const ProfileRegister: FC = () => {
             value={value.password}
             errorText={"Ошибка"}
             onChange={onChange}
-            onIconClick={onIconClick}
+            // onIconClick={onIconClick}
           />
           <div>
             {isChanged && (

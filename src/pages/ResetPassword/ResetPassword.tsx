@@ -8,13 +8,12 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Text } from "../../components/Text/Text";
-import { useDispatch } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
-import { resetPassword } from "../../services/forgotPassword/resetPassword";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { resetPassword } from "../../services/resetPassword/actions";
+import { dispatchStore } from "../../hooks/useTypedDispatch";
 
 export const ResetPassword: FC = () => {
-  const dispatch = useDispatch();
   const history = useHistory<{ from: string }>();
   const auth = useTypedSelector((state) => state.user.isAuthenticated);
 
@@ -27,7 +26,7 @@ export const ResetPassword: FC = () => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(resetPassword(value.newPassword, value.code));
+    dispatchStore(resetPassword(value.newPassword, value.code) as any);
     history.replace({ pathname: "/login" });
   };
 
