@@ -139,7 +139,6 @@ export const editUserDetails = (email, password, name) => {
 
 export const login = (email: string, password: string) => {
   return function (dispatch) {
-
     commonFetch(`${BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
@@ -161,6 +160,31 @@ export const login = (email: string, password: string) => {
           refreshToken = data.refreshToken;
           setCookie("token", authToken);
           localStorage.setItem("token", refreshToken);
+        }
+      })
+      .catch((err) => {
+        console.error("Error", err);
+      });
+  };
+};
+
+export const logout = () => {
+  return function (dispatch) {
+    commonFetch(`${BASE_URL}/auth/logout`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: localStorage.getItem("token"),
+      }),
+    })
+      .then((data) => {
+        if (data.success) {
+          console.log("logout data", data);
+          setCookie("token", "");
+          dispatch(resetUser());
         }
       })
       .catch((err) => {

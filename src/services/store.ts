@@ -5,7 +5,6 @@ import { getIngredientsReducer } from "./ingredients/reducer";
 import { getDetails } from "./details/reducer";
 import { getOrderNumber } from "./orderNumber/reducer";
 import { resetPassword } from "./resetPassword/actions";
-import { logout } from "./logout/reducer";
 import { user } from "./user/reducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -46,7 +45,6 @@ const rootReducer = combineReducers({
   getDetails,
   getOrderNumber,
   resetPassword,
-  logout,
   user,
   getCurrentOrder,
   wssReducer,
