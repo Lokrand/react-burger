@@ -136,3 +136,35 @@ export const editUserDetails = (email, password, name) => {
       });
   };
 };
+
+export const login = (email: string, password: string) => {
+  return function (dispatch) {
+
+    commonFetch(`${BASE_URL}/auth/login`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then((data) => {
+        let authToken;
+        let refreshToken;
+        if (data.success === true) {
+          dispatch(authenticate());
+          dispatch(setUser(data.user.name, email, password));
+          authToken = data.accessToken.split("Bearer ")[1];
+          refreshToken = data.refreshToken;
+          setCookie("token", authToken);
+          localStorage.setItem("token", refreshToken);
+        }
+      })
+      .catch((err) => {
+        console.error("Error", err);
+      });
+  };
+};

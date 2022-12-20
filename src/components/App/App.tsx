@@ -22,7 +22,7 @@ import { getCookie } from "../../utils/cookie";
 import { deleteDetails } from "../../services/details/actions";
 import { Page404 } from "../../pages/Page404/Page404";
 import { FeedDetails } from "../FeedDetails/FeedDetails";
-import { deleteCurrentOrder } from "../../services/feed/reducer";
+import { deleteCurrentOrder } from "../../services/currentOrder/reducer";
 import { refreshToken } from "../../services/forgotPassword/refreshToken";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { Location } from "history";

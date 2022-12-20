@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import styles from "./OrdersFeed.module.css";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../services/modal/actions";
-import { setCurrentOrder } from "../../services/feed/reducer";
+import { setCurrentOrder } from "../../services/currentOrder/reducer";
 import { IOrder, IOrdersFeed, IIngredient } from "../../services/types/data";
 import { Order } from "./Order/Order";
 

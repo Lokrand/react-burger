@@ -5,12 +5,11 @@ import { getIngredientsReducer } from "./ingredients/reducer";
 import { getDetails } from "./details/reducer";
 import { getOrderNumber } from "./orderNumber/reducer";
 import { resetPassword } from "./resetPassword/actions";
-import { login } from "./login/reducer";
 import { logout } from "./logout/reducer";
 import { user } from "./user/reducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { getCurrentOrder } from "./feed/reducer";
+import { getCurrentOrder } from "./currentOrder/reducer";
 import { socketMiddleware } from "./middleware/socketMiddleWare";
 import { wssActions } from "./wssServices/actions";
 import { wssReducer } from "./wssServices/reducer";
@@ -47,7 +46,6 @@ const rootReducer = combineReducers({
   getDetails,
   getOrderNumber,
   resetPassword,
-  login,
   logout,
   user,
   getCurrentOrder,
@@ -55,7 +53,7 @@ const rootReducer = combineReducers({
   modal,
 });
 
-export type RootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>;
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
