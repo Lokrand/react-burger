@@ -2,7 +2,7 @@
 import React, { FC, useEffect } from "react";
 import { AppHeader } from "../AppHeader/AppHeader";
 import { useDispatch } from "react-redux";
-import { fetchIngredients } from "../../services/ingredients/asyncActions";
+// import { fetchIngredients } from "../../services/ingredients/asyncActions";
 import { Login } from "../../pages/Login/Login";
 import { Register } from "../../pages/Register/Register";
 import { ForgotPassword } from "../../pages/ForgotPassword/ForgotPassword";
@@ -26,6 +26,7 @@ import { deleteCurrentOrder } from "../../services/currentOrder/reducer";
 import { refreshToken } from "../../services/forgotPassword/refreshToken";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { Location } from "history";
+import { fetchIngredients } from "../../services/ingredients/actions";
 
 const App: FC = () => {
   const dispatch = useDispatch();

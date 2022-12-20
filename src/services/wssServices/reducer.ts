@@ -1,61 +1,66 @@
-import {
-  WSS_CONNECTION_SUCCESS,
-  WSS_CONNECTION_ERROR,
-  WSS_CONNECTION_CLOSED,
-  WSS_GET_MESSAGE,
-  WSS_SEND_MESSAGE,
-  WSS_DELETE_ORDERS,
-} from "./actions";
+import { IOrder } from "../types/data";
+import { TWssActions, WssConnectionActionTypes } from "./actions";
 
-const initialState = {
+interface IWssReducerState {
+  wssConnected: boolean;
+  orders: IOrder[];
+  error: null | string;
+  total: number;
+  totalToday: number;
+}
+
+const initialState: IWssReducerState = {
   wssConnected: false,
   orders: [],
-  error: undefined,
+  error: null,
   total: 0,
   totalToday: 0,
 };
 
-export const wssReducer = (state = initialState, action) => {
+export const wssReducer = (
+  state = initialState,
+  action: TWssActions
+): IWssReducerState => {
   switch (action.type) {
-    case WSS_CONNECTION_SUCCESS:
+    case WssConnectionActionTypes.WSS_CONNECTION_SUCCESS:
       return {
         ...state,
-        error: undefined,
+        error: null,
         wssConnected: true,
       };
 
-    case WSS_CONNECTION_ERROR:
+    case WssConnectionActionTypes.WSS_CONNECTION_ERROR:
       return {
         ...state,
         error: action.payload,
         wssConnected: false,
       };
 
-    case WSS_CONNECTION_CLOSED:
+    case WssConnectionActionTypes.WSS_CONNECTION_CLOSED:
       return {
         ...state,
-        error: undefined,
+        error: null,
         wssConnected: false,
       };
 
-    case WSS_GET_MESSAGE:
+    case WssConnectionActionTypes.WSS_GET_MESSAGE:
       return {
         ...state,
-        error: undefined,
+        error: null,
         orders: action.payload,
       };
 
-    case WSS_SEND_MESSAGE:
+    case WssConnectionActionTypes.WSS_SEND_MESSAGE:
       return {
         ...state,
-        error: undefined,
+        error: null,
         orders: action.payload,
       };
 
-    case WSS_DELETE_ORDERS:
+    case WssConnectionActionTypes.WSS_DELETE_ORDERS:
       return {
         ...state,
-        error: undefined,
+        error: null,
         orders: [],
       };
 
