@@ -11,9 +11,10 @@ import { Text } from "../../components/Text/Text";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { registerNewUser } from "../../services/user/actions";
-import { dispatchStore } from "../../hooks/useTypedDispatch";
+import { useDispatch } from "../../hooks/useTypedDispatch";
 
 export const Register: FC = () => {
+  const dispatch = useDispatch();
   const auth = useTypedSelector((state) => state.user.isAuthenticated);
   const history = useHistory<{ from: string }>();
   const [value, setValue] = useState({ email: "", password: "", user: "" });
@@ -33,8 +34,8 @@ export const Register: FC = () => {
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    dispatchStore(
-      registerNewUser(value.email, value.password, value.user, redirect) as any
+    dispatch(
+      registerNewUser(value.email, value.password, value.user, redirect)
     );
   };
 

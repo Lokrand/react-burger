@@ -1,6 +1,5 @@
 import React, { FC, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch } from "../../hooks/useTypedDispatch";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import {
   WSS_CONNECTION_CLOSED,

@@ -10,9 +10,9 @@ import {
   WSS_GET_MESSAGE,
 } from "../../services/wssServices/actions";
 import { getCookie } from "../../utils/cookie";
-import { useDispatch } from "react-redux";
 import { Spinner } from "../../components/Spinner/Spinner";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useDispatch } from "../../hooks/useTypedDispatch";
 
 export const ProfileOrders: FC = () => {
   const dispatch = useDispatch();

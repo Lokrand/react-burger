@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
 import { Text } from "../Text/Text";
 import styles from "./FeedDetails.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -23,8 +22,6 @@ export const FeedDetails: FC = () => {
   }
 
   const counter = (it: string[], ingredients: IIngredient[]) => {
-    console.log("counter_it", it)
-    console.log("counter_ingredients", ingredients)
     const newArr = [];
     for (let i = 0; i < ingredients.length; i++) {
       let count = null;

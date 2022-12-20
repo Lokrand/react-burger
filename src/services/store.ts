@@ -27,11 +27,6 @@ declare global {
 }
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// const composeEnhancers =
-// typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-// ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-// : compose;
-
 const enhancer = composeEnhancers(
   applyMiddleware(
     thunk,
@@ -58,5 +53,3 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = createStore(persistedReducer, enhancer);
 
 export const persistor = persistStore(store);
-
-export type AppDispatch = typeof store.dispatch;

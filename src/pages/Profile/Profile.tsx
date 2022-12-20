@@ -4,13 +4,14 @@ import { NavLink, useLocation } from "react-router-dom";
 import { Text } from "../../components/Text/Text";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { logout } from "../../services/user/actions";
-import { dispatchStore } from "../../hooks/useTypedDispatch";
+import { useDispatch } from "../../hooks/useTypedDispatch";
 
 export const Profile: FC<React.PropsWithChildren> = ({ children }) => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const auth = useTypedSelector((state) => state.user.isAuthenticated);
   const logOut = () => {
-    dispatchStore(logout() as any);
+    dispatch(logout());
     localStorage.removeItem("persist:root");
   };
   return (

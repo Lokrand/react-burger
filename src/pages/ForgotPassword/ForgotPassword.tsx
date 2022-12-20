@@ -7,11 +7,11 @@ import {
   EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Text } from "../../components/Text/Text";
-import { useDispatch } from "react-redux";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { resetPassword } from "../../services/user/actions";
 import { fetchPassword } from "../../services/forgotPassword/forgotPassword";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useDispatch } from "../../hooks/useTypedDispatch";
 
 export const ForgotPassword: FC = () => {
   const dispatch = useDispatch();

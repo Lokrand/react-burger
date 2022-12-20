@@ -1,24 +1,23 @@
-import React, { FC, MutableRefObject, useRef, useState } from "react";
+import React, { FC, useRef, useState } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { BurgerIngredient } from "./BurgerIngredient";
 import styles from "./BurgerIngredients.module.css";
-import { useSelector } from "react-redux";
 import { typeBun } from "../../utils/constans";
 import { Text } from "../Text/Text";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { IIngredient } from "../../services/types/data";
 
-export const BurgerIngredients:FC = () => {
+export const BurgerIngredients: FC = () => {
   const items = useTypedSelector((state) => state.ingredients.components);
   const [current, setCurrent] = useState<string>("one");
-  const bunRef:any = useRef<HTMLDivElement | null>(null);
-  const souceRef:any = useRef<HTMLDivElement | null>(null);
+  const bunRef: any = useRef<HTMLDivElement | null>(null);
+  const souceRef: any = useRef<HTMLDivElement | null>(null);
 
   const scrollBar = () => {
     const bunsBlockHeight = bunRef.current.offsetHeight;
     const souceBlockHeight = souceRef.current.offsetHeight;
 
-    let scrollElement = document.querySelector("#main")  ;
+    let scrollElement = document.querySelector("#main");
     let scrollPosition: number | undefined = scrollElement?.scrollTop;
     if (scrollPosition !== undefined) {
       if (scrollPosition > 0 && scrollPosition < bunsBlockHeight / 2) {
@@ -34,8 +33,8 @@ export const BurgerIngredients:FC = () => {
     }
   };
 
-  const scrollView = (type:string) => {
-    const mainRoot:any = document.getElementById(type);
+  const scrollView = (type: string) => {
+    const mainRoot: any = document.getElementById(type);
     mainRoot.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -80,8 +79,8 @@ export const BurgerIngredients:FC = () => {
           </Text>
           <div className={styles.items}>
             {items
-              .filter((item:IIngredient) => item.type === typeBun)
-              .map((el:IIngredient) => (
+              .filter((item: IIngredient) => item.type === typeBun)
+              .map((el: IIngredient) => (
                 <BurgerIngredient data={el} key={el._id} />
               ))}
           </div>
@@ -92,8 +91,8 @@ export const BurgerIngredients:FC = () => {
           </Text>
           <div className={styles.items}>
             {items
-              .filter((item:IIngredient) => item.type === "sauce")
-              .map((el:IIngredient) => (
+              .filter((item: IIngredient) => item.type === "sauce")
+              .map((el: IIngredient) => (
                 <BurgerIngredient data={el} key={el._id} />
               ))}
           </div>
@@ -103,8 +102,8 @@ export const BurgerIngredients:FC = () => {
         </Text>
         <div className={styles.items}>
           {items
-            .filter((item:IIngredient) => item.type === "main")
-            .map((el:IIngredient) => (
+            .filter((item: IIngredient) => item.type === "main")
+            .map((el: IIngredient) => (
               <BurgerIngredient data={el} key={el._id} />
             ))}
         </div>

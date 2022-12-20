@@ -10,10 +10,11 @@ import { Text } from "../../components/Text/Text";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { login } from "../../services/user/actions";
-import { dispatchStore } from "../../hooks/useTypedDispatch";
+import { useDispatch } from "../../hooks/useTypedDispatch";
 
 export const Login: FC = () => {
   const history = useHistory<{ from: string }>();
+  const dispatch = useDispatch();
   const auth = useTypedSelector((state) => state.user.isAuthenticated);
   const [value, setValue] = useState({ email: "", password: "" });
 
@@ -24,7 +25,7 @@ export const Login: FC = () => {
   const toLogin = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
-      dispatchStore(login(value.email, value.password) as any);
+      dispatch(login(value.email, value.password));
     },
     [value]
   );

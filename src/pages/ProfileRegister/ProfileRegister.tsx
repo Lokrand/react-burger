@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useRef, FC, ChangeEvent, FormEventHandler } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  FC,
+  ChangeEvent,
+  FormEventHandler,
+} from "react";
 import { Profile } from "../Profile/Profile";
 import styles from "./ProfileRegister.module.css";
 import {
@@ -9,10 +16,12 @@ import { isTokenExpired } from "../../utils/token";
 import { getCookie } from "../../utils/cookie";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { refreshToken } from "../../services/refreshToken/actions";
-import { dispatchStore } from "../../hooks/useTypedDispatch";
+// import { dispatchStore } from "../../hooks/useTypedDispatch";
 import { getUser, userDetails } from "../../services/user/actions";
+import { useDispatch } from "../../hooks/useTypedDispatch";
 
 export const ProfileRegister: FC = () => {
+  const dispatch = useDispatch();
   const user = useTypedSelector((state) => state.user);
 
   const password = user.password;
@@ -20,19 +29,19 @@ export const ProfileRegister: FC = () => {
 
   const checkToken = () => {
     if (token === undefined) {
-      dispatchStore(refreshToken() as any);
+      dispatch(refreshToken());
     }
     if (token !== undefined) {
       const isExpired = isTokenExpired(token);
       if (isExpired) {
-        dispatchStore(refreshToken() as any);
+        dispatch(refreshToken());
       }
     }
   };
 
   useEffect(() => {
     checkToken();
-    setTimeout(() => dispatchStore(getUser(password) as any), 0);
+    setTimeout(() => dispatch(getUser(password)), 0);
   }, [token]);
 
   const [value, setValue] = useState({
@@ -57,14 +66,11 @@ export const ProfileRegister: FC = () => {
     setIsChanged(false);
   };
 
-  const onSubmit: FormEventHandler<HTMLFormElement>  = (e) => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     checkToken();
     setTimeout(
-      () =>
-        dispatchStore(
-          userDetails(value.email, value.password, value.name) as any
-        ),
+      () => dispatch(userDetails(value.email, value.password, value.name)),
       0
     );
     setIsChanged(false);

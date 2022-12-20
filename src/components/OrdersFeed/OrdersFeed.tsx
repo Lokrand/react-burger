@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import styles from "./OrdersFeed.module.css";
-import { useDispatch } from "react-redux";
 import { openModal } from "../../services/modal/actions";
 import { IOrder, IOrdersFeed } from "../../services/types/data";
 import { Order } from "./Order/Order";
 import { setCurrentOrder } from "../../services/currentOrder/actions";
+import { useDispatch } from "../../hooks/useTypedDispatch";
 
 export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
   const dispatch = useDispatch();

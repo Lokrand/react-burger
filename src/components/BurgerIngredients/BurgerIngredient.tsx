@@ -10,10 +10,9 @@ import { typeBun } from "../../utils/constans";
 import { Text } from "../Text/Text";
 import { Link, useLocation } from "react-router-dom";
 import { setDetails } from "../../services/details/actions";
-import { useDispatch } from "react-redux";
 import { openModal } from "../../services/modal/actions";
 import { IIngredientProps } from "./types";
-import { IIngredient } from "../../services/types/data";
+import { useDispatch } from "../../hooks/useTypedDispatch";
 
 export const BurgerIngredient:FC<IIngredientProps> = ({ data }) => {
   const dispatch = useDispatch();

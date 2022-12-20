@@ -4,8 +4,8 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useCallback, useEffect } from "react";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import ReactDom from "react-dom";
-import { useDispatch } from "react-redux";
 import { openModal } from "../../services/modal/actions";
+import { useDispatch } from "../../hooks/useTypedDispatch";
 
 export interface IModalProps {
   active: boolean;
