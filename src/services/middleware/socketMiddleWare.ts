@@ -1,19 +1,21 @@
 import { Dispatch } from "redux";
 import { TWssActions, TWssActionsObj } from "../wssServices/actions";
 
-export const socketMiddleware = (wssUrl: string, wssActions: TWssActionsObj) => {
-  return (store: {dispatch: Dispatch<TWssActions>}) => {
+export const socketMiddleware = (
+  wssUrl: string,
+  wssActions: TWssActionsObj
+) => {
+  return (store: { dispatch: Dispatch<TWssActions> }) => {
     let socket: WebSocket | null = null;
     return (next: Dispatch<TWssActions>) => (action: TWssActions) => {
       const { dispatch } = store;
-      // const { type, payload }: {type: string, payload: any} = action;
       const { wssInit, wssSendMessage, onOpen, onClose, onError, onMessage } =
-      wssActions;
-      
+        wssActions;
+
       if (action.type === wssInit) {
         socket = new WebSocket(`${wssUrl}${action.payload}`);
       }
-      
+
       if (socket) {
         socket.onopen = (event: any) => {
           dispatch({ type: onOpen, payload: event });

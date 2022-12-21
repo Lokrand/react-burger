@@ -1,7 +1,3 @@
-import { AppDispatch } from "../../hooks/useTypedDispatch";
-import { commonFetch } from "../../utils/api";
-import { BASE_URL } from "../../utils/constans";
-
 export enum ResetPasswordActionTypes {
   RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST",
   RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS",
@@ -41,29 +37,3 @@ export const resetPasswordError = (payload: string): TResetPasswordActions => ({
   type: ResetPasswordActionTypes.RESET_PASSWORD_ERROR,
   payload,
 });
-
-// export const resetPassword = (password: string, token: string) => {
-//   if (password?.length > 0 && token?.length > 0) {
-//     return function (dispatch: AppDispatch) {
-//       dispatch(resetPasswordRequest());
-//       commonFetch(`${BASE_URL}/password-reset/reset`, {
-//         method: "POST",
-//         headers: {
-//           Accept: "application/json",
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//           password: password,
-//           token: token,
-//         }),
-//       })
-//         .then((data) => {
-//           dispatch(resetPasswordSuccess(data));
-//         })
-//         .catch((err) => {
-//           console.error("Error", err);
-//           dispatch(resetPasswordError(err));
-//         });
-//     };
-//   }
-// };

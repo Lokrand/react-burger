@@ -88,14 +88,10 @@ export const resetUser = (): TUserActions => {
   };
 };
 
-//// это из другого файла с асинк экшеном юзера
 export const userDetails = (email: string, password: string, name: string) => {
   return function (dispatch: AppDispatch) {
     commonFetch(`${BASE_URL}/auth/user`, {
       method: "PATCH",
-      // mode: "cors",
-      // cache: "no-cache",
-      // credentials: "same-origin",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + getCookie("token"),
@@ -116,7 +112,6 @@ export const userDetails = (email: string, password: string, name: string) => {
       });
   };
 };
-////
 
 export const registerNewUser = (
   name: string,
@@ -184,7 +179,6 @@ export const login = (email: string, password: string) => {
     commonFetch(`${BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
-        // Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -215,7 +209,6 @@ export const logout = () => {
     commonFetch(`${BASE_URL}/auth/logout`, {
       method: "POST",
       headers: {
-        // Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -224,7 +217,6 @@ export const logout = () => {
     })
       .then((data) => {
         if (data.success) {
-          console.log("logout data", data);
           setCookie("token", "");
           dispatch(resetUser());
         }
@@ -240,7 +232,6 @@ export const refreshToken = () => {
     commonFetch(`${BASE_URL}/auth/token`, {
       method: "POST",
       headers: {
-        // Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({

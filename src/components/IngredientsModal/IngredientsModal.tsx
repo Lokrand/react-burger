@@ -35,6 +35,7 @@ interface IIngredientModal {
 }
 
 export const IngredientsModal = (data: IIngredientModal) => {
+  const item = data.data;
   return (
     <div>
       <div className={styles.title}>
@@ -42,9 +43,9 @@ export const IngredientsModal = (data: IIngredientModal) => {
           Детали ингредиента
         </Text>
       </div>
-      <img src={data.image} alt={data.name} className={styles.image} />
+      <img src={item.image} alt={item.name} className={styles.image} />
       <Text size="medium" className="mt-4">
-        {data.name}
+        {item.name}
       </Text>
       <div className={styles.items}>
         <div className={styles.item}>
@@ -52,7 +53,7 @@ export const IngredientsModal = (data: IIngredientModal) => {
             Калории,ккал
           </Text>
           <Text inactive type="digits">
-            {data.calories}
+            {item.calories}
           </Text>
         </div>
         <div>
@@ -60,7 +61,7 @@ export const IngredientsModal = (data: IIngredientModal) => {
             Белки, г
           </Text>
           <Text inactive type="digits">
-            {data.proteins}
+            {item.proteins}
           </Text>
         </div>
         <div>
@@ -68,7 +69,7 @@ export const IngredientsModal = (data: IIngredientModal) => {
             Жиры, г
           </Text>
           <Text inactive type="digits">
-            {data.fat}
+            {item.fat}
           </Text>
         </div>
         <div>
@@ -76,7 +77,7 @@ export const IngredientsModal = (data: IIngredientModal) => {
             Углеводы, г
           </Text>
           <Text inactive type="digits">
-            {data.carbohydrates}
+            {item.carbohydrates}
           </Text>
         </div>
       </div>

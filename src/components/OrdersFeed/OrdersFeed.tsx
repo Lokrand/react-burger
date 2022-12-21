@@ -7,7 +7,6 @@ import { setCurrentOrder } from "../../services/currentOrder/actions";
 import { useDispatch } from "../../hooks/useTypedDispatch";
 
 export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
-  console.log('orders', orders)
   const dispatch = useDispatch();
   const handleOnClickProfileModal = (el: IOrder): any => {
     dispatch(openModal("OrderProfileOrderPopup"));

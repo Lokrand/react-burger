@@ -83,9 +83,6 @@ export const getUserDetails = () => {
 export function editUser(email:string, password:string, name:string) {
   return commonFetch(`${BASE_URL}/auth/user`, {
     method: "PATCH",
-    // mode: "cors",
-    // cache: "no-cache",
-    // credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + getCookie("token"),

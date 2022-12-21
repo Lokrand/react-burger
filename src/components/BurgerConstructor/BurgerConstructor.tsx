@@ -23,7 +23,6 @@ import {
   updateSelectedItemsOrder,
 } from "../../services/burgerConstructor/actions";
 import { getOrderNumber } from "../../services/orderNumber/actions";
-// import { refreshToken } from "../../services/refreshToken/actions";
 import { useDispatch } from "../../hooks/useTypedDispatch";
 import { refreshToken } from "../../services/user/actions";
 

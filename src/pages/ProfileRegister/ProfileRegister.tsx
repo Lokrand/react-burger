@@ -1,7 +1,6 @@
 import React, {
   useState,
   useEffect,
-  useRef,
   FC,
   ChangeEvent,
   FormEventHandler,
@@ -15,8 +14,6 @@ import {
 import { isTokenExpired } from "../../utils/token";
 import { getCookie } from "../../utils/cookie";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-// import { refreshToken } from "../../services/refreshToken/actions";
-// import { dispatchStore } from "../../hooks/useTypedDispatch";
 import { getUser, refreshToken, userDetails } from "../../services/user/actions";
 import { useDispatch } from "../../hooks/useTypedDispatch";
 
@@ -76,12 +73,6 @@ export const ProfileRegister: FC = () => {
     setIsChanged(false);
   };
 
-  // const inputRef = useRef();
-
-  // const onIconClick = () => {
-  //   setTimeout(() => inputRef.current!.focus(), 0);
-  // };
-
   return (
     <Profile>
       <div className={styles.container}>
@@ -95,7 +86,6 @@ export const ProfileRegister: FC = () => {
             value={value.name}
             errorText={"Ошибка"}
             onChange={onChange}
-            // onIconClick={onIconClick}
           />
           <Input
             type={"text"}
@@ -106,7 +96,6 @@ export const ProfileRegister: FC = () => {
             value={value.email}
             errorText={"Ошибка"}
             onChange={onChange}
-            // onIconClick={onIconClick}
           />
           <Input
             type={"text"}
@@ -117,7 +106,6 @@ export const ProfileRegister: FC = () => {
             value={value.password}
             errorText={"Ошибка"}
             onChange={onChange}
-            // onIconClick={onIconClick}
           />
           <div>
             {isChanged && (

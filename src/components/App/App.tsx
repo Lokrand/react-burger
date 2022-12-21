@@ -24,7 +24,6 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { Location } from "history";
 import { fetchIngredients } from "../../services/ingredients/actions";
 import { deleteCurrentOrder } from "../../services/currentOrder/actions";
-// import { refreshToken } from "../../services/refreshToken/actions";
 import { useDispatch } from "../../hooks/useTypedDispatch";
 import { refreshToken } from "../../services/user/actions";
 

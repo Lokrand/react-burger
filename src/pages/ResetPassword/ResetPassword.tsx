@@ -10,12 +10,8 @@ import {
 import { Text } from "../../components/Text/Text";
 import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-// import { resetPassword } from "../../services/resetPassword/actions";
-import { useDispatch } from "../../hooks/useTypedDispatch";
-// import { resetPassword } from "../../services/user/actions";
 
 export const ResetPassword: FC = () => {
-  const dispatch = useDispatch();
   const history = useHistory<{ from: string }>();
   const auth = useTypedSelector((state) => state.user.isAuthenticated);
 
@@ -28,7 +24,6 @@ export const ResetPassword: FC = () => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // dispatch(resetPassword(value.newPassword, value.code));
     history.replace({ pathname: "/login" });
   };
 
