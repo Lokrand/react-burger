@@ -6,20 +6,7 @@ interface IDetailsState {
 }
 
 const initialState: IDetailsState = {
-  details: {
-    calories: 0,
-    carbohydrates: 0,
-    fat: 0,
-    image: "",
-    image_large: "",
-    image_mobile: "",
-    name: "",
-    price: 0,
-    proteins: 0,
-    type: "",
-    __v: 0,
-    _id: "",
-  },
+  details: {} as IIngredient,
 };
 
 export const getDetails = (

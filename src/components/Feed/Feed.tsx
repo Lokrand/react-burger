@@ -25,14 +25,14 @@ export const Feed: FC = () => {
       dispatch({ type: WSS_DELETE_ORDERS });
     };
   }, []);
-  const data = useTypedSelector((state) => state.wssReducer.orders);
-  let orders;
-  let total;
-  let totalToday;
-  if (data !== undefined) {
-    orders = data.orders;
-    total = data.total;
-    totalToday = data.totalToday;
+  // const data = useTypedSelector((state) => state.wssReducer.orders);
+  const orders = useTypedSelector((state) => state.wssReducer.orders);
+  const total = useTypedSelector((state) => state.wssReducer.total);
+  const totalToday = useTypedSelector((state) => state.wssReducer.totalToday);
+  if (orders !== undefined) {
+    // orders = data.orders;
+    // total = data.total;
+    // totalToday = data.totalToday;
     if (!orders) return <Text size="medium">Загружаем страницу...</Text>;
     for (let i = 0; i < orders.length; i++) {
       if (orders[i].status === "done") {

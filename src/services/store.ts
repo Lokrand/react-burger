@@ -4,7 +4,7 @@ import { reducer } from "./burgerConstructor/reducer";
 import { getIngredientsReducer } from "./ingredients/reducer";
 import { getDetails } from "./details/reducer";
 import { getOrderNumber } from "./orderNumber/reducer";
-import { resetPassword } from "./resetPassword/actions";
+// import { resetPassword } from "./resetPassword/actions";
 import { user } from "./user/reducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -14,6 +14,7 @@ import { wssActions } from "./wssServices/actions";
 import { wssReducer } from "./wssServices/reducer";
 import { modal } from "./modal/reducer";
 
+export type RootState = ReturnType<typeof store.getState>;
 const persistConfig = {
   key: "root",
   storage,
@@ -34,19 +35,18 @@ const enhancer = composeEnhancers(
   )
 );
 
-const rootReducer: any = combineReducers({
+const rootReducer = combineReducers({
   app: reducer,
   ingredients: getIngredientsReducer,
   getDetails,
   getOrderNumber,
-  resetPassword,
+  // resetPassword,
   user,
   getCurrentOrder,
   wssReducer,
   modal,
 });
 
-export type RootState = ReturnType<typeof rootReducer>;
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

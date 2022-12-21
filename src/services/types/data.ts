@@ -68,7 +68,7 @@ export interface IOrder {
 
 export interface IOrdersFeed {
   width: string;
-  orders: string[];
+  orders: IOrder[];
   isProfile?: boolean;
 }
 

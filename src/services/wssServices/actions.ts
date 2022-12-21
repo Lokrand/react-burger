@@ -34,6 +34,7 @@ interface IWssConnectionError {
 }
 interface IWssConnectionClosed {
   readonly type: WssConnectionActionTypes.WSS_CONNECTION_CLOSED;
+  readonly payload: any;
 }
 interface IWssGetMessage {
   readonly type: WssConnectionActionTypes.WSS_GET_MESSAGE;

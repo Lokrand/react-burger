@@ -6,7 +6,7 @@ export const socketMiddleware = (wssUrl: string, wssActions: TWssActionsObj) => 
     let socket: WebSocket | null = null;
     return (next: Dispatch<TWssActions>) => (action: TWssActions) => {
       const { dispatch } = store;
-      // const { type, payload } = action;
+      // const { type, payload }: {type: string, payload: any} = action;
       const { wssInit, wssSendMessage, onOpen, onClose, onError, onMessage } =
       wssActions;
       
