@@ -7,6 +7,7 @@ import { setCurrentOrder } from "../../services/currentOrder/actions";
 import { useDispatch } from "../../hooks/useTypedDispatch";
 
 export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
+  console.log('orders', orders)
   const dispatch = useDispatch();
   const handleOnClickProfileModal = (el: IOrder): any => {
     dispatch(openModal("OrderProfileOrderPopup"));
@@ -21,7 +22,7 @@ export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
     <>
       {isProfile ? (
         <section className={`${styles.section} ${styles.section_profile}`}>
-          {orders.map((el: any) => {
+          {orders.map((el: IOrder) => {
             return (
               <Order
                 key={el._id}
@@ -37,7 +38,7 @@ export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
         </section>
       ) : (
         <section className={styles.section}>
-          {orders.map((el: any) => {
+          {orders.map((el: IOrder) => {
             return (
               <Order
                 key={el._id}

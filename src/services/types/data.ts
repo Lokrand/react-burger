@@ -83,4 +83,6 @@ export interface IOrderDetails {
   orderNumber: number;
 }
 
-
+export interface IWssResponse {
+  orders: IOrder[],
+}

@@ -1,9 +1,9 @@
-import { IOrder } from "../types/data";
+import { IOrder, IWssResponse } from "../types/data";
 import { TWssActions, WssConnectionActionTypes } from "./actions";
 
 interface IWssReducerState {
   wssConnected: boolean;
-  orders: IOrder[];
+  orders: IWssResponse;
   error: null | string;
   total: number;
   totalToday: number;
@@ -11,7 +11,7 @@ interface IWssReducerState {
 
 const initialState: IWssReducerState = {
   wssConnected: false,
-  orders: [],
+  orders: {} as IWssResponse,
   error: null,
   total: 0,
   totalToday: 0,
@@ -61,7 +61,7 @@ export const wssReducer = (
       return {
         ...state,
         error: null,
-        orders: [],
+        orders: { ...state.orders, orders: [] }
       };
 
     default:

@@ -34,7 +34,7 @@ export const ProfileOrders: FC = () => {
   let orders;
   let reverseOrders = [];
   if (data !== undefined) {
-    orders = data;
+    orders = data.orders;
   }
   if (orders !== undefined) {
     for (let i = orders.length - 1; i >= 0; i--) {
