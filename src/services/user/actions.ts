@@ -93,9 +93,9 @@ export const userDetails = (email: string, password: string, name: string) => {
   return function (dispatch: AppDispatch) {
     commonFetch(`${BASE_URL}/auth/user`, {
       method: "PATCH",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
+      // mode: "cors",
+      // cache: "no-cache",
+      // credentials: "same-origin",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + getCookie("token"),
@@ -184,7 +184,7 @@ export const login = (email: string, password: string) => {
     commonFetch(`${BASE_URL}/auth/login`, {
       method: "POST",
       headers: {
-        Accept: "application/json",
+        // Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -215,7 +215,7 @@ export const logout = () => {
     commonFetch(`${BASE_URL}/auth/logout`, {
       method: "POST",
       headers: {
-        Accept: "application/json",
+        // Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -227,6 +227,35 @@ export const logout = () => {
           console.log("logout data", data);
           setCookie("token", "");
           dispatch(resetUser());
+        }
+      })
+      .catch((err) => {
+        console.error("Error", err);
+      });
+  };
+};
+
+export const refreshToken = () => {
+  return function (dispatch: AppDispatch) {
+    commonFetch(`${BASE_URL}/auth/token`, {
+      method: "POST",
+      headers: {
+        // Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: localStorage.getItem("token"),
+      }),
+    })
+      .then((data) => {
+        let authToken;
+        let refreshToken;
+        if (data.success === true) {
+          dispatch(authenticate());
+          authToken = data.accessToken.split("Bearer ")[1];
+          refreshToken = data.refreshToken;
+          localStorage.setItem("token", refreshToken);
+          setCookie("token", authToken, { path: "/", expires: 1140 });
         }
       })
       .catch((err) => {

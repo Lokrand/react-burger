@@ -15,9 +15,9 @@ import {
 import { isTokenExpired } from "../../utils/token";
 import { getCookie } from "../../utils/cookie";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { refreshToken } from "../../services/refreshToken/actions";
+// import { refreshToken } from "../../services/refreshToken/actions";
 // import { dispatchStore } from "../../hooks/useTypedDispatch";
-import { getUser, userDetails } from "../../services/user/actions";
+import { getUser, refreshToken, userDetails } from "../../services/user/actions";
 import { useDispatch } from "../../hooks/useTypedDispatch";
 
 export const ProfileRegister: FC = () => {

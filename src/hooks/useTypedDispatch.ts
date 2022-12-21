@@ -8,7 +8,7 @@ import { TCurrentOrderActions } from "../services/currentOrder/actions";
 import { TGetIngredientsActions } from "../services/ingredients/actions";
 import { TDetailsActions } from "../services/details/actions";
 import { TGetOrderNumberAction } from "../services/orderNumber/actions";
-import { TRefreshTokenRequestActions } from "../services/refreshToken/actions";
+// import { TRefreshTokenRequestActions } from "../services/refreshToken/actions";
 import { TResetPasswordActions } from "../services/resetPassword/actions";
 import { TUserActions } from "../services/user/actions";
 import { TWssActions } from "../services/wssServices/actions";
@@ -21,7 +21,7 @@ type TApplicationActions =
   | TGetIngredientsActions
   | TDetailsActions
   | TGetOrderNumberAction
-  | TRefreshTokenRequestActions
+  // | TRefreshTokenRequestActions
   | TResetPasswordActions
   | TUserActions
   | TWssActions;

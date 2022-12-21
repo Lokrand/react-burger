@@ -2,14 +2,38 @@
 import { BASE_URL } from "./constans";
 import { getCookie, setCookie, deleteCookie } from "./cookie";
 
-const checkResponse = (res) => {
+type THeaders = {
+  'Content-Type': string,
+  Authorization?: string
+}
+
+type TOptions = {
+  method: string;
+  headers: THeaders;
+  body?: string
+};
+
+type TRes = {
+  body: ReadableStream<Uint8Array> | null
+  bodyUsed: boolean,
+  headers: Headers,
+  ok: boolean,
+  redirected: boolean,
+  status: number,
+  statusText: string,
+  type: ResponseType;
+  url: string,
+  json: () => Promise<any> | undefined;
+}
+
+const checkResponse = (res : TRes) => {
   if (res.ok) {
     return res.json();
   }
   return Promise.reject(res.status);
 };
 
-export const commonFetch = (path, params = {}) => {
+export const commonFetch = (path: string, params?: TOptions) => {
   return fetch(path, params).then(checkResponse);
 };
 
@@ -32,7 +56,7 @@ export const refreshTokenRequest = () => {
     .catch((err) => console.error(err));
 };
 
-export const sendRegister = (email, password, name) => {
+export const sendRegister = (email:string, password:string, name:string) => {
   return commonFetch(`${BASE_URL}/auth/register`, {
     method: "POST",
     headers: {
@@ -56,12 +80,12 @@ export const getUserDetails = () => {
   });
 };
 
-export function editUser(email, password, name) {
+export function editUser(email:string, password:string, name:string) {
   return commonFetch(`${BASE_URL}/auth/user`, {
     method: "PATCH",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
+    // mode: "cors",
+    // cache: "no-cache",
+    // credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + getCookie("token"),

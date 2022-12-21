@@ -6,7 +6,7 @@ export const fetchPassword = (email: string, redirect: VoidFunction) => {
     commonFetch(`${BASE_URL}/password-reset`, {
       method: "POST",
       headers: {
-        Accept: "application/json",
+        // Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email: email }),

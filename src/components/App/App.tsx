@@ -24,8 +24,9 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { Location } from "history";
 import { fetchIngredients } from "../../services/ingredients/actions";
 import { deleteCurrentOrder } from "../../services/currentOrder/actions";
-import { refreshToken } from "../../services/refreshToken/actions";
+// import { refreshToken } from "../../services/refreshToken/actions";
 import { useDispatch } from "../../hooks/useTypedDispatch";
+import { refreshToken } from "../../services/user/actions";
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -63,7 +64,7 @@ const App: FC = () => {
     <>
       <AppHeader />
       <Switch location={background || location}>
-        <Route exact path="/react-burger" children={<Main />} />
+        <Route exact path="/" children={<Main />} />
         <Route path="/login" children={<Login />} />
         <Route path="/register" children={<Register />} />
         <Route path="/forgot-password" children={<ForgotPassword />} />

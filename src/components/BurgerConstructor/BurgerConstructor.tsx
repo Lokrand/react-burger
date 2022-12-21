@@ -23,8 +23,9 @@ import {
   updateSelectedItemsOrder,
 } from "../../services/burgerConstructor/actions";
 import { getOrderNumber } from "../../services/orderNumber/actions";
-import { refreshToken } from "../../services/refreshToken/actions";
+// import { refreshToken } from "../../services/refreshToken/actions";
 import { useDispatch } from "../../hooks/useTypedDispatch";
+import { refreshToken } from "../../services/user/actions";
 
 export const BurgerConstructor: FC = () => {
   const history = useHistory();
@@ -125,7 +126,7 @@ export const BurgerConstructor: FC = () => {
   };
 
   const redirect = () => {
-    history.replace({ pathname: "/login", state: "/react-burger" });
+    history.replace({ pathname: "/login", state: "/" });
   };
 
   const checkToken = () => {
