@@ -1,13 +1,16 @@
-import { Dispatch } from "redux";
-import { TWssActions, TWssActionsObj } from "../wssServices/actions";
+import { MiddlewareAPI } from "redux";
+import { Middleware } from "@reduxjs/toolkit";
+import { AppDispatch } from "../../hooks/useTypedDispatch";
+import { RootState } from "../store";
+import { TWssActionsObj } from "../wssServices/actions";
 
 export const socketMiddleware = (
   wssUrl: string,
   wssActions: TWssActionsObj
-) => {
-  return (store: { dispatch: Dispatch<TWssActions> }) => {
+): Middleware => {
+  return (store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
-    return (next: Dispatch<TWssActions>) => (action: TWssActions) => {
+    return (next) => (action) => {
       const { dispatch } = store;
       const { wssInit, wssSendMessage, onOpen, onClose, onError, onMessage } =
         wssActions;
@@ -17,15 +20,15 @@ export const socketMiddleware = (
       }
 
       if (socket) {
-        socket.onopen = (event: Event) => {
+        socket.onopen = (event) => {
           dispatch({ type: onOpen, payload: event });
         };
 
-        socket.onerror = (event: any) => {
+        socket.onerror = (event) => {
           dispatch({ type: onError, payload: event });
         };
 
-        socket.onmessage = (event: any) => {
+        socket.onmessage = (event) => {
           const data = JSON.parse(event.data);
           if (data.success) {
             dispatch({ type: onMessage, payload: data });

@@ -39,7 +39,6 @@ export const FeedDetails: FC = () => {
     return newArr;
   };
   const result = counter(order.ingredients, ingredients);
-
   const date = getDate(order.createdAt);
   return (
     <>

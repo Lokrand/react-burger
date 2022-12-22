@@ -4,7 +4,6 @@ import { IngredientsModal } from "../IngredientsModal/IngredientsModal";
 
 export const IngredientDetails: FC = () => {
   const data = useTypedSelector((state) => state.getDetails.details);
-  return (
-    <IngredientsModal data={data}/>
-  );
+  if (!data) return null;
+  return <IngredientsModal data={data} />;
 };

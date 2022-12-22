@@ -1,7 +1,8 @@
+import moment from "moment";
+import "moment/locale/ru";
+
 export const getDate = (date: string): string => {
-  const moment = require("moment");
-  require("moment/locale/ru");
-  const time = new Date(Date.parse(date));
+  const time = Date.parse(date);
   const russionTime = new Intl.DateTimeFormat("ru", {
     timeZoneName: "short",
   }).format(time);

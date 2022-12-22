@@ -22,11 +22,11 @@ export enum WssConnectionActionTypes {
 
 interface IWssConnectionRequest {
   readonly type: WssConnectionActionTypes.WSS_CONNECTION_REQUEST;
-  readonly payload: string;
+  readonly payload: Event;
 }
 interface IWssConnectionSuccess {
   readonly type: WssConnectionActionTypes.WSS_CONNECTION_SUCCESS;
-  readonly payload: string;
+  readonly payload: Event;
 }
 interface IWssConnectionError {
   readonly type: WssConnectionActionTypes.WSS_CONNECTION_ERROR;
@@ -65,6 +65,6 @@ export const wssActions = {
   onClose: WssConnectionActionTypes.WSS_CONNECTION_CLOSED,
   onError: WssConnectionActionTypes.WSS_CONNECTION_ERROR,
   onMessage: WssConnectionActionTypes.WSS_GET_MESSAGE,
-};
+} as const;
 
 export type TWssActionsObj = typeof wssActions;

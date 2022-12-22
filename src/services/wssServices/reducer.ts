@@ -1,4 +1,4 @@
-import { IOrder, IWssResponse } from "../types/data";
+import { IWssResponse } from "../types/data";
 import { TWssActions, WssConnectionActionTypes } from "./actions";
 
 interface IWssReducerState {
@@ -61,7 +61,7 @@ export const wssReducer = (
       return {
         ...state,
         error: null,
-        orders: { ...state.orders, orders: [] }
+        orders: { ...state.orders, orders: [] },
       };
 
     default:
