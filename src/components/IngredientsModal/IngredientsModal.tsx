@@ -4,37 +4,10 @@ import { Text } from "../Text/Text";
 import { IIngredient } from "../../services/types/data";
 
 interface IIngredientModal {
-  key?: string;
-  calories?: number;
-  carbohydrates?: number;
-  fat?: number;
-  image?: string;
-  image_large?: string;
-  image_mobile?: string;
-  name?: string;
-  price?: number;
-  proteins?: number;
-  type?: string;
-  __v?: number;
-  _id?: string;
-  data: {
-    key?: string;
-    calories: number;
-    carbohydrates: number;
-    fat: number;
-    image: string;
-    image_large: string;
-    image_mobile: string;
-    name: string;
-    price: number;
-    proteins: number;
-    type: string;
-    __v: number;
-    _id: string;
-  };
+  data: IIngredient;
 }
 
-export const IngredientsModal = (data: IIngredientModal) => {
+export const IngredientsModal: FC<IIngredientModal> = (data) => {
   const item = data.data;
   return (
     <div>

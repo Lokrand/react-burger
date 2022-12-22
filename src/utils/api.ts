@@ -2,25 +2,14 @@
 import { BASE_URL } from "./constans";
 import { getCookie, setCookie, deleteCookie } from "./cookie";
 
-type THeaders = {
-  'Content-Type': string,
-  Authorization?: string
-}
-
-type TOptions = {
-  method: string;
-  headers: THeaders;
-  body?: string
-};
-
-const checkResponse = (res : Response) => {
+const checkResponse = (res: Response) => {
   if (res.ok) {
     return res.json();
   }
   return Promise.reject(res.status);
 };
 
-export const commonFetch = (path: string, params?: TOptions) => {
+export const commonFetch = (path: string, params?: RequestInit) => {
   return fetch(path, params).then(checkResponse);
 };
 
@@ -43,7 +32,7 @@ export const refreshTokenRequest = () => {
     .catch((err) => console.error(err));
 };
 
-export const sendRegister = (email:string, password:string, name:string) => {
+export const sendRegister = (email: string, password: string, name: string) => {
   return commonFetch(`${BASE_URL}/auth/register`, {
     method: "POST",
     headers: {
@@ -67,7 +56,7 @@ export const getUserDetails = () => {
   });
 };
 
-export function editUser(email:string, password:string, name:string) {
+export function editUser(email: string, password: string, name: string) {
   return commonFetch(`${BASE_URL}/auth/user`, {
     method: "PATCH",
     headers: {

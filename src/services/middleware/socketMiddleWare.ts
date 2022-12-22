@@ -17,7 +17,7 @@ export const socketMiddleware = (
       }
 
       if (socket) {
-        socket.onopen = (event: any) => {
+        socket.onopen = (event: Event) => {
           dispatch({ type: onOpen, payload: event });
         };
 
