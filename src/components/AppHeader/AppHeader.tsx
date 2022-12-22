@@ -11,7 +11,7 @@ export const AppHeader: FC = () => {
       <div className={styles.header}>
         <NavLink
           exact
-          to="/react-burger"
+          to="/"
           className={styles.link_disables}
           activeClassName={styles.link_active}
         >

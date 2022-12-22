@@ -1,12 +1,12 @@
 import React, { FC, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch } from "../../hooks/useTypedDispatch";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 import {
   WSS_CONNECTION_CLOSED,
   WSS_CONNECTION_REQUEST,
   WSS_DELETE_ORDERS,
   WSS_GET_MESSAGE,
-} from "../../services/actions/wssActions";
+} from "../../services/wssServices/actions";
 import { OrdersFeed } from "../OrdersFeed/OrdersFeed";
 import { Spinner } from "../Spinner/Spinner";
 import { Text } from "../Text/Text";
@@ -25,14 +25,12 @@ export const Feed: FC = () => {
       dispatch({ type: WSS_DELETE_ORDERS });
     };
   }, []);
-  const data = useSelector((state) => state.wssReducer.orders);
+  const data = useTypedSelector((state) => state.wssReducer.orders);
   let orders;
-  let total;
-  let totalToday;
+  const total = useTypedSelector((state) => state.wssReducer.total);
+  const totalToday = useTypedSelector((state) => state.wssReducer.totalToday);
   if (data !== undefined) {
     orders = data.orders;
-    total = data.total;
-    totalToday = data.totalToday;
     if (!orders) return <Text size="medium">Загружаем страницу...</Text>;
     for (let i = 0; i < orders.length; i++) {
       if (orders[i].status === "done") {

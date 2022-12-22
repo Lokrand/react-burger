@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
 import { getDate } from "../../../utils/date";
 import { Text } from "../../Text/Text";
 import styles from "./Order.module.css";
@@ -8,7 +7,8 @@ import { NavLink, useLocation } from "react-router-dom";
 import { getIngredientsAmount, getTotalPrice } from "./Order.utils";
 import { OrderStatus } from "../../OrderStatus/OrderStatus";
 import { OrderIcons } from "../../OrderIcons/OrderIcons";
-import { IOrder, TIngredient } from "../../../services/types/data";
+import { IOrder } from "../../../services/types/data";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 interface IOrderComponent {
   data: IOrder,
@@ -16,7 +16,7 @@ interface IOrderComponent {
   width: string,
   onClick?: () => {},
   pathname: string,
-  className: string,
+  className?: string,
 }
 
 export const Order:FC<IOrderComponent> = ({
@@ -29,7 +29,7 @@ export const Order:FC<IOrderComponent> = ({
 }) => {
   const location = useLocation();
   const time = getDate(data.createdAt);
-  const ingredients = useSelector((state) => state.ingredients.components);
+  const ingredients = useTypedSelector((state) => state.ingredients.components);
   const result = getIngredientsAmount(data.ingredients, ingredients);
   const price = getTotalPrice(data.ingredients, ingredients);
 

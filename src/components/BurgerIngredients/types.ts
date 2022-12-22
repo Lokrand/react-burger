@@ -1,5 +1,5 @@
-import { TIngredient } from "../../services/types/data";
+import { IIngredient } from "../../services/types/data";
 
 export interface IIngredientProps {
-  data: TIngredient;
+  data: IIngredient;
 }

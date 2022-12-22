@@ -1,7 +1,10 @@
-import React, { FC } from 'react'
-import { Text } from '../Text/Text';
-import styles from './OrderStatus.module.css'
-import { IOrderStatus } from './types';
+import React, { FC } from "react";
+import { Text } from "../Text/Text";
+import styles from "./OrderStatus.module.css";
+
+interface IOrderStatus {
+  status: string;
+}
 
 export const OrderStatus: FC<IOrderStatus> = ({ status }) => {
   return status === "done" ? (

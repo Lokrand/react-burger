@@ -1,13 +1,22 @@
 import React, { FC } from "react";
 import styles from "./OrdersFeed.module.css";
-import { useDispatch } from "react-redux";
-import { openModal } from "../../services/actions/modal";
-import { setCurrentOrder } from "../../services/reducers/getFeed";
-import { IOrdersFeed } from "../../services/types/data";
+import { openModal } from "../../services/modal/actions";
+import { IOrder, IOrdersFeed } from "../../services/types/data";
 import { Order } from "./Order/Order";
+import { setCurrentOrder } from "../../services/currentOrder/actions";
+import { useDispatch } from "../../hooks/useTypedDispatch";
 
 export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
   const dispatch = useDispatch();
+  const handleOnClickProfileModal = (el: IOrder): any => {
+    dispatch(openModal("OrderProfileOrderPopup"));
+    dispatch(setCurrentOrder(el));
+  };
+  const handleOnClickOrderFeedModal = (el: IOrder): any => {
+    dispatch(openModal("OrderFeedPopup"));
+    dispatch(setCurrentOrder(el));
+  };
+
   return (
     <>
       {isProfile ? (
@@ -21,10 +30,7 @@ export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
                 width={width}
                 className={styles.order_profile}
                 pathname={`/profile/orders/${el._id}`}
-                onClick={() => {
-                  dispatch(openModal("OrderProfileOrderPopup"));
-                  dispatch(setCurrentOrder(el));
-                }}
+                onClick={() => handleOnClickProfileModal(el)}
               />
             );
           })}
@@ -38,10 +44,7 @@ export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
                 data={el}
                 width={width}
                 pathname={`/feed/${el._id}`}
-                onClick={() => {
-                  dispatch(openModal("OrderFeedPopup"));
-                  dispatch(setCurrentOrder(el));
-                }}
+                onClick={() => handleOnClickOrderFeedModal(el)}
               />
             );
           })}

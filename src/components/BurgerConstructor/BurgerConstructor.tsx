@@ -6,42 +6,45 @@ import styles from "./BurgerConstructor.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { getPrice } from "./BurgerConstructor.utils";
-import { getOrderNumber } from "../../services/asyncActions/orderNumber";
-import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
-import {
-  ADD_CONSTRUCTOR_ELEMENT,
-  REMOVE_CONSTRUCTOR_ELEMENT,
-  UPDATE_SELECTED_ITEMS_ORDER,
-} from "../../services/actions/actions";
 import { Reorder } from "framer-motion";
 import { generateKeys } from "../../utils/generateKeys";
 import { typeBun } from "../../utils/constans";
 import { useHistory } from "react-router-dom";
 import { getCookie } from "../../utils/cookie";
 import { isTokenExpired } from "../../utils/token";
-import { refreshToken } from "../../services/asyncActions/refreshToken";
 import { LoadingDots } from "../LoadingDots/LoadingDots";
 import { Arrows } from "../Arrows/Arrows";
-import { IConstructorIngredient, TIngredient } from "../../services/types/data";
+import { IConstructorIngredient, IIngredient } from "../../services/types/data";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import {
+  addConstructorElement,
+  removeConstructorElement,
+  updateSelectedItemsOrder,
+} from "../../services/burgerConstructor/actions";
+import { getOrderNumber } from "../../services/orderNumber/actions";
+import { useDispatch } from "../../hooks/useTypedDispatch";
+import { refreshToken } from "../../services/user/actions";
 
 export const BurgerConstructor: FC = () => {
   const history = useHistory();
-  const items = useSelector((state) => state.ingredients.components);
-  const loading = useSelector((state) => state.getOrderNumber.loading);
-  const selectedItems = useSelector((state) => state.app.selectedItems);
+  const items = useTypedSelector((state) => state.ingredients.components);
+  const loading = useTypedSelector((state) => state.getOrderNumber.loading);
+  const selectedItems = useTypedSelector((state) => state.app.selectedItems);
   const reduxDispatch = useDispatch();
   const bun = useMemo(
-    () => selectedItems.find((el) => el.type === typeBun),
+    () => selectedItems.find((el: IIngredient) => el.type === typeBun),
     [selectedItems]
   );
   const bunTop = bun?.name + " (верх)";
   const bunBot = bun?.name + " (низ)";
-  const ingredient = selectedItems.filter((item) => item.type !== typeBun);
+  const ingredient = selectedItems.filter(
+    (item) => item.type !== typeBun
+  );
   const totalPrice = getPrice(selectedItems);
   let doIHaveABun = false;
-  const currectOrder: TIngredient[] = [];
-  const auth = useSelector((state) => state.user.isAuthenticated);
+  const currectOrder: IIngredient[] = [];
+  const auth = useTypedSelector((state) => state.user.isAuthenticated);
   const token = getCookie("token");
   const [wantDrop, setWantDrop] = useState(false);
   const [, drop] = useDrop(() => ({
@@ -61,47 +64,45 @@ export const BurgerConstructor: FC = () => {
     }
   }, [selectedItems.length]);
 
-  const addIngredientToBoard = (id: number) => {
+  const addIngredientToBoard = (id: string | undefined) => {
     const innredientsList = items.filter((item) => id === item._id);
-    reduxDispatch({
-      type: ADD_CONSTRUCTOR_ELEMENT,
-      payload: { ...innredientsList[0], key: generateKeys() },
-    });
+    reduxDispatch(
+      addConstructorElement({ ...innredientsList[0], key: generateKeys() })
+    );
   };
 
-  const removeIngredient = (key: string) => {
-    reduxDispatch({
-      type: REMOVE_CONSTRUCTOR_ELEMENT,
-      payload: key,
-    });
+  const removeIngredient = (key: string | undefined) => {
+    reduxDispatch(removeConstructorElement(key));
   };
-  selectedItems.forEach((el: TIngredient) => {
+
+  selectedItems.forEach((el) => {
     if (el.type === typeBun) {
       doIHaveABun = true;
     }
   });
+
   if (doIHaveABun) {
-    selectedItems.forEach((el: TIngredient) => {
+    selectedItems.forEach((el) => {
       if (el.type !== typeBun) {
         currectOrder.push(el);
       }
     });
-    selectedItems.forEach((el: TIngredient) => {
+    selectedItems.forEach((el) => {
       if (el.type === typeBun) {
         currectOrder.push(el);
         currectOrder.unshift(el);
       }
     });
   }
-  const getCurrentOrder = currectOrder.map((el) => el._id);
 
+  const getCurrentOrder = currectOrder.map((el) => el._id);
   const handleOrderClick = () => {
     reduxDispatch(getOrderNumber(getCurrentOrder));
   };
 
   const [, dropRef] = useDrop(() => ({
     accept: typeBun,
-    drop: (item) => {
+    drop: (item: IIngredient) => {
       selectedItems.map((el) => {
         if (el.key === item.key) {
           return { ...el, key: item.key };
@@ -113,24 +114,18 @@ export const BurgerConstructor: FC = () => {
     }),
   }));
 
-  const setItem = (item) => {
+  const setItem = (item: any) => {
     const bun = selectedItems.find((el) => el.type === typeBun);
     if (bun) {
       item.push(bun);
-      reduxDispatch({
-        type: UPDATE_SELECTED_ITEMS_ORDER,
-        payload: item,
-      });
+      reduxDispatch(updateSelectedItemsOrder(item));
     } else {
-      reduxDispatch({
-        type: UPDATE_SELECTED_ITEMS_ORDER,
-        payload: item,
-      });
+      reduxDispatch(updateSelectedItemsOrder(item));
     }
   };
 
   const redirect = () => {
-    history.replace({ pathname: "/login", state: "/react-burger" });
+    history.replace({ pathname: "/login", state: "/" });
   };
 
   const checkToken = () => {
@@ -168,7 +163,7 @@ export const BurgerConstructor: FC = () => {
             <div className={styles.scrollBar} ref={dropRef}>
               <Reorder.Group
                 as="ol"
-                axys="y"
+                axis="y"
                 values={ingredient}
                 onReorder={setItem}
               >

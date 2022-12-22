@@ -1,6 +1,6 @@
 import React from "react";
 
-export type TIngredient = {
+export type IIngredient = {
   calories: number;
   carbohydrates: number;
   fat: number;
@@ -14,20 +14,19 @@ export type TIngredient = {
   type: string;
   __v: number;
   _id: string;
-  
 };
 
 export interface IConstructorIngredient {
-  el: TIngredient;
-  id: number;
+  el: IIngredient;
+  id: string | undefined;
   price: number;
-  remove: (key: number) => {};
+  remove: (key: string | undefined) => void;
   text: string;
   thumbnail: string;
 }
 
-export type TIngredientState = {
-  components: TIngredient[];
+export type IIngredientState = {
+  components: IIngredient[];
   loading: boolean;
   error: string | null;
 };
@@ -70,7 +69,7 @@ export interface IOrder {
 export interface IOrdersFeed {
   width: string;
   orders: IOrder[];
-  isProfile: boolean;
+  isProfile?: boolean;
 }
 
 export interface IOrderItem {
@@ -78,4 +77,12 @@ export interface IOrderItem {
   price: number;
   name: string;
   count: number;
+}
+
+export interface IOrderDetails {
+  orderNumber: number;
+}
+
+export interface IWssResponse {
+  orders: IOrder[],
 }

@@ -1,19 +1,15 @@
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
 import { Text } from "../Text/Text";
 import styles from "./FeedDetails.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { getDate } from "../../utils/date";
 import { Item } from "./Item/Item";
-import { TIngredient } from "../../services/types/data";
-
-interface IComponentsState {
-  ingredients: components,
-}
+import { IIngredient } from "../../services/types/data";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 export const FeedDetails: FC = () => {
-  const order = useSelector((state) => state.getFeed.details);
-  const ingredients = useSelector((state:IComponentsState) => state.ingredients.components);
+  const order = useTypedSelector((state) => state.getCurrentOrder.details);
+  const ingredients = useTypedSelector((state) => state.ingredients.components);
   if (!order) return null;
   if (!order.ingredients) return null;
   let price = 0;
@@ -25,9 +21,7 @@ export const FeedDetails: FC = () => {
     }
   }
 
-  const counter = (it, ingredients) => {
-    console.log("counter_it", it)
-    console.log("counter_ingredients", ingredients)
+  const counter = (it: string[], ingredients: IIngredient[]) => {
     const newArr = [];
     for (let i = 0; i < ingredients.length; i++) {
       let count = null;
@@ -45,7 +39,6 @@ export const FeedDetails: FC = () => {
     return newArr;
   };
   const result = counter(order.ingredients, ingredients);
-
   const date = getDate(order.createdAt);
   return (
     <>
