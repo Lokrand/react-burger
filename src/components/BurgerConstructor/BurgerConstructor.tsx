@@ -39,7 +39,7 @@ export const BurgerConstructor: FC = () => {
   const bunTop = bun?.name + " (верх)";
   const bunBot = bun?.name + " (низ)";
   const ingredient = selectedItems.filter(
-    (item: IIngredient) => item.type !== typeBun
+    (item) => item.type !== typeBun
   );
   const totalPrice = getPrice(selectedItems);
   let doIHaveABun = false;
@@ -65,7 +65,7 @@ export const BurgerConstructor: FC = () => {
   }, [selectedItems.length]);
 
   const addIngredientToBoard = (id: string | undefined) => {
-    const innredientsList = items.filter((item: IIngredient) => id === item._id);
+    const innredientsList = items.filter((item) => id === item._id);
     reduxDispatch(
       addConstructorElement({ ...innredientsList[0], key: generateKeys() })
     );
@@ -75,19 +75,19 @@ export const BurgerConstructor: FC = () => {
     reduxDispatch(removeConstructorElement(key));
   };
 
-  selectedItems.forEach((el: IIngredient) => {
+  selectedItems.forEach((el) => {
     if (el.type === typeBun) {
       doIHaveABun = true;
     }
   });
 
   if (doIHaveABun) {
-    selectedItems.forEach((el: IIngredient) => {
+    selectedItems.forEach((el) => {
       if (el.type !== typeBun) {
         currectOrder.push(el);
       }
     });
-    selectedItems.forEach((el: IIngredient) => {
+    selectedItems.forEach((el) => {
       if (el.type === typeBun) {
         currectOrder.push(el);
         currectOrder.unshift(el);
@@ -103,7 +103,7 @@ export const BurgerConstructor: FC = () => {
   const [, dropRef] = useDrop(() => ({
     accept: typeBun,
     drop: (item: IIngredient) => {
-      selectedItems.map((el: IIngredient) => {
+      selectedItems.map((el) => {
         if (el.key === item.key) {
           return { ...el, key: item.key };
         }
@@ -114,8 +114,8 @@ export const BurgerConstructor: FC = () => {
     }),
   }));
 
-  const setItem = (item: any): void => {
-    const bun = selectedItems.find((el: IIngredient) => el.type === typeBun);
+  const setItem = (item: any) => {
+    const bun = selectedItems.find((el) => el.type === typeBun);
     if (bun) {
       item.push(bun);
       reduxDispatch(updateSelectedItemsOrder(item));
@@ -168,7 +168,7 @@ export const BurgerConstructor: FC = () => {
                 onReorder={setItem}
               >
                 <div className={styles.items}>
-                  {ingredient.map((el: IIngredient) => (
+                  {ingredient.map((el) => (
                     <ConstructorIngredients
                       key={el.key}
                       el={el}

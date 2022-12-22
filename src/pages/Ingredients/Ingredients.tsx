@@ -15,7 +15,7 @@ const Ingredients: FC = () => {
 
   return (
     <main className={styles.block}>
-      {ingredients.map((el: IIngredient) => {
+      {ingredients.map((el) => {
         if (el._id === id) {
           return <IngredientsModal key={el._id} data={el} />;
         }

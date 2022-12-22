@@ -13,20 +13,7 @@ type TOptions = {
   body?: string
 };
 
-type TRes = {
-  body: ReadableStream<Uint8Array> | null
-  bodyUsed: boolean,
-  headers: Headers,
-  ok: boolean,
-  redirected: boolean,
-  status: number,
-  statusText: string,
-  type: ResponseType;
-  url: string,
-  json: () => Promise<any> | undefined;
-}
-
-const checkResponse = (res : TRes) => {
+const checkResponse = (res : Response) => {
   if (res.ok) {
     return res.json();
   }

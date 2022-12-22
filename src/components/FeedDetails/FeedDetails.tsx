@@ -25,7 +25,7 @@ export const FeedDetails: FC = () => {
     const newArr = [];
     for (let i = 0; i < ingredients.length; i++) {
       let count = null;
-      count = it.filter((el: string) => el === ingredients[i]._id).length;
+      count = it.filter((el) => el === ingredients[i]._id).length;
       if (count) {
         newArr.push({
           id: count,

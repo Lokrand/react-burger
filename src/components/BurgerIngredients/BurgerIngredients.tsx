@@ -79,8 +79,8 @@ export const BurgerIngredients: FC = () => {
           </Text>
           <div className={styles.items}>
             {items
-              .filter((item: IIngredient) => item.type === typeBun)
-              .map((el: IIngredient) => (
+              .filter((item) => item.type === typeBun)
+              .map((el) => (
                 <BurgerIngredient data={el} key={el._id} />
               ))}
           </div>
@@ -91,8 +91,8 @@ export const BurgerIngredients: FC = () => {
           </Text>
           <div className={styles.items}>
             {items
-              .filter((item: IIngredient) => item.type === "sauce")
-              .map((el: IIngredient) => (
+              .filter((item) => item.type === "sauce")
+              .map((el) => (
                 <BurgerIngredient data={el} key={el._id} />
               ))}
           </div>
@@ -102,8 +102,8 @@ export const BurgerIngredients: FC = () => {
         </Text>
         <div className={styles.items}>
           {items
-            .filter((item: IIngredient) => item.type === "main")
-            .map((el: IIngredient) => (
+            .filter((item) => item.type === "main")
+            .map((el) => (
               <BurgerIngredient data={el} key={el._id} />
             ))}
         </div>

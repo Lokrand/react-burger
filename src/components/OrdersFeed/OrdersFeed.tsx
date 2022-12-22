@@ -21,7 +21,7 @@ export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
     <>
       {isProfile ? (
         <section className={`${styles.section} ${styles.section_profile}`}>
-          {orders.map((el: IOrder) => {
+          {orders.map((el) => {
             return (
               <Order
                 key={el._id}
@@ -37,7 +37,7 @@ export const OrdersFeed: FC<IOrdersFeed> = ({ width, orders, isProfile }) => {
         </section>
       ) : (
         <section className={styles.section}>
-          {orders.map((el: IOrder) => {
+          {orders.map((el) => {
             return (
               <Order
                 key={el._id}

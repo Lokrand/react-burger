@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { ChangeEvent, FormEventHandler, FC } from "react";
+import React, { ChangeEvent, FC, FormEvent } from "react";
 import { ModalRegister } from "../../components/ModalRegister/ModalRegister";
 import styles from "./ForgotPassword.module.css";
 import {
@@ -27,7 +27,7 @@ export const ForgotPassword: FC = () => {
     history.push(`/reset-password`, { from: "forgot-password" });
   };
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  const onSubmit= (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     fetchPassword(email, redirect);
   };

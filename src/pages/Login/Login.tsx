@@ -1,4 +1,4 @@
-import React, { useState, useCallback, FC } from "react";
+import React, { useState, useCallback, FC, ChangeEvent, FormEvent } from "react";
 import {
   Button,
   EmailInput,
@@ -18,12 +18,12 @@ export const Login: FC = () => {
   const auth = useTypedSelector((state) => state.user.isAuthenticated);
   const [value, setValue] = useState({ email: "", password: "" });
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
 
   const toLogin = useCallback(
-    (e: React.FormEvent) => {
+    (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       dispatch(login(value.email, value.password));
     },

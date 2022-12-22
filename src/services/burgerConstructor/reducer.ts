@@ -40,7 +40,7 @@ export const reducer = (
       };
     case BurgerActionTypes.REMOVE_CONSTRUCTOR_ELEMENT:
       const removedIngs = state.selectedItems.filter(
-        (el: IIngredient): boolean => el.key !== action.payload
+        (el) => el.key !== action.payload
       );
       return {
         ...state,

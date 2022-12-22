@@ -1,4 +1,4 @@
-import React, { useState, FC, ChangeEvent, FormEventHandler } from "react";
+import React, { useState, FC, ChangeEvent, FormEvent } from "react";
 import {
   Button,
   EmailInput,
@@ -32,7 +32,7 @@ export const Register: FC = () => {
     window.history.pushState(null, "", `/react-burger`);
   };
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(
       registerNewUser(value.email, value.password, value.user, redirect)

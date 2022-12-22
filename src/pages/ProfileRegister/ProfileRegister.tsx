@@ -3,7 +3,7 @@ import React, {
   useEffect,
   FC,
   ChangeEvent,
-  FormEventHandler,
+  FormEvent,
 } from "react";
 import { Profile } from "../Profile/Profile";
 import styles from "./ProfileRegister.module.css";
@@ -63,7 +63,7 @@ export const ProfileRegister: FC = () => {
     setIsChanged(false);
   };
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     checkToken();
     setTimeout(
