@@ -63,7 +63,7 @@ const App: FC = () => {
     <>
       <AppHeader />
       <Switch location={background || location}>
-        <Route exact path="/" children={<Main />} />
+        <Route exact path="/react-burger" children={<Main />} />
         <Route path="/login" children={<Login />} />
         <Route path="/register" children={<Register />} />
         <Route path="/forgot-password" children={<ForgotPassword />} />

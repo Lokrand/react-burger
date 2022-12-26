@@ -246,7 +246,7 @@ export const refreshToken = () => {
           authToken = data.accessToken.split("Bearer ")[1];
           refreshToken = data.refreshToken;
           localStorage.setItem("token", refreshToken);
-          setCookie("token", authToken, { path: "/", expires: 1140 });
+          setCookie("token", authToken, { path: "/react-burger", expires: 1140 });
         }
       })
       .catch((err) => {
