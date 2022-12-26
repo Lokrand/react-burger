@@ -125,7 +125,7 @@ export const BurgerConstructor: FC = () => {
   };
 
   const redirect = () => {
-    history.replace({ pathname: "/login", state: "/" });
+    history.replace({ pathname: "/login", state: "/react-burger" });
   };
 
   const checkToken = () => {

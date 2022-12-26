@@ -11,7 +11,7 @@ export const AppHeader: FC = () => {
       <div className={styles.header}>
         <NavLink
           exact
-          to="/"
+          to="/react-burger"
           className={styles.link_disables}
           activeClassName={styles.link_active}
         >
@@ -27,7 +27,7 @@ export const AppHeader: FC = () => {
           <ListIcon />
           <Text className="ml-2">Лента заказов</Text>
         </NavLink>
-        <NavLink to="/" className={styles.logo}>
+        <NavLink to="/react-burger" className={styles.logo}>
           <Logo />
         </NavLink>
         <div className={styles.account}>
